@@ -1,0 +1,17 @@
+---
+layout: base.njk
+title: Domov
+---
+<h1 class="page-title">Články</h1>
+
+<ul class="post-list">
+  {%- for post in collections.post | reverse %}
+  <li>
+    <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+    <a href="{{ post.url }}">{{ post.data.title }}</a>
+  </li>
+  {%- endfor %}
+  {% if collections.post.length == 0 %}
+  <li>Zatiaľ nič. Čoskoro.</li>
+  {% endif %}
+</ul>
