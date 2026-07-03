@@ -61,7 +61,8 @@
   --serif: "Cheltenham", Georgia, "Times New Roman", serif;
 
   /* Layout */
-  --measure: 42rem;
+  --frame: 52rem; /* page frame: header, footer, homepage */
+  --measure: 42rem; /* article prose: kept narrow for readability */
   --radius: 14px;
 }
 
@@ -153,8 +154,13 @@ body::before {
 main,
 .site-header,
 .site-footer {
-  max-width: var(--measure);
+  max-width: var(--frame);
   margin-inline: auto;
+}
+
+/* Article prose stays at a comfortable reading measure inside the wider frame */
+.post {
+  max-width: var(--measure);
 }
 
 a {
@@ -291,10 +297,10 @@ a:focus-visible,
   margin: 0;
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(1.7rem, 5vw, 2.35rem);
-  line-height: 1.32;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  line-height: 1.3;
   letter-spacing: -0.015em;
-  max-width: 24ch;
+  max-width: 30ch;
 }
 
 .intro-note {
