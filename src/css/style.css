@@ -1,4 +1,43 @@
 /* ==========================================================================
+   Fonts
+   Cheltenham Std (self-hosted woff2, serif display face). Only the variants
+   the design uses: Book + Bold, each with its italic. Weight ranges are
+   widened so the 500/600 weights used in the design resolve without synthetic
+   bolding.
+   ========================================================================== */
+@font-face {
+  font-family: "Cheltenham";
+  src: url("/fonts/CheltenhamStdBook.woff2") format("woff2");
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cheltenham";
+  src: url("/fonts/CheltenhamStdBookItalic.woff2") format("woff2");
+  font-weight: 400 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cheltenham";
+  src: url("/fonts/CheltenhamStdBold.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cheltenham";
+  src: url("/fonts/CheltenhamStdBoldItalic.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ==========================================================================
    Design tokens
    Calm green accent + warm neutrals. Both themes defined as custom properties.
    ========================================================================== */
@@ -18,7 +57,7 @@
   /* Type */
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
-  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --serif: "Cheltenham", Georgia, "Times New Roman", serif;
 
   /* Layout */
   --measure: 42rem;

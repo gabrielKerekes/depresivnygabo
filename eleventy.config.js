@@ -1,6 +1,7 @@
 module.exports = function (eleventyConfig) {
   // Copy static assets straight through to the output folder.
   eleventyConfig.addPassthroughCopy("src/css");
+  eleventyConfig.addPassthroughCopy("src/fonts");
   eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
 
   // "3. júl 2026" style dates for humans.
