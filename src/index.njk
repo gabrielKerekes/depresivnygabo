@@ -2,16 +2,31 @@
 layout: base.njk
 title: Domov
 ---
-<h1 class="page-title">Články</h1>
+<section class="intro">
+  <p class="intro-lead">
+    Ahoj, som Gabo a mám (vraj<span class="asterisk">*</span>) depresiu.
+    Tu si o tom môžeš prečítať viac.
+  </p>
+  <p class="intro-note">
+    <span class="asterisk">*</span> „vraj“ pretože s tým ešte stále nie som
+    stotožnený a diagnostika depresie žiaľ nie je úplne presná.
+  </p>
+</section>
 
-<ul class="post-list">
-  {%- for post in collections.post | reverse %}
-  <li>
-    <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-    <a href="{{ post.url }}">{{ post.data.title }}</a>
-  </li>
-  {%- endfor %}
-  {% if collections.post.length == 0 %}
-  <li>Zatiaľ nič. Čoskoro.</li>
-  {% endif %}
-</ul>
+<section class="posts">
+  <h2 class="page-title">Články</h2>
+
+  <ul class="post-list">
+    {%- for post in collections.post | reverse %}
+    <li>
+      <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+      <a href="{{ post.url }}">{{ post.data.title }}</a>
+    </li>
+    {%- endfor %}
+    {% if collections.post.length == 0 %}
+    <li class="post-list-empty">
+      Zatiaľ tu nič nie je — prvý článok sa práve rodí. Vráť sa čoskoro.
+    </li>
+    {% endif %}
+  </ul>
+</section>

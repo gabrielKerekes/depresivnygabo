@@ -2,18 +2,20 @@
   --bg: #14161a;
   --fg: #d6d8dc;
   --muted: #8a8f98;
-  --accent: #7aa2f7;
+  --accent: #8fbf9d;
+  --accent-soft: rgba(143, 191, 157, 0.12);
   --border: #2a2e37;
   --measure: 42rem;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg: #fbfbf9;
+    --bg: #f8faf7;
     --fg: #24262b;
     --muted: #6b7079;
-    --accent: #3355cc;
-    --border: #e3e3df;
+    --accent: #3f8f66;
+    --accent-soft: rgba(63, 143, 102, 0.1);
+    --border: #dce4dd;
   }
 }
 
@@ -74,10 +76,46 @@ a {
   color: var(--accent);
 }
 
+/* Intro block on the homepage */
+.intro {
+  margin: 2.5rem 0 1rem;
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+}
+
+.intro-lead {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.intro-note {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.asterisk {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 /* Post list on the homepage */
+.posts {
+  margin-top: 3rem;
+}
+
 .page-title {
   font-size: 1.4rem;
   margin: 2rem 0 1rem;
+}
+
+.post-list-empty {
+  color: var(--muted);
+  font-style: italic;
 }
 
 .post-list {
@@ -170,4 +208,23 @@ a {
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-size: 0.85rem;
+}
+
+.site-footer p {
+  margin: 0.35rem 0;
+}
+
+.site-footer a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.made-with .heart {
+  color: var(--accent);
+  font-weight: 700;
 }

@@ -3,6 +3,7 @@ module.exports = {
   description: "Osobný blog.",
   url: "https://depresivnygabo.sk",
   author: "Gabo",
+  github: "gabrielKerekes",
   year: new Date().getFullYear(),
 
   // Cloudflare Web Analytics token. Get it from the Cloudflare dashboard:

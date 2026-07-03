@@ -61,7 +61,10 @@ npm run build   # one-off build into _site/
 ## Conventions & gotchas
 
 - **Nunjucks, not JS**: templates use `==` not `===`, `{% if %}`, `| filter`.
-- **Content language is Slovak** (site UI strings, posts). `lang="sk"`.
+- **Content language is Slovak** (site UI strings, posts). `lang="sk"`. All
+  user-facing text (page copy, nav labels, buttons, empty states, etc.) must be
+  written in Slovak. Non-user-facing text (code, comments, commit messages,
+  variable names) stays in English.
 - **Analytics token is not a secret** — Cloudflare's beacon token is client-side
   (shipped to every visitor), so it lives in `site.js` in this public repo by
   design. Real secrets would go in GitHub Actions Secrets, never in the repo.

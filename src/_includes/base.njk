@@ -28,7 +28,14 @@
     </main>
 
     <footer class="site-footer">
-      <p>&copy; {{ site.year }} {{ site.author }}</p>
+      <p class="made-with">
+        Created with <span class="heart">&lt;3</span> by
+        <a href="https://github.com/{{ site.github }}">Gabriel Kerekes</a>
+      </p>
+      <p class="footer-meta">
+        &copy; {{ site.year }} {{ site.author }} ·
+        <a href="https://github.com/{{ site.github }}/depresivnygabo">zdrojový kód na GitHube</a>
+      </p>
     </footer>
   </body>
 </html>
