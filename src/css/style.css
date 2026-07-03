@@ -1,24 +1,48 @@
+/* ==========================================================================
+   Design tokens
+   Calm green accent + warm neutrals. Both themes defined as custom properties.
+   ========================================================================== */
 :root {
-  --bg: #14161a;
-  --fg: #d6d8dc;
-  --muted: #8a8f98;
+  /* Palette — dark (default) */
+  --bg: #15171b;
+  --surface: #1b1e24;
+  --fg: #dde0e4;
+  --muted: #8b909b;
   --accent: #8fbf9d;
+  --accent-strong: #a9d6b6;
   --accent-soft: rgba(143, 191, 157, 0.12);
-  --border: #2a2e37;
+  --border: #282c34;
+  --glow: rgba(143, 191, 157, 0.16);
+  --shadow: rgba(0, 0, 0, 0.35);
+
+  /* Type */
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+
+  /* Layout */
   --measure: 42rem;
+  --radius: 14px;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg: #f8faf7;
-    --fg: #24262b;
-    --muted: #6b7079;
+    --bg: #f6f9f4;
+    --surface: #ffffff;
+    --fg: #23262b;
+    --muted: #626771;
     --accent: #3f8f66;
-    --accent-soft: rgba(63, 143, 102, 0.1);
-    --border: #dce4dd;
+    --accent-strong: #2f7a54;
+    --accent-soft: rgba(63, 143, 102, 0.09);
+    --border: #e1e8e0;
+    --glow: rgba(63, 143, 102, 0.11);
+    --shadow: rgba(31, 61, 45, 0.08);
   }
 }
 
+/* ==========================================================================
+   Base
+   ========================================================================== */
 * {
   box-sizing: border-box;
 }
@@ -29,11 +53,28 @@ html {
 
 body {
   margin: 0;
+  min-height: 100vh;
   background: var(--bg);
   color: var(--fg);
-  font: 1.05rem/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
   padding: 0 1.25rem;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Soft calm-green wash anchored to the top of the page */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 75vh;
+  background: radial-gradient(78% 55% at 50% -8%, var(--glow), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 main,
@@ -43,135 +84,267 @@ main,
   margin-inline: auto;
 }
 
-/* Header */
+a {
+  color: var(--accent);
+}
+
+/* Consistent, accessible focus ring */
+a:focus-visible,
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
 .site-header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
-  padding: 2rem 0 1.25rem;
-  border-bottom: 1px solid var(--border);
+  padding: 2rem 0 1.5rem;
 }
 
 .site-title {
-  font-weight: 700;
-  font-size: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
   color: var(--fg);
   text-decoration: none;
+}
+
+/* Small leaf-dot wordmark */
+.site-title::before {
+  content: "";
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50% 50% 50% 0;
+  background: var(--accent);
+  transform: rotate(45deg);
+  flex: none;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 1.5rem;
 }
 
 .site-header nav a {
   color: var(--muted);
   text-decoration: none;
-  margin-left: 1rem;
+  font-size: 0.95rem;
+  transition: color 0.18s ease;
 }
 
 .site-header nav a:hover {
   color: var(--accent);
 }
 
-/* Links */
-a {
-  color: var(--accent);
+/* ==========================================================================
+   Hero / intro (homepage)
+   ========================================================================== */
+.intro {
+  margin: 3.5rem 0 4.5rem;
 }
 
-/* Intro block on the homepage */
-.intro {
-  margin: 2.5rem 0 1rem;
-  padding: 1.5rem 1.5rem 1.25rem;
-  background: var(--accent-soft);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 6px 6px 0;
+/* Short accent bar as a calm decorative anchor */
+.intro::before {
+  content: "";
+  display: block;
+  width: 2.75rem;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--accent);
+  margin-bottom: 1.75rem;
 }
 
 .intro-lead {
   margin: 0;
-  font-size: 1.3rem;
-  line-height: 1.5;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.7rem, 5vw, 2.35rem);
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  max-width: 24ch;
 }
 
 .intro-note {
-  margin: 0.75rem 0 0;
+  margin: 1.75rem 0 0;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--border);
   color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  max-width: 42ch;
 }
 
 .asterisk {
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 600;
 }
 
-/* Post list on the homepage */
+/* ==========================================================================
+   Post list (homepage)
+   ========================================================================== */
 .posts {
   margin-top: 3rem;
 }
 
 .page-title {
-  font-size: 1.4rem;
-  margin: 2rem 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 1.25rem;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
 }
 
-.post-list-empty {
-  color: var(--muted);
-  font-style: italic;
+.page-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
 }
 
 .post-list {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.post-list li {
   display: flex;
-  gap: 1rem;
-  align-items: baseline;
-  padding: 0.4rem 0;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.post-list time {
+.post-list-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: border-color 0.18s ease, transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.post-list-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -14px var(--shadow);
+}
+
+.post-link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.2rem 1rem;
+  padding: 1.1rem 1.35rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-date {
+  grid-column: 1;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  min-width: 8.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
 }
 
-.post-list a {
-  text-decoration: none;
+.post-title {
+  grid-column: 1;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  color: var(--fg);
 }
 
-.post-list a:hover {
-  text-decoration: underline;
+.post-arrow {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  color: var(--accent);
+  font-size: 1.1rem;
+  transform: translateX(-0.25rem);
+  opacity: 0;
+  transition: transform 0.18s ease, opacity 0.18s ease;
 }
 
-/* Article */
+.post-list-item:hover .post-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Empty state — designed, not an afterthought */
+.post-list-empty {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Article
+   ========================================================================== */
 .post {
-  margin-top: 2rem;
+  margin-top: 3rem;
+}
+
+.post-header {
+  margin-bottom: 2.5rem;
 }
 
 .post-header h1 {
-  margin-bottom: 0.25rem;
+  margin: 0.35rem 0 0.5rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4.5vw, 2.4rem);
   line-height: 1.2;
+  letter-spacing: -0.015em;
 }
 
 .post-header time {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.post h2,
+.post h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 2.25rem;
+}
+
+.post p,
+.post ul,
+.post ol {
+  margin: 1.15rem 0;
 }
 
 .post img {
   max-width: 100%;
   height: auto;
+  border-radius: var(--radius);
 }
 
 .post pre {
   overflow-x: auto;
   padding: 1rem;
-  background: rgba(127, 127, 127, 0.12);
-  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   font-size: 0.9rem;
 }
 
@@ -180,43 +353,53 @@ a {
 }
 
 .post :not(pre) > code {
-  background: rgba(127, 127, 127, 0.15);
+  background: var(--accent-soft);
   padding: 0.1em 0.35em;
   border-radius: 4px;
 }
 
 .post blockquote {
   margin-inline: 0;
-  padding-left: 1rem;
-  border-left: 3px solid var(--border);
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 3px solid var(--accent);
   color: var(--muted);
+  font-style: italic;
 }
 
 .back {
-  margin-top: 2rem;
+  margin-top: 3.5rem;
 }
 
 .back a {
   color: var(--muted);
   text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.18s ease;
 }
 
-/* Footer */
+.back a:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
 .site-footer {
-  margin-top: 4rem;
-  padding: 1.5rem 0 2.5rem;
+  margin-top: 5rem;
+  padding: 2rem 0 3rem;
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-size: 0.85rem;
 }
 
 .site-footer p {
-  margin: 0.35rem 0;
+  margin: 0.4rem 0;
 }
 
 .site-footer a {
   color: var(--muted);
   text-decoration: none;
+  transition: color 0.18s ease;
 }
 
 .site-footer a:hover {
@@ -226,5 +409,26 @@ a {
 
 .made-with .heart {
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Motion / responsive
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+  .post-list-item:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 32rem) {
+  .intro {
+    margin: 2.5rem 0 3.5rem;
+  }
+  .post-link {
+    padding: 1rem 1.15rem;
+  }
 }
