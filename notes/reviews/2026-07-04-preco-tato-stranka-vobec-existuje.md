@@ -81,11 +81,10 @@ iba nedávno.
 
 ## Poznámky k úpravám pri prepise (over pôvodným textom bez diakritiky)
 
-- **"V zásade som sa vôbec otvoril..." → "...vôbec neotvoril..."** — pôvodná
-  veta bez zápornej väzby si protirečí s vetami, čo nasledujú (len zopár
-  kamarátov to vedelo, súrodenci/rodičia iba nedávno). Doplnil som zápor
-  "ne", pretože to dáva zmysel v kontexte. **Over si to** — ak si to myslel
-  opačne, treba to opraviť.
+- ~~"V zásade som sa vôbec otvoril..." → "...vôbec neotvoril..."~~ — **zrušené.**
+  Pridal som zápor "ne" na základe vlastnej interpretácie kontextu, čo bolo
+  nesprávne — autor potvrdil, že pôvodné znenie bez zápornej väzby bolo
+  zámerné. Vrátené na pôvodné "vôbec otvoril" bez zmeny významu.
 - Dve vety, čo sa v poznámkach zjavne zaseknú uprostred myšlienky
   ("...a neja [will continue later]" a "...beriem antidepresíva. Od
   približne"), som odstrihol na prirodzenom mieste vety a doplnil kurzívou

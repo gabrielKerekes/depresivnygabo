@@ -74,6 +74,13 @@ npm run build   # one-off build into _site/
   user-facing text (page copy, nav labels, buttons, empty states, etc.) must be
   written in Slovak. Non-user-facing text (code, comments, commit messages,
   variable names) stays in English.
+- **Don't editorialize the owner's draft text.** He often writes post content
+  without diacritics/accents and asks for it to be typeset properly. Only fix
+  diacritics, spelling, and obvious typos — do not add, remove, or reinterpret
+  words (e.g. inserting a negation) based on inferred logic or what "makes
+  more sense" in context, even if the literal wording looks contradictory or
+  ambiguous. If something genuinely seems like a typo/mistake, ask rather than
+  guessing at the intended meaning.
 - **Analytics token is not a secret** — Cloudflare's beacon token is client-side
   (shipped to every visitor), so it lives in `site.js` in this public repo by
   design. Real secrets would go in GitHub Actions Secrets, never in the repo.

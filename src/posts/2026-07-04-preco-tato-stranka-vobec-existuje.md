@@ -62,6 +62,6 @@ _(Aj toto ešte doplním nabudúce.)_
 
 ## Kto to vie
 
-V zásade som sa vôbec neotvoril o tom, že mám depresiu. Zopár kamarátov
+V zásade som sa vôbec otvoril o tom, že mám depresiu. Zopár kamarátov
 to už vedelo. Sestra to vie už dlhšie. Bratovi a rodičom som to povedal
 iba nedávno.
