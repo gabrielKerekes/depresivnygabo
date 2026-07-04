@@ -7,6 +7,12 @@ layout: base.njk
     <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
   </header>
 
+  {% if draft %}
+  <p class="draft-banner">
+    ✎ Toto je rozpracovaný koncept — obsah ešte nie je dokončený.
+  </p>
+  {% endif %}
+
   {{ content | safe }}
 </article>
 

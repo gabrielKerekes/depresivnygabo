@@ -47,6 +47,12 @@ date: 2026-07-03
 Then Markdown below. The URL becomes `/slug/` (11ty strips the date prefix from
 the filename). Commit + push to `main` → live in ~1 minute.
 
+Add `draft: true` to the front-matter to mark a post as not yet finished. Draft
+posts still publish and appear in the list (this site has no separate preview
+build), but show a "koncept" badge on the homepage and a banner on the post
+page so it's obvious the content isn't done. Remove the flag once the post is
+finished.
+
 ## Local dev
 
 Requires Node (not installed on the owner's machine as of setup;

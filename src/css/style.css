@@ -54,6 +54,8 @@
   --border: #282c34;
   --glow: rgba(143, 191, 157, 0.16);
   --shadow: rgba(0, 0, 0, 0.35);
+  --draft: #d9a441;
+  --draft-soft: rgba(217, 164, 65, 0.14);
 
   /* Type */
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -81,6 +83,8 @@
     --border: #e1e8e0;
     --glow: rgba(63, 143, 102, 0.11);
     --shadow: rgba(31, 61, 45, 0.08);
+    --draft: #a9711c;
+    --draft-soft: rgba(169, 113, 28, 0.1);
   }
 }
 
@@ -98,6 +102,8 @@
   --border: #e1e8e0;
   --glow: rgba(63, 143, 102, 0.11);
   --shadow: rgba(31, 61, 45, 0.08);
+  --draft: #a9711c;
+  --draft-soft: rgba(169, 113, 28, 0.1);
 }
 
 :root[data-theme="dark"] {
@@ -112,6 +118,8 @@
   --border: #282c34;
   --glow: rgba(143, 191, 157, 0.16);
   --shadow: rgba(0, 0, 0, 0.35);
+  --draft: #d9a441;
+  --draft-soft: rgba(217, 164, 65, 0.14);
 }
 
 /* ==========================================================================
@@ -395,6 +403,22 @@ a:focus-visible,
   color: var(--fg);
 }
 
+.draft-badge {
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--draft);
+  border-radius: 999px;
+  background: var(--draft-soft);
+  color: var(--draft);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
 .post-arrow {
   grid-column: 2;
   grid-row: 1 / 3;
@@ -445,6 +469,16 @@ a:focus-visible,
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.draft-banner {
+  margin-bottom: 1.75rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--draft);
+  border-radius: var(--radius);
+  background: var(--draft-soft);
+  color: var(--draft);
+  font-size: 0.92rem;
 }
 
 .post h2,
