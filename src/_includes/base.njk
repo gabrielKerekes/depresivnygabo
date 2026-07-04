@@ -3,8 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{% if title %}{{ title }} · {% endif %}{{ site.title }}</title>
+    {# Reader-mode extractors (Safari/Firefox/Brave use Readability) only strip a
+       known set of title separators — | - / \ > » — so the site name is split off
+       cleanly in reader view. The interpunct "·" is not recognised and would leak
+       into the reader headline. #}
+    <title>{% if title %}{{ title }} | {% endif %}{{ site.title }}</title>
     <meta name="description" content="{{ description or site.description }}" />
+    <meta name="author" content="{{ author or site.author }}" />
     <!-- Apply the saved theme before first paint to avoid a flash of the wrong colours -->
     <script>
       (function () {
