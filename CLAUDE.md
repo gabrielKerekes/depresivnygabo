@@ -66,6 +66,9 @@ npm run build   # one-off build into _site/
 
 ## Conventions & gotchas
 
+- **Commit and push straight to `main`.** This is a solo personal-blog repo
+  with no branch protection or review process — there's no need for feature
+  branches or pull requests here. Always commit and push directly to `main`.
 - **Nunjucks, not JS**: templates use `==` not `===`, `{% if %}`, `| filter`.
 - **Content language is Slovak** (site UI strings, posts). `lang="sk"`. All
   user-facing text (page copy, nav labels, buttons, empty states, etc.) must be
