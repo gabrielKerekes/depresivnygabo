@@ -57,16 +57,20 @@ module.exports = function (eleventyConfig) {
       emoji: "🌱",
       label: "klíčok",
       description: "Čerstvý nápad — ešte len klíči a bude sa vyvíjať.",
+      banner:
+        "🌱 Toto je zatiaľ len klíčok — čerstvá myšlienka, ktorá sa ešte len rodí a bude rásť.",
     },
     budding: {
       emoji: "🌿",
       label: "rastie",
       description: "Rozpracovaná myšlienka, ktorá sa ešte formuje.",
+      banner:
+        "🌿 Toto ešte rastie — myšlienku priebežne dopĺňam a formujem.",
     },
     evergreen: {
       emoji: "🌳",
-      label: "vyzreté",
-      description: "Vyzretý článok, ktorý považujem za dokončený.",
+      label: "dozreté",
+      description: "Dozretý článok, ktorý považujem za dokončený.",
     },
   };
   eleventyConfig.addFilter("stageInfo", (stage) => stages[stage] || null);

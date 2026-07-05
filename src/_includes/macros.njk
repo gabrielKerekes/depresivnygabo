@@ -16,7 +16,6 @@
         </span>
         <span class="post-title">
           {{ post.data.title }}
-          {%- if post.data.draft %} <span class="draft-badge">koncept</span>{% endif -%}
           {{- stageBadge(post.data.stage) -}}
         </span>
         <span class="post-arrow" aria-hidden="true">→</span>

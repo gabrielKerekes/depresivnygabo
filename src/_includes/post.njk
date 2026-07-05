@@ -60,10 +60,9 @@ layout: base.njk
     </p>
   </header>
 
-  {% if draft %}
-  <p class="draft-banner">
-    ✎ Toto je rozpracovaný koncept — obsah ešte nie je dokončený.
-  </p>
+  {% set stageMeta = stage | stageInfo %}
+  {% if stageMeta and stageMeta.banner %}
+  <p class="stage-banner stage-{{ stage }}">{{ stageMeta.banner }}</p>
   {% endif %}
 
   {{ content | safe }}
