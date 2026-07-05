@@ -58,14 +58,13 @@ the filename). Commit + push to `main` → live in ~1 minute.
 
 Optional front-matter fields (all safe to omit):
 
-- **`draft: true`** — marks a post as not yet finished. Draft posts still publish
-  and appear in the list (this site has no separate preview build), but show a
-  "koncept" badge on the homepage and a banner on the post page. Remove the flag
-  once finished.
-- **`stage:`** — a digital-garden growth stage, independent of `draft`. One of
-  `seedling` (🌱 klíčok), `budding` (🌿 rastie) or `evergreen` (🌳 vyzreté).
-  Rendered as a badge on the homepage and in the post header; the label/emoji
-  mapping lives in the `stageInfo` filter in `eleventy.config.js`.
+- **`stage:`** — a digital-garden growth stage. One of `seedling` (🌱 klíčok),
+  `budding` (🌿 rastie) or `evergreen` (🌳 dozreté). Rendered as a colour-coded
+  badge on the homepage and in the post header; seedling/budding posts also get
+  a "still growing" banner atop the article (evergreen gets none). This replaces
+  the old `draft: true` flag — the seed analogy now carries the "unfinished"
+  signal. The label, colour, description and banner text live in the `stageInfo`
+  filter and `--stage-*` CSS tokens.
 - **`updated:`** — the "last tended" date. When set, the post header shows both a
   "zasadené" (planted = `date`) and an "ošetrené" (tended = `updated`) date, and
   the sitemap/JSON-LD use it. Leave it off for posts that haven't been revised.

@@ -64,8 +64,7 @@ module.exports = function (eleventyConfig) {
       emoji: "🌿",
       label: "rastie",
       description: "Rozpracovaná myšlienka, ktorá sa ešte formuje.",
-      banner:
-        "🌿 Toto ešte rastie — myšlienku priebežne dopĺňam a formujem.",
+      banner: "🌿 Toto ešte rastie — myšlienku priebežne dopĺňam a formujem.",
     },
     evergreen: {
       emoji: "🌳",
