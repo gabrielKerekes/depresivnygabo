@@ -394,6 +394,11 @@ a:focus-visible,
   letter-spacing: 0.02em;
 }
 
+.dot {
+  color: var(--muted);
+  margin: 0 0.1rem;
+}
+
 .post-title {
   grid-column: 1;
   font-family: var(--serif);
@@ -552,11 +557,17 @@ a:focus-visible,
   margin: 0;
 }
 
-.post-header time {
+.post-header time,
+.post-meta .post-readtime {
   color: var(--muted);
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+/* The flex gap in the meta row already spaces items; drop the dot's margin */
+.post-meta .dot {
+  margin: 0;
 }
 
 /* Inside the post meta row the flex gap already spaces the badge */

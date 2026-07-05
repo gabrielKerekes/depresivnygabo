@@ -20,6 +20,8 @@ layout: base.njk
     <h1>{{ title }}</h1>
     <p class="post-meta">
       <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+      <span class="dot" aria-hidden="true">·</span>
+      <span class="post-readtime">{{ content | readingTime }} min čítania</span>
       {{- stageBadge(stage) -}}
     </p>
   </header>

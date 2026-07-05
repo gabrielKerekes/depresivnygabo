@@ -61,6 +61,14 @@ module.exports = function (eleventyConfig) {
   };
   eleventyConfig.addFilter("stageInfo", (stage) => stages[stage] || null);
 
+  // Estimated reading time in whole minutes (~200 words/min), min 1. Strips the
+  // HTML tags from rendered content before counting words.
+  eleventyConfig.addFilter("readingTime", (html) => {
+    const text = String(html || "").replace(/<[^>]+>/g, " ");
+    const words = (text.match(/\S+/g) || []).length;
+    return Math.max(1, Math.round(words / 200));
+  });
+
   return {
     dir: {
       input: "src",
