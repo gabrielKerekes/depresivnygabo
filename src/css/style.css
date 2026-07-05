@@ -192,12 +192,30 @@ a:focus-visible,
    Header
    ========================================================================== */
 .site-header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
   padding: 2rem 0 1.5rem;
+}
+
+/* Arched inner green glow rising from the top edge of the bar. The radial
+   peaks above-centre so its lit band bows downward, and the rounded bottom
+   gives the glow its arch silhouette before it melts into the page. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 -1.25rem;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(65% 115% at 50% -20%, var(--glow), transparent 66%),
+    radial-gradient(120% 80% at 50% -10%, var(--glow), transparent 72%);
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  -webkit-mask-image: linear-gradient(#000 62%, transparent);
+  mask-image: linear-gradient(#000 62%, transparent);
 }
 
 .site-title {
