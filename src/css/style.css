@@ -53,6 +53,7 @@
   --accent-soft: rgba(143, 191, 157, 0.12);
   --border: #282c34;
   --glow: rgba(143, 191, 157, 0.16);
+  --header-glow: rgba(143, 191, 157, 0.28);
   --shadow: rgba(0, 0, 0, 0.35);
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
@@ -84,6 +85,7 @@
     --accent-soft: rgba(63, 143, 102, 0.09);
     --border: #e1e8e0;
     --glow: rgba(63, 143, 102, 0.11);
+    --header-glow: rgba(63, 143, 102, 0.24);
     --shadow: rgba(31, 61, 45, 0.08);
     --stage-seedling: #7d8a1f;
     --stage-budding: #3f8f66;
@@ -104,6 +106,7 @@
   --accent-soft: rgba(63, 143, 102, 0.09);
   --border: #e1e8e0;
   --glow: rgba(63, 143, 102, 0.11);
+  --header-glow: rgba(63, 143, 102, 0.24);
   --shadow: rgba(31, 61, 45, 0.08);
   --stage-seedling: #7d8a1f;
   --stage-budding: #3f8f66;
@@ -121,6 +124,7 @@
   --accent-soft: rgba(143, 191, 157, 0.12);
   --border: #282c34;
   --glow: rgba(143, 191, 157, 0.16);
+  --header-glow: rgba(143, 191, 157, 0.28);
   --shadow: rgba(0, 0, 0, 0.35);
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
@@ -207,15 +211,15 @@ a:focus-visible,
 .site-header::before {
   content: "";
   position: absolute;
-  inset: 0 -1.25rem;
+  inset: 0 -1.25rem -4rem;
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(65% 115% at 50% -20%, var(--glow), transparent 66%),
-    radial-gradient(120% 80% at 50% -10%, var(--glow), transparent 72%);
+    radial-gradient(55% 130% at 50% -8%, var(--header-glow), transparent 62%),
+    radial-gradient(130% 85% at 50% 0%, var(--header-glow), transparent 68%);
   border-radius: 0 0 50% 50% / 0 0 100% 100%;
-  -webkit-mask-image: linear-gradient(#000 62%, transparent);
-  mask-image: linear-gradient(#000 62%, transparent);
+  -webkit-mask-image: linear-gradient(#000 58%, transparent);
+  mask-image: linear-gradient(#000 58%, transparent);
 }
 
 .site-title {
