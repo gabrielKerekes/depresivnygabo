@@ -1,0 +1,40 @@
+name: Format
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Needed to push the auto-format commit back to the branch.
+permissions:
+  contents: write
+
+# Don't race with itself if pushes land close together.
+concurrency:
+  group: format-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run format
+      - name: Commit and push formatting changes
+        run: |
+          if [[ -z "$(git status --porcelain)" ]]; then
+            echo "Already formatted, nothing to do."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "style: auto-format with Prettier"
+          # A commit pushed with the default GITHUB_TOKEN does NOT retrigger
+          # workflows, so this can't loop. If someone pushed in the meantime,
+          # rebase onto their change rather than failing the push.
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

@@ -95,6 +95,17 @@ npm run build   # one-off build into _site/
 - **Commit and push straight to `main`.** This is a solo personal-blog repo
   with no branch protection or review process — there's no need for feature
   branches or pull requests here. Always commit and push directly to `main`.
+- **Rebase, never merge commits.** The Format workflow
+  (`.github/workflows/format.yml`) auto-formats with Prettier and pushes a
+  commit back to `main`, so local and remote will diverge whenever you have an
+  unpushed commit. Always reconcile with `git pull --rebase` (never a plain
+  `git pull`/merge) to keep history linear — no merge commits, ever. Setting
+  `git config pull.rebase true` and `git config rebase.autoStash true` makes
+  this the default.
+- **Prettier formats the source.** `npm run format` (Markdown, CSS, JS, JSON;
+  config in `.prettierrc.json`, exclusions in `.prettierignore`). Nunjucks
+  `.njk` templates are excluded — Prettier has no Nunjucks parser and mangles
+  the tags. `proseWrap` is `preserve`, so post prose is never reflowed.
 - **Nunjucks, not JS**: templates use `==` not `===`, `{% if %}`, `| filter`.
 - **Content language is Slovak** (site UI strings, posts). `lang="sk"`. All
   user-facing text (page copy, nav labels, buttons, empty states, etc.) must be

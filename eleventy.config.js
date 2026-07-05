@@ -40,12 +40,13 @@ module.exports = function (eleventyConfig) {
       year: "numeric",
       month: "long",
       day: "numeric",
-    })
+    }),
   );
 
   // "2026-07-03" for <time datetime="...">.
-  eleventyConfig.addFilter("htmlDateString", (dateObj) =>
-    new Date(dateObj).toISOString().split("T")[0]
+  eleventyConfig.addFilter(
+    "htmlDateString",
+    (dateObj) => new Date(dateObj).toISOString().split("T")[0],
   );
 
   // Digital-garden growth stages. A post's `stage:` front-matter maps to an
@@ -94,7 +95,7 @@ module.exports = function (eleventyConfig) {
     const items = headings
       .map(
         (h) =>
-          `<li class="toc-l${h.level}"><a href="#${h.id}">${h.text}</a></li>`
+          `<li class="toc-l${h.level}"><a href="#${h.id}">${h.text}</a></li>`,
       )
       .join("");
     return `<ul class="toc-list">${items}</ul>`;
