@@ -66,7 +66,8 @@ Optional front-matter fields (all safe to omit):
   signal. The label, colour, description and banner text live in the `stageInfo`
   filter and `--stage-*` CSS tokens.
 - **`updated:`** — the "last tended" date. When set, the post header shows both a
-  "zasadené" (planted = `date`) and an "ošetrené" (tended = `updated`) date, and
+  "zasadené" (planted = `date`) and a "naposledy zaliate" (last watered =
+  `updated`) date, and
   the sitemap/JSON-LD use it. Leave it off for posts that haven't been revised.
 - **`tags:`** — topic tags. Each generates a page at `/tema/<slug>/`, all are
   listed at `/temy/`, and chips appear under the article. The internal `post`

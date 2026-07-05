@@ -50,7 +50,7 @@ layout: base.njk
       {%- if updated %}
       <time datetime="{{ date | htmlDateString }}">zasadené {{ date | readableDate }}</time>
       <span class="dot" aria-hidden="true">·</span>
-      <time class="tended" datetime="{{ updated | htmlDateString }}">ošetrené {{ updated | readableDate }}</time>
+      <time class="tended" datetime="{{ updated | htmlDateString }}">naposledy zaliate {{ updated | readableDate }}</time>
       {%- else %}
       <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
       {%- endif %}
