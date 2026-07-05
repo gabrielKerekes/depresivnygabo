@@ -2,6 +2,7 @@
 layout: base.njk
 title: Domov
 ---
+{% from "macros.njk" import postItem %}
 <section class="intro">
   <p class="intro-lead">
     Ahoj, som Gabo a mám (vraj<span class="asterisk">*</span>) depresiu.
@@ -18,16 +19,7 @@ title: Domov
 
   <ul class="post-list">
     {%- for post in collections.post | reverse %}
-    <li class="post-list-item">
-      <a class="post-link" href="{{ post.url }}">
-        <time class="post-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-        <span class="post-title">
-          {{ post.data.title }}
-          {%- if post.data.draft %} <span class="draft-badge">koncept</span>{% endif -%}
-        </span>
-        <span class="post-arrow" aria-hidden="true">→</span>
-      </a>
-    </li>
+    {{ postItem(post) }}
     {%- endfor %}
     {% if collections.post.length == 0 %}
     <li class="post-list-empty">

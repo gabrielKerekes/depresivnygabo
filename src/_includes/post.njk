@@ -1,6 +1,7 @@
 ---
 layout: base.njk
 ---
+{% from "macros.njk" import topicTags %}
 {# Structured data so reader-mode extractors that parse JSON-LD (Firefox/Safari)
    get a clean headline, byline and date without relying on <title> heuristics. #}
 <script type="application/ld+json">
@@ -27,6 +28,12 @@ layout: base.njk
   {% endif %}
 
   {{ content | safe }}
+
+  {% if tags %}
+  <footer class="post-footer">
+    {{ topicTags(tags) }}
+  </footer>
+  {% endif %}
 </article>
 
 <p class="back"><a href="/">← späť na všetky články</a></p>

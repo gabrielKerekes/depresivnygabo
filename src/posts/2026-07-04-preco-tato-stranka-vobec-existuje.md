@@ -2,6 +2,9 @@
 title: Prečo táto stránka vôbec existuje?
 date: 2026-07-04
 draft: true
+tags:
+  - meta
+  - depresia
 ---
 
 ## Ako to celé začalo

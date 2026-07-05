@@ -1,0 +1,31 @@
+---
+layout: base.njk
+title: Témy
+permalink: /temy/
+---
+{# Build the list of topic tags (every collection key except the internal
+   bookkeeping ones), sorted alphabetically. #}
+{%- set topics = [] %}
+{%- for tag, posts in collections %}
+  {%- if tag != "all" and tag != "post" %}
+    {%- set topics = (topics.push(tag), topics) %}
+  {%- endif %}
+{%- endfor %}
+
+<section class="posts">
+  <h2 class="page-title">Témy</h2>
+
+  {%- if topics.length %}
+  <ul class="tag-cloud">
+    {%- for tag in topics | sort %}
+    <li>
+      <a class="tag-chip" href="/tema/{{ tag | slugify }}/">
+        {{ tag }} <span class="tag-count">{{ collections[tag].length }}</span>
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- else %}
+  <p class="post-list-empty">Zatiaľ tu nie sú žiadne témy.</p>
+  {%- endif %}
+</section>

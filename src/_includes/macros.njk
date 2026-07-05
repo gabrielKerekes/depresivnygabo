@@ -1,0 +1,28 @@
+{# Shared post-list item, used by the homepage and the tag/topic pages so the
+   markup stays in one place. #}
+{% macro postItem(post) %}
+    <li class="post-list-item">
+      <a class="post-link" href="{{ post.url }}">
+        <time class="post-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+        <span class="post-title">
+          {{ post.data.title }}
+          {%- if post.data.draft %} <span class="draft-badge">koncept</span>{% endif -%}
+        </span>
+        <span class="post-arrow" aria-hidden="true">→</span>
+      </a>
+    </li>
+{% endmacro %}
+
+{# Chips linking to each of a post's topic tags (everything except the internal
+   "post" tag). #}
+{% macro topicTags(tags) %}
+{%- if tags and (tags | length) > 1 %}
+  <ul class="tag-list">
+    {%- for tag in tags %}
+    {%- if tag != "post" %}
+    <li><a class="tag-chip" href="/tema/{{ tag | slugify }}/">{{ tag }}</a></li>
+    {%- endif %}
+    {%- endfor %}
+  </ul>
+{%- endif %}
+{% endmacro %}

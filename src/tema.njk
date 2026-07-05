@@ -1,0 +1,24 @@
+---
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+  filter:
+    - all
+    - post
+layout: base.njk
+eleventyComputed:
+  title: "Téma: {{ tag }}"
+permalink: "/tema/{{ tag | slugify }}/"
+---
+{% from "macros.njk" import postItem %}
+<section class="posts">
+  <p class="back"><a href="/temy/">← všetky témy</a></p>
+  <h2 class="page-title">Téma: {{ tag }}</h2>
+
+  <ul class="post-list">
+    {%- for post in collections[tag] | reverse %}
+    {{ postItem(post) }}
+    {%- endfor %}
+  </ul>
+</section>
