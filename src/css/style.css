@@ -54,8 +54,9 @@
   --border: #282c34;
   --glow: rgba(143, 191, 157, 0.16);
   --shadow: rgba(0, 0, 0, 0.35);
-  --draft: #d9a441;
-  --draft-soft: rgba(217, 164, 65, 0.14);
+  --stage-seedling: #cdd884;
+  --stage-budding: #84cf9b;
+  --stage-evergreen: #57b7a3;
 
   /* Type */
   --sans:
@@ -84,8 +85,9 @@
     --border: #e1e8e0;
     --glow: rgba(63, 143, 102, 0.11);
     --shadow: rgba(31, 61, 45, 0.08);
-    --draft: #a9711c;
-    --draft-soft: rgba(169, 113, 28, 0.1);
+    --stage-seedling: #7d8a1f;
+    --stage-budding: #3f8f66;
+    --stage-evergreen: #2b8478;
   }
 }
 
@@ -103,8 +105,9 @@
   --border: #e1e8e0;
   --glow: rgba(63, 143, 102, 0.11);
   --shadow: rgba(31, 61, 45, 0.08);
-  --draft: #a9711c;
-  --draft-soft: rgba(169, 113, 28, 0.1);
+  --stage-seedling: #7d8a1f;
+  --stage-budding: #3f8f66;
+  --stage-evergreen: #2b8478;
 }
 
 :root[data-theme="dark"] {
@@ -119,8 +122,9 @@
   --border: #282c34;
   --glow: rgba(143, 191, 157, 0.16);
   --shadow: rgba(0, 0, 0, 0.35);
-  --draft: #d9a441;
-  --draft-soft: rgba(217, 164, 65, 0.14);
+  --stage-seedling: #cdd884;
+  --stage-budding: #84cf9b;
+  --stage-evergreen: #57b7a3;
 }
 
 /* ==========================================================================
@@ -414,33 +418,19 @@ a:focus-visible,
   color: var(--fg);
 }
 
-.draft-badge {
-  display: inline-block;
-  margin-left: 0.6rem;
-  padding: 0.1rem 0.5rem;
-  border: 1px solid var(--draft);
-  border-radius: 999px;
-  background: var(--draft-soft);
-  color: var(--draft);
-  font-family: var(--sans);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  vertical-align: middle;
-}
-
-/* Growth-stage badge (🌱 / 🌿 / 🌳) */
+/* Growth-stage badge (🌱 / 🌿 / 🌳). Each stage sets its own --stage colour
+   (see .stage-seedling/-budding/-evergreen below); the badge falls back to the
+   accent when no stage colour is set. */
 .stage-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
   margin-left: 0.4rem;
   padding: 0.1rem 0.55rem;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--stage, var(--accent));
   border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent-strong);
+  background: color-mix(in srgb, var(--stage, var(--accent)) 15%, transparent);
+  color: var(--stage, var(--accent));
   font-family: var(--sans);
   font-size: 0.7rem;
   font-weight: 600;
@@ -448,6 +438,17 @@ a:focus-visible,
   vertical-align: middle;
   white-space: nowrap;
   text-transform: lowercase;
+}
+
+/* Per-stage colour, shared by the badge and the post banner. */
+.stage-seedling {
+  --stage: var(--stage-seedling);
+}
+.stage-budding {
+  --stage: var(--stage-budding);
+}
+.stage-evergreen {
+  --stage: var(--stage-evergreen);
 }
 
 .post-arrow {
@@ -585,13 +586,16 @@ a:focus-visible,
   margin-left: 0;
 }
 
-.draft-banner {
+/* Growth-stage banner atop unfinished posts (seedling / budding). Colour comes
+   from the post's --stage (set by the .stage-* class on the element). */
+.stage-banner {
   margin-bottom: 1.75rem;
   padding: 0.9rem 1.1rem;
-  border: 1px solid var(--draft);
+  border: 1px solid var(--stage, var(--accent));
+  border-left-width: 3px;
   border-radius: var(--radius);
-  background: var(--draft-soft);
-  color: var(--draft);
+  background: color-mix(in srgb, var(--stage, var(--accent)) 10%, transparent);
+  color: var(--fg);
   font-size: 0.92rem;
 }
 
