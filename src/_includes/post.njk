@@ -16,7 +16,34 @@ layout: base.njk
 }
 </script>
 
-<article class="post">
+{% set toc = content | toc %}
+<div class="post-layout">
+  {% if toc %}
+  <aside class="post-toc">
+    <details class="toc-details">
+      <summary>Obsah</summary>
+      <nav class="toc-body" aria-label="Obsah článku">
+        {{ toc | safe }}
+      </nav>
+    </details>
+  </aside>
+  {# Progressive enhancement: the TOC stays collapsed by default (mobile), and
+     opens automatically once there's room for the sidebar. Without JS it stays
+     a tappable "Obsah" disclosure everywhere. #}
+  <script>
+    (function () {
+      var d = document.querySelector(".toc-details");
+      if (!d || !window.matchMedia) return;
+      var mq = window.matchMedia("(min-width: 64rem)");
+      function sync() {
+        d.open = mq.matches;
+      }
+      sync();
+      mq.addEventListener("change", sync);
+    })();
+  </script>
+  {% endif %}
+  <article class="post">
   <header class="post-header">
     <h1>{{ title }}</h1>
     <p class="post-meta">
@@ -46,6 +73,7 @@ layout: base.njk
     {{ topicTags(tags) }}
   </footer>
   {% endif %}
-</article>
+  </article>
+</div>
 
 <p class="back"><a href="/">← späť na všetky články</a></p>

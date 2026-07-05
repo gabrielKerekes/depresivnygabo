@@ -1,6 +1,15 @@
 const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
+const markdownItAnchor = require("markdown-it-anchor");
 
 module.exports = function (eleventyConfig) {
+  // Give every h2/h3 a stable id so the table of contents can link to it.
+  eleventyConfig.amendLibrary("md", (md) => {
+    md.use(markdownItAnchor, {
+      level: [2, 3],
+      slugify: (s) => eleventyConfig.getFilter("slugify")(s),
+      tabIndex: false,
+    });
+  });
   // Copy static assets straight through to the output folder.
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/fonts");
@@ -67,6 +76,28 @@ module.exports = function (eleventyConfig) {
     const text = String(html || "").replace(/<[^>]+>/g, " ");
     const words = (text.match(/\S+/g) || []).length;
     return Math.max(1, Math.round(words / 200));
+  });
+
+  // Build a flat table of contents from the h2/h3 headings in rendered post
+  // HTML. Returns "" when there are fewer than two headings (not worth a TOC).
+  // Levels are distinguished by class so the markup stays simple and CSS
+  // handles the indentation.
+  eleventyConfig.addFilter("toc", (html) => {
+    const re = /<h([23])[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/gi;
+    const headings = [];
+    let m;
+    while ((m = re.exec(String(html || ""))) !== null) {
+      const text = m[3].replace(/<[^>]+>/g, "").trim();
+      if (text) headings.push({ level: m[1], id: m[2], text });
+    }
+    if (headings.length < 2) return "";
+    const items = headings
+      .map(
+        (h) =>
+          `<li class="toc-l${h.level}"><a href="#${h.id}">${h.text}</a></li>`
+      )
+      .join("");
+    return `<ul class="toc-list">${items}</ul>`;
   });
 
   return {

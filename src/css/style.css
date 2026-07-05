@@ -632,6 +632,62 @@ a:focus-visible,
   font-style: italic;
 }
 
+/* ==========================================================================
+   Table of contents
+   Mobile: a collapsed <details> box above the article. Large screens: a
+   sticky sidebar next to the article (see the min-width block at the end).
+   ========================================================================== */
+.post-toc {
+  margin: 0 0 2.25rem;
+}
+
+.toc-details {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 0.25rem 1.1rem;
+}
+
+.toc-details summary {
+  cursor: pointer;
+  padding: 0.6rem 0;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--fg);
+}
+
+.toc-body {
+  padding: 0.25rem 0 0.75rem;
+}
+
+.toc-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.toc-list a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.toc-list a:hover {
+  color: var(--accent);
+}
+
+.toc-l3 {
+  padding-left: 1rem;
+  font-size: 0.85rem;
+}
+
 .back {
   margin-top: 3.5rem;
 }
@@ -687,6 +743,61 @@ a:focus-visible,
   }
   .post-list-item:hover {
     transform: none;
+  }
+}
+
+/* Table of contents as a sticky sidebar once there's room for it. Widen the
+   post page frame so the reading column keeps its measure and the TOC sits in
+   the gutter. :has() lets only TOC-bearing posts opt into the wider grid. */
+@media (min-width: 64rem) {
+  main:has(.post-toc) {
+    max-width: 62rem;
+  }
+
+  .post-layout:has(.post-toc) {
+    display: grid;
+    grid-template-columns: minmax(0, var(--measure)) 1fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  .post-layout:has(.post-toc) .post {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: none;
+  }
+
+  .post-toc {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 3rem 0 0;
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+
+  /* On the desktop sidebar the box chrome is dropped and (via the small script
+     in post.njk that opens the <details> on wide screens) the heading list
+     reads as a plain sidebar. */
+  .post-toc .toc-details {
+    border: none;
+    background: none;
+    padding: 0;
+  }
+
+  .post-toc summary {
+    padding: 0 0 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    list-style: none;
+  }
+
+  .post-toc summary::-webkit-details-marker {
+    display: none;
   }
 }
 
