@@ -37,6 +37,12 @@
       crossorigin
     />
     <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="{{ site.title }} — Atom feed"
+      href="/feed.xml"
+    />
     {% if site.cloudflareToken %}
     <script
       defer
@@ -118,7 +124,8 @@
       </p>
       <p class="footer-meta">
         &copy; {{ site.year }} {{ site.author }} ·
-        <a href="https://github.com/{{ site.github }}/depresivnygabo">zdrojový kód na GitHube</a>
+        <a href="https://github.com/{{ site.github }}/depresivnygabo">zdrojový kód na GitHube</a> ·
+        <a href="/feed.xml">RSS</a>
       </p>
     </footer>
 
