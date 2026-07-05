@@ -10,12 +10,13 @@ module.exports = function (eleventyConfig) {
       year: "numeric",
       month: "long",
       day: "numeric",
-    })
+    }),
   );
 
   // "2026-07-03" for <time datetime="...">.
-  eleventyConfig.addFilter("htmlDateString", (dateObj) =>
-    new Date(dateObj).toISOString().split("T")[0]
+  eleventyConfig.addFilter(
+    "htmlDateString",
+    (dateObj) => new Date(dateObj).toISOString().split("T")[0],
   );
 
   return {

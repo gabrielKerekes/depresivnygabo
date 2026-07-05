@@ -69,16 +69,16 @@ The included workflow does the rest. The first push triggers a deploy.
 
 Add these records for `depresivnygabo.sk`:
 
-| Type  | Host / Name | Value               |
-| ----- | ----------- | ------------------- |
-| A     | @           | 185.199.108.153     |
-| A     | @           | 185.199.109.153     |
-| A     | @           | 185.199.110.153     |
-| A     | @           | 185.199.111.153     |
-| AAAA  | @           | 2606:50c0:8000::153 |
-| AAAA  | @           | 2606:50c0:8001::153 |
-| AAAA  | @           | 2606:50c0:8002::153 |
-| AAAA  | @           | 2606:50c0:8003::153 |
+| Type  | Host / Name | Value                      |
+| ----- | ----------- | -------------------------- |
+| A     | @           | 185.199.108.153            |
+| A     | @           | 185.199.109.153            |
+| A     | @           | 185.199.110.153            |
+| A     | @           | 185.199.111.153            |
+| AAAA  | @           | 2606:50c0:8000::153        |
+| AAAA  | @           | 2606:50c0:8001::153        |
+| AAAA  | @           | 2606:50c0:8002::153        |
+| AAAA  | @           | 2606:50c0:8003::153        |
 | CNAME | www         | <your-username>.github.io. |
 
 Then in Repo → Settings → Pages → **Custom domain**, enter

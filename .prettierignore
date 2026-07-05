@@ -1,0 +1,9 @@
+# Build output
+_site/
+
+# Lockfile — managed by npm
+package-lock.json
+
+# Nunjucks templates: Prettier has no native Nunjucks parser and can mangle
+# the {% %} / {{ }} tags, so leave them untouched.
+*.njk
