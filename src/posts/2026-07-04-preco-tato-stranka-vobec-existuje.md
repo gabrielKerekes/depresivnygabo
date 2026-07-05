@@ -49,14 +49,15 @@ konzultoval som s manželkou aj s terapeutkou a podobne. A tak som išiel.
 Aj napriek researchu som netušil, čo presne ma u psychiatričky čaká.
 Nevedel som, či sa robia nejaké testy, alebo či sa proste iba
 porozprávame, alebo čo. A pani doktorka sa ma teda pýtala nejaké otázky
-(už si nepamätám presne aké).
+(už si nepamätám presne aké). _Keď to teraz čítam, tak mám pocit, že môj reseach nebol moc dôkladný 😅._
 
 _(Toto rozprávanie ešte doplním nabudúce.)_
 
 ## Ten príbeh, ktorý som opakoval
 
-Takže ako znel ten príbeh, ktorý som opakoval? Dva roky – od júna 2024 –
-beriem antidepresíva.
+Takže ako znel ten príbeh, ktorý som opakoval? Väčšinou to začalo otázkou, čo mám nové. Na to som odpovedal, že skúšam ďalšiu kombináciu liekov na depresiu. A keď ľudia, s ktorými som da práve rozprával ešte nevedeli o mojej depresii, tak to pokračovalo tým, že "Ty máš depresiu?" a ja že "Nó hej, asi hej", prípadne "Áno, berieš antidepresíva? Prečo?" a na to bola odpoveď "Tak nemal som sa dobre a tak som nakoniec šiel až k psychistričke a tá mi predpísala lieky". A potom to pokračovalo ďalšími otázkami, ktoré už spíšem trochu štrukturovanejšie.
+
+Dva roky – od júna 2024 – beriem antidepresíva.
 
 _(Aj toto ešte doplním nabudúce.)_
 
