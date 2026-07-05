@@ -11,6 +11,7 @@ layout: base.njk
   "headline": {{ title | dump | safe }},
   "author": { "@type": "Person", "name": {{ site.author | dump | safe }} },
   "datePublished": "{{ date | htmlDateString }}",
+  {% if updated %}"dateModified": "{{ updated | htmlDateString }}",{% endif %}
   "url": "{{ site.url }}{{ page.url }}"
 }
 </script>
@@ -19,7 +20,13 @@ layout: base.njk
   <header class="post-header">
     <h1>{{ title }}</h1>
     <p class="post-meta">
+      {%- if updated %}
+      <time datetime="{{ date | htmlDateString }}">zasadené {{ date | readableDate }}</time>
+      <span class="dot" aria-hidden="true">·</span>
+      <time class="tended" datetime="{{ updated | htmlDateString }}">ošetrené {{ updated | readableDate }}</time>
+      {%- else %}
       <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+      {%- endif %}
       <span class="dot" aria-hidden="true">·</span>
       <span class="post-readtime">{{ content | readingTime }} min čítania</span>
       {{- stageBadge(stage) -}}
