@@ -419,6 +419,26 @@ a:focus-visible,
   vertical-align: middle;
 }
 
+/* Growth-stage badge (🌱 / 🌿 / 🌳) */
+.stage-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.55rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-transform: lowercase;
+}
+
 .post-arrow {
   grid-column: 2;
   grid-row: 1 / 3;
@@ -524,11 +544,24 @@ a:focus-visible,
   letter-spacing: -0.015em;
 }
 
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+}
+
 .post-header time {
   color: var(--muted);
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+/* Inside the post meta row the flex gap already spaces the badge */
+.post-meta .stage-badge {
+  margin-left: 0;
 }
 
 .draft-banner {

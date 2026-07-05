@@ -39,6 +39,28 @@ module.exports = function (eleventyConfig) {
     new Date(dateObj).toISOString().split("T")[0]
   );
 
+  // Digital-garden growth stages. A post's `stage:` front-matter maps to an
+  // emoji, a Slovak label and a one-line description. Exposed as a filter so it
+  // is reachable from inside Nunjucks macros (page data is not).
+  const stages = {
+    seedling: {
+      emoji: "🌱",
+      label: "klíčok",
+      description: "Čerstvý nápad — ešte len klíči a bude sa vyvíjať.",
+    },
+    budding: {
+      emoji: "🌿",
+      label: "rastie",
+      description: "Rozpracovaná myšlienka, ktorá sa ešte formuje.",
+    },
+    evergreen: {
+      emoji: "🌳",
+      label: "vyzreté",
+      description: "Vyzretý článok, ktorý považujem za dokončený.",
+    },
+  };
+  eleventyConfig.addFilter("stageInfo", (stage) => stages[stage] || null);
+
   return {
     dir: {
       input: "src",

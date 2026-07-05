@@ -1,3 +1,9 @@
+{# Growth-stage badge (🌱 / 🌿 / 🌳) for a post's `stage:` front-matter. #}
+{% macro stageBadge(stage) %}
+{%- set s = stage | stageInfo -%}
+{%- if s %} <span class="stage-badge stage-{{ stage }}" title="{{ s.description }}">{{ s.emoji }} {{ s.label }}</span>{% endif -%}
+{% endmacro %}
+
 {# Shared post-list item, used by the homepage and the tag/topic pages so the
    markup stays in one place. #}
 {% macro postItem(post) %}
@@ -7,6 +13,7 @@
         <span class="post-title">
           {{ post.data.title }}
           {%- if post.data.draft %} <span class="draft-badge">koncept</span>{% endif -%}
+          {{- stageBadge(post.data.stage) -}}
         </span>
         <span class="post-arrow" aria-hidden="true">→</span>
       </a>
