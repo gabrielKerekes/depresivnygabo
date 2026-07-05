@@ -23,13 +23,18 @@ with a light build step. Content is written in Markdown.
 ```
 src/
   _includes/     Nunjucks layouts (base.njk = shell, post.njk = article)
+  _includes/macros.njk  Shared Nunjucks macros (post-list item, tag chips, stage badge)
   _data/site.js  Site-wide config (title, author, analytics token)
   posts/         One Markdown file per article
   posts/posts.json  Directory data: applies post.njk layout + "/{slug}/" permalink
   css/style.css  All styling (dark/light via prefers-color-scheme)
   index.njk      Homepage — lists posts (collections.post)
+  tema.njk       One page per topic tag → /tema/<slug>/ (paginated over collections)
+  temy.njk       Topics index → /temy/
+  sitemap.njk    /sitemap.xml    robots.njk  /robots.txt
   about.md       About page
   CNAME          Pins the custom domain (copied to output on build)
+eleventy.config.js  Plugins (Atom feed, heading anchors) + filters (dates, stageInfo, readingTime, toc)
 .github/workflows/deploy.yml   CI: build + deploy
 ```
 
@@ -41,17 +46,38 @@ Create `src/posts/YYYY-MM-DD-slug.md` with front-matter:
 ---
 title: Title here
 date: 2026-07-03
+updated: 2026-07-05      # optional — "last tended" date (see below)
+stage: seedling          # optional — growth stage (see below)
+tags:                    # optional — topic tags (the "post" tag is added automatically)
+  - depresia
 ---
 ```
 
 Then Markdown below. The URL becomes `/slug/` (11ty strips the date prefix from
 the filename). Commit + push to `main` → live in ~1 minute.
 
-Add `draft: true` to the front-matter to mark a post as not yet finished. Draft
-posts still publish and appear in the list (this site has no separate preview
-build), but show a "koncept" badge on the homepage and a banner on the post
-page so it's obvious the content isn't done. Remove the flag once the post is
-finished.
+Optional front-matter fields (all safe to omit):
+
+- **`draft: true`** — marks a post as not yet finished. Draft posts still publish
+  and appear in the list (this site has no separate preview build), but show a
+  "koncept" badge on the homepage and a banner on the post page. Remove the flag
+  once finished.
+- **`stage:`** — a digital-garden growth stage, independent of `draft`. One of
+  `seedling` (🌱 klíčok), `budding` (🌿 rastie) or `evergreen` (🌳 vyzreté).
+  Rendered as a badge on the homepage and in the post header; the label/emoji
+  mapping lives in the `stageInfo` filter in `eleventy.config.js`.
+- **`updated:`** — the "last tended" date. When set, the post header shows both a
+  "zasadené" (planted = `date`) and an "ošetrené" (tended = `updated`) date, and
+  the sitemap/JSON-LD use it. Leave it off for posts that haven't been revised.
+- **`tags:`** — topic tags. Each generates a page at `/tema/<slug>/`, all are
+  listed at `/temy/`, and chips appear under the article. The internal `post`
+  tag is merged in automatically via Eleventy's data deep merge.
+
+Other niceties that need no front-matter: an Atom feed at `/feed.xml`, a
+`/sitemap.xml` + `/robots.txt`, an estimated **reading time** (computed from the
+content), and a **table of contents** auto-built from a post's `h2`/`h3`
+headings (only shown when there are at least two — collapsed on mobile, a sticky
+sidebar on wide screens).
 
 ## Local dev
 
