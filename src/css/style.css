@@ -52,8 +52,7 @@
   --accent-strong: #a9d6b6;
   --accent-soft: rgba(143, 191, 157, 0.12);
   --border: #282c34;
-  --glow: rgba(143, 191, 157, 0.16);
-  --header-glow: rgba(143, 191, 157, 0.28);
+  --glow: rgba(143, 191, 157, 0.24);
   --shadow: rgba(0, 0, 0, 0.35);
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
@@ -84,8 +83,7 @@
     --accent-strong: #2f7a54;
     --accent-soft: rgba(63, 143, 102, 0.09);
     --border: #e1e8e0;
-    --glow: rgba(63, 143, 102, 0.11);
-    --header-glow: rgba(63, 143, 102, 0.24);
+    --glow: rgba(63, 143, 102, 0.17);
     --shadow: rgba(31, 61, 45, 0.08);
     --stage-seedling: #7d8a1f;
     --stage-budding: #3f8f66;
@@ -105,8 +103,7 @@
   --accent-strong: #2f7a54;
   --accent-soft: rgba(63, 143, 102, 0.09);
   --border: #e1e8e0;
-  --glow: rgba(63, 143, 102, 0.11);
-  --header-glow: rgba(63, 143, 102, 0.24);
+  --glow: rgba(63, 143, 102, 0.17);
   --shadow: rgba(31, 61, 45, 0.08);
   --stage-seedling: #7d8a1f;
   --stage-budding: #3f8f66;
@@ -123,8 +120,7 @@
   --accent-strong: #a9d6b6;
   --accent-soft: rgba(143, 191, 157, 0.12);
   --border: #282c34;
-  --glow: rgba(143, 191, 157, 0.16);
-  --header-glow: rgba(143, 191, 157, 0.28);
+  --glow: rgba(143, 191, 157, 0.24);
   --shadow: rgba(0, 0, 0, 0.35);
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
@@ -196,30 +192,12 @@ a:focus-visible,
    Header
    ========================================================================== */
 .site-header {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
   padding: 2rem 0 1.5rem;
-}
-
-/* Arched inner green glow rising from the top edge of the bar. The radial
-   peaks above-centre so its lit band bows downward, and the rounded bottom
-   gives the glow its arch silhouette before it melts into the page. */
-.site-header::before {
-  content: "";
-  position: absolute;
-  inset: 0 -1.25rem -4rem;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(55% 130% at 50% -8%, var(--header-glow), transparent 62%),
-    radial-gradient(130% 85% at 50% 0%, var(--header-glow), transparent 68%);
-  border-radius: 0 0 50% 50% / 0 0 100% 100%;
-  -webkit-mask-image: linear-gradient(#000 58%, transparent);
-  mask-image: linear-gradient(#000 58%, transparent);
 }
 
 .site-title {
