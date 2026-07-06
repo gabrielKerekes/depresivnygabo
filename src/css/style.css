@@ -52,7 +52,7 @@
   --accent-strong: #a9d6b6;
   --accent-soft: rgba(143, 191, 157, 0.12);
   --border: #282c34;
-  --glow: rgba(143, 191, 157, 0.16);
+  --glow: rgba(143, 191, 157, 0.24);
   --shadow: rgba(0, 0, 0, 0.35);
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
@@ -83,7 +83,7 @@
     --accent-strong: #2f7a54;
     --accent-soft: rgba(63, 143, 102, 0.09);
     --border: #e1e8e0;
-    --glow: rgba(63, 143, 102, 0.11);
+    --glow: rgba(63, 143, 102, 0.17);
     --shadow: rgba(31, 61, 45, 0.08);
     --stage-seedling: #7d8a1f;
     --stage-budding: #3f8f66;
@@ -103,7 +103,7 @@
   --accent-strong: #2f7a54;
   --accent-soft: rgba(63, 143, 102, 0.09);
   --border: #e1e8e0;
-  --glow: rgba(63, 143, 102, 0.11);
+  --glow: rgba(63, 143, 102, 0.17);
   --shadow: rgba(31, 61, 45, 0.08);
   --stage-seedling: #7d8a1f;
   --stage-budding: #3f8f66;
@@ -120,7 +120,7 @@
   --accent-strong: #a9d6b6;
   --accent-soft: rgba(143, 191, 157, 0.12);
   --border: #282c34;
-  --glow: rgba(143, 191, 157, 0.16);
+  --glow: rgba(143, 191, 157, 0.24);
   --shadow: rgba(0, 0, 0, 0.35);
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
