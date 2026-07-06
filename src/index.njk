@@ -14,6 +14,22 @@ title: Domov
   </p>
 </section>
 
+<section class="start-here">
+  <h2 class="page-title">Kde začať?</h2>
+  <p class="start-here-lead">
+    Toto je moja digitálna záhradka. Keď mám čas, tak sem pridám nejaké drobné
+    vylepšenie alebo „zalejem“ (upravím) nejaký článok.
+  </p>
+
+  <ul class="post-list">
+    {%- for post in collections.post %}
+    {%- if post.fileSlug == "preco-tato-stranka-vobec-existuje" %}
+    {{ postItem(post) }}
+    {%- endif %}
+    {%- endfor %}
+  </ul>
+</section>
+
 <section class="posts">
   <h2 class="page-title">Články</h2>
 
