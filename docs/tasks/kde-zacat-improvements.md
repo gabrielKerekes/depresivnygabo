@@ -28,5 +28,5 @@ accent-tinted background or a left accent border) would help it read as
 ## Notes
 
 - The starter post also still appears in the full „Články" list below — the
-  curated section is an *additional* highlight, not a move. Revisit if that
+  curated section is an _additional_ highlight, not a move. Revisit if that
   ever feels redundant.
