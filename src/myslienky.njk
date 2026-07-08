@@ -1,0 +1,26 @@
+---
+layout: base.njk
+title: Myslienky
+permalink: /myslienky/
+description: Krátke myšlienky a poznámky — mikroblog.
+---
+<section class="thoughts">
+  <h2 class="page-title">Myslienky</h2>
+  <p class="thoughts-lead">
+    Krátke myšlienky, ktoré ešte nedorástli do článku — poznámky, otázky
+    a pochybnosti tak, ako mi napadnú.
+  </p>
+
+  {%- if myslienky.length %}
+  <ol class="thought-list">
+    {%- for m in myslienky | sort(true, false, "date") %}
+    <li class="thought">
+      <p class="thought-body">{{ m.text | safe }}</p>
+      <time class="thought-date" datetime="{{ m.date | htmlDateString }}">{{ m.date | readableDate }}</time>
+    </li>
+    {%- endfor %}
+  </ol>
+  {%- else %}
+  <p class="post-list-empty">Zatiaľ tu žiadna myšlienka nevyklíčila.</p>
+  {%- endif %}
+</section>
