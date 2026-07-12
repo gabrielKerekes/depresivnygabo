@@ -54,10 +54,14 @@
   --border: #282c34;
   --glow: rgba(143, 191, 157, 0.24);
   --shadow: rgba(0, 0, 0, 0.35);
-  /* Hairline along a raised card's top edge — its "lit" edge. Kept faint on
-     dark surfaces, where a bright seam reads as a glowing crack rather than
-     as paper catching the light. */
-  --card-highlight: rgba(255, 255, 255, 0.05);
+  /* A raised card is lit from above. On dark surfaces that reads as a bright
+     hairline on the top edge (--card-highlight). On a white card a white line
+     is invisible, so light mode does the same job in reverse: shade the bottom
+     of the card (--card-shade) and let the top edge stay the brightest thing
+     (--card-topline). Each theme leans on whichever half actually shows. */
+  --card-highlight: rgba(255, 255, 255, 0.5);
+  --card-shade: transparent;
+  --card-topline: color-mix(in srgb, var(--border) 80%, transparent);
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
   --stage-evergreen: #57b7a3;
@@ -90,6 +94,8 @@
     --glow: rgba(63, 143, 102, 0.17);
     --shadow: rgba(31, 61, 45, 0.08);
     --card-highlight: rgba(255, 255, 255, 0.55);
+    --card-shade: rgba(31, 61, 45, 0.05);
+    --card-topline: #ffffff;
     --stage-seedling: #7d8a1f;
     --stage-budding: #3f8f66;
     --stage-evergreen: #2b8478;
@@ -111,6 +117,8 @@
   --glow: rgba(63, 143, 102, 0.17);
   --shadow: rgba(31, 61, 45, 0.08);
   --card-highlight: rgba(255, 255, 255, 0.55);
+  --card-shade: rgba(31, 61, 45, 0.05);
+  --card-topline: #ffffff;
   --stage-seedling: #7d8a1f;
   --stage-budding: #3f8f66;
   --stage-evergreen: #2b8478;
@@ -128,10 +136,14 @@
   --border: #282c34;
   --glow: rgba(143, 191, 157, 0.24);
   --shadow: rgba(0, 0, 0, 0.35);
-  /* Hairline along a raised card's top edge — its "lit" edge. Kept faint on
-     dark surfaces, where a bright seam reads as a glowing crack rather than
-     as paper catching the light. */
-  --card-highlight: rgba(255, 255, 255, 0.05);
+  /* A raised card is lit from above. On dark surfaces that reads as a bright
+     hairline on the top edge (--card-highlight). On a white card a white line
+     is invisible, so light mode does the same job in reverse: shade the bottom
+     of the card (--card-shade) and let the top edge stay the brightest thing
+     (--card-topline). Each theme leans on whichever half actually shows. */
+  --card-highlight: rgba(255, 255, 255, 0.5);
+  --card-shade: transparent;
+  --card-topline: color-mix(in srgb, var(--border) 80%, transparent);
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
   --stage-evergreen: #57b7a3;
@@ -426,6 +438,7 @@ a:focus-visible,
 
 .post-list-item {
   border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-top-color: var(--card-topline);
   border-bottom-color: color-mix(in srgb, var(--border) 100%, #000 12%);
   border-radius: var(--radius);
   background:
@@ -434,6 +447,7 @@ a:focus-visible,
       color-mix(in srgb, var(--accent) 6%, transparent),
       transparent 55%
     ),
+    linear-gradient(180deg, transparent 45%, var(--card-shade)),
     linear-gradient(
       180deg,
       color-mix(in srgb, var(--surface) 100%, #fff 4%),
@@ -462,6 +476,7 @@ a:focus-visible,
       color-mix(in srgb, var(--accent) 10%, transparent),
       transparent 55%
     ),
+    linear-gradient(180deg, transparent 45%, var(--card-shade)),
     linear-gradient(
       180deg,
       color-mix(in srgb, var(--surface) 100%, #fff 4%),
