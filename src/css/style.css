@@ -374,6 +374,13 @@ a:focus-visible,
   margin-top: 3rem;
 }
 
+/* The curated pick leads with its own sentence, so its label stays a plain
+   caption — no trailing rule. Only "Všetky články" keeps the ruled header, so
+   the two sections stop reading as identical. */
+.start-here .page-title::after {
+  display: none;
+}
+
 .start-here-lead {
   margin: 0 0 1.25rem;
   color: var(--muted);
@@ -572,6 +579,28 @@ a:focus-visible,
   opacity: 1;
   transform: translateX(0);
 }
+
+/* VARIANT-B-START — full list as quiet rows; card reserved for the curated pick */
+.posts .post-list {
+  gap: 0;
+}
+.posts .post-list-item,
+.posts .post-list-item:hover {
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+.posts .post-list-item:last-child {
+  border-bottom: none;
+}
+.posts .post-link {
+  padding-left: 0;
+  padding-right: 0;
+}
+/* VARIANT-B-END */
 
 /* Empty state — designed, not an afterthought */
 .post-list-empty {
@@ -986,5 +1015,13 @@ a:focus-visible,
   }
   .post-link {
     padding: 1rem 1.15rem;
+  }
+  /* The hover arrow never shows on touch; don't let its column reserve a gutter
+     on the right of every row. */
+  .post-link {
+    grid-template-columns: 1fr;
+  }
+  .post-arrow {
+    display: none;
   }
 }

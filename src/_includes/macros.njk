@@ -11,8 +11,6 @@
       <a class="post-link" href="{{ post.url }}">
         <span class="post-date">
           <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-          <span class="dot" aria-hidden="true">·</span>
-          <span class="post-readtime">{{ post.templateContent | readingTime }} min čítania</span>
         </span>
         <span class="post-title">
           {{ post.data.title }}

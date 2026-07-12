@@ -33,7 +33,9 @@ layout: base.njk
 
   <ul class="post-list">
     {%- for post in collections.post | reverse %}
+    {%- if post.fileSlug != "preco-tato-stranka-vobec-existuje" %}
     {{ postItem(post) }}
+    {%- endif %}
     {%- endfor %}
     {% if collections.post.length == 0 %}
     <li class="post-list-empty">
