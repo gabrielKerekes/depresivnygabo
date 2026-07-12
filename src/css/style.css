@@ -1089,3 +1089,19 @@ a:focus-visible,
 .exp .exp-status .stage-badge {
   margin-left: 0;
 }
+
+/* Variant H: status on its own line above the title, a very small date sitting
+   directly after the title, and a less-rounded status badge. */
+.exp-h .exp-date-inline {
+  margin-left: 0.5rem;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.exp-h .stage-badge {
+  border-radius: 5px;
+}

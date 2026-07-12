@@ -1,0 +1,8 @@
+---
+layout: base.njk
+title: Variant H — status nad nadpisom, dátum za nadpisom
+permalink: /experiment/h/
+eleventyExcludeFromCollections: true
+---
+{% from "experiment-macros.njk" import expHome %}
+{{ expHome(collections.post, "h", "Variant H: zoznam ako riadky, status nad nadpisom, drobný dátum hneď za nadpisom, menej zaoblený status", "statusTop", "date-first", false, true) }}

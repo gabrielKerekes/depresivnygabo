@@ -15,7 +15,8 @@
   { slug: "d", label: "D", url: "/experiment/d/" },
   { slug: "e", label: "E", url: "/experiment/e/" },
   { slug: "f", label: "F", url: "/experiment/f/" },
-  { slug: "g", label: "G", url: "/experiment/g/" }
+  { slug: "g", label: "G", url: "/experiment/g/" },
+  { slug: "h", label: "H", url: "/experiment/h/" }
 ] %}
 
 {# The date + status meta line. `order` = "date-first" (date left, status right)
@@ -38,7 +39,12 @@
    `metaBelow` (meta mode only) puts the meta line below the title. #}
 {% macro expPost(post, mode, order, metaBelow) %}
     <li class="post-list-item">
-      {%- if mode == "meta" %}
+      {%- if mode == "statusTop" %}
+      <a class="post-link exp-link" href="{{ post.url }}">
+        <span class="exp-status">{{ stageBadge(post.data.stage) }}</span>
+        <span class="post-title exp-title">{{ post.data.title }}<span class="exp-date-inline"><time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time></span></span>
+      </a>
+      {%- elif mode == "meta" %}
       <a class="post-link exp-link" href="{{ post.url }}">
         {%- if not metaBelow %}{{ expMetaRow(post, order) }}{%- endif %}
         <span class="post-title exp-title">{{ post.data.title }}</span>
@@ -71,7 +77,7 @@
 
 <p class="exp-banner">Dočasná ukážka na porovnanie — {{ label }}. Skús ju na telefóne.</p>
 
-<div class="exp{% if rows %} exp-rows{% endif %}">
+<div class="exp exp-{{ slug }}{% if rows %} exp-rows{% endif %}">
   <section class="intro">
     <p class="intro-lead">
       Ahoj, som Gabo a mám (vraj<span class="asterisk">*</span>) depresiu.
