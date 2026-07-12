@@ -16,7 +16,8 @@
   { slug: "e", label: "E", url: "/experiment/e/" },
   { slug: "f", label: "F", url: "/experiment/f/" },
   { slug: "g", label: "G", url: "/experiment/g/" },
-  { slug: "h", label: "H", url: "/experiment/h/" }
+  { slug: "h", label: "H", url: "/experiment/h/" },
+  { slug: "i", label: "I", url: "/experiment/i/" }
 ] %}
 
 {# The date + status meta line. `order` = "date-first" (date left, status right)
@@ -39,7 +40,13 @@
    `metaBelow` (meta mode only) puts the meta line below the title. #}
 {% macro expPost(post, mode, order, metaBelow) %}
     <li class="post-list-item">
-      {%- if mode == "statusTop" %}
+      {%- if mode == "icon" %}
+      {%- set s = post.data.stage | stageInfo %}
+      <a class="post-link exp-iconrow" href="{{ post.url }}">
+        {%- if s %}<span class="exp-icon stage-{{ post.data.stage }}" title="{{ s.label }}" role="img" aria-label="{{ s.label }}">{{ s.emoji }}</span>{% else %}<span class="exp-icon" aria-hidden="true"></span>{%- endif %}
+        <span class="post-title exp-title">{{ post.data.title }}</span>
+      </a>
+      {%- elif mode == "statusTop" %}
       <a class="post-link exp-link" href="{{ post.url }}">
         <span class="exp-status">{{ stageBadge(post.data.stage) }}</span>
         <span class="post-title exp-title">{{ post.data.title }}<span class="exp-date-inline"><time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time></span></span>

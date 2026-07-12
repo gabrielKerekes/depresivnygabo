@@ -1105,3 +1105,20 @@ a:focus-visible,
 .exp-h .stage-badge {
   border-radius: 5px;
 }
+
+/* Variant I: no date; the status is just its emoji in a fixed column before the
+   title, vertically centred against it. */
+.exp-i .exp-iconrow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+}
+.exp-i .exp-icon {
+  grid-column: 1;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.exp-i .exp-title {
+  grid-column: 2;
+}

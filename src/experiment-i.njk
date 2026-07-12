@@ -1,0 +1,8 @@
+---
+layout: base.njk
+title: Variant I — status ako ikona, bez dátumu
+permalink: /experiment/i/
+eleventyExcludeFromCollections: true
+---
+{% from "experiment-macros.njk" import expHome %}
+{{ expHome(collections.post, "i", "Variant I: zoznam ako riadky, bez dátumu, status len ako ikona vo vlastnom stĺpci pred nadpisom", "icon", "date-first", false, true) }}
