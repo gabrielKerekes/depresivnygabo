@@ -6,9 +6,45 @@
 {# Slug of the curated "start here" pick, so it is not also listed below. #}
 {% set CURATED = "preco-tato-stranka-vobec-existuje" %}
 
-{# Post row without the reading-time meta line (date only). #}
-{% macro expPostItem(post) %}
+{# All variants, for the switcher nav. #}
+{% set EXP_VARIANTS = [
+  { slug: "", label: "Aktuálna", url: "/" },
+  { slug: "a", label: "A", url: "/experiment/a/" },
+  { slug: "b", label: "B", url: "/experiment/b/" },
+  { slug: "c", label: "C", url: "/experiment/c/" },
+  { slug: "d", label: "D", url: "/experiment/d/" },
+  { slug: "e", label: "E", url: "/experiment/e/" },
+  { slug: "f", label: "F", url: "/experiment/f/" },
+  { slug: "g", label: "G", url: "/experiment/g/" }
+] %}
+
+{# The date + status meta line. `order` = "date-first" (date left, status right)
+   or "status-first" (status left, date right). #}
+{% macro expMetaRow(post, order) %}
+        <span class="exp-meta">
+          {%- if order == "status-first" %}
+          <span class="exp-status">{{ stageBadge(post.data.stage) }}</span>
+          <span class="post-date exp-date"><time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time></span>
+          {%- else %}
+          <span class="post-date exp-date"><time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time></span>
+          <span class="exp-status">{{ stageBadge(post.data.stage) }}</span>
+          {%- endif %}
+        </span>
+{% endmacro %}
+
+{# One post row. `mode`:
+   - "inline" → original look: date line, then title with inline status badge.
+   - "meta"   → date + status share one line (see `order`); title on its own.
+   `metaBelow` (meta mode only) puts the meta line below the title. #}
+{% macro expPost(post, mode, order, metaBelow) %}
     <li class="post-list-item">
+      {%- if mode == "meta" %}
+      <a class="post-link exp-link" href="{{ post.url }}">
+        {%- if not metaBelow %}{{ expMetaRow(post, order) }}{%- endif %}
+        <span class="post-title exp-title">{{ post.data.title }}</span>
+        {%- if metaBelow %}{{ expMetaRow(post, order) }}{%- endif %}
+      </a>
+      {%- else %}
       <a class="post-link" href="{{ post.url }}">
         <span class="post-date">
           <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
@@ -19,24 +55,23 @@
         </span>
         <span class="post-arrow" aria-hidden="true">→</span>
       </a>
+      {%- endif %}
     </li>
 {% endmacro %}
 
-{# The full decluttered home body, wrapped so a variant class can scope CSS.
-   `variant` is the modifier class (e.g. "exp-a" / "exp-b"). #}
-{% macro expHome(posts, variant, label) %}
+{# The full decluttered home body. `rows` renders "Všetky články" as quiet
+   divider rows (the curated pick keeps its card). #}
+{% macro expHome(posts, slug, label, mode="inline", order="date-first", metaBelow=false, rows=false) %}
 <nav class="exp-nav" aria-label="Prepínač variantov">
   <span class="exp-nav-label">Experiment:</span>
-  <a href="/">Aktuálna</a>
-  <a href="/experiment/a/"{% if variant == "exp-a" %} aria-current="page"{% endif %}>Variant A</a>
-  <a href="/experiment/b/"{% if variant == "exp-b" %} aria-current="page"{% endif %}>Variant B</a>
+  {%- for v in EXP_VARIANTS %}
+  <a href="{{ v.url }}"{% if v.slug == slug %} aria-current="page"{% endif %}>{{ v.label }}</a>
+  {%- endfor %}
 </nav>
 
-<p class="exp-banner">
-  Dočasná ukážka na porovnanie — {{ label }}. Skús ju na telefóne.
-</p>
+<p class="exp-banner">Dočasná ukážka na porovnanie — {{ label }}. Skús ju na telefóne.</p>
 
-<div class="exp {{ variant }}">
+<div class="exp{% if rows %} exp-rows{% endif %}">
   <section class="intro">
     <p class="intro-lead">
       Ahoj, som Gabo a mám (vraj<span class="asterisk">*</span>) depresiu.
@@ -57,7 +92,7 @@
     <ul class="post-list">
       {%- for post in posts %}
       {%- if post.fileSlug == CURATED %}
-      {{ expPostItem(post) }}
+      {{ expPost(post, mode, order, metaBelow) }}
       {%- endif %}
       {%- endfor %}
     </ul>
@@ -69,7 +104,7 @@
     <ul class="post-list">
       {%- for post in posts | reverse %}
       {%- if post.fileSlug != CURATED %}
-      {{ expPostItem(post) }}
+      {{ expPost(post, mode, order, metaBelow) }}
       {%- endif %}
       {%- endfor %}
     </ul>

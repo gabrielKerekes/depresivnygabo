@@ -1042,13 +1042,13 @@ a:focus-visible,
   }
 }
 
-/* Variant B only: "Všetky články" as quiet divider rows; the raised card stays
-   reserved for the single curated pick in "Kde začať?". */
-.exp-b .posts .post-list {
+/* Rows variants (B, F, G): "Všetky články" as quiet divider rows; the raised
+   card stays reserved for the single curated pick in "Kde začať?". */
+.exp-rows .posts .post-list {
   gap: 0;
 }
-.exp-b .posts .post-list-item,
-.exp-b .posts .post-list-item:hover {
+.exp-rows .posts .post-list-item,
+.exp-rows .posts .post-list-item:hover {
   border: none;
   border-bottom: 1px solid var(--border);
   border-radius: 0;
@@ -1056,10 +1056,36 @@ a:focus-visible,
   box-shadow: none;
   transform: none;
 }
-.exp-b .posts .post-list-item:last-child {
+.exp-rows .posts .post-list-item:last-child {
   border-bottom: none;
 }
-.exp-b .posts .post-link {
+.exp-rows .posts .post-link {
   padding-left: 0;
   padding-right: 0;
+}
+
+/* Meta-row variants (C–G): date + status share one line (justified to opposite
+   edges), the date is smaller, and the title sits on its own line. No hover
+   arrow in these — the row is a simple flex column. */
+.exp .exp-link {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* override the base .post-link align-items: center */
+  gap: 0.4rem;
+}
+.exp .exp-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.exp .exp-date {
+  font-size: 0.7rem;
+}
+.exp .exp-status {
+  display: inline-flex;
+}
+/* The badge's usual left margin is for sitting after a title; not needed here. */
+.exp .exp-status .stage-badge {
+  margin-left: 0;
 }

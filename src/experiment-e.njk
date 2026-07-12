@@ -1,0 +1,8 @@
+---
+layout: base.njk
+title: Variant E — status a dátum pod nadpisom
+permalink: /experiment/e/
+eleventyExcludeFromCollections: true
+---
+{% from "experiment-macros.njk" import expHome %}
+{{ expHome(collections.post, "e", "Variant E: ako D, ale riadok so statusom a dátumom je pod nadpisom", "meta", "status-first", true, false) }}
