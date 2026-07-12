@@ -799,7 +799,7 @@ a:focus-visible,
   text-decoration: underline;
 }
 
-.made-with .heart {
+.site-footer .heart {
   color: var(--accent);
   font-weight: 600;
 }
