@@ -1,0 +1,8 @@
+---
+layout: base.njk
+title: Variant A — upratané karty
+permalink: /experiment/a/
+eleventyExcludeFromCollections: true
+---
+{% from "experiment-macros.njk" import expHome %}
+{{ expHome(collections.post, "exp-a", "Variant A: karty, ale bez duplikátu, bez času čítania a s ľahším nadpisom") }}

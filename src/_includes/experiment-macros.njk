@@ -1,0 +1,78 @@
+{# TEMPORARY — markup for the home-page redesign experiments (/experiment/).
+   Delete this file together with src/experiment*.njk and the "EXPERIMENT"
+   block in css/style.css to remove the whole experiment. #}
+{% from "macros.njk" import stageBadge %}
+
+{# Slug of the curated "start here" pick, so it is not also listed below. #}
+{% set CURATED = "preco-tato-stranka-vobec-existuje" %}
+
+{# Post row without the reading-time meta line (date only). #}
+{% macro expPostItem(post) %}
+    <li class="post-list-item">
+      <a class="post-link" href="{{ post.url }}">
+        <span class="post-date">
+          <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+        </span>
+        <span class="post-title">
+          {{ post.data.title }}
+          {{- stageBadge(post.data.stage) -}}
+        </span>
+        <span class="post-arrow" aria-hidden="true">→</span>
+      </a>
+    </li>
+{% endmacro %}
+
+{# The full decluttered home body, wrapped so a variant class can scope CSS.
+   `variant` is the modifier class (e.g. "exp-a" / "exp-b"). #}
+{% macro expHome(posts, variant, label) %}
+<nav class="exp-nav" aria-label="Prepínač variantov">
+  <span class="exp-nav-label">Experiment:</span>
+  <a href="/">Aktuálna</a>
+  <a href="/experiment/a/"{% if variant == "exp-a" %} aria-current="page"{% endif %}>Variant A</a>
+  <a href="/experiment/b/"{% if variant == "exp-b" %} aria-current="page"{% endif %}>Variant B</a>
+</nav>
+
+<p class="exp-banner">
+  Dočasná ukážka na porovnanie — {{ label }}. Skús ju na telefóne.
+</p>
+
+<div class="exp {{ variant }}">
+  <section class="intro">
+    <p class="intro-lead">
+      Ahoj, som Gabo a mám (vraj<span class="asterisk">*</span>) depresiu.
+    </p>
+    <p class="intro-note">
+      <span class="asterisk">*</span> „vraj“ pretože s tým ešte stále nie som
+      stotožnený a diagnostika depresie žiaľ nie je úplne presná.
+    </p>
+  </section>
+
+  <section class="start-here">
+    <h2 class="page-title">Kde začať?</h2>
+    <p class="start-here-lead">
+      Toto je moja digitálna záhradka. Keď mám čas, tak sem pridám nejaké drobné
+      vylepšenie alebo „zalejem“ (upravím) nejaký článok.
+    </p>
+
+    <ul class="post-list">
+      {%- for post in posts %}
+      {%- if post.fileSlug == CURATED %}
+      {{ expPostItem(post) }}
+      {%- endif %}
+      {%- endfor %}
+    </ul>
+  </section>
+
+  <section class="posts">
+    <h2 class="page-title">Všetky články</h2>
+
+    <ul class="post-list">
+      {%- for post in posts | reverse %}
+      {%- if post.fileSlug != CURATED %}
+      {{ expPostItem(post) }}
+      {%- endif %}
+      {%- endfor %}
+    </ul>
+  </section>
+</div>
+{% endmacro %}

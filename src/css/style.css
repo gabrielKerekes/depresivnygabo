@@ -988,3 +988,78 @@ a:focus-visible,
     padding: 1rem 1.15rem;
   }
 }
+
+/* ==========================================================================
+   EXPERIMENT — temporary home-page variants for comparison (/experiment/).
+   Everything below is scoped under .exp / .exp-a / .exp-b (plus the .exp-nav
+   and .exp-banner chrome). Delete this whole block together with
+   src/experiment*.njk and src/_includes/experiment-macros.njk to remove it.
+   ========================================================================== */
+
+/* Variant switcher + banner shown above each experiment */
+.exp-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.9rem;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+}
+.exp-nav-label {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+}
+.exp-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.exp-nav a[aria-current="page"] {
+  color: var(--accent);
+  font-weight: 600;
+}
+.exp-banner {
+  margin: 0.75rem 0 0;
+  padding: 0.6rem 0.9rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Shared by both variants: lighter "Kde začať?" header (no trailing rule) and
+   no dead hover-arrow gutter on touch. */
+.exp .start-here .page-title::after {
+  display: none;
+}
+@media (max-width: 32rem) {
+  .exp .post-arrow {
+    display: none;
+  }
+  .exp .post-link {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Variant B only: "Všetky články" as quiet divider rows; the raised card stays
+   reserved for the single curated pick in "Kde začať?". */
+.exp-b .posts .post-list {
+  gap: 0;
+}
+.exp-b .posts .post-list-item,
+.exp-b .posts .post-list-item:hover {
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+.exp-b .posts .post-list-item:last-child {
+  border-bottom: none;
+}
+.exp-b .posts .post-link {
+  padding-left: 0;
+  padding-right: 0;
+}
