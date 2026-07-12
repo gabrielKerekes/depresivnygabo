@@ -14,6 +14,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/fonts");
   eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
+  eleventyConfig.addPassthroughCopy({ "src/favicon.svg": "favicon.svg" });
 
   // Atom feed at /feed.xml so readers can subscribe.
   eleventyConfig.addPlugin(feedPlugin, {
