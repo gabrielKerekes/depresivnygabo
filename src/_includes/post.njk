@@ -67,11 +67,8 @@ layout: base.njk
 
   {{ content | safe }}
 
-  {% if tags %}
-  <footer class="post-footer">
-    {{ topicTags(tags) }}
-  </footer>
-  {% endif %}
+  {# Tag chips hidden while /tema/ pages are unpublished — they'd link nowhere.
+     Restore this footer (and the import above) with the topic pages. #}
   </article>
 </div>
 

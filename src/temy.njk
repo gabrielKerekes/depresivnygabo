@@ -1,7 +1,11 @@
 ---
 layout: base.njk
 title: Témy
-permalink: /temy/
+# Unpublished for now: too few posts to make topics worth navigating. Restore
+# the permalink here and in tema.njk, the nav link in base.njk, and the tag
+# chips in post.njk when there's enough to sort.
+permalink: false
+eleventyExcludeFromCollections: true
 ---
 {# Build the list of topic tags (every collection key except the internal
    bookkeeping ones), sorted alphabetically. #}

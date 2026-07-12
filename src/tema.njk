@@ -9,7 +9,9 @@ pagination:
 layout: base.njk
 eleventyComputed:
   title: "Téma: {{ tag }}"
-permalink: "/tema/{{ tag | slugify }}/"
+# Unpublished alongside /temy/ — see the note there.
+permalink: false
+eleventyExcludeFromCollections: true
 ---
 {% from "macros.njk" import postItem %}
 <section class="posts">
