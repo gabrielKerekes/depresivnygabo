@@ -161,5 +161,39 @@
         });
       })();
     </script>
+
+    <!-- Post cards tilt slightly toward the cursor while hovered. Everything
+         else about the card (lift, scale, shadow, corner wash) is CSS; this
+         only feeds the rotation angles into --rx/--ry. -->
+    <script>
+      (function () {
+        var cards = document.querySelectorAll(".post-list-item");
+        if (!cards.length) return;
+        // Skip on touch/coarse pointers (nothing to hover) and when the reader
+        // has asked for reduced motion.
+        if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        // The cards are wide and short, so a degree of rotateY swings the far
+        // edge much further than a degree of rotateX moves the top edge. The
+        // vertical axis gets 2x the angle to compensate.
+        var TILT = 1.5;
+        var V_RATIO = 2;
+
+        cards.forEach(function (card) {
+          card.addEventListener("pointermove", function (e) {
+            var b = card.getBoundingClientRect();
+            var px = (e.clientX - b.left) / b.width - 0.5;
+            var py = (e.clientY - b.top) / b.height - 0.5;
+            card.style.setProperty("--ry", (px * TILT * 2).toFixed(2) + "deg");
+            card.style.setProperty("--rx", (-py * TILT * V_RATIO * 2).toFixed(2) + "deg");
+          });
+          card.addEventListener("pointerleave", function () {
+            card.style.removeProperty("--rx");
+            card.style.removeProperty("--ry");
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
