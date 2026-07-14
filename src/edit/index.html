@@ -1,0 +1,1091 @@
+<!doctype html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Editor — depresívny gabo</title>
+
+    <!-- PWA: allow "Add to Home Screen" to open full-screen like an app. -->
+    <link rel="manifest" href="/edit/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Editor" />
+    <meta name="theme-color" content="#15171b" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Everything below is deliberately self-contained: no external scripts,
+         no CDN, no web fonts. The page holds a GitHub token, so there must be
+         no third-party code path that could read it. -->
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #15171b;
+        --surface: #1b1e24;
+        --surface-2: #23272f;
+        --fg: #dde0e4;
+        --muted: #8b909b;
+        --accent: #8fbf9d;
+        --accent-strong: #a9d6b6;
+        --border: #282c34;
+        --danger: #e08f8f;
+        --radius: 12px;
+        --sans:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        --mono:
+          ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+          "Liberation Mono", monospace;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          color-scheme: light;
+          --bg: #f7f6f2;
+          --surface: #ffffff;
+          --surface-2: #efeee9;
+          --fg: #23262b;
+          --muted: #6b7078;
+          --accent: #3f7d52;
+          --accent-strong: #2f6a42;
+          --border: #e2e0d8;
+          --danger: #b4483f;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right)
+          env(safe-area-inset-bottom) env(safe-area-inset-left);
+      }
+      .wrap {
+        max-width: 46rem;
+        margin: 0 auto;
+        padding: 1rem 1rem 4rem;
+      }
+      header.bar {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: color-mix(in srgb, var(--bg) 92%, transparent);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+        padding: 0.7rem 1rem;
+        padding-top: calc(0.7rem + env(safe-area-inset-top));
+      }
+      header.bar h1 {
+        font-size: 1rem;
+        margin: 0;
+        font-weight: 600;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      header.bar .spacer {
+        flex: 1;
+      }
+
+      button {
+        font: inherit;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--fg);
+        border-radius: 10px;
+        padding: 0.55rem 0.9rem;
+        min-height: 44px;
+      }
+      button:active {
+        transform: translateY(1px);
+      }
+      button.primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #10231a;
+        font-weight: 600;
+      }
+      button.ghost {
+        background: transparent;
+      }
+      button.icon {
+        padding: 0.4rem 0.6rem;
+        min-width: 44px;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      button.danger {
+        color: var(--danger);
+      }
+
+      label {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin: 0.9rem 0 0.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        font: inherit;
+        color: var(--fg);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 0.6rem 0.7rem;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 0;
+        border-color: var(--accent);
+      }
+      textarea.body {
+        font-family: var(--mono);
+        font-size: 15px;
+        line-height: 1.6;
+        min-height: 45vh;
+        resize: vertical;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .row {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+      .row > * {
+        flex: 1;
+        min-width: 8rem;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1rem;
+      }
+      a {
+        color: var(--accent-strong);
+      }
+
+      /* Post list */
+      ul.posts {
+        list-style: none;
+        margin: 1rem 0 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      ul.posts li button {
+        width: 100%;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+        padding: 0.8rem 0.9rem;
+      }
+      ul.posts .p-title {
+        font-weight: 600;
+      }
+      ul.posts .p-meta {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      /* Editor toolbar */
+      .toolbar {
+        display: flex;
+        gap: 0.35rem;
+        flex-wrap: wrap;
+        margin: 0.4rem 0;
+      }
+      .toolbar button {
+        padding: 0.45rem 0.7rem;
+        min-height: 40px;
+        font-size: 0.85rem;
+      }
+
+      /* Preview */
+      .preview {
+        border: 1px dashed var(--border);
+        border-radius: 10px;
+        padding: 0.2rem 1rem;
+        background: var(--surface);
+      }
+      .preview h1,
+      .preview h2,
+      .preview h3 {
+        line-height: 1.25;
+      }
+      .preview pre {
+        background: var(--surface-2);
+        padding: 0.7rem;
+        border-radius: 8px;
+        overflow-x: auto;
+      }
+      .preview code {
+        font-family: var(--mono);
+        font-size: 0.9em;
+      }
+      .preview blockquote {
+        border-left: 3px solid var(--border);
+        margin: 0.8rem 0;
+        padding-left: 0.9rem;
+        color: var(--muted);
+      }
+      .preview img {
+        max-width: 100%;
+      }
+
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: calc(1rem + env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        color: var(--fg);
+        padding: 0.7rem 1rem;
+        border-radius: 10px;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+        max-width: 90vw;
+        z-index: 20;
+      }
+      .toast.err {
+        border-color: var(--danger);
+        color: var(--danger);
+      }
+      .hidden {
+        display: none !important;
+      }
+      .sticky-actions {
+        position: sticky;
+        bottom: 0;
+        display: flex;
+        gap: 0.6rem;
+        padding: 0.7rem 0;
+        padding-bottom: calc(0.7rem + env(safe-area-inset-bottom));
+        background: linear-gradient(to top, var(--bg) 70%, transparent);
+      }
+      .sticky-actions button {
+        flex: 1;
+      }
+      details.help summary {
+        cursor: pointer;
+        color: var(--muted);
+        margin-top: 0.6rem;
+      }
+      code.inline {
+        font-family: var(--mono);
+        background: var(--surface-2);
+        padding: 0.1rem 0.35rem;
+        border-radius: 5px;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="bar">
+      <button
+        id="backBtn"
+        class="icon ghost hidden"
+        aria-label="Späť"
+        title="Späť"
+      >
+        ‹
+      </button>
+      <h1 id="barTitle">Editor</h1>
+      <span class="spacer"></span>
+      <button id="logoutBtn" class="icon ghost hidden" title="Odhlásiť">
+        ⎋
+      </button>
+    </header>
+
+    <main class="wrap" id="view"></main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        // --- Configuration --------------------------------------------------
+        var OWNER = "gabrielKerekes";
+        var REPO = "depresivnygabo";
+        var BRANCH = "main";
+        var POSTS_DIR = "src/posts";
+        var API = "https://api.github.com";
+        var STAGES = [
+          { value: "", label: "— žiadne —" },
+          { value: "seedling", label: "🌱 klíčok (seedling)" },
+          { value: "budding", label: "🌿 rastie (budding)" },
+          { value: "evergreen", label: "🌳 dozreté (evergreen)" },
+        ];
+
+        // --- Tiny DOM helpers ----------------------------------------------
+        var view = document.getElementById("view");
+        var barTitle = document.getElementById("barTitle");
+        var backBtn = document.getElementById("backBtn");
+        var logoutBtn = document.getElementById("logoutBtn");
+
+        function el(tag, attrs, kids) {
+          var e = document.createElement(tag);
+          if (attrs)
+            Object.keys(attrs).forEach(function (k) {
+              if (k === "class") e.className = attrs[k];
+              else if (k === "html") e.innerHTML = attrs[k];
+              else if (k === "text") e.textContent = attrs[k];
+              else if (k.slice(0, 2) === "on")
+                e.addEventListener(k.slice(2).toLowerCase(), attrs[k]);
+              else e.setAttribute(k, attrs[k]);
+            });
+          (kids || []).forEach(function (c) {
+            if (c)
+              e.appendChild(
+                typeof c === "string" ? document.createTextNode(c) : c,
+              );
+          });
+          return e;
+        }
+        function clear(node) {
+          while (node.firstChild) node.removeChild(node.firstChild);
+        }
+        var toastTimer;
+        function toast(msg, isErr) {
+          var t = el("div", {
+            class: "toast" + (isErr ? " err" : ""),
+            text: msg,
+          });
+          document.body.appendChild(t);
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(
+            function () {
+              t.remove();
+            },
+            isErr ? 6000 : 3000,
+          );
+        }
+
+        // --- Token storage --------------------------------------------------
+        var TOKEN_KEY = "gh_editor_token";
+        function getToken() {
+          try {
+            return localStorage.getItem(TOKEN_KEY) || "";
+          } catch (e) {
+            return "";
+          }
+        }
+        function setToken(t) {
+          try {
+            if (t) localStorage.setItem(TOKEN_KEY, t);
+            else localStorage.removeItem(TOKEN_KEY);
+          } catch (e) {}
+        }
+
+        // --- UTF-8 safe base64 (Slovak diacritics must survive) -------------
+        function encodeB64(str) {
+          var bytes = new TextEncoder().encode(str);
+          var bin = "";
+          for (var i = 0; i < bytes.length; i++)
+            bin += String.fromCharCode(bytes[i]);
+          return btoa(bin);
+        }
+        function decodeB64(b64) {
+          var bin = atob(b64.replace(/\s/g, ""));
+          var bytes = new Uint8Array(bin.length);
+          for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+          return new TextDecoder().decode(bytes);
+        }
+
+        // --- GitHub API -----------------------------------------------------
+        function api(path, opts) {
+          opts = opts || {};
+          return fetch(API + path, {
+            method: opts.method || "GET",
+            headers: {
+              Authorization: "Bearer " + getToken(),
+              Accept: "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+              "Content-Type": "application/json",
+            },
+            body: opts.body ? JSON.stringify(opts.body) : undefined,
+          }).then(function (res) {
+            if (res.status === 401 || res.status === 403) {
+              return res
+                .json()
+                .catch(function () {
+                  return {};
+                })
+                .then(function (j) {
+                  var e = new Error(
+                    j.message ||
+                      "Prístup zamietnutý — skontroluj token a jeho oprávnenia.",
+                  );
+                  e.auth = true;
+                  throw e;
+                });
+            }
+            if (!res.ok) {
+              return res
+                .json()
+                .catch(function () {
+                  return {};
+                })
+                .then(function (j) {
+                  throw new Error(j.message || "Chyba " + res.status);
+                });
+            }
+            if (res.status === 204) return null;
+            return res.json();
+          });
+        }
+
+        function listPosts() {
+          return api(
+            "/repos/" +
+              OWNER +
+              "/" +
+              REPO +
+              "/contents/" +
+              POSTS_DIR +
+              "?ref=" +
+              BRANCH,
+          ).then(function (items) {
+            return items
+              .filter(function (i) {
+                return i.type === "file" && /\.md$/.test(i.name);
+              })
+              .sort(function (a, b) {
+                return a.name < b.name ? 1 : -1; // newest date prefix first
+              });
+          });
+        }
+        function getFile(path) {
+          return api(
+            "/repos/" +
+              OWNER +
+              "/" +
+              REPO +
+              "/contents/" +
+              path +
+              "?ref=" +
+              BRANCH,
+          ).then(function (j) {
+            return { sha: j.sha, text: decodeB64(j.content), path: path };
+          });
+        }
+        function putFile(path, text, message, sha) {
+          var body = {
+            message: message,
+            content: encodeB64(text),
+            branch: BRANCH,
+          };
+          if (sha) body.sha = sha;
+          return api("/repos/" + OWNER + "/" + REPO + "/contents/" + path, {
+            method: "PUT",
+            body: body,
+          });
+        }
+
+        // --- Front-matter parse / serialize --------------------------------
+        // The blog uses a small, flat front-matter block. We pull out the known
+        // keys for a nice mobile form and preserve any unknown lines verbatim so
+        // nothing the owner wrote is ever silently dropped.
+        var KNOWN = ["title", "date", "updated", "stage", "tags"];
+        function parse(text) {
+          var m = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
+          var fm = {
+            title: "",
+            date: "",
+            updated: "",
+            stage: "",
+            tags: [],
+            extra: [],
+          };
+          var body = text;
+          if (m) {
+            body = text.slice(m[0].length);
+            var lines = m[1].split(/\r?\n/);
+            for (var i = 0; i < lines.length; i++) {
+              var line = lines[i];
+              var kv = line.match(/^([A-Za-z0-9_-]+):\s?(.*)$/);
+              if (kv && KNOWN.indexOf(kv[1]) !== -1 && kv[1] !== "tags") {
+                fm[kv[1]] = unquote(kv[2]);
+              } else if (kv && kv[1] === "tags") {
+                // collect following "  - x" lines
+                var tags = [];
+                if (kv[2].trim()) tags.push(unquote(kv[2].trim()));
+                while (i + 1 < lines.length && /^\s*-\s+/.test(lines[i + 1])) {
+                  tags.push(unquote(lines[++i].replace(/^\s*-\s+/, "").trim()));
+                }
+                fm.tags = tags;
+              } else if (line.trim() !== "") {
+                fm.extra.push(line); // unknown key — keep as-is
+              }
+            }
+          }
+          return { fm: fm, body: body.replace(/^\s+/, "") };
+        }
+        function unquote(v) {
+          v = v.trim();
+          if (
+            (v[0] === '"' && v[v.length - 1] === '"') ||
+            (v[0] === "'" && v[v.length - 1] === "'")
+          )
+            return v.slice(1, -1).replace(/\\"/g, '"');
+          return v;
+        }
+        function yamlStr(v) {
+          // Quote only when YAML would otherwise misread it.
+          if (
+            /^[\s]|[\s]$|:\s|^[#>&*!|%@`"'\[\]{},]|^-\s|^$/.test(v) ||
+            /[:#]\s/.test(v)
+          ) {
+            return '"' + v.replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"';
+          }
+          return v;
+        }
+        function serialize(fm, body) {
+          var out = ["---"];
+          out.push("title: " + yamlStr(fm.title || ""));
+          if (fm.date) out.push("date: " + fm.date);
+          if (fm.updated) out.push("updated: " + fm.updated);
+          if (fm.stage) out.push("stage: " + fm.stage);
+          if (fm.extra && fm.extra.length)
+            fm.extra.forEach(function (l) {
+              out.push(l);
+            });
+          if (fm.tags && fm.tags.length) {
+            out.push("tags:");
+            fm.tags.forEach(function (t) {
+              out.push("  - " + yamlStr(t));
+            });
+          }
+          out.push("---");
+          return (
+            out.join("\n") +
+            "\n\n" +
+            body.replace(/^\s+/, "").replace(/\s+$/, "") +
+            "\n"
+          );
+        }
+
+        function slugify(s) {
+          return s
+            .normalize("NFD")
+            .replace(/[̀-ͯ]/g, "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+        }
+
+        // --- Minimal Markdown preview --------------------------------------
+        // Approximate on purpose: the real render is done by 11ty on build.
+        // Covers headings, bold/italic/code, links, lists, quotes, code blocks.
+        function esc(s) {
+          return s
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+        }
+        function inline(s) {
+          return esc(s)
+            .replace(/`([^`]+)`/g, "<code>$1</code>")
+            .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+            .replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>")
+            .replace(
+              /\[([^\]]+)\]\(([^)]+)\)/g,
+              '<a href="$2" rel="noopener">$1</a>',
+            );
+        }
+        function renderMd(src) {
+          var lines = src.split(/\r?\n/);
+          var html = [];
+          var i = 0;
+          var listOpen = false;
+          function closeList() {
+            if (listOpen) {
+              html.push("</ul>");
+              listOpen = false;
+            }
+          }
+          while (i < lines.length) {
+            var line = lines[i];
+            if (/^```/.test(line)) {
+              closeList();
+              var code = [];
+              i++;
+              while (i < lines.length && !/^```/.test(lines[i]))
+                code.push(esc(lines[i++]));
+              html.push("<pre><code>" + code.join("\n") + "</code></pre>");
+              i++;
+              continue;
+            }
+            var h = line.match(/^(#{1,4})\s+(.*)$/);
+            if (h) {
+              closeList();
+              var lvl = h[1].length;
+              html.push("<h" + lvl + ">" + inline(h[2]) + "</h" + lvl + ">");
+              i++;
+              continue;
+            }
+            if (/^\s*[-*]\s+/.test(line)) {
+              if (!listOpen) {
+                html.push("<ul>");
+                listOpen = true;
+              }
+              html.push(
+                "<li>" + inline(line.replace(/^\s*[-*]\s+/, "")) + "</li>",
+              );
+              i++;
+              continue;
+            }
+            if (/^>\s?/.test(line)) {
+              closeList();
+              html.push(
+                "<blockquote>" +
+                  inline(line.replace(/^>\s?/, "")) +
+                  "</blockquote>",
+              );
+              i++;
+              continue;
+            }
+            if (line.trim() === "") {
+              closeList();
+              i++;
+              continue;
+            }
+            closeList();
+            html.push("<p>" + inline(line) + "</p>");
+            i++;
+          }
+          closeList();
+          return html.join("\n");
+        }
+
+        // --- Chrome (back / logout buttons) --------------------------------
+        function setChrome(title, opts) {
+          opts = opts || {};
+          barTitle.textContent = title;
+          backBtn.classList.toggle("hidden", !opts.back);
+          logoutBtn.classList.toggle("hidden", !opts.logout);
+        }
+        backBtn.onclick = function () {
+          renderList();
+        };
+        logoutBtn.onclick = function () {
+          if (confirm("Odhlásiť a zabudnúť token na tomto zariadení?")) {
+            setToken("");
+            renderTokenGate();
+          }
+        };
+
+        // --- View: token gate ----------------------------------------------
+        function renderTokenGate() {
+          setChrome("Prihlásenie", {});
+          clear(view);
+          var input = el("input", {
+            type: "password",
+            placeholder: "github_pat_…",
+            autocomplete: "off",
+            autocapitalize: "off",
+            spellcheck: "false",
+          });
+          var save = el("button", {
+            class: "primary",
+            text: "Uložiť a pokračovať",
+            onclick: function () {
+              var t = input.value.trim();
+              if (!t) return toast("Zadaj token.", true);
+              setToken(t);
+              toast("Overujem…");
+              listPosts()
+                .then(renderList)
+                .catch(function (e) {
+                  setToken("");
+                  toast(e.message, true);
+                });
+            },
+          });
+          view.appendChild(
+            el("div", { class: "card" }, [
+              el("p", {
+                html:
+                  "Vlož svoj <strong>fine-grained GitHub token</strong>. Uloží sa " +
+                  "iba na tomto zariadení (v prehliadači) a používa sa výhradne " +
+                  "na commity do tohto repozitára.",
+              }),
+              el("label", { text: "GitHub token" }),
+              input,
+              el("div", { class: "row", style: "margin-top:1rem" }, [save]),
+              el("details", { class: "help" }, [
+                el("summary", { text: "Ako vytvoriť token?" }),
+                el("ol", {}, [
+                  el("li", {
+                    html:
+                      'Otvor <a href="https://github.com/settings/personal-access-tokens/new" ' +
+                      'target="_blank" rel="noopener">Fine-grained tokens → Generate new</a>.',
+                  }),
+                  el("li", {
+                    html:
+                      "<strong>Resource owner:</strong> gabrielKerekes, " +
+                      "<strong>Repository access:</strong> Only select repositories → " +
+                      "<code class='inline'>depresivnygabo</code>.",
+                  }),
+                  el("li", {
+                    html:
+                      "<strong>Repository permissions → Contents:</strong> " +
+                      "Read and write. (Nič iné netreba.)",
+                  }),
+                  el("li", {
+                    html:
+                      "Nastav expiráciu (napr. 90 dní), vygeneruj a sem vlož " +
+                      "hodnotu, čo začína <code class='inline'>github_pat_</code>.",
+                  }),
+                ]),
+              ]),
+            ]),
+          );
+          input.focus();
+        }
+
+        // --- View: post list -----------------------------------------------
+        function renderList() {
+          setChrome("Články", { logout: true });
+          clear(view);
+          view.appendChild(
+            el("div", { class: "row" }, [
+              el("button", {
+                class: "primary",
+                text: "✎ Nový článok",
+                onclick: function () {
+                  renderEditor(null);
+                },
+              }),
+            ]),
+          );
+          var loading = el("p", { class: "muted", text: "Načítavam…" });
+          view.appendChild(loading);
+          listPosts()
+            .then(function (posts) {
+              loading.remove();
+              if (!posts.length) {
+                view.appendChild(
+                  el("p", { class: "muted", text: "Žiadne články." }),
+                );
+                return;
+              }
+              var ul = el("ul", { class: "posts" });
+              posts.forEach(function (p) {
+                var date =
+                  (p.name.match(/^(\d{4}-\d{2}-\d{2})/) || [])[1] || "";
+                var slug = p.name
+                  .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+                  .replace(/\.md$/, "");
+                ul.appendChild(
+                  el("li", {}, [
+                    el(
+                      "button",
+                      {
+                        onclick: function () {
+                          renderEditor(p.path);
+                        },
+                      },
+                      [
+                        el("span", { class: "p-title", text: slug }),
+                        el("span", {
+                          class: "p-meta",
+                          text: date + " · " + p.name,
+                        }),
+                      ],
+                    ),
+                  ]),
+                );
+              });
+              view.appendChild(ul);
+            })
+            .catch(function (e) {
+              loading.remove();
+              toast(e.message, true);
+              if (e.auth) renderTokenGate();
+            });
+        }
+
+        // --- View: editor ---------------------------------------------------
+        function renderEditor(path) {
+          var isNew = !path;
+          setChrome(isNew ? "Nový článok" : "Úprava", { back: true });
+          clear(view);
+          var loading = el("p", { class: "muted", text: "Načítavam…" });
+          view.appendChild(loading);
+
+          var loader = isNew
+            ? Promise.resolve({
+                sha: null,
+                path: null,
+                fm: {
+                  title: "",
+                  date: new Date().toISOString().slice(0, 10),
+                  updated: "",
+                  stage: "seedling",
+                  tags: [],
+                  extra: [],
+                },
+                body: "",
+              })
+            : getFile(path).then(function (f) {
+                var p = parse(f.text);
+                return { sha: f.sha, path: f.path, fm: p.fm, body: p.body };
+              });
+
+          loader
+            .then(function (data) {
+              loading.remove();
+              buildEditor(data, isNew);
+            })
+            .catch(function (e) {
+              loading.remove();
+              toast(e.message, true);
+              if (e.auth) renderTokenGate();
+            });
+        }
+
+        function buildEditor(data, isNew) {
+          var fm = data.fm;
+
+          var titleIn = el("input", { type: "text", value: fm.title });
+          var dateIn = el("input", { type: "date", value: fm.date });
+          var updatedIn = el("input", { type: "date", value: fm.updated });
+          var stageSel = el("select", {});
+          STAGES.forEach(function (s) {
+            var o = el("option", { value: s.value, text: s.label });
+            if (s.value === fm.stage) o.selected = true;
+            stageSel.appendChild(o);
+          });
+          var tagsIn = el("input", {
+            type: "text",
+            value: (fm.tags || []).join(", "),
+            placeholder: "depresia, meta",
+            autocapitalize: "off",
+          });
+          var bodyIn = el("textarea", { class: "body" });
+          bodyIn.value = data.body;
+
+          // Markdown insert helpers (wrap current selection).
+          function wrap(before, after, placeholder) {
+            var s = bodyIn.selectionStart,
+              e = bodyIn.selectionEnd;
+            var sel = bodyIn.value.slice(s, e) || placeholder || "";
+            bodyIn.setRangeText(before + sel + after, s, e, "end");
+            bodyIn.focus();
+            syncPreview();
+          }
+          var toolbar = el("div", { class: "toolbar" }, [
+            el("button", {
+              type: "button",
+              text: "H2",
+              onclick: function () {
+                wrap("## ", "", "Nadpis");
+              },
+            }),
+            el("button", {
+              type: "button",
+              text: "H3",
+              onclick: function () {
+                wrap("### ", "", "Nadpis");
+              },
+            }),
+            el("button", {
+              type: "button",
+              text: "B",
+              onclick: function () {
+                wrap("**", "**", "tučné");
+              },
+            }),
+            el("button", {
+              type: "button",
+              text: "I",
+              onclick: function () {
+                wrap("*", "*", "kurzíva");
+              },
+            }),
+            el("button", {
+              type: "button",
+              text: "• Zoznam",
+              onclick: function () {
+                wrap("- ", "", "položka");
+              },
+            }),
+            el("button", {
+              type: "button",
+              text: "🔗 Odkaz",
+              onclick: function () {
+                wrap("[", "](https://)", "text");
+              },
+            }),
+            el("button", {
+              type: "button",
+              text: "„Citát",
+              onclick: function () {
+                wrap("> ", "", "citát");
+              },
+            }),
+          ]);
+
+          // Preview toggle
+          var preview = el("div", { class: "preview hidden" });
+          function syncPreview() {
+            if (!preview.classList.contains("hidden"))
+              preview.innerHTML = renderMd(bodyIn.value);
+          }
+          bodyIn.addEventListener("input", syncPreview);
+          var previewBtn = el("button", {
+            type: "button",
+            class: "ghost",
+            text: "👁 Náhľad",
+            onclick: function () {
+              preview.classList.toggle("hidden");
+              previewBtn.textContent = preview.classList.contains("hidden")
+                ? "👁 Náhľad"
+                : "✎ Text";
+              syncPreview();
+            },
+          });
+
+          function collectFm() {
+            return {
+              title: titleIn.value.trim(),
+              date: dateIn.value,
+              updated: updatedIn.value,
+              stage: stageSel.value,
+              tags: tagsIn.value
+                .split(",")
+                .map(function (t) {
+                  return t.trim();
+                })
+                .filter(Boolean),
+              extra: fm.extra || [],
+            };
+          }
+
+          var saveBtn = el("button", {
+            class: "primary",
+            text: "💾 Uložiť (commit)",
+            onclick: function () {
+              var nfm = collectFm();
+              if (!nfm.title) return toast("Chýba názov.", true);
+              if (!nfm.date) return toast("Chýba dátum.", true);
+              var text = serialize(nfm, bodyIn.value);
+              var path = data.path;
+              if (isNew) {
+                var slug = slugify(nfm.title);
+                if (!slug) return toast("Z názvu sa nedá vytvoriť slug.", true);
+                path = POSTS_DIR + "/" + nfm.date + "-" + slug + ".md";
+              }
+              var defMsg = (isNew ? "Add post: " : "Update post: ") + nfm.title;
+              var msg = prompt("Commit message:", defMsg);
+              if (msg === null) return;
+              saveBtn.disabled = true;
+              saveBtn.textContent = "Ukladám…";
+              putFile(path, text, msg || defMsg, data.sha)
+                .then(function (res) {
+                  toast("Uložené ✓ Deploy beží (~1 min).");
+                  // Refresh sha so a second save on the same screen works.
+                  data.sha = res.content.sha;
+                  data.path = path;
+                  isNew = false;
+                  setChrome("Úprava", { back: true });
+                  saveBtn.disabled = false;
+                  saveBtn.textContent = "💾 Uložiť (commit)";
+                })
+                .catch(function (e) {
+                  saveBtn.disabled = false;
+                  saveBtn.textContent = "💾 Uložiť (commit)";
+                  toast(e.message, true);
+                  if (e.auth) renderTokenGate();
+                });
+            },
+          });
+
+          view.appendChild(
+            el("div", {}, [
+              el("label", { text: "Názov" }),
+              titleIn,
+              el("div", { class: "row" }, [
+                el("div", {}, [
+                  el("label", { text: "Zasadené (date)" }),
+                  dateIn,
+                ]),
+                el("div", {}, [
+                  el("label", { text: "Zaliate (updated)" }),
+                  updatedIn,
+                ]),
+              ]),
+              el("div", { class: "row" }, [
+                el("div", {}, [
+                  el("label", { text: "Fáza (stage)" }),
+                  stageSel,
+                ]),
+                el("div", {}, [el("label", { text: "Témy (tags)" }), tagsIn]),
+              ]),
+              el(
+                "div",
+                { class: "row", style: "margin-top:1rem;align-items:center" },
+                [
+                  el("label", { text: "Obsah", style: "flex:1;margin:0" }),
+                  previewBtn,
+                ],
+              ),
+              toolbar,
+              bodyIn,
+              preview,
+              el("div", { class: "sticky-actions" }, [saveBtn]),
+            ]),
+          );
+        }
+
+        // --- Boot -----------------------------------------------------------
+        if (getToken()) {
+          listPosts()
+            .then(renderList)
+            .catch(function (e) {
+              toast(e.message, true);
+              renderTokenGate();
+            });
+        } else {
+          renderTokenGate();
+        }
+      })();
+    </script>
+  </body>
+</html>

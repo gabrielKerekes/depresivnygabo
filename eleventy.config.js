@@ -13,6 +13,12 @@ module.exports = function (eleventyConfig) {
   // Copy static assets straight through to the output folder.
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/fonts");
+  // Self-contained mobile editor at /edit/ — copied verbatim (no templating, no
+  // layout) so nothing in the build can touch the page that holds the token.
+  // Ignoring it as a template keeps its raw HTML/JS untouched by Nunjucks and
+  // out of collections (so it never lands in the sitemap or the feed).
+  eleventyConfig.ignores.add("src/edit/**");
+  eleventyConfig.addPassthroughCopy("src/edit");
   eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
   eleventyConfig.addPassthroughCopy({ "src/favicon.svg": "favicon.svg" });
 
