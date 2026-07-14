@@ -302,6 +302,35 @@
       .sticky-actions button {
         flex: 1;
       }
+
+      /* Full-screen writing mode: the content pane covers the viewport and the
+         textarea (or preview) flex-grows to fill everything between the toolbar
+         and the save bar. */
+      .editor-pane.fs {
+        position: fixed;
+        inset: 0;
+        z-index: 30;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        padding: calc(0.5rem + env(safe-area-inset-top)) 0.8rem
+          calc(0.5rem + env(safe-area-inset-bottom));
+      }
+      .editor-pane.fs textarea.body,
+      .editor-pane.fs .preview:not(.hidden) {
+        flex: 1 1 0;
+        min-height: 0;
+        resize: none;
+      }
+      .editor-pane.fs .preview {
+        overflow-y: auto;
+      }
+      .editor-pane.fs .sticky-actions {
+        position: static;
+        padding: 0;
+        background: none;
+      }
       details.help summary {
         cursor: pointer;
         color: var(--muted);
@@ -699,6 +728,8 @@
           barTitle.textContent = title;
           backBtn.classList.toggle("hidden", !opts.back);
           logoutBtn.classList.toggle("hidden", !opts.logout);
+          // Leaving any view drops the scroll-lock a full-screen editor set.
+          document.body.style.overflow = "";
         }
         backBtn.onclick = function () {
           renderList();
@@ -982,6 +1013,32 @@
             },
           });
 
+          // Full-screen writing mode toggle.
+          var editorPane = el("div", { class: "editor-pane" });
+          function setFullscreen(on) {
+            editorPane.classList.toggle("fs", on);
+            document.body.style.overflow = on ? "hidden" : "";
+            fsBtn.textContent = on ? "⤢ Zmenšiť" : "⛶ Na celú obrazovku";
+            fsBtn.setAttribute("aria-pressed", on ? "true" : "false");
+            if (on) bodyIn.focus();
+          }
+          var fsBtn = el("button", {
+            type: "button",
+            class: "ghost",
+            text: "⛶ Na celú obrazovku",
+            "aria-pressed": "false",
+            onclick: function () {
+              setFullscreen(!editorPane.classList.contains("fs"));
+            },
+          });
+          // Esc leaves full-screen (handy on a keyboard; harmless on phones).
+          bodyIn.addEventListener("keydown", function (ev) {
+            if (ev.key === "Escape" && editorPane.classList.contains("fs")) {
+              ev.preventDefault();
+              setFullscreen(false);
+            }
+          });
+
           function collectFm() {
             return {
               title: titleIn.value.trim(),
@@ -1058,20 +1115,30 @@
                 ]),
                 el("div", {}, [el("label", { text: "Témy (tags)" }), tagsIn]),
               ]),
-              el(
-                "div",
-                { class: "row", style: "margin-top:1rem;align-items:center" },
-                [
-                  el("label", { text: "Obsah", style: "flex:1;margin:0" }),
-                  previewBtn,
-                ],
-              ),
-              toolbar,
-              bodyIn,
-              preview,
-              el("div", { class: "sticky-actions" }, [saveBtn]),
+              editorPane,
             ]),
           );
+
+          // The pane is what expands to full screen, so everything the writer
+          // needs while writing — header controls, toolbar, body, preview and
+          // the save button — lives inside it.
+          [
+            el(
+              "div",
+              { class: "row", style: "margin-top:1rem;align-items:center" },
+              [
+                el("label", { text: "Obsah", style: "flex:1;margin:0" }),
+                fsBtn,
+                previewBtn,
+              ],
+            ),
+            toolbar,
+            bodyIn,
+            preview,
+            el("div", { class: "sticky-actions" }, [saveBtn]),
+          ].forEach(function (n) {
+            editorPane.appendChild(n);
+          });
         }
 
         // --- Boot -----------------------------------------------------------
