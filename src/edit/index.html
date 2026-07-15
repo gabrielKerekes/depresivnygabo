@@ -287,6 +287,35 @@
         border-color: var(--danger);
         color: var(--danger);
       }
+
+      /* In-app dialog — replaces window.prompt(), which is a silent no-op in
+         installed PWAs and several mobile browsers. */
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+      .modal {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1rem;
+        width: 100%;
+        max-width: 30rem;
+        box-shadow: 0 12px 44px rgba(0, 0, 0, 0.45);
+      }
+      .modal h2 {
+        margin: 0 0 0.7rem;
+        font-size: 1rem;
+      }
+      .modal .row {
+        margin-top: 0.9rem;
+      }
       .hidden {
         display: none !important;
       }
@@ -428,6 +457,67 @@
             },
             isErr ? 6000 : 3000,
           );
+        }
+
+        // In-app text prompt. Resolves to the entered string, or null on cancel.
+        // Used instead of window.prompt(), which silently returns null in
+        // installed PWAs / many mobile browsers.
+        function askText(heading, defaultValue) {
+          return new Promise(function (resolve) {
+            var input = el("input", {
+              type: "text",
+              value: defaultValue || "",
+            });
+            function done(val) {
+              backdrop.remove();
+              document.removeEventListener("keydown", onKey);
+              resolve(val);
+            }
+            function onKey(e) {
+              if (e.key === "Escape") done(null);
+            }
+            input.addEventListener("keydown", function (e) {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                done(input.value.trim() || defaultValue || "");
+              }
+            });
+            var backdrop = el(
+              "div",
+              {
+                class: "modal-backdrop",
+                onclick: function (e) {
+                  if (e.target === backdrop) done(null);
+                },
+              },
+              [
+                el("div", { class: "modal" }, [
+                  el("h2", { text: heading }),
+                  input,
+                  el("div", { class: "row" }, [
+                    el("button", {
+                      class: "ghost",
+                      text: "Zrušiť",
+                      onclick: function () {
+                        done(null);
+                      },
+                    }),
+                    el("button", {
+                      class: "primary",
+                      text: "Uložiť",
+                      onclick: function () {
+                        done(input.value.trim() || defaultValue || "");
+                      },
+                    }),
+                  ]),
+                ]),
+              ],
+            );
+            document.body.appendChild(backdrop);
+            document.addEventListener("keydown", onKey);
+            input.focus();
+            input.select();
+          });
         }
 
         // --- Token storage --------------------------------------------------
@@ -1085,27 +1175,28 @@
                 path = POSTS_DIR + "/" + nfm.date + "-" + slug + ".md";
               }
               var defMsg = (isNew ? "Add post: " : "Update post: ") + nfm.title;
-              var msg = prompt("Commit message:", defMsg);
-              if (msg === null) return;
-              saveBtn.disabled = true;
-              saveBtn.textContent = "Ukladám…";
-              putFile(path, text, msg || defMsg, data.sha)
-                .then(function (res) {
-                  toast("Uložené ✓ Deploy beží (~1 min).");
-                  // Refresh sha so a second save on the same screen works.
-                  data.sha = res.content.sha;
-                  data.path = path;
-                  isNew = false;
-                  setChrome("Úprava", { back: true });
-                  saveBtn.disabled = false;
-                  saveBtn.textContent = "💾 Uložiť (commit)";
-                })
-                .catch(function (e) {
-                  saveBtn.disabled = false;
-                  saveBtn.textContent = "💾 Uložiť (commit)";
-                  toast(e.message, true);
-                  if (e.auth) renderTokenGate();
-                });
+              askText("Commit message", defMsg).then(function (msg) {
+                if (msg === null) return; // cancelled
+                saveBtn.disabled = true;
+                saveBtn.textContent = "Ukladám…";
+                putFile(path, text, msg || defMsg, data.sha)
+                  .then(function (res) {
+                    toast("Uložené ✓ Deploy beží (~1 min).");
+                    // Refresh sha so a second save on the same screen works.
+                    data.sha = res.content.sha;
+                    data.path = path;
+                    isNew = false;
+                    setChrome("Úprava", { back: true });
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = "💾 Uložiť (commit)";
+                  })
+                  .catch(function (e) {
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = "💾 Uložiť (commit)";
+                    toast(e.message, true);
+                    if (e.auth) renderTokenGate();
+                  });
+              });
             },
           });
 
