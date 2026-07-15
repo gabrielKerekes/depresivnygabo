@@ -316,6 +316,28 @@
       .modal .row {
         margin-top: 0.9rem;
       }
+
+      /* Unsaved-draft restore banner. */
+      .draft-banner {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 0.9rem;
+        padding: 0.7rem 0.8rem;
+        border: 1px solid var(--accent);
+        border-radius: 10px;
+        background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+      }
+      .draft-banner span {
+        flex: 1;
+        min-width: 11rem;
+        font-size: 0.9rem;
+      }
+      .draft-banner button {
+        min-height: 40px;
+        padding: 0.4rem 0.8rem;
+      }
       .hidden {
         display: none !important;
       }
@@ -522,6 +544,8 @@
 
         // --- Token storage --------------------------------------------------
         var TOKEN_KEY = "gh_editor_token";
+        // Prefix for per-post local draft autosave (see buildEditor).
+        var DRAFT_PREFIX = "gh_editor_draft:";
         function getToken() {
           try {
             return localStorage.getItem(TOKEN_KEY) || "";
@@ -1160,6 +1184,47 @@
             };
           }
 
+          // --- Local draft autosave ----------------------------------------
+          // Protects unsaved work against a refresh / PWA reload. Drafts live
+          // in localStorage (separate from Git) and are cleared once committed.
+          // New posts share the "__new__" slot; existing posts key by path.
+          var draftKey = DRAFT_PREFIX + (data.path || "__new__");
+          function fmSig(f) {
+            return [
+              f.title || "",
+              f.date || "",
+              f.updated || "",
+              f.stage || "",
+              (f.tags || []).join("|"),
+            ].join("");
+          }
+          function saveDraft() {
+            try {
+              localStorage.setItem(
+                draftKey,
+                JSON.stringify({
+                  fm: collectFm(),
+                  body: bodyIn.value,
+                  savedAt: Date.now(),
+                }),
+              );
+            } catch (e) {}
+          }
+          function clearDraft() {
+            try {
+              localStorage.removeItem(draftKey);
+            } catch (e) {}
+          }
+          var draftTimer;
+          function scheduleDraft() {
+            clearTimeout(draftTimer);
+            draftTimer = setTimeout(saveDraft, 400);
+          }
+          [titleIn, dateIn, updatedIn, tagsIn, bodyIn].forEach(function (n) {
+            n.addEventListener("input", scheduleDraft);
+          });
+          stageSel.addEventListener("change", scheduleDraft);
+
           var saveBtn = el("button", {
             class: "primary",
             text: "💾 Uložiť (commit)",
@@ -1182,9 +1247,13 @@
                 putFile(path, text, msg || defMsg, data.sha)
                   .then(function (res) {
                     toast("Uložené ✓ Deploy beží (~1 min).");
+                    // The committed content is now the source of truth — drop
+                    // the local draft and re-key to the saved path.
+                    clearDraft();
                     // Refresh sha so a second save on the same screen works.
                     data.sha = res.content.sha;
                     data.path = path;
+                    draftKey = DRAFT_PREFIX + data.path;
                     isNew = false;
                     setChrome("Úprava", { back: true });
                     saveBtn.disabled = false;
@@ -1246,6 +1315,59 @@
           ].forEach(function (n) {
             editorPane.appendChild(n);
           });
+
+          // If a stored draft differs from the loaded content, offer to restore
+          // it (e.g. after a refresh that lost unsaved work).
+          (function () {
+            var raw;
+            try {
+              raw = localStorage.getItem(draftKey);
+            } catch (e) {}
+            if (!raw) return;
+            var draft;
+            try {
+              draft = JSON.parse(raw);
+            } catch (e) {
+              return;
+            }
+            var loadedSig = fmSig(fm) + "" + (data.body || "");
+            var draftSig = fmSig(draft.fm || {}) + "" + (draft.body || "");
+            if (draftSig === loadedSig) return; // nothing newer to restore
+
+            var when = new Date(draft.savedAt || Date.now());
+            var banner = el("div", { class: "draft-banner" }, [
+              el("span", {
+                text:
+                  "Nájdený neuložený koncept (" +
+                  when.toLocaleString("sk-SK") +
+                  "). Obnoviť ho?",
+              }),
+              el("button", {
+                class: "primary",
+                text: "Obnoviť",
+                onclick: function () {
+                  var f = draft.fm || {};
+                  titleIn.value = f.title || "";
+                  dateIn.value = f.date || "";
+                  updatedIn.value = f.updated || "";
+                  stageSel.value = f.stage || "";
+                  tagsIn.value = (f.tags || []).join(", ");
+                  bodyIn.value = draft.body || "";
+                  syncPreview();
+                  banner.remove();
+                },
+              }),
+              el("button", {
+                class: "ghost",
+                text: "Zahodiť",
+                onclick: function () {
+                  clearDraft();
+                  banner.remove();
+                },
+              }),
+            ]);
+            view.insertBefore(banner, view.firstChild);
+          })();
         }
 
         // --- Boot -----------------------------------------------------------
