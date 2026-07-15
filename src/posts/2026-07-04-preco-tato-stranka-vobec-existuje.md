@@ -52,7 +52,7 @@ Nevedel som, či sa robia nejaké testy, alebo či sa proste iba
 porozprávame, alebo čo. A pani doktorka sa ma teda pýtala nejaké otázky
 (konkrétne otázky spíšem inokedy). Ja som na tie otázky odpovedal a pani doktorka z mojich odpovedí usúdila, že mám reaktívnu depresiu a teda že mi nasadí antidepresíva.
 
-A tam sa začal môj príbeh. Mám pocit, že by som tu k tomu mal napísať viac, ale zároveň k tomu mám toľko čo povedať, že sa to do tohto úvodného článku úplne nehodí. 
+A tam sa začal môj príbeh. Mám pocit, že by som tu k tomu mal napísať viac, ale zároveň k tomu mám toľko čo povedať, že sa to do tohto úvodného článku úplne nehodí.
 
 _Inak keď to teraz čítam, tak mám pocit, že môj reseach o psychiatrii, depresii a antidepresívach nebol moc dôkladný 😅. Je zároveň aj dosť možné, že si to úplne nepamätám._
 
@@ -60,7 +60,7 @@ _Inak keď to teraz čítam, tak mám pocit, že môj reseach o psychiatrii, dep
 
 Takže ako znel ten príbeh, ktorý som opakoval? Väčšinou to začalo otázkou, čo mám nové. Na to som odpovedal, že skúšam ďalšiu kombináciu liekov na depresiu. A keď ľudia, s ktorými som da práve rozprával ešte nevedeli o mojej depresii, tak to pokračovalo tým, že "Ty máš depresiu?" a ja že "Nó hej, asi hej", prípadne "Áno, berieš antidepresíva? Prečo?" a na to bola odpoveď "Tak nemal som sa dobre a tak som nakoniec šiel až k psychistričke a tá mi predpísala lieky". A potom to pokračovalo ďalšími otázkami, ktoré už spíšem trochu štrukturovanejšie. Here it goes.
 
-Dva roky – od júna 2024 – beriem antidepresíva. 
+Dva roky – od júna 2024 – beriem antidepresíva.
 
 _(Toto ešte doplním nabudúce.)_
 
