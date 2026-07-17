@@ -6,7 +6,7 @@ tags:
   - depresia
 ---
 
-*Článok nemá dobrú štruktúru. Je to uba klíčom, okej? A je mi to jedno. Nevadí mi to. Čítaj ďalej a potom si toto prečítaj znova a pochopíš, prečo je dôležité, že mi ti nevadí.*
+_Článok nemá dobrú štruktúru. Je to uba klíčom, okej? A je mi to jedno. Nevadí mi to. Čítaj ďalej a potom si toto prečítaj znova a pochopíš, prečo je dôležité, že mi ti nevadí._
 
 Začínam cítiť, že sa niečo zmenilo. Zrazu neruminujem. Neubíjam sa. Hocičo sa stane, neanalyzujem. Žijem!
 
