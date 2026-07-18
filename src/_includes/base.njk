@@ -69,8 +69,28 @@
         <span>{{ site.title }}</span>
       </a>
       <div class="header-right">
-        {# No nav: the only destination left is home, and the wordmark already
-           goes there. Restore a <nav> here when there are pages to link to. #}
+        <button
+          type="button"
+          class="nav-toggle"
+          aria-label="Otvoriť menu"
+          aria-expanded="false"
+          aria-controls="side-menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
         <button type="button" class="theme-toggle" aria-label="Prepnúť tému">
           <svg
             class="icon icon-system"
@@ -125,6 +145,41 @@
       </div>
     </header>
 
+    <div class="side-menu-backdrop" hidden></div>
+    <nav
+      id="side-menu"
+      class="side-menu"
+      aria-label="Hlavné menu"
+      aria-hidden="true"
+    >
+      <div class="side-menu-head">
+        <span class="side-menu-title">Menu</span>
+        <button type="button" class="side-menu-close" aria-label="Zavrieť menu">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <ul class="side-menu-list">
+        <li><a href="/">Domov</a></li>
+        <li><a href="mailto:{{ site.email }}">Kontakt</a></li>
+        <li>
+          <a href="https://github.com/{{ site.github }}" rel="me noopener">GitHub</a>
+        </li>
+      </ul>
+    </nav>
+
     <main>
       {{ content | safe }}
     </main>
@@ -171,6 +226,81 @@
         btn.addEventListener("click", function () {
           apply(order[(order.indexOf(current) + 1) % order.length]);
           current = root.getAttribute("data-theme");
+        });
+      })();
+    </script>
+
+    <!-- Side menu: hamburger opens an off-canvas drawer; a backdrop, the close
+         button, Escape, or picking a link closes it. Focus is trapped inside
+         while open and returned to the toggle on close. -->
+    <script>
+      (function () {
+        var toggle = document.querySelector(".nav-toggle");
+        var menu = document.getElementById("side-menu");
+        var backdrop = document.querySelector(".side-menu-backdrop");
+        var closeBtn = document.querySelector(".side-menu-close");
+        if (!toggle || !menu || !backdrop) return;
+
+        var isOpen = false;
+
+        function focusable() {
+          return menu.querySelectorAll("a[href], button:not([disabled])");
+        }
+
+        function open() {
+          if (isOpen) return;
+          isOpen = true;
+          backdrop.hidden = false;
+          document.body.classList.add("side-menu-open");
+          menu.classList.add("is-open");
+          menu.setAttribute("aria-hidden", "false");
+          toggle.setAttribute("aria-expanded", "true");
+          var first = focusable()[0];
+          if (first) first.focus();
+          document.addEventListener("keydown", onKeydown);
+        }
+
+        function close() {
+          if (!isOpen) return;
+          isOpen = false;
+          document.body.classList.remove("side-menu-open");
+          menu.classList.remove("is-open");
+          menu.setAttribute("aria-hidden", "true");
+          toggle.setAttribute("aria-expanded", "false");
+          document.removeEventListener("keydown", onKeydown);
+          // Wait for the slide-out transition before hiding the backdrop.
+          var done = function () {
+            if (!isOpen) backdrop.hidden = true;
+            menu.removeEventListener("transitionend", done);
+          };
+          menu.addEventListener("transitionend", done);
+          toggle.focus();
+        }
+
+        function onKeydown(e) {
+          if (e.key === "Escape") {
+            close();
+            return;
+          }
+          if (e.key !== "Tab") return;
+          var items = focusable();
+          if (!items.length) return;
+          var first = items[0];
+          var last = items[items.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+
+        toggle.addEventListener("click", open);
+        backdrop.addEventListener("click", close);
+        if (closeBtn) closeBtn.addEventListener("click", close);
+        menu.addEventListener("click", function (e) {
+          if (e.target.closest("a")) close();
         });
       })();
     </script>
