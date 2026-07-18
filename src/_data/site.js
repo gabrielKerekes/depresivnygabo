@@ -4,7 +4,6 @@ module.exports = {
   url: "https://depresivnygabo.sk",
   author: "Gabo",
   github: "gabrielKerekes",
-  email: "gabriel.kerekes.ml@gmail.com",
   year: new Date().getFullYear(),
 
   // Cloudflare Web Analytics token. Get it from the Cloudflare dashboard:
