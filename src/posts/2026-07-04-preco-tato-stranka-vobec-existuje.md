@@ -35,7 +35,6 @@ Znamená to, že ma tak trošku prestal baviť život prípadne to, že som si u
 
 To samozrejme nie je jediné - deti vedia človeka silno vytočiť. Keď sa tieto výbuchy udiali, tak som si to potom strašne vyčítal, hanbil som sa a ubíjal som sa.
 
-
 _tuto sekciu som zacal upravovat, no nedoupravoval_
 
 Znamená to, že som si asi pred tromi rokmi uvedomil, že ma nejak nebaví
