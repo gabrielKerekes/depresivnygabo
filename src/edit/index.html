@@ -140,6 +140,17 @@
       button.danger {
         color: var(--danger);
       }
+      button.danger.solid {
+        background: var(--danger);
+        border-color: var(--danger);
+        color: #2a0f0d;
+        font-weight: 600;
+      }
+      @media (prefers-color-scheme: light) {
+        button.danger.solid {
+          color: #fff;
+        }
+      }
 
       label {
         display: block;
@@ -542,6 +553,55 @@
           });
         }
 
+        // In-app confirm dialog. Resolves to true (confirmed) or false. Used
+        // instead of window.confirm() for destructive actions, so it also works
+        // inside installed PWAs / mobile browsers that suppress the native one.
+        function askConfirm(heading, message, confirmLabel) {
+          return new Promise(function (resolve) {
+            function done(val) {
+              backdrop.remove();
+              document.removeEventListener("keydown", onKey);
+              resolve(val);
+            }
+            function onKey(e) {
+              if (e.key === "Escape") done(false);
+            }
+            var backdrop = el(
+              "div",
+              {
+                class: "modal-backdrop",
+                onclick: function (e) {
+                  if (e.target === backdrop) done(false);
+                },
+              },
+              [
+                el("div", { class: "modal" }, [
+                  el("h2", { text: heading }),
+                  el("p", { class: "muted", text: message }),
+                  el("div", { class: "row" }, [
+                    el("button", {
+                      class: "ghost",
+                      text: "Zrušiť",
+                      onclick: function () {
+                        done(false);
+                      },
+                    }),
+                    el("button", {
+                      class: "danger solid",
+                      text: confirmLabel || "Zmazať",
+                      onclick: function () {
+                        done(true);
+                      },
+                    }),
+                  ]),
+                ]),
+              ],
+            );
+            document.body.appendChild(backdrop);
+            document.addEventListener("keydown", onKey);
+          });
+        }
+
         // --- Token storage --------------------------------------------------
         var TOKEN_KEY = "gh_editor_token";
         // Prefix for per-post local draft autosave (see buildEditor).
@@ -662,6 +722,12 @@
           return api("/repos/" + OWNER + "/" + REPO + "/contents/" + path, {
             method: "PUT",
             body: body,
+          });
+        }
+        function deleteFile(path, message, sha) {
+          return api("/repos/" + OWNER + "/" + REPO + "/contents/" + path, {
+            method: "DELETE",
+            body: { message: message, sha: sha, branch: BRANCH },
           });
         }
 
@@ -1258,10 +1324,51 @@
                     setChrome("Úprava", { back: true });
                     saveBtn.disabled = false;
                     saveBtn.textContent = "💾 Uložiť (commit)";
+                    // The post now exists on GitHub, so it can be deleted.
+                    deleteBtn.classList.remove("hidden");
                   })
                   .catch(function (e) {
                     saveBtn.disabled = false;
                     saveBtn.textContent = "💾 Uložiť (commit)";
+                    toast(e.message, true);
+                    if (e.auth) renderTokenGate();
+                  });
+              });
+            },
+          });
+
+          // --- Delete article ----------------------------------------------
+          // Removes the Markdown file from the repo entirely (one commit). Only
+          // available for posts that already exist on GitHub — a brand-new,
+          // never-saved article has nothing to delete. Hidden until the first
+          // save flips isNew to false.
+          var deleteBtn = el("button", {
+            class: "ghost danger" + (isNew ? " hidden" : ""),
+            text: "🗑 Zmazať článok",
+            onclick: function () {
+              if (!data.path || !data.sha) return;
+              askConfirm(
+                "Zmazať článok?",
+                "Súbor „" +
+                  data.path.replace(POSTS_DIR + "/", "") +
+                  "“ sa natrvalo odstráni z repozitára. Túto akciu nemožno vrátiť.",
+                "🗑 Zmazať",
+              ).then(function (ok) {
+                if (!ok) return;
+                var msg = "Delete post: " + (collectFm().title || data.path);
+                deleteBtn.disabled = true;
+                saveBtn.disabled = true;
+                deleteBtn.textContent = "Mažem…";
+                deleteFile(data.path, msg, data.sha)
+                  .then(function () {
+                    clearDraft();
+                    toast("Zmazané ✓ Deploy beží (~1 min).");
+                    renderList();
+                  })
+                  .catch(function (e) {
+                    deleteBtn.disabled = false;
+                    saveBtn.disabled = false;
+                    deleteBtn.textContent = "🗑 Zmazať článok";
                     toast(e.message, true);
                     if (e.auth) renderTokenGate();
                   });
@@ -1311,6 +1418,9 @@
             bodyIn,
             preview,
             el("div", { class: "sticky-actions" }, [saveBtn]),
+            el("div", { class: "row", style: "margin-top:0.4rem" }, [
+              deleteBtn,
+            ]),
             fsExit,
           ].forEach(function (n) {
             editorPane.appendChild(n);
