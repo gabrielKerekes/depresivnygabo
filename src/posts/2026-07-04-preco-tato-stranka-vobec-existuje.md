@@ -31,6 +31,13 @@ spomeniem. Som depresívny Gabo. 32-ročný programátor, otec dvoch detí – K
 
 ## Čo to znamená?
 
+Znamená to, že ma tak trošku prestal baviť život prípadne to, že som si uvedomil, že ma už dlhšie nebaví. Prejavovalo sa to tak, že som vkuse "pred-nasratý" - nenapadá mi lepší slovenský výraz; po anglicky by som povedal, že som bol irritable alebo on-edge. Akákoľvek drobnosť s deťmi ma privádzala do úplneho hnevu, výbuchu.
+
+To samozrejme nie je jediné - deti vedia človeka silno vytočiť. Keď sa tieto výbuchy udiali, tak som si to potom strašne vyčítal, hanbil som sa a ubíjal som sa.
+
+
+_tuto sekciu som zacal upravovat, no nedoupravoval_
+
 Znamená to, že som si asi pred tromi rokmi uvedomil, že ma nejak nebaví
 život a že všetko nejak nedávam. Rodina, práca, rodina, práca, rodina,
 práca – a teda málo času na seba, manželku, kamarátov a tak všeobecne. A
