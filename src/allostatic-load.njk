@@ -12,6 +12,25 @@ description: A pocket reference — what fills the stress battery, what drains i
 <style>
   /* Scoped to this page; leans on the site's design tokens so it tracks the
      theme and the green accent automatically. */
+  .al-ai {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: -0.25rem 0 1.5rem;
+    padding: 0.6rem 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--muted);
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+  }
+  .al-ai::before {
+    content: "✳";
+    flex: none;
+    color: var(--accent);
+  }
+
   .al-lead {
     font-family: var(--serif);
     font-size: 1.15rem;
@@ -162,6 +181,11 @@ description: A pocket reference — what fills the stress battery, what drains i
   <header class="post-header">
     <h1>Allostatic load</h1>
   </header>
+
+  <p class="al-ai">
+    Written by AI (Claude) from Gabo's prompts, then reviewed by him — a
+    reference he keeps, not medical advice.
+  </p>
 
   <p class="al-lead">
     Allostasis is how the body stays stable by <em>changing</em> — heart rate,
