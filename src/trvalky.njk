@@ -1,0 +1,26 @@
+---
+layout: base.njk
+title: Trvalky
+permalink: /trvalky/
+description: Stránky, ktoré neuvädnú — pomôcky a poznámky, ku ktorým sa vraciam.
+---
+{% from "macros.njk" import trvalkaItem %}
+<section class="posts">
+  <h2 class="page-title">Trvalky</h2>
+  <p class="start-here-lead">
+    V záhradke sú články ako sezónne kvety — vykvitnú a odkvitnú. Trvalky sú to,
+    čo ostáva: pomôcky, zoznamy a poznámky, ku ktorým sa vraciam znova a znova.
+  </p>
+
+  {%- if collections.trvalka.length %}
+  <ul class="post-list">
+    {%- for t in collections.trvalka %}
+    {{ trvalkaItem(t) }}
+    {%- endfor %}
+  </ul>
+  {%- else %}
+  <p class="post-list-empty">
+    Zatiaľ tu nič nerastie — prvá trvalka sa práve ujíma.
+  </p>
+  {%- endif %}
+</section>

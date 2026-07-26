@@ -11,7 +11,7 @@ eleventyExcludeFromCollections: true
    bookkeeping ones), sorted alphabetically. #}
 {%- set topics = [] %}
 {%- for tag, posts in collections %}
-  {%- if tag != "all" and tag != "post" %}
+  {%- if tag != "all" and tag != "post" and tag != "trvalka" %}
     {%- set topics = (topics.push(tag), topics) %}
   {%- endif %}
 {%- endfor %}

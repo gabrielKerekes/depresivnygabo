@@ -23,6 +23,20 @@
     </li>
 {% endmacro %}
 
+{# Standing-reference ("trvalka" = perennial) list item: title + a one-line
+   description, no date or reading time. Used on the homepage and at /trvalky/. #}
+{% macro trvalkaItem(page) %}
+    <li class="post-list-item">
+      <a class="post-link" href="{{ page.url }}">
+        <span class="post-title">{{ page.data.title }}</span>
+        {%- if page.data.description %}
+        <span class="trvalka-desc">{{ page.data.description }}</span>
+        {%- endif %}
+        <span class="post-arrow" aria-hidden="true">→</span>
+      </a>
+    </li>
+{% endmacro %}
+
 {# Chips linking to each of a post's topic tags (everything except the internal
    "post" tag). #}
 {% macro topicTags(tags) %}

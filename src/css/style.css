@@ -522,6 +522,19 @@ a:focus-visible,
   line-height: 1.3;
   color: var(--fg);
 }
+/* One-line description under a "trvalka" (perennial) list item's title. */
+.trvalka-desc {
+  grid-column: 1;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+/* "See all →" link at the foot of a homepage section. */
+.section-more {
+  margin: 0.9rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+}
 
 /* Growth-stage badge (🌱 / 🌿 / 🌳). Each stage sets its own --stage colour
    (see .stage-seedling/-budding/-evergreen below); the badge falls back to the
