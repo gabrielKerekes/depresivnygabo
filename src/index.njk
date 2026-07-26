@@ -28,6 +28,21 @@ layout: base.njk
   </ul>
 </section>
 
+<section class="posts">
+  <h2 class="page-title">Všetky články</h2>
+
+  <ul class="post-list">
+    {%- for post in collections.post | reverse %}
+    {{ postItem(post) }}
+    {%- endfor %}
+    {% if collections.post.length == 0 %}
+    <li class="post-list-empty">
+      Zatiaľ tu nič nie je — prvý článok sa práve rodí. Vráť sa čoskoro.
+    </li>
+    {% endif %}
+  </ul>
+</section>
+
 {% if collections.trvalka.length %}
 <section class="trvalky">
   <h2 class="page-title">Trvalky</h2>
@@ -43,18 +58,3 @@ layout: base.njk
   <p class="section-more"><a href="/trvalky/">všetky trvalky →</a></p>
 </section>
 {% endif %}
-
-<section class="posts">
-  <h2 class="page-title">Všetky články</h2>
-
-  <ul class="post-list">
-    {%- for post in collections.post | reverse %}
-    {{ postItem(post) }}
-    {%- endfor %}
-    {% if collections.post.length == 0 %}
-    <li class="post-list-empty">
-      Zatiaľ tu nič nie je — prvý článok sa práve rodí. Vráť sa čoskoro.
-    </li>
-    {% endif %}
-  </ul>
-</section>
