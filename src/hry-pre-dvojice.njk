@@ -24,6 +24,25 @@ description: Štyri malé písacie hry pre dvojice — s generátorom námetov.
     margin: 0;
   }
 
+  .games-ai {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 0.9rem 0 0;
+    padding: 0.6rem 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--muted);
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+  }
+  .games-ai::before {
+    content: "✳";
+    flex: none;
+    color: var(--accent);
+  }
+
   .games-grid {
     display: grid;
     gap: 1.25rem;
@@ -169,6 +188,10 @@ description: Štyri malé písacie hry pre dvojice — s generátorom námetov.
     Pero, papier (alebo zdieľaný dokument) a trochu odvahy. Štyri malé hry, pri
     ktorých spolu niečo napíšete — a väčšinou sa aj poriadne nasmejete. Ak
     neviete, o čom písať, nechajte si pri každej hre vygenerovať námet.
+  </p>
+  <p class="games-ai">
+    Túto stránku vytvorila AI (Claude) podľa Gabových zadaní a on ju
+    skontroloval.
   </p>
 </section>
 
