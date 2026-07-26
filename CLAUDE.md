@@ -118,6 +118,12 @@ npm run build   # one-off build into _site/
   more sense" in context, even if the literal wording looks contradictory or
   ambiguous. If something genuinely seems like a typo/mistake, ask rather than
   guessing at the intended meaning.
+- **Write well.** When generating prose content (posts, reference pages, page
+  copy — anything the reader reads), always apply the lessons from William
+  Zinsser's _On Writing Well_: prize simplicity and clarity, strip every word
+  that does no work, prefer plain words and active verbs, keep sentences short
+  and concrete, cut qualifiers and jargon, and keep a warm, human voice. Say the
+  thing, then stop.
 - **Analytics token is not a secret** — Cloudflare's beacon token is client-side
   (shipped to every visitor), so it lives in `site.js` in this public repo by
   design. Real secrets would go in GitHub Actions Secrets, never in the repo.

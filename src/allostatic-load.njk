@@ -1,0 +1,218 @@
+---
+layout: base.njk
+title: Allostatic load
+# A "trvalka" (perennial) — a standing reference page. Listed on the homepage
+# and at /trvalky/, and publicly indexed. Dateless by design. Written in English
+# on purpose (owner's call): it's a personal reference for a clinical topic.
+permalink: /allostatic-load/
+tags:
+  - trvalka
+description: A pocket reference — what fills the stress battery, what drains it, and how to tell it is full.
+---
+<style>
+  /* Scoped to this page; leans on the site's design tokens so it tracks the
+     theme and the green accent automatically. */
+  .al-lead {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--muted);
+  }
+  .al-lead strong {
+    color: var(--fg);
+  }
+
+  .al-grid {
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    margin: 1.75rem 0 0.5rem;
+  }
+  .al-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top-color: var(--card-topline);
+    border-radius: var(--radius);
+    padding: 1.3rem 1.35rem;
+  }
+  .al-card h2 {
+    font-family: var(--sans);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 0.85rem;
+  }
+  .al-card.fills h2 {
+    color: var(--muted);
+  }
+  .al-card.frees h2 {
+    color: var(--accent-strong);
+  }
+  .al-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--serif);
+  }
+  .al-card li {
+    padding: 0.42rem 0 0.42rem 1.4rem;
+    position: relative;
+    line-height: 1.4;
+    border-top: 1px solid var(--border);
+  }
+  .al-card li:first-child {
+    border-top: 0;
+  }
+  .al-card li::before {
+    position: absolute;
+    left: 0;
+    top: 0.42rem;
+  }
+  .al-card.fills li::before {
+    content: "▲";
+    color: var(--muted);
+    font-size: 0.7rem;
+    top: 0.5rem;
+  }
+  .al-card.frees li::before {
+    content: "▼";
+    color: var(--accent);
+    font-size: 0.7rem;
+    top: 0.5rem;
+  }
+
+  .al-signs {
+    margin: 1.75rem 0;
+    padding: 1.4rem 1.5rem;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+  }
+  .al-signs h2 {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.7rem;
+  }
+  .al-signs ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-family: var(--serif);
+  }
+  .al-signs li {
+    margin: 0.3rem 0;
+  }
+
+  .al-mech {
+    counter-reset: mech;
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+  .al-mech li {
+    counter-increment: mech;
+    position: relative;
+    padding: 0.55rem 0 0.55rem 2.2rem;
+    font-family: var(--serif);
+    line-height: 1.45;
+  }
+  .al-mech li::before {
+    content: counter(mech);
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: grid;
+    place-items: center;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    border-radius: 999px;
+  }
+  .al-mech strong {
+    color: var(--fg);
+  }
+</style>
+
+<article class="post">
+  <header class="post-header">
+    <h1>Allostatic load</h1>
+  </header>
+
+  <p class="al-lead">
+    Allostasis is how the body stays stable by <em>changing</em> — heart rate,
+    cortisol, blood sugar all move to meet the moment. <strong>Allostatic load
+    is the bill for running that machinery too hard, too often, without letting
+    it switch off.</strong> Think of it as a battery of wear-and-tear. Stress
+    charges it; recovery drains it. Trouble starts when it never gets to empty.
+  </p>
+
+  <div class="al-grid">
+    <section class="al-card fills">
+      <h2>What fills it</h2>
+      <ul>
+        <li>Stressors stacked back to back, with no gap to recover.</li>
+        <li>Poor or too little sleep.</li>
+        <li>Money, work and relationship strain that never lets up.</li>
+        <li>Loneliness and lost social support.</li>
+        <li>Alcohol, nicotine, junk food, a sedentary body.</li>
+        <li>Rumination — replaying the threat long after it is gone.</li>
+        <li>Old wounds: childhood adversity leaves the system primed.</li>
+      </ul>
+    </section>
+
+    <section class="al-card frees">
+      <h2>What frees it</h2>
+      <ul>
+        <li>Real sleep — the deepest reset there is.</li>
+        <li>Movement you can talk through: walks, easy cycling, swimming.</li>
+        <li>Time outdoors — 20–30 minutes in green, a few times a week.</li>
+        <li>People you trust, and time with them.</li>
+        <li>Slow breathing, meditation, a genuine day off.</li>
+        <li>Fewer inputs: less booze, caffeine, doom-scrolling.</li>
+        <li>Naming the thing — writing or talking it out beats stewing.</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="al-signs">
+    <h2>Signs the load is full</h2>
+    <ul>
+      <li>Sleep breaks down — wired at night, wrecked in the morning.</li>
+      <li>A short fuse, or feeling flat and switched off.</li>
+      <li>Getting sick often; small wounds that heal slowly.</li>
+      <li>Gut trouble, appetite swings, weight settling at the middle.</li>
+      <li>Blood pressure, resting heart rate or blood sugar creeping up.</li>
+      <li>Foggy thinking, poor focus, a memory that slips.</li>
+      <li>Small things land like big ones — no reserve left.</li>
+    </ul>
+  </div>
+
+  <h2>Four ways stress turns into damage</h2>
+  <p>
+    McEwen's point: it is not stress itself that harms you, but the response
+    failing to behave. Four patterns do the wearing.
+  </p>
+  <ol class="al-mech">
+    <li><strong>Too many hits.</strong> One stressor after another, faster than you recover.</li>
+    <li><strong>No habituation.</strong> The same stressor keeps hitting as hard as the first time — you never get used to it.</li>
+    <li><strong>No off switch.</strong> The alarm stays on after the threat has passed.</li>
+    <li><strong>A weak response.</strong> One system underreacts, so others overwork to cover — a flat cortisol curve, say, lets inflammation run.</li>
+  </ol>
+
+  <h2>Sources</h2>
+  <ul>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/8379800/">McEwen &amp; Stellar (1993), <em>Stress and the Individual</em></a> — the paper that named the idea.</li>
+    <li><a href="https://www.nejm.org/doi/full/10.1056/NEJM199801153380307">McEwen (1998), <em>Protective and Damaging Effects of Stress Mediators</em>, NEJM</a> — the mechanisms above.</li>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/19822172/">Juster, McEwen &amp; Lupien (2010), <em>Allostatic load biomarkers of chronic stress</em></a> — how it is measured.</li>
+    <li><a href="https://en.wikipedia.org/wiki/Allostatic_load">Allostatic load</a> on Wikipedia — a solid overview with further reading.</li>
+  </ul>
+</article>
+
+<p class="back"><a href="/">← späť na všetky články</a></p>
