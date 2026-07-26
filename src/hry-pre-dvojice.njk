@@ -5,7 +5,7 @@ title: Písacie hry pre dvojice
 # sitemap. Reachable only by knowing the URL.
 permalink: /hry-pre-dvojice/
 eleventyExcludeFromCollections: true
-description: Štyri malé písacie hry pre dvojice.
+description: Štyri malé písacie hry pre dvojice — s generátorom námetov.
 ---
 <style>
   /* Scoped to this page. Everything leans on the site's design tokens
@@ -30,6 +30,8 @@ description: Štyri malé písacie hry pre dvojice.
 
   .game-card {
     position: relative;
+    display: flex;
+    flex-direction: column;
     background: var(--surface);
     border: 1px solid var(--border);
     border-top-color: var(--card-topline);
@@ -73,7 +75,7 @@ description: Štyri malé písacie hry pre dvojice.
     color: var(--muted);
     margin-top: 0.3rem;
   }
-  .game-card p {
+  .game-card p.game-desc {
     font-family: var(--serif);
     margin: 0 0 1.25rem;
     color: var(--fg);
@@ -98,6 +100,41 @@ description: Štyri malé písacie hry pre dvojice.
   }
   .game-chip .lbl {
     color: var(--muted);
+  }
+
+  /* Generator sits at the bottom of every card and is pushed to the same
+     baseline across the row by the flex column + margin-top:auto. */
+  .game-gen {
+    margin-top: auto;
+    padding-top: 1.1rem;
+  }
+  .game-btn {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent-strong);
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .game-btn:hover,
+  .game-btn:focus-visible {
+    background: var(--accent);
+    color: var(--bg);
+    outline: none;
+  }
+  .game-out {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: var(--accent-strong);
+    margin: 0.9rem 0 0;
+  }
+  .game-out:empty {
+    display: none;
   }
 
   .games-rules {
@@ -128,7 +165,8 @@ description: Štyri malé písacie hry pre dvojice.
   <h1 class="page-title">Písacie hry pre dvojice</h1>
   <p class="games-lead">
     Pero, papier (alebo zdieľaný dokument) a trochu odvahy. Štyri malé hry, pri
-    ktorých spolu niečo napíšete — a väčšinou sa aj poriadne nasmejete.
+    ktorých spolu niečo napíšete — a väčšinou sa aj poriadne nasmejete. Ak
+    neviete, o čom písať, nechajte si pri každej hre vygenerovať námet.
   </p>
 </section>
 
@@ -138,7 +176,7 @@ description: Štyri malé písacie hry pre dvojice.
       <span class="game-num">1</span>
       <h2>Bleskový príbeh <span class="en">Flash Fiction</span></h2>
     </div>
-    <p>
+    <p class="game-desc">
       Každý napíše kompletný mini-príbeh — so začiatkom, zápletkou aj koncom —
       vojdúci sa do zopár viet (skúste strop okolo 100 slov). Vyberte si spoločné
       slovo alebo tému a píšte oddelene, potom si výtvory prečítajte nahlas.
@@ -150,6 +188,12 @@ description: Štyri malé písacie hry pre dvojice.
         vynaliezaví</span
       >
     </div>
+    <div class="game-gen">
+      <button type="button" class="game-btn" data-bank="flashFiction">
+        Vygeneruj tému
+      </button>
+      <p class="game-out" aria-live="polite"></p>
+    </div>
   </article>
 
   <article class="game-card">
@@ -157,7 +201,7 @@ description: Štyri malé písacie hry pre dvojice.
       <span class="game-num">2</span>
       <h2>Iba dialóg <span class="en">Dialogue Only</span></h2>
     </div>
-    <p>
+    <p class="game-desc">
       Napíšte spolu scénu zloženú výhradne z replík — žiadne „povedal“, žiadny
       opis, len to, čo si postavy hovoria. Striedajte sa po jednom riadku a
       nechajte rozhovor, nech vás vedie, kam chce.
@@ -169,6 +213,12 @@ description: Štyri malé písacie hry pre dvojice.
         ukryť do samotných slov</span
       >
     </div>
+    <div class="game-gen">
+      <button type="button" class="game-btn" data-bank="dialogueOnly">
+        Vygeneruj scénu
+      </button>
+      <p class="game-out" aria-live="polite"></p>
+    </div>
   </article>
 
   <article class="game-card">
@@ -176,7 +226,7 @@ description: Štyri malé písacie hry pre dvojice.
       <span class="game-num">3</span>
       <h2>Zadania s obmedzeniami <span class="en">Prompts with Constraints</span></h2>
     </div>
-    <p>
+    <p class="game-desc">
       Vytiahnite si podnet a k nemu pravidlo, ktoré vás zväzuje: bez písmena „e“,
       presne 50 slov, každá veta začína na to isté písmeno. Obmedzenie platí pre
       oboch — a práve ono robí písanie hrou.
@@ -188,6 +238,12 @@ description: Štyri malé písacie hry pre dvojice.
         rozprúdia kreativitu</span
       >
     </div>
+    <div class="game-gen">
+      <button type="button" class="game-btn" data-bank="constraints">
+        Vygeneruj zadanie
+      </button>
+      <p class="game-out" aria-live="polite"></p>
+    </div>
   </article>
 
   <article class="game-card">
@@ -195,7 +251,7 @@ description: Štyri malé písacie hry pre dvojice.
       <span class="game-num">4</span>
       <h2>Pokračovanie príbehu <span class="en">Story Continuation</span></h2>
     </div>
-    <p>
+    <p class="game-desc">
       Jeden začne príbeh jednou-dvoma vetami a podá pero druhému. Striedate sa a
       každý dopíše ďalší kúsok — príbeh sa vetví do miest, kam by sa ani jeden z
       vás sám nedostal.
@@ -207,6 +263,12 @@ description: Štyri malé písacie hry pre dvojice.
         druhý stočí</span
       >
     </div>
+    <div class="game-gen">
+      <button type="button" class="game-btn" data-bank="continuation">
+        Vygeneruj začiatok
+      </button>
+      <p class="game-out" aria-live="polite"></p>
+    </div>
   </article>
 </div>
 
@@ -217,3 +279,240 @@ description: Štyri malé písacie hry pre dvojice.
     si to <em>vždy</em> prečítajte nahlas — tam je celá tá zábava.
   </p>
 </section>
+
+<script>
+  // Topic banks — one per game. Everything is client-side, no network.
+  (function () {
+    var banks = {
+      flashFiction: [
+        "Posledný vlak domov",
+        "Odkaz vo fľaši, ktorý dorazil o sto rokov neskôr",
+        "Ráno, keď sa nikto nezobudil",
+        "Svadba, ktorú organizovali tri mesiace a trvala tri minúty",
+        "Kľúč od dverí, ktoré nikde nie sú",
+        "List napísaný sebe do budúcnosti",
+        "Muž, ktorý si každé ráno zabudol vlastnú tvár",
+        "Jedna zápalka a veľmi dlhá noc",
+        "Kufor, ktorý si na letisku niekto vymenil",
+        "Mačka, ktorá vie, kedy klameš",
+        "Kaviareň, kde sa platí spomienkami",
+        "Fotka, z ktorej niekto potichu zmizol",
+        "Dovolenka, ktorá sa odmietla skončiť",
+        "Telefonát o tretej ráno",
+        "Zberateľ stratených vecí",
+        "Záhrada, čo rastie iba v noci",
+        "Deň, keď každý povedal iba pravdu",
+        "Výťah, ktorý zastal medzi poschodiami",
+        "Dieťa, ktoré nakreslilo budúcnosť",
+        "Dom, ktorý si pamätá svojich obyvateľov",
+        "Hodinky, ktoré idú pospiatky",
+        "Neznámy hosť na tvojej vlastnej oslave",
+        "Recept po prababke, čo mení náladu",
+        "Muž, ktorý predával spánok",
+        "Nočný autobus bez konečnej zastávky",
+        "Kniha, ktorá dopisuje sama seba",
+        "Prvý sneh v meste, kde nikdy nesneží",
+        "Zrkadlo, ktoré ukazuje zajtrajšok",
+        "Dvaja cudzí ľudia s tým istým snom",
+        "Stratené dieťa v obchodnom centre",
+        "Pes, ktorý sa vrátil po desiatich rokoch",
+        "Rozhovor s vlastným strachom",
+        "Byt, ktorý sa každú noc trochu presunie",
+        "Nedopísaná správa pred vybitím telefónu",
+        "Žena, čo zbiera cudzie ospravedlnenia",
+        "Vianoce zaseknuté v jednom dni",
+        "Semienko, ktoré vyrástlo cez betón",
+        "Odkaz na zaparenom zrkadle",
+        "Sused, ktorý nikdy nespí",
+        "Deň, keď z mesta zmizli všetky farby",
+        "Dievča, ktoré počúva domy",
+        "Posledný telefónny automat v meste",
+        "Ráno po najdlhšej noci v roku",
+        "Cesta, ktorá vždy vedie inam",
+        "Muž, ktorý daroval svoj hlas",
+        "Škatuľa s nápisom „neotvárať“",
+        "Deň, keď sa gravitácia rozhodla oddýchnuť si",
+        "Dva domy, čo si celý život kývajú cez ulicu",
+        "Batoh plný listov, ktoré sa neodvážil poslať",
+        "Posledný človek, čo si pamätá tvoje meno",
+      ],
+      dialogueOnly: [
+        "Dvaja cudzí ľudia uviaznutí vo výťahu",
+        "Rodičia sa dohadujú na mene pre bábätko",
+        "Prvé rande, na ktorom si obaja niečo pomýlili",
+        "Pár plánuje svadbu s takmer nulovým rozpočtom",
+        "Bývalí partneri sa náhodou stretnú v lekárni",
+        "Tínedžer vysvetľuje rodičovi, ako funguje internet",
+        "Dvaja sa hádajú, kto zabudol vypnúť sporák",
+        "Hosť a čašník, ktorý zásadne nič neodporúča",
+        "Dvaja stroskotanci si delia poslednú konzervu",
+        "Terapeut a klient, ktorí si vymenili roly",
+        "Sused pýta naspäť vŕtačku po desiatich rokoch",
+        "Dvaja v aute, ktoré sa stratilo v cudzom meste",
+        "Pár si balí kufre a každý balí úplne iné veci",
+        "Dieťa vysvetľuje rodičovi, prečo je celá kuchyňa pod vodou",
+        "Dvaja neznámi na tej istej lavičke každé ráno",
+        "Zamestnanec dáva výpoveď šéfovi, ktorý to odmieta pochopiť",
+        "Dvaja duchovia sa sťažujú na nových majiteľov domu",
+        "Babka učí vnuka karty, hrajú o tajomstvá",
+        "Dvaja v nekonečnom rade na úrade",
+        "Partner priznáva, že celý rok tajne chodí na tanec",
+        "Dvaja susedia cez plot počas najtrapnejšieho ticha",
+        "Rodič a dieťa vyjednávajú o čase spať",
+        "Dvaja sa spoznajú v čakárni u zubára",
+        "Astronaut volá domov s trojsekundovým oneskorením",
+        "Pár skladá nábytok bez návodu a bez trpezlivosti",
+        "Dvaja sa hádajú, či to bol sen alebo spomienka",
+        "Zákazník reklamuje niečo, čo si nekúpil",
+        "Dvaja kolegovia uviaznutí cez noc v kancelárii",
+        "Rodičia čakajú, kým sa dieťa vráti po polnoci",
+        "Dvaja si vymieňajú dažďové kabáty a s nimi aj životy",
+        "Pár na výlete, kde jeden zabudol mapu a druhý nabíjačku",
+        "Dvaja neznámi si sadnú k jednému stolu v plnej kaviarni",
+        "Predavač a zákazník sa dohadujú o poslednom bochníku chleba",
+        "Dvaja sa stretnú na strednej po dvadsiatich rokoch",
+        "Rodič vysvetľuje dieťaťu, prečo dospelí plačú",
+        "Inštruktor a začiatočník tesne pred prvým zoskokom padákom",
+        "Partneri si píšu odkazy na chladničku miesto rozhovoru",
+        "Dvaja horolezci na jednom lane, jeden chce hore, druhý dole",
+        "Šéfkuchár a kritik uviaznutí v tej istej kuchyni",
+        "Dvaja sa hádajú o hlasitosti, no ani jeden nepovie, o čo naozaj ide",
+        "Dvaja súrodenci rozhodujú, čo zachránia z horiaceho domu",
+        "Dvaja starí priatelia si po rokoch nemajú čo povedať",
+        "Pár na párovej terapii opisuje ten istý večer inak",
+        "Vodič taxíka a pasažier, ktorý nevie povedať, kam ide",
+        "Dvaja sa hrajú na to, že sa nepoznajú, hoci sú manželia",
+        "Dvaja sa stretnú v sne a obaja to vedia",
+        "Zákazník a operátor linky, ktorá nikam nevedie",
+        "Dvaja si vymenili telefóny a teraz aj správy",
+        "Pár rozhoduje, či si zoberú psa alebo dieťa",
+        "Dvaja cudzí ľudia uviaznutí na zastavenej horskej dráhe",
+      ],
+      constraints: [
+        "Rozchod — bez slova „ja“",
+        "More — každá ďalšia veta kratšia ako predošlá",
+        "Prvá láska — presne 50 slov",
+        "Pondelok ráno — bez písmena „a“",
+        "Strach z lietania — iba otázky",
+        "Domov — celé v druhej osobe („ty“)",
+        "Odpustenie — jedna jediná dlhá veta",
+        "Nákup v potravinách — ako napínavá detektívka",
+        "Blížiaci sa termín — každá veta o slovo dlhšia ako predošlá",
+        "Rodičovstvo — bez slovesa „byť“",
+        "Dovolenka — iba pomocou piatich zmyslov, žiadne mená",
+        "Úzkosť pred spaním — v prítomnom čase, bez bodky",
+        "Svadobný prípitok — presne sto slov",
+        "Stratené kľúče — rozprávané odzadu",
+        "Ranná káva — bez jediného prídavného mena",
+        "Hádka — každý riadok začína na to isté písmeno",
+        "Detský smiech — každá veta má práve tri slová",
+        "Cesta vlakom — iba vetami do štyroch slov",
+        "Terapia — ako recept z kuchárky",
+        "Sťahovanie — v treťom rode, akoby o niekom cudzom",
+        "Prvý deň v práci — len prostredníctvom zvukov",
+        "Osamelosť — bez slova „sám“",
+        "Nedeľný obed s rodinou — ako športový komentár",
+        "Zmierenie — ako záznam z rokovania (body a uznesenia)",
+        "Panika — v číslovanom zozname krokov",
+        "Prechádzka v daždi — bez farieb, iba tvary",
+        "Nervozita pred skúškou — písané ako predpoveď počasia",
+        "Túžba — bez slovesa „chcieť“",
+        "Sen o lietaní — každá veta začína slovom „a“",
+        "Výčitky svedomia — ako návod na použitie",
+        "Stres v práci — iba v otázkach a odpovediach",
+        "Nový začiatok — presne 30 slov",
+        "Nostalgia — v budúcom čase",
+        "Balenie na dovolenku — ako zoznam prianí",
+        "Depresívny deň — a predsa musí skončiť nádejou",
+        "Prvé stretnutie s dieťaťom — bez slova „malý“",
+        "Odchod z domu — rozprávané tým domom",
+        "Trapas — písané s úplným pokojom",
+        "Únava — bez slova „unavený“",
+        "Čakanie v nemocnici — iba tým, čo vidno z okna",
+        "Rozhodnutie — každá veta je jedna možnosť",
+        "Ticho medzi dvoma ľuďmi — bez opisu ticha",
+        "Rande naslepo — ako správa z terénu",
+        "Deň bez telefónu — v minulom čase, s údivom",
+        "Hnev — a ani raz nezvýšiť hlas (žiadne výkričníky)",
+        "Zmena plánov — všetko podmieňovacím spôsobom („keby“)",
+        "Prvý spoločný byt — iba cez veci, čo v ňom sú",
+        "Odvaha — bez slova „strach“ aj bez slova „odvaha“",
+        "Ospravedlnenie — presne v troch vetách",
+        "Ráno po hádke — a nikto nespomenie hádku",
+      ],
+      continuation: [
+        "Keď zazvonil telefón, už bolo dávno neskoro.",
+        "Nikto nečakal, že práve on povie áno.",
+        "Balík dorazil bez mena odosielateľa.",
+        "Zobudila sa a byt bol o jednu izbu väčší.",
+        "Posledný hosť odišiel, no jeho kabát ostal visieť.",
+        "Sľúbili sme si, že o tom už nikdy nebudeme hovoriť.",
+        "Na dverách bol odkaz písaný mojím vlastným rukopisom.",
+        "V ten deň meškali všetky vlaky okrem jedného.",
+        "Otvorila škatuľu a vo vnútri bola ďalšia, menšia.",
+        "Povedal, že sa vráti do večere. To bolo pred tromi rokmi.",
+        "Prvýkrát po rokoch sme boli v tej kuchyni obaja ticho.",
+        "Mapa ukazovala cestu, ktorá tam v skutočnosti nebola.",
+        "Deti tvrdili, že v pivnici býva niekto, koho nepoznáme.",
+        "Na svadbe sa nikto neodvážil povedať to, čo vedeli všetci.",
+        "Ráno bola na stole káva pre dvoch, hoci som bývala sama.",
+        "Kufor sa vrátil z dovolenky, my nie.",
+        "Rozhodli sme sa hodiť si mincou. Padla na hranu.",
+        "V zrkadle som sa usmial skôr než ja.",
+        "List začínal slovami: „Keď toto čítaš, už to viem.“",
+        "Prestalo pršať presne vo chvíli, keď som prestal dúfať.",
+        "Suseda som stretol až v deň, keď sa odsťahoval.",
+        "Fotka bola stará, ale ja som na nej starol.",
+        "Doktor sa na výsledok pozrel dvakrát a potom sa usmial.",
+        "Vlak sa pohol a ona ostala stáť na nástupišti.",
+        "Napísali sme si zoznam vecí, ktoré ešte stihneme.",
+        "Telefón zazvonil z čísla, ktoré patrilo mne.",
+        "Do rána sa v obývačke objavil strom.",
+        "Sľúbil, že nezabudne. Zabudol ako prvé práve to.",
+        "Keď zhaslo svetlo, deti sa začali smiať.",
+        "Na parkovisku stálo auto presne ako naše, len o rok staršie.",
+        "Nechala mi tri veci a jednu otázku.",
+        "Prvá vec, ktorú povedala po prebudení, nedávala zmysel — zatiaľ.",
+        "V ten večer sa všetci tvárili, že je všetko v poriadku.",
+        "Otec vytiahol starú krabicu a povedal: „Toto som ti nikdy nepovedal.“",
+        "Cesta domov trvala o hodinu dlhšie a nikto nevedel prečo.",
+        "Zobrali sme sa v pondelok, aby to nikto nečakal.",
+        "Kufre boli zbalené, len sme ešte nevedeli kam.",
+        "V byte voňalo po niekom, kto tam už roky nebýval.",
+        "Napísala „už idem“ a viac sa neozvala.",
+        "Dážď prestal a s ním aj naša výhovorka ostať doma.",
+        "Deň sa začal celkom obyčajne, čo malo byť prvé varovanie.",
+        "Babka vždy vravela, že tie dvere sa nemajú otvárať.",
+        "Na stole ležala jedna vidlička navyše.",
+        "Zabudol som, ako znie ticho, kým sa nevrátila.",
+        "Povedali nám, že máme rok. Rozhodli sme sa žiť dva.",
+        "V mobile mi pribudla spomienka, ktorú si nepamätám.",
+        "Prvý sneh napadol v júli a nečudoval sa nikto, iba ona.",
+        "Otvorili sme si účet na spoločné sny a hneď minuli prvý.",
+        "Vo vedľajšom byte svietilo svetlo aj po tom, čo sa susedia odsťahovali.",
+        "Na konci chodby boli dvere, ktoré tam predtým neboli.",
+      ],
+    };
+
+    var last = {};
+    var buttons = document.querySelectorAll(".game-btn");
+    for (var b = 0; b < buttons.length; b++) {
+      (function (btn) {
+        var key = btn.getAttribute("data-bank");
+        var out = btn.parentNode.querySelector(".game-out");
+        btn.addEventListener("click", function () {
+          var arr = banks[key];
+          if (!arr || !arr.length) return;
+          var i;
+          do {
+            i = Math.floor(Math.random() * arr.length);
+          } while (arr.length > 1 && i === last[key]);
+          last[key] = i;
+          out.textContent = arr[i];
+          // After the first pick, invite another roll.
+          btn.textContent = btn.getAttribute("data-again") || "Skús inú";
+        });
+      })(buttons[b]);
+    }
+  })();
+</script>
