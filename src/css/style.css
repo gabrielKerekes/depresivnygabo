@@ -73,7 +73,7 @@
   --serif: "Cheltenham", Georgia, "Times New Roman", serif;
 
   /* Layout */
-  --frame: 52rem; /* page frame: header, footer, homepage */
+  --frame: 52rem; /* page frame: same edge on every page — header, footer, main */
   --measure: 42rem; /* article prose: kept narrow for readability */
   --radius: 14px;
 }
@@ -938,18 +938,15 @@ a:focus-visible,
   }
 }
 
-/* Table of contents as a sticky sidebar once there's room for it. Widen the
-   post page frame so the reading column keeps its measure and the TOC sits in
-   the gutter. :has() lets only TOC-bearing posts opt into the wider grid. */
+/* Table of contents as a sticky sidebar once there's room for it. The sidebar
+   sits inside the shared page frame — the article gives up a little of its
+   measure rather than the post page growing wider than the header and footer.
+   :has() lets only TOC-bearing posts opt into the grid. */
 @media (min-width: 64rem) {
-  main:has(.post-toc) {
-    max-width: 62rem;
-  }
-
   .post-layout:has(.post-toc) {
     display: grid;
-    grid-template-columns: minmax(0, var(--measure)) 1fr;
-    gap: 3.5rem;
+    grid-template-columns: minmax(0, 1fr) 12rem;
+    gap: 2.5rem;
     align-items: start;
   }
 
