@@ -190,9 +190,10 @@ description: Štyri malé písacie hry pre dvojice — s generátorom námetov.
     gap: 0.6rem;
     cursor: pointer;
     list-style: none;
-    padding: 0.7rem 0.9rem;
+    padding: 0.55rem 0.8rem;
     font-family: var(--serif);
-    font-size: 1.02rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
     color: var(--fg);
   }
   .ff-sub > summary::-webkit-details-marker {
@@ -214,27 +215,27 @@ description: Štyri malé písacie hry pre dvojice — s generátorom námetov.
     border-radius: 8px;
   }
   .ff-sub-body {
-    padding: 0 0.9rem 0.9rem;
+    padding: 0 0.8rem 0.75rem;
   }
   .ff-sub-row {
     display: flex;
     gap: 0.5rem;
-    margin: 0 0 0.35rem;
+    margin: 0 0 0.25rem;
     font-family: var(--sans);
-    font-size: 0.86rem;
-    line-height: 1.4;
+    font-size: 0.84rem;
+    line-height: 1.35;
     color: var(--fg);
   }
   .ff-sub-row .lbl {
     flex: none;
-    min-width: 5.2rem;
+    min-width: 3.6rem;
     color: var(--muted);
   }
   .ff-sub-link {
     display: inline-block;
-    margin-top: 0.55rem;
+    margin-top: 0.45rem;
     font-family: var(--sans);
-    font-size: 0.86rem;
+    font-size: 0.84rem;
     font-weight: 600;
     color: var(--accent-strong);
   }
@@ -305,13 +306,14 @@ description: Štyri malé písacie hry pre dvojice — s generátorom námetov.
     <div class="game-subs">
       <h3 class="game-subs-title">Odovzdané príbehy</h3>
       {% for s in ffSubs | reverse %}
+      {%- set showPrompt = s.data.prompt and (s.data.prompt | trim | replace(".", "")) != (s.data.title | trim | replace(".", "")) %}
       <details class="ff-sub"{% if loop.first %} open{% endif %}>
         <summary>{{ s.data.title }}</summary>
         <div class="ff-sub-body">
           {%- if s.data.participants %}
           <p class="ff-sub-row"><span class="lbl">Autor</span> {{ s.data.participants | join(", ") }}</p>
           {%- endif %}
-          {%- if s.data.prompt %}
+          {%- if showPrompt %}
           <p class="ff-sub-row"><span class="lbl">Zadanie</span> {{ s.data.prompt }}</p>
           {%- endif %}
           <a class="ff-sub-link" href="{{ s.url }}">čítať celé →</a>
