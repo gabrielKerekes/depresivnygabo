@@ -1,0 +1,5 @@
+{
+  "layout": "flash-fiction.njk",
+  "tags": ["flash-fiction"],
+  "permalink": "/flash-fiction/{{ page.fileSlug }}/"
+}

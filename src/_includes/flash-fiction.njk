@@ -1,0 +1,257 @@
+---
+layout: base.njk
+---
+{# Layout for a single flash-fiction submission page. Chrome (kicker, title,
+   author, prompt, AI note, back link) plus the scoped design for the three
+   parts lives here; the page body supplies the parts themselves. Everything
+   leans on the site's design tokens so it tracks the theme and green accent. #}
+<style>
+  .ff-kicker {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-strong);
+  }
+  .ff-by {
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .ff-prompt {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin: 0 0 1.4rem;
+    padding: 0.9rem 1.15rem;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+  }
+  .ff-prompt .ff-prompt-label {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-strong);
+  }
+  .ff-prompt .ff-prompt-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--fg);
+  }
+
+  .ff-ai {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 0 0 0.5rem;
+    padding: 0.6rem 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--muted);
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+  }
+  .ff-ai::before {
+    content: "✳";
+    flex: none;
+    color: var(--accent);
+  }
+
+  /* Each of the three parts: a numbered head plus a body panel keeps the
+     original, the feedback and the rewrite visibly separate. */
+  .ff-part {
+    margin: 3.25rem 0 0;
+  }
+  .ff-part-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    margin-bottom: 1.1rem;
+  }
+  .ff-num {
+    flex: none;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+  }
+  .ff-part-head h2 {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.35rem;
+    line-height: 1.15;
+  }
+  .ff-part-head .ff-sub {
+    display: block;
+    margin-top: 0.15rem;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+  }
+  .ff-panel {
+    border: 1px solid var(--border);
+    border-top-color: var(--card-topline);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1.6rem 1.7rem;
+  }
+
+  /* Part 1 — the manuscript. */
+  .ff-draft p {
+    font-family: var(--serif);
+    margin: 0 0 1.1rem;
+  }
+  .ff-draft p:last-child {
+    margin-bottom: 0;
+  }
+  .ff-draft em {
+    color: var(--muted);
+  }
+  .ff-note {
+    margin: 1rem 0 0;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  /* Part 2 — the feedback. */
+  .ff-fb-group {
+    margin-top: 1.4rem;
+  }
+  .ff-fb-group:first-child {
+    margin-top: 0;
+  }
+  .ff-fb-group > h3 {
+    margin: 0 0 0.7rem;
+    font-family: var(--sans);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .ff-fb-group.worked > h3 {
+    color: var(--accent-strong);
+  }
+  .ff-fb-group.didnt > h3 {
+    color: var(--muted);
+  }
+  .ff-fb-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .ff-fb-group li {
+    position: relative;
+    padding: 0.55rem 0 0.55rem 1.5rem;
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+  }
+  .ff-fb-group li:first-child {
+    border-top: 0;
+  }
+  .ff-fb-group li::before {
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    font-size: 0.8rem;
+  }
+  .ff-fb-group.worked li::before {
+    content: "+";
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .ff-fb-group.didnt li::before {
+    content: "–";
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .ff-fb-group strong {
+    color: var(--fg);
+  }
+  .ff-principles {
+    margin: 1.4rem 0 0;
+    padding: 1.1rem 1.25rem;
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+  }
+  .ff-principles h3 {
+    margin: 0 0 0.5rem;
+    font-family: var(--sans);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ff-principles p {
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* Part 3 — the rewrite. */
+  .ff-rewrite {
+    padding: 1.9rem 2rem;
+  }
+  .ff-rewrite p {
+    font-family: var(--serif);
+    font-size: 1.06rem;
+    line-height: 1.7;
+    margin: 0 0 1.15rem;
+  }
+  .ff-rewrite p:last-child {
+    margin-bottom: 0;
+  }
+  .ff-rewrite em {
+    color: var(--muted);
+  }
+</style>
+
+<article class="post">
+  <header class="post-header">
+    <p class="ff-kicker">Bleskový príbeh · flash fiction</p>
+    <h1>{{ title }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+      {%- if participants %}
+      <span class="dot" aria-hidden="true">·</span>
+      <span class="ff-by">{{ participants | join(", ") }}</span>
+      {%- endif %}
+    </p>
+  </header>
+
+  {% if prompt %}
+  <p class="ff-prompt">
+    <span class="ff-prompt-label">Zadanie</span>
+    <span class="ff-prompt-text">{{ prompt }}</span>
+  </p>
+  {% endif %}
+
+  <p class="ff-ai">
+    Spätnú väzbu aj prepis vytvorila AI (Claude); pôvodný text je autorov.
+  </p>
+
+  {{ content | safe }}
+</article>
+
+<p class="back"><a href="/hry-pre-dvojice/">← späť na písacie hry</a></p>
