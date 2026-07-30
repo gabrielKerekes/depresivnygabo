@@ -107,6 +107,27 @@ layout: base.njk
     letter-spacing: 0.03em;
     color: var(--muted);
   }
+  /* Who did this part — author for the draft, Claude for the feedback and the
+     rewrite. */
+  .ff-byline {
+    flex: none;
+    margin-left: auto;
+    align-self: center;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.25rem 0.65rem;
+    white-space: nowrap;
+  }
+  .ff-byline .lbl {
+    color: var(--muted);
+    font-weight: 500;
+  }
   .ff-panel {
     border: 1px solid var(--border);
     border-top-color: var(--card-topline);
