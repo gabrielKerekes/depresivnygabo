@@ -20,10 +20,13 @@ layout: base.njk
   </p>
 
   <ul class="post-list">
+    {%- set startHere = ["kto-som", "preco-tato-stranka-vobec-existuje"] %}
+    {%- for slug in startHere %}
     {%- for post in collections.post %}
-    {%- if post.fileSlug == "preco-tato-stranka-vobec-existuje" %}
+    {%- if post.fileSlug == slug %}
     {{ postItem(post) }}
     {%- endif %}
+    {%- endfor %}
     {%- endfor %}
   </ul>
 </section>
