@@ -155,15 +155,21 @@
     </main>
 
     <footer class="site-footer">
-      <p class="footer-credit">
-        So <span class="heart">&lt;3</span> vytvoril
-        <a href="https://github.com/{{ site.github }}">Gabo</a>
+      <p class="footer-contact">
+        Chceš sa podeliť o svoj príbeh, prípadne len tak pokecať? Napíš mi na
+        <a href="mailto:{{ site.email }}">{{ site.email }}</a>.
       </p>
-      <nav class="footer-links" aria-label="Odkazy v pätičke">
-        <a href="https://github.com/{{ site.github }}/depresivnygabo">zdrojový kód na GitHube</a>
-        <span class="footer-sep" aria-hidden="true">·</span>
-        <a href="/feed.xml">RSS</a>
-      </nav>
+      <div class="footer-meta">
+        <p class="footer-credit">
+          So <span class="heart">&lt;3</span> vytvoril
+          <a href="https://github.com/{{ site.github }}">Gabo</a>
+        </p>
+        <nav class="footer-links" aria-label="Odkazy v pätičke">
+          <a href="https://github.com/{{ site.github }}/depresivnygabo">zdrojový kód na GitHube</a>
+          <span class="footer-sep" aria-hidden="true">·</span>
+          <a href="/feed.xml">RSS</a>
+        </nav>
+      </div>
     </footer>
 
     <!-- Reveal the edit shortcut only on devices where an editor token is
