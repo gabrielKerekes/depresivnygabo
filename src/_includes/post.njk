@@ -18,6 +18,27 @@ layout: base.njk
 
 {% set toc = content | toc %}
 <div class="post-layout">
+  {# The header lives outside <article> so the layout has three siblings —
+     header, TOC, body. On the desktop grid the TOC becomes a sticky sidebar
+     (its explicit grid placement ignores source order); in mobile flow the
+     order reads title → Obsah → body, keeping the TOC just under the heading
+     instead of above the title. #}
+  <header class="post-header">
+    <h1>{{ title }}</h1>
+    <p class="post-meta">
+      {%- if updated %}
+      <time datetime="{{ date | htmlDateString }}">zasadené {{ date | readableDate }}</time>
+      <span class="dot" aria-hidden="true">·</span>
+      <time class="tended" datetime="{{ updated | htmlDateString }}">naposledy zaliate {{ updated | readableDate }}</time>
+      {%- else %}
+      <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
+      {%- endif %}
+      <span class="dot" aria-hidden="true">·</span>
+      <span class="post-readtime">{{ content | readingTime }} min čítania</span>
+      {{- stageBadge(stage) -}}
+    </p>
+  </header>
+
   {% if toc %}
   <aside class="post-toc">
     <details class="toc-details">
@@ -44,22 +65,6 @@ layout: base.njk
   </script>
   {% endif %}
   <article class="post">
-  <header class="post-header">
-    <h1>{{ title }}</h1>
-    <p class="post-meta">
-      {%- if updated %}
-      <time datetime="{{ date | htmlDateString }}">zasadené {{ date | readableDate }}</time>
-      <span class="dot" aria-hidden="true">·</span>
-      <time class="tended" datetime="{{ updated | htmlDateString }}">naposledy zaliate {{ updated | readableDate }}</time>
-      {%- else %}
-      <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
-      {%- endif %}
-      <span class="dot" aria-hidden="true">·</span>
-      <span class="post-readtime">{{ content | readingTime }} min čítania</span>
-      {{- stageBadge(stage) -}}
-    </p>
-  </header>
-
   {% set stageMeta = stage | stageInfo %}
   {% if stageMeta and stageMeta.banner %}
   <p class="stage-banner stage-{{ stage }}">{{ stageMeta.banner }}</p>
