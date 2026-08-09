@@ -466,8 +466,8 @@
         var ANTHROPIC_API = "https://api.anthropic.com";
         // Model used to restore Slovak diacritics. Any current Claude model
         // works — swap to "claude-haiku-4-5" for lower latency/cost, or
-        // "claude-sonnet-5" for a middle ground.
-        var ANTHROPIC_MODEL = "claude-opus-5";
+        // "claude-opus-5" for maximum quality on tricky cases.
+        var ANTHROPIC_MODEL = "claude-sonnet-5";
         var STAGES = [
           { value: "", label: "— žiadne —" },
           { value: "seedling", label: "🌱 klíčok (seedling)" },
