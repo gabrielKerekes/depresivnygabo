@@ -21,9 +21,12 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
-    <!-- Everything below is deliberately self-contained: no external scripts,
-         no CDN, no web fonts. The page holds a GitHub token, so there must be
-         no third-party code path that could read it. -->
+    <!-- No external scripts, no CDN, no web fonts: the page holds a GitHub
+         token and a Claude API key, so no third-party *code* ever runs here.
+         The only outbound calls are to GitHub (commits) and, for the optional
+         "add diacritics" feature, directly to the Anthropic API. The Claude
+         key is stored per-device alongside the GitHub token and is sent only
+         to api.anthropic.com. -->
     <style>
       :root {
         color-scheme: dark;
@@ -327,6 +330,25 @@
       .modal .row {
         margin-top: 0.9rem;
       }
+      /* Checkbox row inside a modal — opt out of the uppercase/muted <label>
+         styling and lay the box out beside its text. */
+      .check-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.9rem 0 0;
+        font-size: 0.9rem;
+        color: var(--fg);
+        text-transform: none;
+        letter-spacing: normal;
+        cursor: pointer;
+      }
+      .check-row input[type="checkbox"] {
+        flex: none;
+        width: 1.1rem;
+        height: 1.1rem;
+        margin: 0;
+      }
 
       /* Unsaved-draft restore banner. */
       .draft-banner {
@@ -441,6 +463,11 @@
         var BRANCH = "main";
         var POSTS_DIR = "src/posts";
         var API = "https://api.github.com";
+        var ANTHROPIC_API = "https://api.anthropic.com";
+        // Model used to restore Slovak diacritics. Any current Claude model
+        // works — swap to "claude-haiku-4-5" for lower latency/cost, or
+        // "claude-sonnet-5" for a middle ground.
+        var ANTHROPIC_MODEL = "claude-opus-5";
         var STAGES = [
           { value: "", label: "— žiadne —" },
           { value: "seedling", label: "🌱 klíčok (seedling)" },
@@ -492,67 +519,6 @@
           );
         }
 
-        // In-app text prompt. Resolves to the entered string, or null on cancel.
-        // Used instead of window.prompt(), which silently returns null in
-        // installed PWAs / many mobile browsers.
-        function askText(heading, defaultValue) {
-          return new Promise(function (resolve) {
-            var input = el("input", {
-              type: "text",
-              value: defaultValue || "",
-            });
-            function done(val) {
-              backdrop.remove();
-              document.removeEventListener("keydown", onKey);
-              resolve(val);
-            }
-            function onKey(e) {
-              if (e.key === "Escape") done(null);
-            }
-            input.addEventListener("keydown", function (e) {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                done(input.value.trim() || defaultValue || "");
-              }
-            });
-            var backdrop = el(
-              "div",
-              {
-                class: "modal-backdrop",
-                onclick: function (e) {
-                  if (e.target === backdrop) done(null);
-                },
-              },
-              [
-                el("div", { class: "modal" }, [
-                  el("h2", { text: heading }),
-                  input,
-                  el("div", { class: "row" }, [
-                    el("button", {
-                      class: "ghost",
-                      text: "Zrušiť",
-                      onclick: function () {
-                        done(null);
-                      },
-                    }),
-                    el("button", {
-                      class: "primary",
-                      text: "Uložiť",
-                      onclick: function () {
-                        done(input.value.trim() || defaultValue || "");
-                      },
-                    }),
-                  ]),
-                ]),
-              ],
-            );
-            document.body.appendChild(backdrop);
-            document.addEventListener("keydown", onKey);
-            input.focus();
-            input.select();
-          });
-        }
-
         // In-app confirm dialog. Resolves to true (confirmed) or false. Used
         // instead of window.confirm() for destructive actions, so it also works
         // inside installed PWAs / mobile browsers that suppress the native one.
@@ -602,6 +568,171 @@
           });
         }
 
+        // In-app prompt for the Claude API key. Resolves to the entered key, or
+        // null on cancel. Shown lazily the first time diacritics are requested.
+        function askAnthropicKey() {
+          return new Promise(function (resolve) {
+            var input = el("input", {
+              type: "password",
+              placeholder: "sk-ant-…",
+              autocomplete: "off",
+              autocapitalize: "off",
+              spellcheck: "false",
+            });
+            function done(val) {
+              backdrop.remove();
+              document.removeEventListener("keydown", onKey);
+              resolve(val);
+            }
+            function submit() {
+              done(input.value.trim() || null);
+            }
+            function onKey(e) {
+              if (e.key === "Escape") done(null);
+            }
+            input.addEventListener("keydown", function (e) {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                submit();
+              }
+            });
+            var backdrop = el(
+              "div",
+              {
+                class: "modal-backdrop",
+                onclick: function (e) {
+                  if (e.target === backdrop) done(null);
+                },
+              },
+              [
+                el("div", { class: "modal" }, [
+                  el("h2", { text: "Claude API kľúč" }),
+                  el("p", {
+                    class: "muted",
+                    html:
+                      "Potrebný na dopĺňanie diakritiky. Uloží sa iba na tomto " +
+                      "zariadení (v prehliadači) a posiela sa výhradne do " +
+                      "Anthropic API. Vytvor ho v <a " +
+                      "href='https://console.anthropic.com/settings/keys' " +
+                      "target='_blank' rel='noopener'>Anthropic Console</a>.",
+                  }),
+                  input,
+                  el("div", { class: "row" }, [
+                    el("button", {
+                      class: "ghost",
+                      text: "Zrušiť",
+                      onclick: function () {
+                        done(null);
+                      },
+                    }),
+                    el("button", {
+                      class: "primary",
+                      text: "Uložiť",
+                      onclick: submit,
+                    }),
+                  ]),
+                ]),
+              ],
+            );
+            document.body.appendChild(backdrop);
+            document.addEventListener("keydown", onKey);
+            input.focus();
+          });
+        }
+
+        // Ensure a Claude key is on hand, asking for one if needed. Resolves to
+        // true once a key is stored, false if the user cancelled.
+        function ensureAnthropicKey() {
+          if (getAnthropicKey()) return Promise.resolve(true);
+          return askAnthropicKey().then(function (k) {
+            if (!k) return false;
+            setAnthropicKey(k);
+            return true;
+          });
+        }
+
+        // The commit dialog: a message field plus an opt-in checkbox that adds
+        // diacritics to the body before committing. Resolves to
+        // { message, addDiacritics } or null on cancel. The checkbox state is
+        // remembered across saves.
+        function askCommit(defaultMsg) {
+          return new Promise(function (resolve) {
+            var input = el("input", { type: "text", value: defaultMsg || "" });
+            var check = el("input", {
+              type: "checkbox",
+              id: "auto-diakritika",
+            });
+            try {
+              check.checked = localStorage.getItem(AUTO_DIACRITICS_KEY) === "1";
+            } catch (e) {}
+            function done(val) {
+              backdrop.remove();
+              document.removeEventListener("keydown", onKey);
+              resolve(val);
+            }
+            function submit() {
+              try {
+                localStorage.setItem(
+                  AUTO_DIACRITICS_KEY,
+                  check.checked ? "1" : "0",
+                );
+              } catch (e) {}
+              done({
+                message: input.value.trim() || defaultMsg || "",
+                addDiacritics: check.checked,
+              });
+            }
+            function onKey(e) {
+              if (e.key === "Escape") done(null);
+            }
+            input.addEventListener("keydown", function (e) {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                submit();
+              }
+            });
+            var backdrop = el(
+              "div",
+              {
+                class: "modal-backdrop",
+                onclick: function (e) {
+                  if (e.target === backdrop) done(null);
+                },
+              },
+              [
+                el("div", { class: "modal" }, [
+                  el("h2", { text: "Commit message" }),
+                  input,
+                  el("label", { class: "check-row", for: "auto-diakritika" }, [
+                    check,
+                    el("span", {
+                      text: "Pred uložením doplniť diakritiku (Claude)",
+                    }),
+                  ]),
+                  el("div", { class: "row" }, [
+                    el("button", {
+                      class: "ghost",
+                      text: "Zrušiť",
+                      onclick: function () {
+                        done(null);
+                      },
+                    }),
+                    el("button", {
+                      class: "primary",
+                      text: "Uložiť",
+                      onclick: submit,
+                    }),
+                  ]),
+                ]),
+              ],
+            );
+            document.body.appendChild(backdrop);
+            document.addEventListener("keydown", onKey);
+            input.focus();
+            input.select();
+          });
+        }
+
         // --- Token storage --------------------------------------------------
         var TOKEN_KEY = "gh_editor_token";
         // Prefix for per-post local draft autosave (see buildEditor).
@@ -617,6 +748,23 @@
           try {
             if (t) localStorage.setItem(TOKEN_KEY, t);
             else localStorage.removeItem(TOKEN_KEY);
+          } catch (e) {}
+        }
+        // Claude API key + the remembered "auto-diacritics on save" preference.
+        // Both live only on this device, like the GitHub token above.
+        var ANTHROPIC_KEY_KEY = "gh_editor_anthropic_key";
+        var AUTO_DIACRITICS_KEY = "gh_editor_auto_diacritics";
+        function getAnthropicKey() {
+          try {
+            return localStorage.getItem(ANTHROPIC_KEY_KEY) || "";
+          } catch (e) {
+            return "";
+          }
+        }
+        function setAnthropicKey(k) {
+          try {
+            if (k) localStorage.setItem(ANTHROPIC_KEY_KEY, k);
+            else localStorage.removeItem(ANTHROPIC_KEY_KEY);
           } catch (e) {}
         }
 
@@ -729,6 +877,91 @@
             method: "DELETE",
             body: { message: message, sha: sha, branch: BRANCH },
           });
+        }
+
+        // --- Diacritics (Claude) -------------------------------------------
+        // Sends the Markdown body to the Anthropic API and returns it with
+        // correct Slovak diacritics restored. The system prompt is deliberately
+        // strict: add/fix accents only, never touch wording, structure, code,
+        // or URLs — mirroring the "don't editorialize the draft" house rule.
+        var DIACRITICS_SYSTEM =
+          "You are a Slovak-language typesetting assistant. The user sends a " +
+          "Markdown document written in Slovak in which the diacritics " +
+          "(á ä č ď é í ĺ ľ ň ó ô ŕ š ť ú ý ž and their uppercase forms) may " +
+          "be missing or incomplete. Restore the correct Slovak diacritics and " +
+          "fix only diacritic-related spelling.\n\n" +
+          "Rules:\n" +
+          "- Do NOT add, remove, reorder, translate, rephrase, or reinterpret " +
+          "any words. Never change the meaning — not even if the wording looks " +
+          "contradictory, mistaken, or ambiguous. Change letters only to add " +
+          "or correct diacritics.\n" +
+          "- Preserve the Markdown structure exactly: headings, list markers, " +
+          "emphasis (* and **), links, images, blockquotes, tables, and all " +
+          "whitespace and line breaks.\n" +
+          "- Never modify the contents of inline code (`...`), fenced code " +
+          "blocks (```), URLs, or raw HTML.\n" +
+          "- Leave words that are already correctly accented unchanged.\n" +
+          "- Respond with the corrected Markdown only — no preamble, no " +
+          "explanation, no wrapping code fence, no XML tags.";
+
+        function diacritize(text) {
+          var key = getAnthropicKey();
+          if (!key) return Promise.reject(new Error("Chýba Claude API kľúč."));
+          return fetch(ANTHROPIC_API + "/v1/messages", {
+            method: "POST",
+            headers: {
+              "x-api-key": key,
+              "anthropic-version": "2023-06-01",
+              "anthropic-dangerous-direct-browser-access": "true",
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              model: ANTHROPIC_MODEL,
+              max_tokens: 16000,
+              thinking: { type: "disabled" },
+              system: DIACRITICS_SYSTEM,
+              messages: [{ role: "user", content: text }],
+            }),
+          })
+            .then(function (res) {
+              return res
+                .json()
+                .catch(function () {
+                  return {};
+                })
+                .then(function (j) {
+                  if (!res.ok) {
+                    var msg =
+                      (j.error && j.error.message) || "Chyba " + res.status;
+                    var e = new Error(msg);
+                    if (res.status === 401 || res.status === 403)
+                      e.authKey = true;
+                    throw e;
+                  }
+                  return j;
+                });
+            })
+            .then(function (j) {
+              if (j.stop_reason === "refusal")
+                throw new Error("Model požiadavku odmietol.");
+              if (j.stop_reason === "max_tokens")
+                throw new Error(
+                  "Text je príliš dlhý — výstup by bol orezaný. Rozdeľ ho.",
+                );
+              var out = (j.content || [])
+                .filter(function (b) {
+                  return b.type === "text";
+                })
+                .map(function (b) {
+                  return b.text;
+                })
+                .join("");
+              // Defensive: drop any stray leading <thinking>…</thinking>.
+              out = out.replace(/^\s*<thinking>[\s\S]*?<\/thinking>\s*/i, "");
+              out = out.replace(/^\s+|\s+$/g, "");
+              if (!out) throw new Error("Prázdna odpoveď od modelu.");
+              return out;
+            });
         }
 
         // --- Front-matter parse / serialize --------------------------------
@@ -922,6 +1155,7 @@
         logoutBtn.onclick = function () {
           if (confirm("Odhlásiť a zabudnúť token na tomto zariadení?")) {
             setToken("");
+            setAnthropicKey("");
             renderTokenGate();
           }
         };
@@ -1198,6 +1432,40 @@
             },
           });
 
+          // Rewrite the body in place with Slovak diacritics restored, so the
+          // result can be reviewed (and tweaked) before committing.
+          var diacriticsBtn = el("button", {
+            type: "button",
+            class: "ghost",
+            text: "✨ Diakritika",
+            title: "Doplniť slovenskú diakritiku (Claude)",
+            onclick: function () {
+              ensureAnthropicKey().then(function (ok) {
+                if (!ok) return;
+                if (!bodyIn.value.trim())
+                  return toast("Obsah je prázdny.", true);
+                diacriticsBtn.disabled = true;
+                var prev = diacriticsBtn.textContent;
+                diacriticsBtn.textContent = "Dopĺňam…";
+                diacritize(bodyIn.value)
+                  .then(function (out) {
+                    bodyIn.value = out;
+                    syncPreview();
+                    scheduleDraft();
+                    diacriticsBtn.disabled = false;
+                    diacriticsBtn.textContent = prev;
+                    toast("Diakritika doplnená ✓");
+                  })
+                  .catch(function (e) {
+                    diacriticsBtn.disabled = false;
+                    diacriticsBtn.textContent = prev;
+                    toast(e.message, true);
+                    if (e.authKey) setAnthropicKey("");
+                  });
+              });
+            },
+          });
+
           // Full-screen writing mode toggle.
           var editorPane = el("div", { class: "editor-pane" });
           function setFullscreen(on) {
@@ -1298,7 +1566,6 @@
               var nfm = collectFm();
               if (!nfm.title) return toast("Chýba názov.", true);
               if (!nfm.date) return toast("Chýba dátum.", true);
-              var text = serialize(nfm, bodyIn.value);
               var path = data.path;
               if (isNew) {
                 var slug = slugify(nfm.title);
@@ -1306,10 +1573,15 @@
                 path = POSTS_DIR + "/" + nfm.date + "-" + slug + ".md";
               }
               var defMsg = (isNew ? "Add post: " : "Update post: ") + nfm.title;
-              askText("Commit message", defMsg).then(function (msg) {
-                if (msg === null) return; // cancelled
-                saveBtn.disabled = true;
+
+              function resetSave() {
+                saveBtn.disabled = false;
+                saveBtn.textContent = "💾 Uložiť (commit)";
+              }
+              // Serialize the (possibly diacritized) body and commit it.
+              function commit(finalBody, msg) {
                 saveBtn.textContent = "Ukladám…";
+                var text = serialize(nfm, finalBody);
                 putFile(path, text, msg || defMsg, data.sha)
                   .then(function (res) {
                     toast("Uložené ✓ Deploy beží (~1 min).");
@@ -1322,17 +1594,47 @@
                     draftKey = DRAFT_PREFIX + data.path;
                     isNew = false;
                     setChrome("Úprava", { back: true });
-                    saveBtn.disabled = false;
-                    saveBtn.textContent = "💾 Uložiť (commit)";
+                    resetSave();
                     // The post now exists on GitHub, so it can be deleted.
                     deleteBtn.classList.remove("hidden");
                   })
                   .catch(function (e) {
-                    saveBtn.disabled = false;
-                    saveBtn.textContent = "💾 Uložiť (commit)";
+                    resetSave();
                     toast(e.message, true);
                     if (e.auth) renderTokenGate();
                   });
+              }
+
+              askCommit(defMsg).then(function (result) {
+                if (!result) return; // cancelled
+                saveBtn.disabled = true;
+                if (!result.addDiacritics) {
+                  commit(bodyIn.value, result.message);
+                  return;
+                }
+                // Auto-diacritics on save: run the body through Claude first,
+                // reflect it in the editor, then commit. Abort (don't commit)
+                // if anything fails, so we never save the un-diacritized text
+                // when the user asked for diacritics.
+                saveBtn.textContent = "Dopĺňam diakritiku…";
+                ensureAnthropicKey().then(function (ok) {
+                  if (!ok) {
+                    resetSave();
+                    return;
+                  }
+                  diacritize(bodyIn.value)
+                    .then(function (out) {
+                      bodyIn.value = out;
+                      syncPreview();
+                      scheduleDraft();
+                      commit(out, result.message);
+                    })
+                    .catch(function (e) {
+                      resetSave();
+                      toast("Diakritika zlyhala: " + e.message, true);
+                      if (e.authKey) setAnthropicKey("");
+                    });
+                });
               });
             },
           });
@@ -1410,6 +1712,7 @@
               { class: "row", style: "margin-top:1rem;align-items:center" },
               [
                 el("label", { text: "Obsah", style: "flex:1;margin:0" }),
+                diacriticsBtn,
                 fsBtn,
                 previewBtn,
               ],
