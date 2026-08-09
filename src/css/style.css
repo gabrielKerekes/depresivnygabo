@@ -786,6 +786,19 @@ a:focus-visible,
   margin: 1.15rem 0;
 }
 
+/* Article prose reads in the serif — a calm, book-like reading column, set a
+   touch larger and looser than UI text. The furniture (meta row, stage banner,
+   TOC, back link) stays in the sans; <code>/<pre> keep the browser monospace,
+   so only the flowing text changes. */
+.post > p:not(.stage-banner),
+.post ul,
+.post ol,
+.post blockquote {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
 .post img {
   max-width: 100%;
   height: auto;
