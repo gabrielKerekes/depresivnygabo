@@ -71,6 +71,37 @@
       <div class="header-right">
         {# No nav: the only destination left is home, and the wordmark already
            goes there. Restore a <nav> here when there are pages to link to. #}
+        {# Edit shortcut → the browser editor at /edit/. On a Markdown post it
+           deep-links straight to that file; everywhere else (homepage, index
+           pages) it opens the post list. Hidden until JS confirms an editor
+           token is stored on this device — see the reveal script below. #}
+        {%- set editHref = "/edit/" -%}
+        {%- if "/posts/" in page.inputPath -%}
+        {%- set editHref = "/edit/?path=" + (page.inputPath | replace("./", "") | urlencode) -%}
+        {%- endif -%}
+        <a
+          class="edit-link"
+          href="{{ editHref }}"
+          aria-label="Upraviť"
+          title="Upraviť"
+          hidden
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="17"
+            height="17"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+          </svg>
+        </a>
         <button type="button" class="theme-toggle" aria-label="Prepnúť tému">
           <svg
             class="icon icon-system"
@@ -140,6 +171,18 @@
         <a href="/feed.xml">RSS</a>
       </nav>
     </footer>
+
+    <!-- Reveal the edit shortcut only on devices where an editor token is
+         stored (same key the /edit/ page uses). Visitors never see it. -->
+    <script>
+      (function () {
+        var link = document.querySelector(".edit-link");
+        if (!link) return;
+        try {
+          if (localStorage.getItem("gh_editor_token")) link.hidden = false;
+        } catch (e) {}
+      })();
+    </script>
 
     <script>
       (function () {

@@ -278,6 +278,33 @@ a:focus-visible,
   color: var(--accent);
 }
 
+/* Edit shortcut — same round icon-button shape as the theme toggle. Hidden
+   until JS confirms an editor token is stored (the [hidden] rule wins). */
+.edit-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--muted);
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.edit-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.edit-link[hidden] {
+  display: none;
+}
+
 /* Theme toggle */
 .theme-toggle {
   display: inline-flex;

@@ -1481,13 +1481,24 @@
         }
 
         // --- Boot -----------------------------------------------------------
+        // A ?path= query (set by the site's edit shortcut) deep-links straight
+        // to one post. The "back" button then falls through to the list.
+        var deepLink = "";
+        try {
+          deepLink = new URLSearchParams(location.search).get("path") || "";
+        } catch (e) {}
+
         if (getToken()) {
-          listPosts()
-            .then(renderList)
-            .catch(function (e) {
-              toast(e.message, true);
-              renderTokenGate();
-            });
+          if (deepLink) {
+            renderEditor(deepLink);
+          } else {
+            listPosts()
+              .then(renderList)
+              .catch(function (e) {
+                toast(e.message, true);
+                renderTokenGate();
+              });
+          }
         } else {
           renderTokenGate();
         }
