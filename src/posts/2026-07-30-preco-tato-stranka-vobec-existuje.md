@@ -16,7 +16,7 @@ A tu sme!
 
 ## Prečo teda táto stránka existuje?
 
-1. Podeliť sa s mojim blízkym kruhom o mojej depresii.
-2. Rozprávať o depresii, aby ju ľudia lepšie pochopili prípadne aby sa depresia trošku destigmatizovala.
+1. Podeliť sa s mojím blízkym kruhom o mojej depresii.
+2. Rozprávať o depresii, aby ju ľudia lepšie pochopili, prípadne aby sa depresia trošku destigmatizovala.
 3. Písanie o mojej depresii ako terapia pre mňa.
-4. Možno to pomôže aj iným depresívnym ľuďom - buď sa v mojom príbehu aspoň čiastočne nájdu alebo ich to podporí, aby o sa o svojej depresii tiež nebáli hovoriť.
+4. Možno to pomôže aj iným depresívnym ľuďom - buď sa v mojom príbehu aspoň čiastočne nájdu alebo ich to podporí, aby sa o svojej depresii tiež nebáli hovoriť.
