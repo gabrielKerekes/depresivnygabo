@@ -408,6 +408,11 @@ a:focus-visible,
   margin-top: 3rem;
 }
 
+/* Homepage "Trvalky" section — same top gap as the sections above it. */
+.trvalky {
+  margin-top: 3rem;
+}
+
 .page-title {
   margin: 0 0 1.25rem;
   font-family: var(--serif);
