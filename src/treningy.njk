@@ -1,0 +1,60 @@
+---
+layout: base.njk
+title: Tréningy
+permalink: /treningy/
+description: Súkromný denník tréningov.
+eleventyExcludeFromCollections: true
+---
+<section class="workouts">
+  <h2 class="page-title">Tréningy</h2>
+  <p class="start-here-lead">
+    Súkromný denník — čo som odcvičil a kedy. Skrytá stránka, dostupná len cez
+    priamy odkaz.
+  </p>
+
+  {%- if workouts.length %}
+  {%- for session in workouts %}
+  <article class="workout-session">
+    <header class="workout-head">
+      <h3 class="workout-date">{{ session.date | readableDate }}</h3>
+      {%- set n = session.exercises.length %}
+      <span class="workout-count"
+        >{{ n }}&nbsp;{% if n == 1 %}cvik{% elif n >= 2 and n <= 4 %}cviky{% else %}cvikov{% endif %}</span
+      >
+    </header>
+
+    {%- if session.cardio.length %}
+    <p class="workout-group-label">Rozcvička a kardio</p>
+    <ul class="workout-list">
+      {%- for ex in session.cardio %}
+      <li class="workout-exercise">
+        <span class="workout-ex-name">
+          {{ ex.name }}
+          {%- if ex.detail %}<span class="workout-ex-detail">{{ ex.detail }}</span>{% endif %}
+        </span>
+        <span class="workout-ex-metric">{{ ex.duration }}</span>
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+
+    {%- if session.strength.length %}
+    <p class="workout-group-label">Silový tréning</p>
+    <ul class="workout-list">
+      {%- for ex in session.strength %}
+      <li class="workout-exercise">
+        <span class="workout-ex-name">{{ ex.name }}</span>
+        <span class="workout-ex-metric">
+          <span class="workout-weight">{{ ex.weight }}</span>
+          <span class="workout-sets">{{ ex.sets }}&nbsp;×&nbsp;{{ ex.reps }}</span>
+        </span>
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+  </article>
+  {%- endfor %}
+  {%- else %}
+  <p class="post-list-empty">Zatiaľ žiadny záznam.</p>
+  {%- endif %}
+</section>
