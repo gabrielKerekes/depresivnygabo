@@ -1141,6 +1141,42 @@ a:focus-visible,
   margin-top: 1rem;
 }
 
+/* Athlete stats bar at the top of the log. */
+.athlete-stats {
+  list-style: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.athlete-stat {
+  flex: 1 1 auto;
+  min-width: 6rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface) 100%, transparent);
+  text-align: center;
+}
+.athlete-stat-value {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+.athlete-stat-label {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .workout-session {
   margin-top: 1.5rem;
   padding: 1.35rem 1.5rem 1.5rem;
@@ -1258,4 +1294,61 @@ a:focus-visible,
   min-width: 3.4rem;
   text-align: right;
   font-weight: 600;
+}
+
+.workout-duration {
+  color: var(--accent);
+  font-weight: 600;
+}
+.workout-count-sep {
+  color: var(--muted);
+}
+
+/* Ratings: one row per rater, a label with star score, and an optional note. */
+.workout-ratings {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.workout-rating {
+  padding: 0.6rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+.workout-rating:first-child {
+  border-top: none;
+}
+.workout-rating-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.workout-rating-label {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+.workout-rating-by {
+  font-weight: 400;
+  color: var(--muted);
+}
+.workout-rating-score {
+  flex: none;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+}
+.star-on {
+  color: var(--accent);
+}
+.star-off {
+  color: color-mix(in srgb, var(--muted) 40%, transparent);
+}
+.workout-rating-note {
+  margin: 0.3rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--muted);
 }

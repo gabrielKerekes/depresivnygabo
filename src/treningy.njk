@@ -12,14 +12,27 @@ eleventyExcludeFromCollections: true
     priamy odkaz.
   </p>
 
+  {%- if athlete.stats.length %}
+  <ul class="athlete-stats">
+    {%- for stat in athlete.stats %}
+    <li class="athlete-stat">
+      <span class="athlete-stat-value">{{ stat.value }}</span>
+      <span class="athlete-stat-label">{{ stat.label }}</span>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+
   {%- if workouts.length %}
   {%- for session in workouts %}
   <article class="workout-session">
     <header class="workout-head">
       <h3 class="workout-date">{{ session.date | readableDate }}</h3>
       {%- set n = session.exercises.length %}
-      <span class="workout-count"
-        >{{ n }}&nbsp;{% if n == 1 %}cvik{% elif n >= 2 and n <= 4 %}cviky{% else %}cvikov{% endif %}</span
+      <span class="workout-count">
+        {%- if session.totalDuration %}<span class="workout-duration">{{ session.totalDuration }}</span
+        ><span class="workout-count-sep" aria-hidden="true"> · </span>{% endif -%}
+        {{ n }}&nbsp;{% if n == 1 %}cvik{% elif n >= 2 and n <= 4 %}cviky{% else %}cvikov{% endif %}</span
       >
     </header>
 
@@ -48,6 +61,25 @@ eleventyExcludeFromCollections: true
           <span class="workout-weight">{{ ex.weight }}</span>
           <span class="workout-sets">{{ ex.sets }}&nbsp;×&nbsp;{{ ex.reps }}</span>
         </span>
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+
+    {%- if session.ratings.length %}
+    <p class="workout-group-label">Hodnotenie</p>
+    <ul class="workout-ratings">
+      {%- for r in session.ratings %}
+      <li class="workout-rating">
+        <div class="workout-rating-head">
+          <span class="workout-rating-label"
+            >{{ r.label }} <span class="workout-rating-by">— {{ r.by }}</span></span
+          >
+          <span class="workout-rating-score" aria-label="{{ r.score }} z 5"
+            >{% for i in range(1, 6) %}<span class="star {% if i <= r.score %}star-on{% else %}star-off{% endif %}" aria-hidden="true">★</span>{% endfor %}</span
+          >
+        </div>
+        {%- if r.note %}<p class="workout-rating-note">{{ r.note }}</p>{% endif %}
       </li>
       {%- endfor %}
     </ul>

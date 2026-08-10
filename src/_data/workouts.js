@@ -10,6 +10,7 @@
 const sessions = [
   {
     date: "2026-08-10",
+    totalDuration: "75 min",
     exercises: [
       { name: "Roller / mobilita", duration: "10 min" },
       { name: "Beh", duration: "5 min", detail: "sklon 7 %, 9 km/h" },
@@ -21,6 +22,35 @@ const sessions = [
         reps: 13,
       },
       { name: "Bicepsové zdvihy", weight: "12,5 kg", sets: 3, reps: 9 },
+      {
+        name: "Tricepsová extenzia nad hlavu (jednoručka)",
+        weight: "12,5 kg",
+        sets: 3,
+        reps: 10,
+      },
+      { name: "Drepy", weight: "50 kg", sets: 3, reps: 10 },
+      { name: "Rumunský mŕtvy ťah (RDL)", weight: "60 kg", sets: 3, reps: 10 },
+    ],
+    // score out of 5. `by` names the rater; Claude adds one of its own.
+    ratings: [
+      {
+        by: "Gabo",
+        label: "Tréning",
+        score: 4,
+        note: "Chýbal chrbát a prsia.",
+      },
+      {
+        by: "Gabo",
+        label: "Výkon",
+        score: 4,
+        note: "Veľmi solídny prvý pokus.",
+      },
+      {
+        by: "Claude",
+        label: "Výkon",
+        score: 4,
+        note: "Pekne vyvážený návrat — kardio, nohy aj ruky za 75 minút. Nabudúce pridaj ťah pre chrbát a tlak na prsia a máš celé telo. Pri RDL a drepoch drž váhu radšej nižšie, kým sadne technika.",
+      },
     ],
   },
 ];
