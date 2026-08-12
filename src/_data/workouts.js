@@ -39,6 +39,19 @@ const sessions = [
           { reps: 10, weight: "40 kg" },
         ],
       },
+      {
+        name: "Príťahy na šikmej lavici (spodný chrbát)",
+        weight: "12,5 kg / ruka",
+        sets: 3,
+        reps: 10,
+      },
+      {
+        name: "Príťahy na rovnej lavici (vrchný chrbát)",
+        weight: "15 kg / ruka",
+        sets: 3,
+        reps: 13,
+      },
+      { name: "Rumunský mŕtvy ťah (RDL)", weight: "60 kg", sets: 3, reps: 12 },
     ],
   },
   {
