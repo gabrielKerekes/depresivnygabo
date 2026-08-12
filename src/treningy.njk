@@ -66,6 +66,21 @@ eleventyExcludeFromCollections: true
     </ul>
     {%- endif %}
 
+    {%- if session.recovery.length %}
+    <p class="workout-group-label">Regenerácia</p>
+    <ul class="workout-list">
+      {%- for ex in session.recovery %}
+      <li class="workout-exercise">
+        <span class="workout-ex-name">
+          {{ ex.name }}
+          {%- if ex.detail %}<span class="workout-ex-detail">{{ ex.detail }}</span>{% endif %}
+        </span>
+        <span class="workout-ex-metric">{{ ex.duration }}</span>
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+
     {%- if session.ratings.length %}
     <p class="workout-group-label">Hodnotenie</p>
     <ul class="workout-ratings">
