@@ -19,6 +19,8 @@
 const sessions = [
   {
     date: "2026-08-12",
+    title: "Posilňovňa",
+    totalDuration: "1 h 10 min",
     summary:
       "Tlak na prsia a poriadna dávka ťahov na chrbát — vrchný aj spodný — a RDL na zadnú stranu stehien. Prsia aj chrbát pekne unavené, tricepsy cítiť z nepriamej práce.",
     exercises: [
@@ -80,6 +82,41 @@ const sessions = [
         muscles: { hamstrings: 1, glutes: 0.8, lowerback: 0.7, forearms: 0.3 },
       },
     ],
+    ratings: [
+      {
+        by: "Gabo",
+        label: "Tréning",
+        score: 3.5,
+        note: "Neistý pri niektorých cvikoch.",
+      },
+      {
+        by: "Claude",
+        label: "Tréning",
+        score: 4,
+        note: "Skladba dáva zmysel — tlak na prsia, dva ťahy na chrbát a RDL pokrývajú vršok aj spodnú časť tela. Pri príťahoch na lavici drž trup spevnený a lopatky sťahuj k sebe, nech to cítiš v chrbte a nie v tricepsoch.",
+      },
+    ],
+  },
+  {
+    date: "2026-08-12",
+    title: "Túra — Sarnia Skała (Zakopané)",
+    totalDuration: "2 h 44 min",
+    summary:
+      "Ranná túra s deťmi nad Zakopané — pomalé tempo, mierne stúpanie a slnečných 15 °C. Nohy dostali dlhú a ľahkú prácu, najviac lýtka a stehná.",
+    stats: [
+      { label: "Vzdialenosť", value: "5,80 km" },
+      { label: "Prevýšenie", value: "+189 m" },
+      { label: "Tempo", value: "28:15 / km" },
+      { label: "Kalórie", value: "765 kcal" },
+    ],
+    muscles: {
+      quads: 0.6,
+      hamstrings: 0.5,
+      glutes: 0.5,
+      calves: 0.7,
+      lowerback: 0.2,
+    },
+    exercises: [],
   },
   {
     date: "2026-08-11",
@@ -191,18 +228,22 @@ const sessions = [
   },
 ];
 
-// Sum how much each muscle was worked in a set of exercises. Volume is the
-// number of sets (a per-set list counts its length); cardio counts as one light
-// unit. Each muscle's involvement is multiplied by that volume and summed.
-function scoreMuscles(exercises) {
+// Sum how much each muscle was worked in a session. Volume is the number of
+// sets (a per-set list counts its length); cardio counts as one light unit.
+// A session may also carry its own `muscles` map for whole-session activities
+// like a hike; those are added at a moderate fixed volume.
+function scoreMuscles(session) {
   const scores = {};
-  for (const ex of exercises) {
-    if (!ex.muscles) continue;
-    const volume = ex.setList ? ex.setList.length : ex.sets || 1;
-    for (const [muscle, involvement] of Object.entries(ex.muscles)) {
+  const add = (muscles, volume) => {
+    if (!muscles) return;
+    for (const [muscle, involvement] of Object.entries(muscles)) {
       scores[muscle] = (scores[muscle] || 0) + involvement * volume;
     }
+  };
+  for (const ex of session.exercises || []) {
+    add(ex.muscles, ex.setList ? ex.setList.length : ex.sets || 1);
   }
+  add(session.muscles, 3);
   return scores;
 }
 
@@ -223,7 +264,7 @@ function levelsFrom(scores) {
 }
 
 const decorated = sessions.map((session) => {
-  const scores = scoreMuscles(session.exercises);
+  const scores = scoreMuscles(session);
   return {
     ...session,
     cardio: session.exercises.filter(
@@ -239,9 +280,7 @@ const decorated = sessions.map((session) => {
 // All-time totals across every session, for the coverage map at the top.
 const totalScores = {};
 for (const session of sessions) {
-  for (const [muscle, value] of Object.entries(
-    scoreMuscles(session.exercises),
-  )) {
+  for (const [muscle, value] of Object.entries(scoreMuscles(session))) {
     totalScores[muscle] = (totalScores[muscle] || 0) + value;
   }
 }

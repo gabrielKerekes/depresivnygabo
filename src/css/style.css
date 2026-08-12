@@ -1217,7 +1217,7 @@ a:focus-visible,
 
 .workout-head {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 0.75rem;
   padding-bottom: 0.9rem;
@@ -1398,6 +1398,18 @@ a:focus-visible,
 .star-off {
   color: color-mix(in srgb, var(--muted) 40%, transparent);
 }
+/* Half a star: accent on the left, the "off" colour on the right, via a
+   gradient clipped to the glyph. */
+.star-half {
+  background: linear-gradient(
+    90deg,
+    var(--accent) 50%,
+    color-mix(in srgb, var(--muted) 40%, transparent) 50%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 .workout-rating-note {
   margin: 0.3rem 0 0;
   font-family: var(--sans);
@@ -1412,12 +1424,34 @@ a:focus-visible,
    Structural parts stay neutral (--muscle-bp); worked muscles shade from a
    light base up to full accent — darker means more work.
    ========================================================================== */
+/* Optional session subtitle (e.g. "Posilňovňa", "Túra") under the date. */
+.workout-headings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.workout-title {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
 .workout-summary {
   margin: 0.6rem 0 0;
   font-family: var(--serif);
   font-size: 1.02rem;
   line-height: 1.5;
   color: var(--fg);
+}
+
+/* Per-session stat grid (hike distance/ascent/pace/calories). Reuses the
+   athlete-stat card look with a bit of top space. */
+.workout-session-stats {
+  margin: 0.9rem 0 0;
 }
 
 .workout-coverage {

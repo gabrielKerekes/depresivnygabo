@@ -38,17 +38,35 @@ eleventyExcludeFromCollections: true
   {%- for session in workouts.sessions %}
   <article class="workout-session">
     <header class="workout-head">
-      <h3 class="workout-date">{{ session.date | readableDate }}</h3>
+      <div class="workout-headings">
+        <h3 class="workout-date">{{ session.date | readableDate }}</h3>
+        {%- if session.title %}<p class="workout-title">{{ session.title }}</p>{% endif %}
+      </div>
       {%- set n = session.exercises.length %}
+      {%- if n %}
       <span class="workout-count">
         {%- if session.totalDuration %}<span class="workout-duration">{{ session.totalDuration }}</span
         ><span class="workout-count-sep" aria-hidden="true"> · </span>{% endif -%}
         {{ n }}&nbsp;{% if n == 1 %}cvik{% elif n >= 2 and n <= 4 %}cviky{% else %}cvikov{% endif %}</span
       >
+      {%- elif session.totalDuration %}
+      <span class="workout-count"><span class="workout-duration">{{ session.totalDuration }}</span></span>
+      {%- endif %}
     </header>
 
     {%- if session.summary %}
     <p class="workout-summary">{{ session.summary }}</p>
+    {%- endif %}
+
+    {%- if session.stats.length %}
+    <ul class="athlete-stats workout-session-stats">
+      {%- for stat in session.stats %}
+      <li class="athlete-stat">
+        <span class="athlete-stat-value">{{ stat.value }}</span>
+        <span class="athlete-stat-label">{{ stat.label }}</span>
+      </li>
+      {%- endfor %}
+    </ul>
     {%- endif %}
 
     {%- if session.cardio.length %}
@@ -126,7 +144,7 @@ eleventyExcludeFromCollections: true
             >{{ r.label }} <span class="workout-rating-by">— {{ r.by }}</span></span
           >
           <span class="workout-rating-score" aria-label="{{ r.score }} z 5"
-            >{% for i in range(1, 6) %}<span class="star {% if i <= r.score %}star-on{% else %}star-off{% endif %}" aria-hidden="true">★</span>{% endfor %}</span
+            >{% for i in range(1, 6) %}<span class="star {% if i <= r.score %}star-on{% elif i - 0.5 <= r.score %}star-half{% else %}star-off{% endif %}" aria-hidden="true">★</span>{% endfor %}</span
           >
         </div>
         {%- if r.note %}<p class="workout-rating-note">{{ r.note }}</p>{% endif %}
