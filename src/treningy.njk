@@ -5,6 +5,7 @@ permalink: /treningy/
 description: Súkromný denník tréningov.
 eleventyExcludeFromCollections: true
 ---
+{% from "bodymap.njk" import bodyMap, bodyMapLegend %}
 <section class="workouts">
   <h2 class="page-title">Tréningy</h2>
   <p class="start-here-lead">
@@ -23,8 +24,18 @@ eleventyExcludeFromCollections: true
   </ul>
   {%- endif %}
 
-  {%- if workouts.length %}
-  {%- for session in workouts %}
+  <section class="workout-coverage">
+    <h3 class="page-title">Celkové pokrytie svalov</h3>
+    <p class="start-here-lead">
+      Všetky tréningy dokopy — výraznejšia farba znamená viac odtrénovanej
+      práce. Bledé a nezafarbené miesta ukazujú, čo zanedbávam.
+    </p>
+    {{ bodyMap(workouts.muscleTotals) }}
+    {{ bodyMapLegend() }}
+  </section>
+
+  {%- if workouts.sessions.length %}
+  {%- for session in workouts.sessions %}
   <article class="workout-session">
     <header class="workout-head">
       <h3 class="workout-date">{{ session.date | readableDate }}</h3>
@@ -35,6 +46,10 @@ eleventyExcludeFromCollections: true
         {{ n }}&nbsp;{% if n == 1 %}cvik{% elif n >= 2 and n <= 4 %}cviky{% else %}cvikov{% endif %}</span
       >
     </header>
+
+    {%- if session.summary %}
+    <p class="workout-summary">{{ session.summary }}</p>
+    {%- endif %}
 
     {%- if session.cardio.length %}
     <p class="workout-group-label">Rozcvička a kardio</p>
@@ -96,6 +111,11 @@ eleventyExcludeFromCollections: true
     </ul>
     {%- endif %}
 
+    {%- if session.trainsMuscles %}
+    <p class="workout-group-label">Zapojené svaly</p>
+    {{ bodyMap(session.muscleLevels) }}
+    {%- endif %}
+
     {%- if session.ratings.length %}
     <p class="workout-group-label">Hodnotenie</p>
     <ul class="workout-ratings">
@@ -120,3 +140,4 @@ eleventyExcludeFromCollections: true
   <p class="post-list-empty">Zatiaľ žiadny záznam.</p>
   {%- endif %}
 </section>
+

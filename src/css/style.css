@@ -64,6 +64,10 @@
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
   --stage-evergreen: #57b7a3;
+  /* Muscle map: neutral body (--muscle-bp) and untrained muscle (--muscle-base);
+     trained levels mix --accent over the base in the .bodymap rules. */
+  --muscle-base: #363d49;
+  --muscle-bp: #2a2f39;
 
   /* Type */
   /* A quiet, native workhorse for small UI text (meta, chips, TOC). No
@@ -100,6 +104,8 @@
     --stage-seedling: #7d8a1f;
     --stage-budding: #3f8f66;
     --stage-evergreen: #2b8478;
+    --muscle-base: #e3e9e2;
+    --muscle-bp: #cfd8cf;
   }
 }
 
@@ -122,6 +128,8 @@
   --stage-seedling: #7d8a1f;
   --stage-budding: #3f8f66;
   --stage-evergreen: #2b8478;
+  --muscle-base: #e3e9e2;
+  --muscle-bp: #cfd8cf;
 }
 
 :root[data-theme="dark"] {
@@ -146,6 +154,10 @@
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
   --stage-evergreen: #57b7a3;
+  /* Muscle map: neutral body (--muscle-bp) and untrained muscle (--muscle-base);
+     trained levels mix --accent over the base in the .bodymap rules. */
+  --muscle-base: #363d49;
+  --muscle-bp: #2a2f39;
 }
 
 /* ==========================================================================
@@ -1392,4 +1404,116 @@ a:focus-visible,
   font-size: 0.85rem;
   line-height: 1.5;
   color: var(--muted);
+}
+
+/* ==========================================================================
+   Muscle map (/treningy/)
+   A stylized front + back figure per workout and one for all-time coverage.
+   Structural parts stay neutral (--muscle-bp); worked muscles shade from a
+   light base up to full accent — darker means more work.
+   ========================================================================== */
+.workout-summary {
+  margin: 0.6rem 0 0;
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--fg);
+}
+
+.workout-coverage {
+  margin-top: 2rem;
+  padding: 1.35rem 1.5rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.workout-coverage .page-title {
+  font-size: 1.15rem;
+}
+.workout-coverage .start-here-lead {
+  margin-bottom: 0.5rem;
+}
+
+.bodymap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+}
+.bodymap-view {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+.bodymap-view svg {
+  width: 120px;
+  height: auto;
+  max-width: 40vw;
+}
+.bodymap-view figcaption {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Structural parts and muscle-shading levels. `fill` and `stroke` are inherited
+   SVG properties, so setting them on the <g> cascades to its shapes. */
+.bodymap .bp {
+  fill: var(--muscle-bp);
+}
+.bodymap .mg {
+  stroke: var(--surface);
+  stroke-width: 0.8;
+}
+.bodymap .m0 {
+  fill: var(--muscle-base);
+}
+.bodymap .m1 {
+  fill: color-mix(in srgb, var(--accent) 28%, var(--muscle-base));
+}
+.bodymap .m2 {
+  fill: color-mix(in srgb, var(--accent) 52%, var(--muscle-base));
+}
+.bodymap .m3 {
+  fill: color-mix(in srgb, var(--accent) 78%, var(--muscle-base));
+}
+.bodymap .m4 {
+  fill: var(--accent-strong);
+}
+
+.bodymap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-top: 1rem;
+}
+.bodymap-legend-label {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 0 0.2rem;
+}
+.bodymap-legend-swatch {
+  width: 1.1rem;
+  height: 0.7rem;
+  border-radius: 3px;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+}
+.bodymap-legend-swatch.m1 {
+  background: color-mix(in srgb, var(--accent) 28%, var(--muscle-base));
+}
+.bodymap-legend-swatch.m2 {
+  background: color-mix(in srgb, var(--accent) 52%, var(--muscle-base));
+}
+.bodymap-legend-swatch.m3 {
+  background: color-mix(in srgb, var(--accent) 78%, var(--muscle-base));
+}
+.bodymap-legend-swatch.m4 {
+  background: var(--accent-strong);
 }

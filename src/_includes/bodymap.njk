@@ -1,0 +1,95 @@
+{# Front + back muscle map. `levels` is a map of muscle key → 0–4 shading level
+   (see src/_data/workouts.js). Each muscle is a <g> whose class picks the fill;
+   structural parts (head, hands, knees, feet) stay neutral. Left/right shapes
+   share a group so both sides light up together. #}
+{% macro bodyMap(levels) %}
+<div class="bodymap">
+  <figure class="bodymap-view">
+    <svg viewBox="0 0 100 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zapojené svaly spredu">
+      <circle class="bp" cx="50" cy="15" r="11" />
+      <rect class="bp" x="44" y="24" width="12" height="7" rx="2" />
+      <circle class="bp" cx="15" cy="100" r="4.5" />
+      <circle class="bp" cx="85" cy="100" r="4.5" />
+      <circle class="bp" cx="40" cy="150" r="5" />
+      <circle class="bp" cx="60" cy="150" r="5" />
+      <ellipse class="bp" cx="40" cy="203" rx="6" ry="5" />
+      <ellipse class="bp" cx="60" cy="203" rx="6" ry="5" />
+      <g class="mg m{{ levels.shoulders or 0 }}"><title>Ramená</title>
+        <ellipse cx="30" cy="40" rx="9" ry="8" /><ellipse cx="70" cy="40" rx="9" ry="8" />
+      </g>
+      <g class="mg m{{ levels.chest or 0 }}"><title>Prsia</title>
+        <ellipse cx="42" cy="50" rx="8" ry="6.5" /><ellipse cx="58" cy="50" rx="8" ry="6.5" />
+      </g>
+      <g class="mg m{{ levels.abs or 0 }}"><title>Brucho</title>
+        <rect x="41" y="58" width="18" height="30" rx="4" />
+      </g>
+      <g class="mg m{{ levels.biceps or 0 }}"><title>Biceps</title>
+        <ellipse cx="24" cy="58" rx="6" ry="13" /><ellipse cx="76" cy="58" rx="6" ry="13" />
+      </g>
+      <g class="mg m{{ levels.forearms or 0 }}"><title>Predlaktia</title>
+        <ellipse cx="18" cy="82" rx="5" ry="13" /><ellipse cx="82" cy="82" rx="5" ry="13" />
+      </g>
+      <g class="mg m{{ levels.quads or 0 }}"><title>Kvadricepsy</title>
+        <ellipse cx="41" cy="120" rx="8.5" ry="26" /><ellipse cx="59" cy="120" rx="8.5" ry="26" />
+      </g>
+      <g class="mg m{{ levels.calves or 0 }}"><title>Lýtka</title>
+        <ellipse cx="40" cy="175" rx="6.5" ry="20" /><ellipse cx="60" cy="175" rx="6.5" ry="20" />
+      </g>
+    </svg>
+    <figcaption>Spredu</figcaption>
+  </figure>
+
+  <figure class="bodymap-view">
+    <svg viewBox="0 0 100 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zapojené svaly zozadu">
+      <circle class="bp" cx="50" cy="15" r="11" />
+      <rect class="bp" x="44" y="24" width="12" height="7" rx="2" />
+      <circle class="bp" cx="15" cy="100" r="4.5" />
+      <circle class="bp" cx="85" cy="100" r="4.5" />
+      <circle class="bp" cx="40" cy="150" r="5" />
+      <circle class="bp" cx="60" cy="150" r="5" />
+      <ellipse class="bp" cx="40" cy="203" rx="6" ry="5" />
+      <ellipse class="bp" cx="60" cy="203" rx="6" ry="5" />
+      <g class="mg m{{ levels.lats or 0 }}"><title>Široký sval chrbta</title>
+        <path d="M37 52 L63 52 L56 82 L44 82 Z" />
+      </g>
+      <g class="mg m{{ levels.lowerback or 0 }}"><title>Spodný chrbát</title>
+        <rect x="42" y="80" width="16" height="13" rx="3" />
+      </g>
+      <g class="mg m{{ levels.traps or 0 }}"><title>Trapézy</title>
+        <path d="M38 33 L62 33 L58 53 L50 58 L42 53 Z" />
+      </g>
+      <g class="mg m{{ levels.shoulders or 0 }}"><title>Ramená</title>
+        <ellipse cx="30" cy="40" rx="9" ry="8" /><ellipse cx="70" cy="40" rx="9" ry="8" />
+      </g>
+      <g class="mg m{{ levels.triceps or 0 }}"><title>Triceps</title>
+        <ellipse cx="24" cy="58" rx="6" ry="13" /><ellipse cx="76" cy="58" rx="6" ry="13" />
+      </g>
+      <g class="mg m{{ levels.forearms or 0 }}"><title>Predlaktia</title>
+        <ellipse cx="18" cy="82" rx="5" ry="13" /><ellipse cx="82" cy="82" rx="5" ry="13" />
+      </g>
+      <g class="mg m{{ levels.glutes or 0 }}"><title>Sedacie svaly</title>
+        <ellipse cx="42" cy="100" rx="8" ry="9" /><ellipse cx="58" cy="100" rx="8" ry="9" />
+      </g>
+      <g class="mg m{{ levels.hamstrings or 0 }}"><title>Zadné stehná</title>
+        <ellipse cx="41" cy="125" rx="8.5" ry="22" /><ellipse cx="59" cy="125" rx="8.5" ry="22" />
+      </g>
+      <g class="mg m{{ levels.calves or 0 }}"><title>Lýtka</title>
+        <ellipse cx="40" cy="175" rx="6.5" ry="20" /><ellipse cx="60" cy="175" rx="6.5" ry="20" />
+      </g>
+    </svg>
+    <figcaption>Zozadu</figcaption>
+  </figure>
+</div>
+{% endmacro %}
+
+{# The shading legend — light means little work, dark means a lot. #}
+{% macro bodyMapLegend() %}
+<div class="bodymap-legend" aria-hidden="true">
+  <span class="bodymap-legend-label">menej</span>
+  <span class="bodymap-legend-swatch m1"></span>
+  <span class="bodymap-legend-swatch m2"></span>
+  <span class="bodymap-legend-swatch m3"></span>
+  <span class="bodymap-legend-swatch m4"></span>
+  <span class="bodymap-legend-label">viac</span>
+</div>
+{% endmacro %}
