@@ -81,6 +81,7 @@ const sessions = [
         reps: 12,
         muscles: { hamstrings: 1, glutes: 0.8, lowerback: 0.7, forearms: 0.3 },
       },
+      { name: "Sauna", duration: "12 min", sauna: true },
     ],
     ratings: [
       {
