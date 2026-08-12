@@ -55,6 +55,20 @@ eleventyExcludeFromCollections: true
     <p class="workout-group-label">Silový tréning</p>
     <ul class="workout-list">
       {%- for ex in session.strength %}
+      {%- if ex.setList %}
+      <li class="workout-exercise workout-exercise--detailed">
+        <span class="workout-ex-name">{{ ex.name }}</span>
+        <ol class="workout-setlist">
+          {%- for s in ex.setList %}
+          <li class="workout-set">
+            <span class="workout-set-metric">{{ s.reps }}&nbsp;×&nbsp;{{ s.weight }}</span>
+            {%- if s.note %}<span class="workout-set-note">{{ s.note }}</span>{% endif %}
+          </li>
+          {%- endfor %}
+        </ol>
+        {%- if ex.note %}<p class="workout-ex-note">{{ ex.note }}</p>{% endif %}
+      </li>
+      {%- else %}
       <li class="workout-exercise">
         <span class="workout-ex-name">{{ ex.name }}</span>
         <span class="workout-ex-metric">
@@ -62,6 +76,7 @@ eleventyExcludeFromCollections: true
           <span class="workout-sets">{{ ex.sets }}&nbsp;×&nbsp;{{ ex.reps }}</span>
         </span>
       </li>
+      {%- endif %}
       {%- endfor %}
     </ul>
     {%- endif %}

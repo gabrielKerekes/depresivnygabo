@@ -4,11 +4,43 @@
 // is one of:
 //   - cardio / mobility: give it `duration` (e.g. "5 min") and an optional
 //     `detail` (e.g. "sklon 7 %, 9 km/h"),
-//   - strength: give it `weight`, `sets` and `reps`, or
+//   - strength: give it `weight`, `sets` and `reps` for uniform sets, or a
+//     `setList` of `{ reps, weight, note? }` when the sets differ; either way
+//     an optional `note` hangs a remark under the whole exercise, or
 //   - recovery: set `sauna: true` (with a `duration` and optional `detail`).
 // The page decides how to render and group each one from which fields are
 // present, so adding a workout is just adding an object here.
 const sessions = [
+  {
+    date: "2026-08-12",
+    exercises: [
+      { name: "Roller", duration: "5 min" },
+      { name: "Beh", duration: "3 min", detail: "sklon 7 %, 9 km/h" },
+      { name: "Veslovanie", duration: "3 min" },
+      {
+        name: "Tlaky na prsia (stroj)",
+        note: "Cítil som aj tricepsy — asi som išiel príliš dozadu.",
+        setList: [
+          { reps: 20, weight: "30 kg", note: "veľmi ľahké" },
+          {
+            reps: 15,
+            weight: "45 kg",
+            note: "trochu ťažšie, ale stále v pohode",
+          },
+          { reps: 15, weight: "55 kg", note: "limit" },
+        ],
+      },
+      {
+        name: "Sťahovanie hornej kladky pred telo (chrbát)",
+        note: "Cítil som aj tricepsy — asi boľavé spred dvoch dní.",
+        setList: [
+          { reps: 15, weight: "40 kg" },
+          { reps: 15, weight: "40 kg" },
+          { reps: 10, weight: "40 kg" },
+        ],
+      },
+    ],
+  },
   {
     date: "2026-08-11",
     exercises: [
@@ -91,7 +123,9 @@ const sessions = [
 // any grouping logic in Nunjucks.
 module.exports = sessions.map((session) => ({
   ...session,
-  cardio: session.exercises.filter((ex) => !ex.sets && !ex.sauna),
-  strength: session.exercises.filter((ex) => ex.sets),
+  cardio: session.exercises.filter(
+    (ex) => !ex.sets && !ex.setList && !ex.sauna,
+  ),
+  strength: session.exercises.filter((ex) => ex.sets || ex.setList),
   recovery: session.exercises.filter((ex) => ex.sauna),
 }));
