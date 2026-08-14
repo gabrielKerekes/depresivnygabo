@@ -1189,6 +1189,66 @@ a:focus-visible,
   color: var(--muted);
 }
 
+/* Weight history: hidden behind a small toggle so only the current weight
+   (in the stats bar) shows by default. */
+.weight-history {
+  margin-top: 0.6rem;
+  font-family: var(--sans);
+}
+.weight-history > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  list-style: none;
+}
+.weight-history > summary::-webkit-details-marker {
+  display: none;
+}
+.weight-history > summary::before {
+  content: "›";
+  display: inline-block;
+  transition: transform 0.15s ease;
+  color: var(--accent);
+}
+.weight-history[open] > summary::before {
+  transform: rotate(90deg);
+}
+.weight-history-list {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  max-width: 16rem;
+}
+.weight-history-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.25rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+.weight-history-item:first-child {
+  border-top: none;
+}
+.weight-history-date {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.weight-history-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
 .workout-session {
   margin-top: 1.5rem;
   padding: 1.35rem 1.5rem 1.5rem;

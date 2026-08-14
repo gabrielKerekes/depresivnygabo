@@ -1,9 +1,21 @@
-// Athlete stats shown at the top of the workout log (/treningy/). Plain
-// key/value pairs — edit the value strings as things change.
+// Athlete stats shown at the top of the workout log (/treningy/).
+//
+// Weight is a log, oldest first. Only the most recent entry is shown in the
+// stats bar (the "current" weight); the full log is kept as history and
+// rendered in a collapsed panel. To record a new weight, append an entry.
+const weightLog = [
+  { date: "2026-07-27", value: "96 kg" },
+  { date: "2026-08-14", value: "99 kg" },
+];
+
+const current = weightLog[weightLog.length - 1];
+
 module.exports = {
   stats: [
-    { label: "Váha", value: "96 kg" },
+    { label: "Váha", value: current.value },
     { label: "Výška", value: "180 cm" },
     { label: "Kondícia", value: "detrénovaný" },
   ],
+  // Newest first for display.
+  weightHistory: weightLog.slice().reverse(),
 };

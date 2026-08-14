@@ -22,6 +22,19 @@ eleventyExcludeFromCollections: true
     </li>
     {%- endfor %}
   </ul>
+  {%- if athlete.weightHistory.length > 1 %}
+  <details class="weight-history">
+    <summary>História váhy</summary>
+    <ul class="weight-history-list">
+      {%- for w in athlete.weightHistory %}
+      <li class="weight-history-item">
+        <span class="weight-history-date">{{ w.date | readableDate }}</span>
+        <span class="weight-history-value">{{ w.value }}</span>
+      </li>
+      {%- endfor %}
+    </ul>
+  </details>
+  {%- endif %}
   {%- endif %}
 
   <section class="workout-coverage">
