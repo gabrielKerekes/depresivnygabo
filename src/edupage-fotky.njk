@@ -1,0 +1,441 @@
+---
+layout: base.njk
+title: Stiahnutie fotiek z EduPage
+permalink: /edupage-fotky/
+eleventyExcludeFromCollections: true
+description: Súkromný nástroj na hromadné stiahnutie fotiek z EduPage nástenky.
+---
+{% raw %}
+<style>
+  /* Scoped to this page. Leans on the site's design tokens (--accent,
+     --surface, --border, --serif, --measure, --muted) so it tracks the
+     theme and the green accent automatically. */
+  .ep-intro {
+    max-width: var(--measure);
+    margin-bottom: 2.5rem;
+  }
+  .ep-lead {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--muted);
+    margin: 0 0 1rem;
+  }
+  .ep-note {
+    border-left: 3px solid var(--accent);
+    padding: 0.1rem 0 0.1rem 1rem;
+    margin: 1.5rem 0;
+    color: var(--muted);
+  }
+  .ep-warn {
+    border-left: 3px solid #c0562b;
+    padding: 0.1rem 0 0.1rem 1rem;
+    margin: 1.5rem 0;
+    color: var(--muted);
+  }
+  .ep-section {
+    max-width: var(--measure);
+    margin: 2.5rem 0;
+  }
+  .ep-section h2 {
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+  }
+  .ep-steps {
+    padding-left: 1.2rem;
+  }
+  .ep-steps li {
+    margin: 0.55rem 0;
+  }
+  .ep-steps code,
+  .ep-inline code,
+  p code {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.05rem 0.35rem;
+    font-size: 0.9em;
+  }
+  .ep-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin: 1.25rem 0;
+  }
+  .ep-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .ep-field input {
+    font: inherit;
+    padding: 0.45rem 0.6rem;
+    background: var(--surface);
+    color: inherit;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+  .ep-script {
+    width: 100%;
+    min-height: 140px;
+    box-sizing: border-box;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    padding: 0.85rem 1rem;
+    background: var(--surface);
+    color: inherit;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    white-space: pre;
+    overflow: auto;
+    resize: vertical;
+  }
+  .ep-copy {
+    margin-top: 0.85rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.55rem 1.1rem;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+  }
+  .ep-copy:hover {
+    filter: brightness(1.06);
+  }
+  .ep-copied {
+    margin-left: 0.75rem;
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+  details.ep-more {
+    margin: 1rem 0;
+  }
+  details.ep-more summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+</style>
+
+<section class="ep-intro">
+  <p class="ep-lead">
+    Súkromná pomôcka: stiahne všetky fotky z EduPage nástenky (timeline) naraz,
+    pekne pomenované podľa dátumu a zabalené do <code>.zip</code> súborov.
+  </p>
+  <p>
+    EduPage nemá tlačidlo „stiahnuť všetko“. Táto stránka ho obchádza malým
+    skriptom, ktorý spustíš priamo vo svojom prehliadači na svojej EduPage —
+    použije tvoje prihlásenie, prejde nástenku od zvoleného dátumu, nájde v
+    príspevkoch fotky a stiahne ich. Nič sa neposiela na tento web ani nikam
+    inam — všetko beží u teba v počítači.
+  </p>
+  <div class="ep-warn">
+    <strong>Pozor:</strong> na fotkách z triedy sú aj cudzie deti. Pre súkromný
+    rodinný archív je to v poriadku, ale nikde ich nezverejňuj.
+  </div>
+</section>
+
+<section class="ep-section">
+  <h2>Najprv skús to najjednoduchšie</h2>
+  <p>
+    Než sa pustíš do skriptu — pani učiteľky fotky nahrávajú zo svojej strany a
+    často majú <em>originály</em> v plnom rozlíšení (EduPage rodičom väčšinou
+    ukazuje zmenšené verzie). USB kľúč odovzdaný pri vyzdvihnutí poráža
+    akékoľvek sťahovanie. Ak ti to nevyjde, poď sem naspäť.
+  </p>
+</section>
+
+<section class="ep-section">
+  <h2>Ako to spustiť</h2>
+  <ol class="ep-steps">
+    <li>
+      Na počítači (nie na mobile) sa v prehliadači prihlás do svojej EduPage —
+      adresa v tvare <code>nieco.edupage.org</code>.
+    </li>
+    <li>
+      Ak máš viac detí, hore v EduPage si prepni na to dieťa, ktorého fotky
+      chceš. Skript stiahne fotky <em>aktuálne zvoleného</em> dieťaťa —
+      pre ďalšie ho spusti znova po prepnutí.
+    </li>
+    <li>
+      Nastav si nižšie dátum, <em>odkedy</em> sťahovať (pokojne dva-tri roky
+      dozadu), a klikni <strong>Skopírovať skript</strong>.
+    </li>
+    <li>
+      Na EduPage otvor vývojársku konzolu: <code>F12</code> (alebo
+      <code>Ctrl</code>+<code>Shift</code>+<code>I</code>, na Macu
+      <code>Cmd</code>+<code>Option</code>+<code>I</code>) a prejdi na záložku
+      <strong>Console</strong>.
+    </li>
+    <li>
+      Vlož skript (<code>Ctrl</code>/<code>Cmd</code>+<code>V</code>) a stlač
+      <code>Enter</code>. Vpravo dole sa objaví okienko s priebehom.
+    </li>
+    <li>
+      Prehliadač postupne ponúkne na stiahnutie <code>.zip</code> súbory
+      (<code>edupage-fotky-01.zip</code>, …). Ak sa spýta, povoľ sťahovanie
+      viacerých súborov. V každom <code>.zip</code> je aj
+      <code>_index.csv</code> s dátumom, autorom a popisom ku každej fotke.
+    </li>
+  </ol>
+  <p class="ep-inline">
+    Prvýkrát môže prehliadač napísať niečo ako
+    <code>allow pasting</code> — vtedy do konzoly napíš
+    <code>allow pasting</code> a stlač Enter, potom vlož skript.
+  </p>
+</section>
+
+<section class="ep-section">
+  <h2>Skript</h2>
+  <div class="ep-controls">
+    <label class="ep-field">
+      Sťahovať od dátumu
+      <input type="date" id="ep-date" value="2021-09-01" />
+    </label>
+    <label class="ep-field">
+      Fotiek na jeden .zip
+      <input type="number" id="ep-batch" value="200" min="20" max="2000" step="10" />
+    </label>
+  </div>
+  <textarea class="ep-script" id="ep-script" readonly spellcheck="false"></textarea>
+  <div>
+    <button type="button" class="ep-copy" id="ep-copy">Skopírovať skript</button>
+    <span class="ep-copied" id="ep-copied" hidden>skopírované ✓</span>
+  </div>
+
+  <details class="ep-more">
+    <summary>Keď niečo nefunguje</summary>
+    <ul class="ep-steps">
+      <li>
+        <strong>Píše, že sa nedá načítať nástenka:</strong> skontroluj, či si
+        naozaj prihlásený a či adresa končí na <code>.edupage.org</code>.
+      </li>
+      <li>
+        <strong>Nenašlo žiadne fotky:</strong> skús skorší dátum, alebo prepni
+        dieťa. Nástenka drží len príspevky s prílohami — staršie školy majú
+        fotky niekde inde a tie skript nevidí.
+      </li>
+      <li>
+        <strong>Málo fotiek oproti očakávaniu:</strong> EduPage môže vracať
+        obmedzený rozsah naraz — spusti skript viackrát s kratšími obdobiami
+        (napr. po školských rokoch).
+      </li>
+      <li>
+        <strong>Padá pamäť / veľké fotky:</strong> zníž „Fotiek na jeden .zip“
+        (napr. na 80).
+      </li>
+    </ul>
+  </details>
+</section>
+
+<!-- The console snippet, stored as inert text so the browser never runs or
+     re-parses it here. The controls above splice the date / batch size in. -->
+<script type="text/plain" id="ep-tpl">
+/* EduPage — hromadne stiahne fotky z nastenky (timeline).
+   Spusti v konzole prehliadaca (F12 -> Console) na svojej *.edupage.org,
+   kde si prihlaseny. Nastroj z https://depresivnygabo.sk/edupage-fotky/  */
+(async () => {
+  const DATE_FROM   = "__DATE_FROM__";   // odkedy stahovat (YYYY-MM-DD)
+  const MAX_PER_ZIP = __BATCH_FILES__;   // kolko fotiek do jedneho .zip
+
+  const origin = location.origin;
+  if (!/\.edupage\.org$/i.test(location.hostname)) {
+    alert("Spusti to na stranke prihlasenej do EduPage (adresa ...edupage.org).");
+    return;
+  }
+
+  const box = document.createElement("div");
+  box.style.cssText = "position:fixed;z-index:2147483647;right:16px;bottom:16px;max-width:360px;background:#111;color:#eee;font:14px/1.45 system-ui,sans-serif;padding:14px 16px;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.4)";
+  document.body.appendChild(box);
+  const log = (m) => { box.innerHTML = m; console.log("[edupage-fotky] " + m.replace(/<[^>]+>/g, "")); };
+
+  log("Nacitavam nastenku od " + DATE_FROM + " ...");
+  let items = [];
+  try {
+    const r = await fetch(origin + "/timeline/?module=todo&filterTab=&akcia=getData", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ datefrom: DATE_FROM }).toString()
+    });
+    const t = await r.text();
+    const j = JSON.parse(t);
+    items = j.timelineItems || j.Items || [];
+  } catch (e) {
+    log("Nepodarilo sa nacitat nastenku: " + e.message + "<br>Si prihlaseny na *.edupage.org?");
+    return;
+  }
+  log("Nasiel som " + items.length + " zaznamov. Hladam fotky ...");
+
+  const IMG = /\.(jpe?g|png|gif|webp|heic|heif|bmp|tiff?)(\?|$)/i;
+  const abs = (u) => /^https?:/i.test(u) ? u : origin + (u[0] === "/" ? u : "/" + u);
+  const seen = new Set();
+  const photos = [];
+  for (const it of items) {
+    let d = {};
+    try { d = JSON.parse(it.data || "{}"); } catch (e) {}
+    const att = d.attachements || d.attachments || {};
+    const day = (it.timestamp || it.cas_pridania || "").slice(0, 10) || "0000-00-00";
+    const author = (it.vlastnik_meno || it.user_meno || "").trim();
+    const text = (it.text || "").replace(/\s+/g, " ").trim();
+    for (const url in att) {
+      const name = att[url] || url.split("/").pop();
+      if (!IMG.test(name) && !IMG.test(url)) continue;
+      const full = abs(url);
+      if (seen.has(full)) continue;
+      seen.add(full);
+      photos.push({ url: full, name, day, author, text });
+    }
+  }
+  if (!photos.length) {
+    log("Nenasiel som ziadne fotky. Skus skorsi datum, alebo prepni dieta v EduPage.");
+    return;
+  }
+  photos.sort((a, b) => a.day.localeCompare(b.day) || a.url.localeCompare(b.url));
+  log("Nasiel som <b>" + photos.length + "</b> fotiek. Stahujem ...");
+
+  const enc = new TextEncoder();
+  const crcTable = (() => {
+    const t = [];
+    for (let n = 0; n < 256; n++) {
+      let c = n;
+      for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+      t[n] = c >>> 0;
+    }
+    return t;
+  })();
+  const crc32 = (u8) => {
+    let c = 0xffffffff;
+    for (let i = 0; i < u8.length; i++) c = crcTable[(c ^ u8[i]) & 0xff] ^ (c >>> 8);
+    return (c ^ 0xffffffff) >>> 0;
+  };
+  const u16 = (n) => new Uint8Array([n & 255, (n >>> 8) & 255]);
+  const u32 = (n) => new Uint8Array([n & 255, (n >>> 8) & 255, (n >>> 16) & 255, (n >>> 24) & 255]);
+  const concat = (arrs) => {
+    let len = 0;
+    for (const a of arrs) len += a.length;
+    const out = new Uint8Array(len);
+    let o = 0;
+    for (const a of arrs) { out.set(a, o); o += a.length; }
+    return out;
+  };
+  function buildZip(entries) {
+    const locals = [], central = [];
+    let offset = 0;
+    for (const e of entries) {
+      const nb = enc.encode(e.name);
+      const crc = crc32(e.data);
+      const size = e.data.length;
+      const local = concat([
+        u32(0x04034b50), u16(20), u16(0x0800), u16(0), u16(0), u16(0),
+        u32(crc), u32(size), u32(size), u16(nb.length), u16(0), nb, e.data
+      ]);
+      locals.push(local);
+      central.push(concat([
+        u32(0x02014b50), u16(20), u16(20), u16(0x0800), u16(0), u16(0), u16(0),
+        u32(crc), u32(size), u32(size), u16(nb.length), u16(0), u16(0),
+        u16(0), u16(0), u32(0), u32(offset), nb
+      ]));
+      offset += local.length;
+    }
+    const cd = concat(central);
+    const end = concat([
+      u32(0x06054b50), u16(0), u16(0), u16(entries.length), u16(entries.length),
+      u32(cd.length), u32(offset), u16(0)
+    ]);
+    return new Blob([concat(locals), cd, end], { type: "application/zip" });
+  }
+  function saveBlob(blob, fname) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = fname;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 5000);
+  }
+
+  const safe = (s) => (s || "").replace(/[\\/:*?"<>|]+/g, "_").replace(/\s+/g, " ").trim().slice(0, 80);
+  const pad = String(photos.length).length;
+  let part = 1, ok = 0, fail = 0;
+  let entries = [], index = "subor,datum,autor,popis\n";
+
+  async function flush() {
+    if (!entries.length) return;
+    entries.push({ name: "_index.csv", data: enc.encode(index) });
+    saveBlob(buildZip(entries), "edupage-fotky-" + String(part).padStart(2, "0") + ".zip");
+    part++;
+    entries = [];
+    index = "subor,datum,autor,popis\n";
+    await new Promise((r) => setTimeout(r, 600));
+  }
+
+  for (let i = 0; i < photos.length; i++) {
+    const p = photos[i];
+    log("Stahujem <b>" + (i + 1) + " / " + photos.length + "</b><br>" + p.day + (p.author ? " - " + safe(p.author) : ""));
+    try {
+      const r = await fetch(p.url, { credentials: "include" });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const buf = new Uint8Array(await r.arrayBuffer());
+      let ext = ((p.name.match(IMG) || p.url.match(IMG) || [])[1] || "jpg").toLowerCase();
+      if (ext === "jpeg") ext = "jpg";
+      const fname = p.day + "_" + String(i + 1).padStart(pad, "0") + (p.author ? "_" + safe(p.author) : "") + "." + ext;
+      entries.push({ name: fname, data: buf });
+      const q = (s) => '"' + (s || "").replace(/"/g, '""') + '"';
+      index += [fname, p.day, q(p.author), q(p.text)].join(",") + "\n";
+      ok++;
+    } catch (e) {
+      fail++;
+      console.warn("[edupage-fotky] zlyhalo:", p.url, e.message);
+    }
+    if (entries.length >= MAX_PER_ZIP) await flush();
+  }
+  await flush();
+  log("Hotovo &#9989;<br>Stiahnutych: <b>" + ok + "</b>" + (fail ? (", zlyhalo: " + fail) : "") + "<br>Rozdelene do " + (part - 1) + " .zip suborov.");
+})();
+</script>
+
+<script>
+  (function () {
+    var tpl = document.getElementById("ep-tpl").textContent.trim();
+    var out = document.getElementById("ep-script");
+    var dateEl = document.getElementById("ep-date");
+    var batchEl = document.getElementById("ep-batch");
+    var copyBtn = document.getElementById("ep-copy");
+    var copied = document.getElementById("ep-copied");
+
+    function render() {
+      var date = dateEl.value || "2021-09-01";
+      var batch = parseInt(batchEl.value, 10);
+      if (!batch || batch < 1) batch = 200;
+      out.value = tpl
+        .replace("__DATE_FROM__", date)
+        .replace("__BATCH_FILES__", String(batch));
+      copied.hidden = true;
+    }
+
+    dateEl.addEventListener("input", render);
+    batchEl.addEventListener("input", render);
+    render();
+
+    copyBtn.addEventListener("click", function () {
+      out.select();
+      var done = function () {
+        copied.hidden = false;
+        setTimeout(function () { copied.hidden = true; }, 2500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(out.value).then(done, function () {
+          document.execCommand("copy");
+          done();
+        });
+      } else {
+        document.execCommand("copy");
+        done();
+      }
+    });
+  })();
+</script>
+{% endraw %}
