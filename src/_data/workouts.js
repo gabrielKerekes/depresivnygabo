@@ -1,7 +1,8 @@
 // Workout log. Newest sessions go on top — the page renders them in this order.
 //
-// Each session has a `date` (YYYY-MM-DD), an optional one/two-sentence
-// `summary`, and a list of `exercises`. An exercise is one of:
+// Each session has a `date` (YYYY-MM-DD) and a list of `exercises`. An optional
+// `summary` holds a one/two-sentence note in the owner's own words — leave it
+// off unless he writes one; it is never auto-generated. An exercise is one of:
 //   - cardio / mobility: give it `duration` (e.g. "5 min") and an optional
 //     `detail` (e.g. "sklon 7 %, 9 km/h"),
 //   - strength: give it `weight`, `sets` and `reps` for uniform sets, or a
@@ -24,8 +25,6 @@ const sessions = [
     date: "2026-08-19",
     title: "Beh — Dunaj (Ovsište)",
     totalDuration: "41:05",
-    summary:
-      "Poobedný beh popri Dunaji cez Ovsište — vyše šesť kilometrov rovnomerným tempom v 27 °C. Nohy dostali dávku, tep držal v pohodovom aeróbnom pásme.",
     stats: [
       { label: "Vzdialenosť", value: "6,02 km" },
       { label: "Tempo", value: "6:50 / km" },
@@ -44,8 +43,6 @@ const sessions = [
     date: "2026-08-19",
     title: "Dochádzka na bicykli",
     totalDuration: "51 min",
-    summary:
-      "Dvakrát cez mesto popri Dunaji — ráno svižne do práce, podvečer pomalšie a do kopca späť na Dlhé diely.",
     cardioLabel: "Jazdy",
     muscles: { quads: 0.5, hamstrings: 0.3, calves: 0.3, glutes: 0.3 },
     exercises: [
@@ -65,8 +62,6 @@ const sessions = [
     date: "2026-08-17",
     title: "Posilňovňa",
     totalDuration: "50 min",
-    summary:
-      "Superséria zhybov a dipov na vršok tela, potom drepy, tricepsová extenzia a RDL. Pekne pokrytý chrbát, tricepsy aj nohy.",
     exercises: [
       {
         name: "Beh",
@@ -142,8 +137,6 @@ const sessions = [
     date: "2026-08-12",
     title: "Posilňovňa",
     totalDuration: "1 h 10 min",
-    summary:
-      "Tlak na prsia a poriadna dávka ťahov na chrbát — vrchný aj spodný — a RDL na zadnú stranu stehien. Prsia aj chrbát pekne unavené, tricepsy cítiť z nepriamej práce.",
     exercises: [
       { name: "Roller", duration: "5 min" },
       {
@@ -223,8 +216,6 @@ const sessions = [
     date: "2026-08-12",
     title: "Túra — Sarnia Skała (Zakopané)",
     totalDuration: "2 h 44 min",
-    summary:
-      "Ranná túra s deťmi nad Zakopané — pomalé tempo, mierne stúpanie a slnečných 15 °C. Nohy dostali dlhú a ľahkú prácu, najviac lýtka a stehná.",
     stats: [
       { label: "Vzdialenosť", value: "5,80 km" },
       { label: "Prevýšenie", value: "+189 m" },
@@ -242,8 +233,6 @@ const sessions = [
   },
   {
     date: "2026-08-11",
-    summary:
-      "Čistá regenerácia — štyri kolá v saune pri 90 °C. Žiadna svalová práca navyše, len uvoľnenie a prekrvenie po tréningoch.",
     exercises: [
       {
         name: "Sauna — 1. kolo",
@@ -274,8 +263,6 @@ const sessions = [
   {
     date: "2026-08-10",
     totalDuration: "75 min",
-    summary:
-      "Prvý tréning po pauze: kardio na rozohriatie, potom tricepsy, bicepsy a nohy (drepy, RDL). Slušný celotelový štart — chýbal len chrbát a prsia.",
     exercises: [
       { name: "Roller / mobilita", duration: "10 min" },
       {
