@@ -2,11 +2,12 @@
 //
 // Weight is a log, oldest first. Only the most recent entry is shown in the
 // stats bar (the "current" weight); the full log is kept as history and
-// rendered in a collapsed panel. To record a new weight, append an entry.
+// rendered in a collapsed panel. To record a new weight, append an entry —
+// an optional `time` (e.g. "7:00") notes when it was measured.
 const weightLog = [
   { date: "2026-07-27", value: "96 kg" },
   { date: "2026-08-14", value: "99 kg" },
-  { date: "2026-08-18", value: "98,6 kg" },
+  { date: "2026-08-18", value: "98,6 kg", time: "7:00" },
 ];
 
 const current = weightLog[weightLog.length - 1];

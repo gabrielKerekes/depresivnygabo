@@ -28,7 +28,7 @@ eleventyExcludeFromCollections: true
     <ul class="weight-history-list">
       {%- for w in athlete.weightHistory %}
       <li class="weight-history-item">
-        <span class="weight-history-date">{{ w.date | readableDate }}</span>
+        <span class="weight-history-date">{{ w.date | readableDate }}{% if w.time %} · {{ w.time }}{% endif %}</span>
         <span class="weight-history-value">{{ w.value }}</span>
       </li>
       {%- endfor %}
