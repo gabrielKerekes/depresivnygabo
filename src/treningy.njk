@@ -83,7 +83,7 @@ eleventyExcludeFromCollections: true
     {%- endif %}
 
     {%- if session.cardio.length %}
-    <p class="workout-group-label">Rozcvička a kardio</p>
+    <p class="workout-group-label">{{ session.cardioLabel or "Rozcvička a kardio" }}</p>
     <ul class="workout-list">
       {%- for ex in session.cardio %}
       <li class="workout-exercise">

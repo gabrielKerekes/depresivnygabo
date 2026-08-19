@@ -16,7 +16,128 @@
 //   traps, lats, lowerback, glutes, quads, hamstrings, calves.
 // The page turns these into a per-day and an all-time front/back body map,
 // shaded darker where the muscle got more work.
+//
+// A session may set `cardioLabel` to rename the cardio group heading (defaults
+// to "Rozcvička a kardio") — handy for a commute logged as a couple of rides.
 const sessions = [
+  {
+    date: "2026-08-19",
+    title: "Beh — Dunaj (Ovsište)",
+    totalDuration: "41:05",
+    summary:
+      "Poobedný beh popri Dunaji cez Ovsište — vyše šesť kilometrov rovnomerným tempom v 27 °C. Nohy dostali dávku, tep držal v pohodovom aeróbnom pásme.",
+    stats: [
+      { label: "Vzdialenosť", value: "6,02 km" },
+      { label: "Tempo", value: "6:50 / km" },
+      { label: "Tep", value: "150 bpm" },
+      { label: "Kalórie", value: "566 kcal" },
+    ],
+    muscles: {
+      quads: 0.7,
+      hamstrings: 0.6,
+      calves: 0.8,
+      glutes: 0.5,
+    },
+    exercises: [],
+  },
+  {
+    date: "2026-08-19",
+    title: "Dochádzka na bicykli",
+    totalDuration: "51 min",
+    summary:
+      "Dvakrát cez mesto popri Dunaji — ráno svižne do práce, podvečer pomalšie a do kopca späť na Dlhé diely.",
+    cardioLabel: "Jazdy",
+    muscles: { quads: 0.5, hamstrings: 0.3, calves: 0.3, glutes: 0.3 },
+    exercises: [
+      {
+        name: "Ráno — do práce (8:05)",
+        duration: "20:10",
+        detail: "7,50 km · 22,3 km/h · ⌀ 130 bpm",
+      },
+      {
+        name: "Podvečer — domov (17:38)",
+        duration: "31:07",
+        detail: "7,64 km · 14,7 km/h · ⌀ 132 bpm",
+      },
+    ],
+  },
+  {
+    date: "2026-08-17",
+    title: "Posilňovňa",
+    totalDuration: "50 min",
+    summary:
+      "Superséria zhybov a dipov na vršok tela, potom drepy, tricepsová extenzia a RDL. Pekne pokrytý chrbát, tricepsy aj nohy.",
+    exercises: [
+      {
+        name: "Beh",
+        duration: "4 min",
+        detail: "10 km/h, sklon 7 %",
+        muscles: { quads: 0.4, hamstrings: 0.3, calves: 0.5, glutes: 0.3 },
+      },
+      {
+        name: "Veslovanie",
+        duration: "3 min",
+        detail: "30 záberov/min",
+        muscles: { lats: 0.4, traps: 0.3, biceps: 0.3, forearms: 0.2 },
+      },
+      { name: "Roller", duration: "3 min" },
+      {
+        name: "Zhyby + dipy (superséria)",
+        weight: "vlastná váha",
+        sets: 3,
+        reps: 5,
+        note: "5 zhybov → 5 dipov, 3 kolá. Dipy cielené na tricepsy.",
+        muscles: {
+          lats: 0.8,
+          biceps: 0.5,
+          triceps: 0.8,
+          chest: 0.4,
+          shoulders: 0.3,
+          forearms: 0.3,
+        },
+      },
+      {
+        name: "Drepy",
+        weight: "55 kg",
+        sets: 3,
+        reps: 12,
+        muscles: { quads: 1, glutes: 0.7, hamstrings: 0.4, lowerback: 0.3 },
+      },
+      {
+        name: "Tricepsová extenzia nad hlavu (jednoručka)",
+        weight: "12,5 kg",
+        sets: 3,
+        reps: 12,
+        muscles: { triceps: 1, shoulders: 0.2 },
+      },
+      {
+        name: "Rumunský mŕtvy ťah (RDL)",
+        weight: "50 kg",
+        sets: 2,
+        reps: 14,
+        muscles: { hamstrings: 1, glutes: 0.8, lowerback: 0.7, forearms: 0.3 },
+      },
+    ],
+    ratings: [
+      {
+        by: "Gabo",
+        label: "Tréning",
+        score: 4,
+        note: "Celkom dobrý.",
+      },
+      {
+        by: "Gabo",
+        label: "Výkon",
+        score: 4,
+      },
+      {
+        by: "Claude",
+        label: "Tréning",
+        score: 4,
+        note: "Dobrá skladba — zhyby a dipy v supersérii zapoja chrbát aj tricepsy naraz, drepy a RDL pokryjú nohy. Nabudúce skús pridať tlak na prsia, nech je vršok kompletný. Pri RDL veď pohyb z bokov a chrbát drž rovný.",
+      },
+    ],
+  },
   {
     date: "2026-08-12",
     title: "Posilňovňa",
