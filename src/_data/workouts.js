@@ -181,6 +181,19 @@ const sessions = [
     ],
   },
   {
+    date: "2026-08-24",
+    title: "Beh — Bratislava",
+    totalDuration: "21:36",
+    stats: [
+      { label: "Vzdialenosť", value: "3,31 km" },
+      { label: "Tempo", value: "6:32 / km" },
+      { label: "Tep", value: "148 bpm" },
+      { label: "Kalórie", value: "309 kcal" },
+    ],
+    muscles: { quads: 0.7, hamstrings: 0.6, calves: 0.8, glutes: 0.5 },
+    exercises: [],
+  },
+  {
     date: "2026-08-19",
     title: "Beh — Dunaj (Ovsište)",
     totalDuration: "41:05",
