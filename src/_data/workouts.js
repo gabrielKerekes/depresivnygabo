@@ -22,6 +22,70 @@
 // to "Rozcvička a kardio") — handy for a commute logged as a couple of rides.
 const sessions = [
   {
+    date: "2026-09-03",
+    title: "Posilňovňa",
+    totalDuration: "1 h",
+    summary:
+      "Určite som bol slabý, nebolo to najlepšie a neužil som si to. Chcel som na záver spraviť zhyby, ale nezostal čas.",
+    exercises: [
+      { name: "Roller", duration: "10 min" },
+      {
+        name: "Beh",
+        duration: "3 min",
+        detail: "sklon 7 %, 9,5 km/h",
+        muscles: { quads: 0.4, hamstrings: 0.3, calves: 0.5, glutes: 0.3 },
+      },
+      {
+        name: "Dipy",
+        muscles: { triceps: 0.8, chest: 0.4, shoulders: 0.3 },
+        setList: [
+          { reps: 8, weight: "vlastná váha" },
+          { reps: 3, weight: "vlastná váha" },
+          { reps: 8, weight: "vlastná váha" },
+        ],
+      },
+      {
+        name: "Príťahy kolien vo vise",
+        note: "Superséria — príťahy kolien, bicepsové zdvihy a tricepsová extenzia nad hlavu za sebou, 3 kolá.",
+        muscles: { abs: 1, forearms: 0.3 },
+        setList: [
+          { reps: 15, weight: "vlastná váha" },
+          { reps: 12, weight: "vlastná váha" },
+          { reps: 10, weight: "vlastná váha" },
+        ],
+      },
+      {
+        name: "Bicepsové zdvihy",
+        weight: "15 kg",
+        sets: 3,
+        reps: 8,
+        muscles: { biceps: 1, forearms: 0.4 },
+      },
+      {
+        name: "Tricepsová extenzia nad hlavu",
+        weight: "15 kg",
+        sets: 3,
+        reps: 8,
+        muscles: { triceps: 1, shoulders: 0.2 },
+      },
+      {
+        name: "Drepy",
+        weight: "65 kg",
+        sets: 3,
+        reps: 10,
+        muscles: { quads: 1, glutes: 0.7, hamstrings: 0.4, lowerback: 0.3 },
+      },
+    ],
+    ratings: [
+      {
+        by: "Claude",
+        label: "Tréning",
+        score: 3.5,
+        note: "Slabé dni patria k veci — to, že si prišiel a odcvičil aj cez to, je väčšia výhra než čísla. Skladba drží pokope: dipy a tricepsová extenzia na tricepsy, bicepsy, stred tela cez príťahy kolien a drepy na nohy. Chýba ťah na chrbát a tlak na prsia — nabudúce pridaj jeden ťah a máš vršok vyvážený. Zhyby, čo nevyšli, si nechaj na úvod ďalšieho tréningu, kým máš silu.",
+      },
+    ],
+  },
+  {
     date: "2026-08-29",
     title: "Beh — Bratislava",
     totalDuration: "27:44",
