@@ -22,6 +22,38 @@
 // to "Rozcvička a kardio") — handy for a commute logged as a couple of rides.
 const sessions = [
   {
+    date: "2026-08-29",
+    title: "Beh — Bratislava",
+    totalDuration: "27:44",
+    stats: [
+      { label: "Vzdialenosť", value: "4,43 km" },
+      { label: "Tempo", value: "6:16 / km" },
+      { label: "Tep", value: "157 bpm" },
+      { label: "Kalórie", value: "420 kcal" },
+    ],
+    muscles: { quads: 0.7, hamstrings: 0.6, calves: 0.8, glutes: 0.5 },
+    exercises: [],
+  },
+  {
+    date: "2026-08-28",
+    title: "Dochádzka na bicykli",
+    totalDuration: "47 min",
+    cardioLabel: "Jazdy",
+    muscles: { quads: 0.5, hamstrings: 0.3, calves: 0.3, glutes: 0.3 },
+    exercises: [
+      {
+        name: "Ráno — do práce (7:41)",
+        duration: "21:17",
+        detail: "7,59 km · 21,4 km/h · +68 m · ⌀ 130 bpm",
+      },
+      {
+        name: "Popoludní — domov (15:33)",
+        duration: "25:56",
+        detail: "6,57 km · 15,2 km/h · +46 m · ⌀ 127 bpm",
+      },
+    ],
+  },
+  {
     date: "2026-08-26",
     title: "Doma",
     exercises: [
@@ -68,6 +100,25 @@ const sessions = [
         label: "Tréning",
         score: 3.5,
         note: "Pekná domáca porcia na ruky, ramená a stred tela — bicepsy, tricepsy z dvoch uhlov aj tlak nad hlavu. Chýbajú nohy a chrbát, tie si nechaj na posilňovňu. Pri tlaku nad hlavu spevni brucho a nezalamuj sa v drieku, nech ide sila z ramien.",
+      },
+    ],
+  },
+  {
+    date: "2026-08-25",
+    title: "Dochádzka na bicykli",
+    totalDuration: "52 min",
+    cardioLabel: "Jazdy",
+    muscles: { quads: 0.5, hamstrings: 0.3, calves: 0.3, glutes: 0.3 },
+    exercises: [
+      {
+        name: "Ráno — do práce (7:58)",
+        duration: "21:35",
+        detail: "7,61 km · 21,1 km/h · +48 m · ⌀ 123 bpm",
+      },
+      {
+        name: "Popoludní — domov (15:37)",
+        duration: "30:39",
+        detail: "7,66 km · 15,0 km/h · +97 m · ⌀ 124 bpm",
       },
     ],
   },
