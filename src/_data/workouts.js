@@ -22,6 +22,114 @@
 // to "Rozcvička a kardio") — handy for a commute logged as a couple of rides.
 const sessions = [
   {
+    date: "2026-08-26",
+    title: "Doma",
+    exercises: [
+      { name: "Roller / mobilita", duration: "15 min", detail: "poriadne" },
+      {
+        name: "Bicepsové zdvihy",
+        weight: "10 kg",
+        sets: 1,
+        reps: 10,
+        muscles: { biceps: 1, forearms: 0.4 },
+      },
+      {
+        name: "Tricepsové kliky (opretý dozadu)",
+        weight: "vlastná váha",
+        sets: 1,
+        reps: 10,
+        note: "To isté ako na stroji.",
+        muscles: { triceps: 1, chest: 0.4, shoulders: 0.3 },
+      },
+      {
+        name: "Tlak nad hlavu",
+        weight: "10 kg",
+        sets: 1,
+        reps: 10,
+        muscles: { shoulders: 1, triceps: 0.5, traps: 0.3 },
+      },
+      {
+        name: "Tricepsová extenzia nad hlavu",
+        weight: "10 kg",
+        sets: 1,
+        reps: 10,
+        muscles: { triceps: 1, shoulders: 0.2 },
+      },
+      {
+        name: "Plank",
+        duration: "1:40",
+        detail: "30 s nízky + 30 s vysoký + 20 s bočný / strana",
+        muscles: { abs: 1, shoulders: 0.4, lowerback: 0.3, glutes: 0.3 },
+      },
+    ],
+    ratings: [
+      {
+        by: "Claude",
+        label: "Tréning",
+        score: 3.5,
+        note: "Pekná domáca porcia na ruky, ramená a stred tela — bicepsy, tricepsy z dvoch uhlov aj tlak nad hlavu. Chýbajú nohy a chrbát, tie si nechaj na posilňovňu. Pri tlaku nad hlavu spevni brucho a nezalamuj sa v drieku, nech ide sila z ramien.",
+      },
+    ],
+  },
+  {
+    date: "2026-08-24",
+    title: "Posilňovňa",
+    summary: "Pri planku sa mi začala robiť nevoľnosť.",
+    exercises: [
+      { name: "Roller / mobilita", duration: "10 min" },
+      {
+        name: "Rotoped",
+        duration: "5 min",
+        muscles: { quads: 0.4, hamstrings: 0.3, calves: 0.4, glutes: 0.3 },
+      },
+      {
+        name: "Príťah v sede (stroj)",
+        muscles: {
+          lats: 1,
+          traps: 0.5,
+          biceps: 0.5,
+          forearms: 0.3,
+          shoulders: 0.3,
+        },
+        setList: [
+          { reps: 12, weight: "40 kg" },
+          { reps: 12, weight: "50 kg" },
+          { reps: 12, weight: "50 kg" },
+        ],
+      },
+      {
+        name: "Drepy",
+        weight: "60 kg",
+        sets: 3,
+        reps: 12,
+        muscles: { quads: 1, glutes: 0.7, hamstrings: 0.4, lowerback: 0.3 },
+      },
+      {
+        name: "Plank",
+        duration: "3:30",
+        detail: "2 kolá · 45 s nízky + 30 s bočný / strana",
+        muscles: { abs: 1, shoulders: 0.4, lowerback: 0.3, glutes: 0.3 },
+      },
+      {
+        name: "Tricepsové sťahovanie (kladka)",
+        muscles: { triceps: 1 },
+        setList: [
+          { reps: 12, weight: "40 kg" },
+          { reps: 8, weight: "45 kg" },
+          { reps: 8, weight: "35 kg" },
+        ],
+      },
+    ],
+    ratings: [
+      {
+        by: "Claude",
+        label: "Tréning",
+        score: 4,
+        note: "Dobrá skladba — príťah na chrbát, drepy na nohy, plank na stred a tricepsy na záver. Nevoľnosť môže byť z málo jedla či pitia pred tréningom alebo z priveľkého tempa; nabudúce skús ľahšie sa najesť a viac piť. Pri príťahu v sede sťahuj lopatky k sebe a ťahaj lakťami, nie rukami.",
+      },
+    ],
+  },
+  {
     date: "2026-08-19",
     title: "Beh — Dunaj (Ovsište)",
     totalDuration: "41:05",
