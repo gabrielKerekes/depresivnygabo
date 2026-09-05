@@ -6,50 +6,53 @@ tags:
   - alkohol
 ---
 
-Poznáte to. Príde pozvánka na oslavu, párty, svadbu, čokoľvek, kde bude
-veľa ľudí. A vy máte dve reakcie naraz. Jedna hovorí „super, teším sa".
-Druhá, tá hlasnejšia, hovorí „a čo keby som radšej ostal doma a pozeral do
-steny?".
+Mám návrh. Vážny návrh, aj keď vyzerá ako vtip. Slovo **alxtrovert** by
+malo prestať byť srandou z krčmy a stať sa poriadnym vedeckým termínom.
 
-To je silný introvert. Ale nie ten roztomilý introvert z Instagramu, čo má
-útulnú deku a knižku. Skôr ten typ, čo si v hlave prehráva rozhovor ešte
-predtým, ako ho vôbec začne, a potom sa rozhodne, že ho radšej ani nezačne.
+Alkohol + extrovert. Alxtrovert. Človek, ktorý je triezvy introvert, ale po
+pár pivách sa z neho stane duša párty. Cez deň sa vyhýba telefonátom. Večer,
+po troch, rečník, ktorého nikto neprosil, ale všetci ho radi počúvajú.
 
-## A potom príde prvé pivo
+Znie to smiešne. Ale keď sa nad tým zamyslíte, nie je to práve to smiešne,
+čo si zaslúži byť pomenované?
 
-Niečo sa stane. Nie hneď. Prvé pivo ešte len tak sedí a introvert stále
-stojí v rohu a analyzuje, kto s kým a prečo. Ale niekde medzi druhým a
-tretím sa to prepne. Tá stena v hlave, tá, čo hovorí „radšej nie", sa zrazu
-rozplynie.
+## Prečo vlastne pomenúvame veci
 
-A na jej mieste stojí niekto úplne iný. Človek, ktorý rozpráva. Ktorý sa
-smeje nahlas. Ktorý ide za neznámym človekom a povie mu, že má super
-tričko. Ktorý je zrazu duša párty.
+Jung nám dal introverta a extroverta. Dve krabice. A odvtedy do nich cpeme
+ôsmich miliárd ľudí, akoby človek bol buď jedno, alebo druhé. Buď nabíjaš
+energiu medzi ľuďmi, alebo osamote. Vyber si.
 
-Alxtrovert.
+Lenže väčšina z nás v žiadnej z tých krabíc poriadne nesedí. A alxtrovert je
+dôkaz. Je to človek, ktorý má obidve osobnosti v sebe naraz — a hranicou
+medzi nimi nie je nálada, deň, ani spoločnosť. Je to promile.
 
-## Dáva to zmysel, nie?
+Keď dokáže jeden pohár presunúť človeka z jednej Jungovej krabice do druhej,
+tak možno tie krabice nie sú steny. Sú to len dvere. A alkohol je kľúč,
+ktorý náhodou pasuje do zámky.
 
-Alkohol + extrovert. Alxtrovert. Ten človek, čo existuje iba vtedy, keď má
-v sebe pár pív. Cez deň introvert, ktorý sa vyhýba telefonátom. Večer, po
-troch, rečník, ktorého nikto neprosil, ale všetci ho radi počúvajú.
+## Čo by ten termín vlastne pomenoval
 
-A tu je tá zákerná časť. Funguje to. Naozaj to funguje. Po tých pivách sa
-cítiš fajn. Uvoľnený. Vtipný. Konečne sám sebou — alebo aspoň tou verziou
-seba, ktorú by si chcel byť aj triezvy.
+Tu sa to stáva filozofickým. Lebo otázka nie je „prečo je niekto po pive
+ukecaný". To vieme, alkohol tlmí zábrany, koniec príbehu. Skutočná otázka
+je: **ktorá z tých dvoch verzií je ten pravý ja?**
 
-## Lenže
+Triezvy introvert by povedal, že ten ukecaný večerný človek je len ilúzia,
+chemický trik, maska. Ale dá sa to čítať aj naopak. Čo ak je maskou práve
+ten triezvy? Čo ak alkohol nič nepridá — len na chvíľu odstráni strážcu,
+ktorý celý deň hovorí „radšej nie", a pod ním sa vynorí ten, kým človek
+naozaj chce byť?
 
-Ráno je Alxtrovert preč. Ostane len introvert. A hlava plná otázok. Bol som
-naozaj vtipný, alebo sa mi to len zdalo? Povedal som niečo hlúpe? Prečo som
-sa dokázal takto uvoľniť iba s alkoholom v krvi?
+Ak platí to druhé, tak alxtrovert nie je porucha. Je to diagnóza celej
+kultúry, ktorá naučila introvertov, že ich pravé ja treba držať pod zámkom,
+a dala im k tomu zámku jediný kľúč — taký, ktorý ničí pečeň.
 
-A to je asi celá pointa. Alxtrovert nie je nová osobnosť. Je to skratka.
-Skratka k tomu, čo v tebe celý čas je, ale k čomu sa triezvy nevieš dostať.
-Alkohol nič nepridal. Len na chvíľu vypol toho strážcu v hlave, čo hovorí
-„radšej nie".
+## Preto by to mal byť termín
 
-Otázka teda nie je, ako sa stať Alxtrovertom častejšie. Otázka je, ako sa
-naučiť vypnúť toho strážcu aj bez piva.
+Lebo pomenovať vec znamená začať ju brať vážne. Kým je alxtrovert len vtip,
+je to len chlapík, čo veľa vypije a veľa rozpráva. Vo chvíli, keď to je
+termín, sa dá pýtať: koľko ľudí takto žije? Prečo sa vieme uvoľniť iba
+s promile v krvi? A dá sa ten strážca v hlave vypnúť aj bez neho?
 
-Na to zatiaľ odpoveď nemám. Ale aspoň už viem, na čo sa pýtať.
+To sú otázky, ktoré stoja za výskum. Ja odpovede nemám. Ale mám aspoň slovo.
+
+A pomenovanie je vždy prvý krok.
