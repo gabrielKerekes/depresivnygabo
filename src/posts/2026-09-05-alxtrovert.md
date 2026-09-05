@@ -6,6 +6,10 @@ tags:
   - alkohol
 ---
 
+_Upozornenie: tento článok napísala AI. Ako srandu. Na svadbe. Opitý som
+bol ja, nie AI — čo je, keď sa nad tým zamyslíte, presne tá vec, o ktorej
+celý článok je._
+
 Mám návrh. Vážny návrh, aj keď vyzerá ako vtip. Slovo **alxtrovert** by
 malo prestať byť srandou z krčmy a stať sa poriadnym vedeckým termínom.
 
