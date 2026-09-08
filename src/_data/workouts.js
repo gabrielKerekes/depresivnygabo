@@ -22,6 +22,57 @@
 // to "Rozcvička a kardio") — handy for a commute logged as a couple of rides.
 const sessions = [
   {
+    date: "2026-09-08",
+    title: "Beh + kalistenika — Bratislava",
+    summary: "Slabý, naozaj slabý. Aspoň som sa dostal von a niečo spravil.",
+    stats: [
+      { label: "Vzdialenosť", value: "2,23 km" },
+      { label: "Čas", value: "13:58" },
+      { label: "Tempo", value: "6:16 / km" },
+      { label: "Tep", value: "154 bpm" },
+      { label: "Kalórie", value: "208 kcal" },
+    ],
+    muscles: { quads: 0.7, hamstrings: 0.6, calves: 0.8, glutes: 0.5 },
+    exercises: [
+      {
+        name: "Zhyby",
+        weight: "vlastná váha",
+        sets: 3,
+        reps: 5,
+        note: "Superséria — zhyby, dipy a príťahy kolien za sebou, 3 kolá.",
+        muscles: {
+          lats: 1,
+          biceps: 0.6,
+          forearms: 0.4,
+          traps: 0.4,
+          shoulders: 0.3,
+        },
+      },
+      {
+        name: "Dipy",
+        weight: "vlastná váha",
+        sets: 3,
+        reps: 5,
+        muscles: { triceps: 0.8, chest: 0.4, shoulders: 0.3 },
+      },
+      {
+        name: "Príťahy kolien vo vise",
+        weight: "vlastná váha",
+        sets: 3,
+        reps: 10,
+        muscles: { abs: 1, forearms: 0.3 },
+      },
+    ],
+    ratings: [
+      {
+        by: "Claude",
+        label: "Tréning",
+        score: 4,
+        note: "Slabé dni sa počítajú dvojnásobne — prísť a odcvičiť aj cez ne je väčšia výhra než akékoľvek číslo. A skladba je na krátky tréning prekvapivo kompletná: zhyby zaberú chrbát a bicepsy, dipy tricepsy a prsia, príťahy kolien stred tela a beh pridá nohy aj kardio. Zhyby a dipy vo vlastnej váhe sú výborný základ — keď dôjde sila, radšej spomaľ a drž čistý pohyb než naháňať ďalšie opakovania. Nabudúce, keď budeš mať viac šťavy, pridaj štvrté kolo alebo ťažší variant.",
+      },
+    ],
+  },
+  {
     date: "2026-09-03",
     title: "Posilňovňa",
     totalDuration: "1 h",
