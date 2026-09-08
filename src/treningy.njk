@@ -1,16 +1,18 @@
 ---
 layout: base.njk
 title: Tréningy
+# A "trvalka" (perennial) — a standing reference page. Listed on the homepage
+# and at /trvalky/, and publicly indexed (in the sitemap).
 permalink: /treningy/
-description: Súkromný denník tréningov.
-eleventyExcludeFromCollections: true
+tags:
+  - trvalka
+description: Denník tréningov — čo som odcvičil a kedy.
 ---
 {% from "bodymap.njk" import bodyMap, bodyMapLegend %}
 <section class="workouts">
   <h2 class="page-title">Tréningy</h2>
   <p class="start-here-lead">
-    Súkromný denník — čo som odcvičil a kedy. Skrytá stránka, dostupná len cez
-    priamy odkaz.
+    Denník tréningov — čo som odcvičil a kedy.
   </p>
 
   {%- if athlete.stats.length %}
