@@ -20,7 +20,41 @@
 //
 // A session may set `cardioLabel` to rename the cardio group heading (defaults
 // to "Rozcvička a kardio") — handy for a commute logged as a couple of rides.
+//
+// A session may also set `circuit` to a slug (see `circuitMeta` below) to mark
+// it as one lap of a repeatable route. Sessions sharing a circuit are grouped
+// into a progress table on /treningy/, so repeated laps can be compared over
+// time. The metrics compared come from the session's `stats` and
+// `totalDuration`.
 const sessions = [
+  {
+    date: "2026-09-10",
+    title: "Beh — Bratislava (lesný okruh)",
+    circuit: "lesna-6",
+    totalDuration: "39:48",
+    stats: [
+      { label: "Vzdialenosť", value: "6,36 km" },
+      { label: "Tempo", value: "6:15 / km" },
+      { label: "Tep", value: "157 bpm" },
+      { label: "Prevýšenie", value: "+143 m" },
+    ],
+    muscles: { quads: 0.7, hamstrings: 0.6, calves: 0.8, glutes: 0.5 },
+    exercises: [],
+    ratings: [
+      {
+        by: "Gabo",
+        label: "Tréning",
+        score: 5,
+        note: "Cítil som sa skvele — konečne som sa netrápil celý čas a chvíľu v strede som držal tempo 5:00.",
+      },
+      {
+        by: "Claude",
+        label: "Výkon",
+        score: 4.5,
+        note: "Prvý zápis Lesnej šestky — odteraz je to tvoj etalón, s ktorým budeš porovnávať ďalšie kolá. Priemer 6:15/km na trati so 143 m stúpania je slušný základ a záblesk 5:00 v strede ukazuje, že v nohách máš viac. Nabudúce skús držať rovnomernejšie tempo namiesto jedného výkyvu — a hlavne, konečne si si beh užil, to je najdôležitejšie číslo.",
+      },
+    ],
+  },
   {
     date: "2026-09-08",
     title: "Beh + kalistenika — Bratislava",
@@ -659,10 +693,20 @@ function levelsFrom(scores) {
   return levels;
 }
 
+// Repeatable routes. A session's `circuit` slug points here for its display
+// name; add an entry when a new route starts repeating.
+const circuitMeta = {
+  "lesna-6": { name: "Lesná šestka" },
+};
+
+const circuitName = (slug) =>
+  (circuitMeta[slug] && circuitMeta[slug].name) || slug;
+
 const decorated = sessions.map((session) => {
   const scores = scoreMuscles(session);
   return {
     ...session,
+    circuitName: session.circuit ? circuitName(session.circuit) : null,
     cardio: session.exercises.filter(
       (ex) => !ex.sets && !ex.setList && !ex.sauna,
     ),
@@ -672,6 +716,35 @@ const decorated = sessions.map((session) => {
     trainsMuscles: Object.keys(scores).length > 0,
   };
 });
+
+// Group sessions by circuit into a progress log — oldest lap first, with the
+// key metrics pulled flat so the page can lay them out as a comparison table.
+const statValue = (session, label) => {
+  const found = (session.stats || []).find((s) => s.label === label);
+  return found ? found.value : null;
+};
+
+const circuitGroups = {};
+for (const session of sessions) {
+  if (!session.circuit) continue;
+  (circuitGroups[session.circuit] ||= []).push(session);
+}
+
+const circuits = Object.entries(circuitGroups).map(([slug, laps]) => ({
+  slug,
+  name: circuitName(slug),
+  laps: laps
+    .slice()
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .map((session) => ({
+      date: session.date,
+      distance: statValue(session, "Vzdialenosť"),
+      time: session.totalDuration || null,
+      pace: statValue(session, "Tempo"),
+      hr: statValue(session, "Tep"),
+      ascent: statValue(session, "Prevýšenie"),
+    })),
+}));
 
 // All-time totals across every session, for the coverage map at the top.
 const totalScores = {};
@@ -684,4 +757,5 @@ for (const session of sessions) {
 module.exports = {
   sessions: decorated,
   muscleTotals: levelsFrom(totalScores),
+  circuits,
 };

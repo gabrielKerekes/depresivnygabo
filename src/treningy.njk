@@ -49,6 +49,46 @@ description: Denník tréningov — čo som odcvičil a kedy.
     {{ bodyMapLegend() }}
   </section>
 
+  {%- if workouts.circuits.length %}
+  <section class="workout-circuits">
+    <h3 class="page-title">Okruhy</h3>
+    <p class="start-here-lead">
+      Trate, ktoré bežím opakovane — každé kolo vedľa seba, nech vidno progres.
+    </p>
+    {%- for circuit in workouts.circuits %}
+    <div class="workout-circuit-card" id="okruh-{{ circuit.slug }}">
+      <h4 class="workout-circuit-name">🌲 {{ circuit.name }}</h4>
+      <div class="workout-circuit-scroll">
+        <table class="workout-circuit-table">
+          <thead>
+            <tr>
+              <th scope="col">Dátum</th>
+              <th scope="col">Vzdialenosť</th>
+              <th scope="col">Čas</th>
+              <th scope="col">Tempo</th>
+              <th scope="col">Tep</th>
+              <th scope="col">Prevýšenie</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for lap in circuit.laps %}
+            <tr>
+              <th scope="row">{{ lap.date | readableDate }}</th>
+              <td>{{ lap.distance or "—" }}</td>
+              <td>{{ lap.time or "—" }}</td>
+              <td>{{ lap.pace or "—" }}</td>
+              <td>{{ lap.hr or "—" }}</td>
+              <td>{{ lap.ascent or "—" }}</td>
+            </tr>
+            {%- endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {%- endfor %}
+  </section>
+  {%- endif %}
+
   {%- if workouts.sessions.length %}
   {%- for session in workouts.sessions %}
   <article class="workout-session">
@@ -56,6 +96,7 @@ description: Denník tréningov — čo som odcvičil a kedy.
       <div class="workout-headings">
         <h3 class="workout-date">{{ session.date | readableDate }}</h3>
         {%- if session.title %}<p class="workout-title">{{ session.title }}</p>{% endif %}
+        {%- if session.circuit %}<p class="workout-circuit"><a class="workout-circuit-chip" href="#okruh-{{ session.circuit }}">🌲 {{ session.circuitName }}</a></p>{% endif %}
       </div>
       {%- set n = session.exercises.length %}
       {%- if n %}

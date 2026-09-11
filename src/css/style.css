@@ -1528,6 +1528,95 @@ a:focus-visible,
   margin-bottom: 0.5rem;
 }
 
+/* Circuit chip under a session's title, linking to its progress table. */
+.workout-circuit {
+  margin: 0.2rem 0 0;
+}
+.workout-circuit-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.1rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  text-decoration: none;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+.workout-circuit-chip:hover {
+  border-color: var(--accent);
+}
+
+/* Repeatable-route progress: one card per circuit with a lap-by-lap table. */
+.workout-circuits {
+  margin-top: 2rem;
+  padding: 1.35rem 1.5rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.workout-circuits > .page-title {
+  font-size: 1.15rem;
+}
+.workout-circuits > .start-here-lead {
+  margin-bottom: 0.5rem;
+}
+.workout-circuit-card {
+  margin-top: 1.25rem;
+  scroll-margin-top: 1rem;
+}
+.workout-circuit-card:first-of-type {
+  margin-top: 1rem;
+}
+.workout-circuit-name {
+  margin: 0 0 0.6rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--fg);
+}
+.workout-circuit-scroll {
+  overflow-x: auto;
+}
+.workout-circuit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+.workout-circuit-table th,
+.workout-circuit-table td {
+  padding: 0.45rem 0.7rem;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+.workout-circuit-table thead th {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.workout-circuit-table thead th:first-child,
+.workout-circuit-table tbody th {
+  text-align: left;
+}
+.workout-circuit-table tbody th {
+  font-weight: 600;
+  color: var(--fg);
+}
+.workout-circuit-table tbody tr:last-child th,
+.workout-circuit-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
 .bodymap {
   display: flex;
   flex-wrap: wrap;
