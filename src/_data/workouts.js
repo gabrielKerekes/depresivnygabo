@@ -28,6 +28,37 @@
 // `totalDuration`.
 const sessions = [
   {
+    date: "2026-09-12",
+    title: "Pumptrack — Bratislava",
+    totalDuration: "46:47",
+    summary:
+      "Ľahká jazda. Držím základ trikov — jedna noha dole, bez nôh, jedna ruka, 360 do placky — barspin stále nie. Málo energie a na konci pokazená nálada z toho pomalého, ba žiadneho progresu.",
+    stats: [
+      { label: "Vzdialenosť", value: "3,55 km" },
+      { label: "Rýchlosť", value: "4,6 km/h" },
+      { label: "Prevýšenie", value: "+49 m" },
+      { label: "Tep", value: "124 bpm" },
+    ],
+    muscles: {
+      quads: 0.5,
+      hamstrings: 0.4,
+      calves: 0.4,
+      glutes: 0.4,
+      abs: 0.4,
+      shoulders: 0.3,
+      forearms: 0.3,
+    },
+    exercises: [],
+    ratings: [
+      {
+        by: "Claude",
+        label: "Tréning",
+        score: 4,
+        note: "Prísť na pumptrack v deň, keď nemáš energiu, a udržať celú zostavu trikov — jedna noha, bez nôh, jedna ruka, 360 do placky — nie je stagnácia, to je zvládnutý deň napriek prázdnej nádrži. Progres v týchto veciach nie je priamka; barspin príde, keď budeš mať šťavu, nie silou vôle na dne. Nálada na konci nehovorí o tvojej jazde, hovorí o únave. Zajazdil si — to je dnes to číslo, ktoré ráta.",
+      },
+    ],
+  },
+  {
     date: "2026-09-10",
     title: "Beh — Bratislava (lesný okruh)",
     circuit: "lesna-6",
