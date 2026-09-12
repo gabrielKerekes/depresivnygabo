@@ -7,4 +7,16 @@ Allow: /
 Disallow: /edit/
 Disallow: /treningy/
 
+# Claude / Anthropic crawlers are explicitly welcome. A named group wins over
+# the "*" group for these agents, so this keeps the content readable to Claude
+# even if a restrictive wildcard rule is ever added above.
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: anthropic-ai
+User-agent: Claude-Web
+Allow: /
+Disallow: /edit/
+Disallow: /treningy/
+
 Sitemap: {{ site.url }}/sitemap.xml
