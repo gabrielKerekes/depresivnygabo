@@ -13,3 +13,5 @@ Prešlo 10 dní bez hrania, 6 bez fajčenia. Cítim sa zle. Neviem, čo robiť, 
 Claude povedal, že sa to časom zlepší. Len treba vydržať. Hovoria to aj ľudia 😅. Hm. Tak mi neostáva nič iné, ako to skúsiť vydržať a uvidieť. Takže tento článok bude fungovať ako zápisník môjho progresu prípadne neprogresu.
 
 Zápis č.1: Deň 10, 6 (12.9.) - nič ma nebaví. Chcem fajčiť. Chcem sa hrať. Mozog začína racionalizovať, že nemá zmysel sa 100% obmedzovať. Že načo to vlastne robím. Well. Fuck you mozog. Fuck you! 🖕Let's go! 🔥
+
+Zápis č.2: Deň 11, 7 (13.9.) - dnes je určite lepšie ako včera. No ale teraz budem mať voľný čas a ja neviem, čo skôr. Pred tým to bolo jasné. Voľný čas = hranie. Teraz? Idem sa hrať (single player hry)? Behať? Pracovať? Písať? Cvičiť? Upratovať? Príliš veľa možností. Čo som si ale všimol je, že večer ma fakt že vypína - po hraní a fajčení som bol nabudený a dlho som zaspával. Čiže aspoň spánok mi abstinencia určite zlepšuje.
