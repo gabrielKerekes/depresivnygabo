@@ -73,6 +73,19 @@ Optional front-matter fields (all safe to omit):
   listed at `/temy/`, and chips appear under the article. The internal `post`
   tag is merged in automatically via Eleventy's data deep merge.
 
+Journal-style posts (e.g. `nefajcim-nehram-nezijem`) log dated entries with the
+`zapis` paired shortcode — each renders as a numbered card on a timeline, with
+streak chips for the days without gaming and smoking, and shows up in the TOC:
+
+```
+{% zapis 4, "24.9.", 22, 18 %}
+Text zápisu v Markdowne…
+{% endzapis %}
+```
+
+Arguments: entry number, date as written, day without gaming, day without
+smoking. Keep a blank line before and after each block.
+
 Other niceties that need no front-matter: an Atom feed at `/feed.xml`, a
 `/sitemap.xml` + `/robots.txt`, an estimated **reading time** (computed from the
 content), and a **table of contents** auto-built from a post's `h2`/`h3`

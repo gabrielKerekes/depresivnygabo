@@ -64,6 +64,9 @@
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
   --stage-evergreen: #57b7a3;
+  /* Journal-entry streak chips: gaming (violet) and smoking (amber). */
+  --streak-play: #b4a3ec;
+  --streak-smoke: #e5b27c;
   /* Muscle map: neutral body (--muscle-bp) and untrained muscle (--muscle-base);
      trained levels mix --accent over the base in the .bodymap rules. */
   --muscle-base: #363d49;
@@ -104,6 +107,8 @@
     --stage-seedling: #7d8a1f;
     --stage-budding: #3f8f66;
     --stage-evergreen: #2b8478;
+    --streak-play: #6a52bf;
+    --streak-smoke: #a4601c;
     --muscle-base: #e3e9e2;
     --muscle-bp: #cfd8cf;
   }
@@ -128,6 +133,8 @@
   --stage-seedling: #7d8a1f;
   --stage-budding: #3f8f66;
   --stage-evergreen: #2b8478;
+  --streak-play: #6a52bf;
+  --streak-smoke: #a4601c;
   --muscle-base: #e3e9e2;
   --muscle-bp: #cfd8cf;
 }
@@ -154,6 +161,9 @@
   --stage-seedling: #cdd884;
   --stage-budding: #84cf9b;
   --stage-evergreen: #57b7a3;
+  /* Journal-entry streak chips: gaming (violet) and smoking (amber). */
+  --streak-play: #b4a3ec;
+  --streak-smoke: #e5b27c;
   /* Muscle map: neutral body (--muscle-bp) and untrained muscle (--muscle-base);
      trained levels mix --accent over the base in the .bodymap rules. */
   --muscle-base: #363d49;
@@ -773,6 +783,166 @@ a:focus-visible,
   font-family: var(--serif);
   font-size: 1.15rem;
   line-height: 1.7;
+}
+
+/* Journal entries ("zápisy") from the `zapis` shortcode: numbered cards
+   strung on a vertical timeline. The rail runs from each node down to the
+   next entry; the last entry in a run drops it. */
+.zapis {
+  position: relative;
+  margin: 2.25rem 0;
+  padding-left: 3rem;
+}
+
+.zapis::before {
+  content: "";
+  position: absolute;
+  left: 1.05rem;
+  top: 2.4rem;
+  bottom: -2.25rem;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 55%, transparent),
+    color-mix(in srgb, var(--accent) 12%, transparent)
+  );
+}
+
+.zapis:not(:has(+ .zapis))::before {
+  display: none;
+}
+
+.zapis-node {
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.zapis-card {
+  padding: 1.1rem 1.35rem 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-top-color: var(--card-topline);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(
+      120% 90% at 0% 0%,
+      color-mix(in srgb, var(--accent) 7%, transparent),
+      transparent 60%
+    ),
+    linear-gradient(180deg, transparent 45%, var(--card-shade)), var(--surface);
+  box-shadow:
+    inset 0 1px 0 var(--card-highlight),
+    0 1px 2px -1px var(--shadow),
+    0 6px 14px -8px var(--shadow);
+}
+
+.zapis-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px dashed var(--border);
+}
+
+.post .zapis-title {
+  margin: 0;
+  font-size: 1.2rem;
+  scroll-margin-top: 1.5rem;
+}
+
+.zapis-date {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.post .zapis-streaks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  width: 100%;
+  margin: 0.2rem 0 0;
+}
+
+.zapis-streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--streak) 45%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--streak) 12%, transparent);
+  color: var(--streak);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.zapis-streak b {
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.zapis-streak-play {
+  --streak: var(--streak-play);
+}
+
+.zapis-streak-smoke {
+  --streak: var(--streak-smoke);
+}
+
+.zapis-body p {
+  margin: 0.9rem 0;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 30rem) {
+  .zapis {
+    padding-left: 2.4rem;
+  }
+  .zapis::before {
+    left: 0.85rem;
+  }
+  .zapis-node {
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 0.95rem;
+  }
+  .zapis-card {
+    padding: 0.9rem 0.9rem 0.3rem;
+  }
+  /* Keep both streak chips on one line on phones. */
+  .post .zapis-streaks {
+    gap: 0.3rem;
+  }
+  .zapis-streak {
+    gap: 0.2rem;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.72rem;
+  }
+  .zapis-streak b {
+    font-size: 0.85rem;
+  }
 }
 
 .post img {

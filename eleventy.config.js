@@ -2,8 +2,12 @@ const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
 const markdownItAnchor = require("markdown-it-anchor");
 
 module.exports = function (eleventyConfig) {
+  // Keep a handle on the Markdown renderer so shortcodes can render their
+  // inner Markdown themselves (see the `zapis` shortcode below).
+  let mdLib;
   // Give every h2/h3 a stable id so the table of contents can link to it.
   eleventyConfig.amendLibrary("md", (md) => {
+    mdLib = md;
     md.use(markdownItAnchor, {
       level: [2, 3],
       slugify: (s) => eleventyConfig.getFilter("slugify")(s),
@@ -110,6 +114,44 @@ module.exports = function (eleventyConfig) {
       .join("");
     return `<ul class="toc-list">${items}</ul>`;
   });
+
+  // A dated journal entry ("zápis") rendered as a card on a timeline. Used in
+  // posts that log progress over time:
+  //   {% zapis 4, "24.9.", 22, 18 %}
+  //   Markdown text of the entry…
+  //   {% endzapis %}
+  // Arguments: entry number, date as written, day without gaming, day without
+  // smoking. The output is one HTML block with no blank lines so Markdown
+  // passes it through untouched. The h3 gets an id, so the TOC lists entries.
+  eleventyConfig.addPairedShortcode(
+    "zapis",
+    (content, number, date, playDay, smokeDay) => {
+      const streak = (kind, emoji, day, label) =>
+        day == null
+          ? ""
+          : `<span class="zapis-streak zapis-streak-${kind}"><span aria-hidden="true">${emoji}</span> <b>${day}.</b> deň ${label}</span>`;
+      const body = mdLib
+        .render(String(content).trim())
+        .split("\n")
+        .filter((line) => line.trim())
+        .join("\n");
+      return [
+        `<section class="zapis">`,
+        `<span class="zapis-node" aria-hidden="true">${number}</span>`,
+        `<div class="zapis-card">`,
+        `<header class="zapis-head">`,
+        `<h3 class="zapis-title" id="zapis-${number}">Zápis č. ${number}</h3>`,
+        `<span class="zapis-date">${date}</span>`,
+        `<p class="zapis-streaks">${streak("play", "🎮", playDay, "bez hrania")}${streak("smoke", "🚭", smokeDay, "bez fajčenia")}</p>`,
+        `</header>`,
+        `<div class="zapis-body">`,
+        body,
+        `</div>`,
+        `</div>`,
+        `</section>`,
+      ].join("\n");
+    },
+  );
 
   return {
     dir: {
