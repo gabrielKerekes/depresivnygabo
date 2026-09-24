@@ -14,7 +14,7 @@ No a teda teraz, keď počujem tú pesničku, tak mi je mega smutno za týmito �
 
 Teraz to vypnutie nemám. Nejak som v kuse iba napätý. Stratený v abstraktnom svete programovania. Celý deň ide mozog na 100% (tak to bolo aj pred AI - asi aj viac). A potom prídem domov a zase iba dačo „musím“. Hej, občas aj môžem ísť niekam von. Na futbal. Na pivo. Na prechádzku. Behať. Na bike. Ale kua občas.
 
-Pomer povinností a radosti sa jednak že otočil a ešte k tomu sa výrez radosti zmenšil na polovicu. A v mojom prípade ma (asi aj v každého prípade) pre spokojnosť potrebujem trošku viac radosti. Je tam nejaký threshold, ktorý pokiaľ neprekročím, tak jednoducho nie som spokojný.
+Pomer povinností a radosti sa jednak že otočil a ešte k tomu sa výrez radosti zmenšil na polovicu. A v mojom prípade (asi aj v každého prípade) pre spokojnosť potrebujem trošku viac radosti. Je tam nejaký threshold, ktorý pokiaľ neprekročím, tak jednoducho nie som spokojný.
 
 Ešte sa chcem vrátiť k tomu abstraktnému svetu, lebo podľa mňa je jedným z dôvodov, prečo sa nejak cítim na hovno. Je to jednoducho vyčerpávajúce. Aj keď robím pomerne basic veci, tak som akokeby na hrane svojich schopností a to je jednoducho náročné. Čiže vlastne to neni ani ten abstraktný svet, ale to, že proste som na hrane. Na hrane „nope, can't do it“ a „can maybe potentially do it“. Ale zase inde by som asi ani byť nechcel. Tiež by som tam nebol spokojný. ...tupá hlava.
 
