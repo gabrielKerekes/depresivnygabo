@@ -28,6 +28,53 @@
 // `totalDuration`.
 const sessions = [
   {
+    date: "2026-09-28",
+    title: "Dochádzka na bicykli",
+    totalDuration: "19 min",
+    cardioLabel: "Jazdy",
+    muscles: { quads: 0.5, hamstrings: 0.3, calves: 0.3, glutes: 0.3 },
+    exercises: [
+      {
+        name: "Ráno — do práce (7:35)",
+        duration: "19:20",
+        detail: "7,46 km · 23,2 km/h · +28 m · ⌀ 73 bpm",
+      },
+    ],
+  },
+  {
+    date: "2026-09-17",
+    title: "Dochádzka na bicykli",
+    totalDuration: "20 min",
+    cardioLabel: "Jazdy",
+    muscles: { quads: 0.5, hamstrings: 0.3, calves: 0.3, glutes: 0.3 },
+    exercises: [
+      {
+        name: "Ráno — do práce (7:30)",
+        duration: "20:25",
+        detail: "7,75 km · 22,8 km/h · +30 m · ⌀ 125 bpm",
+      },
+    ],
+  },
+  {
+    date: "2026-09-16",
+    title: "Dochádzka na bicykli",
+    totalDuration: "54 min",
+    cardioLabel: "Jazdy",
+    muscles: { quads: 0.5, hamstrings: 0.3, calves: 0.3, glutes: 0.3 },
+    exercises: [
+      {
+        name: "Ráno — do práce (7:35)",
+        duration: "20:44",
+        detail: "7,69 km · 22,3 km/h · +37 m · ⌀ 139 bpm",
+      },
+      {
+        name: "Popoludní — domov (16:50)",
+        duration: "33:02",
+        detail: "9,08 km · 16,5 km/h · +119 m · ⌀ 144 bpm",
+      },
+    ],
+  },
+  {
     date: "2026-09-12",
     title: "Pumptrack — Bratislava",
     totalDuration: "46:47",
