@@ -29,6 +29,51 @@
 const sessions = [
   {
     date: "2026-09-28",
+    title: "Silový tréning",
+    totalDuration: "20 min",
+    summary:
+      "Cítil som sa dobre. Rýchly tréning, aby som si zaviedol rutinu (možno). RDL bolo myslím ďaleko od limitu.",
+    exercises: [
+      {
+        name: "Zhyby",
+        weight: "vlastná váha",
+        sets: 3,
+        reps: 5,
+        note: "Superséria — zhyby, dipy a RDL za sebou, 3 kolá.",
+        muscles: {
+          lats: 1,
+          biceps: 0.6,
+          forearms: 0.4,
+          traps: 0.4,
+          shoulders: 0.3,
+        },
+      },
+      {
+        name: "Dipy",
+        weight: "vlastná váha",
+        sets: 3,
+        reps: 7,
+        muscles: { triceps: 0.8, chest: 0.4, shoulders: 0.3 },
+      },
+      {
+        name: "Rumunský mŕtvy ťah (RDL)",
+        weight: "75 kg",
+        sets: 3,
+        reps: 6,
+        muscles: { hamstrings: 1, glutes: 0.8, lowerback: 0.7, forearms: 0.3 },
+      },
+    ],
+    ratings: [
+      {
+        by: "Claude",
+        label: "Tréning",
+        score: 4,
+        note: "Krátke a múdre. Zhyby, dipy a RDL pokryjú chrbát, ruky aj zadnú stranu nôh za dvadsať minút — presne taký tréning, ktorý sa dá opakovať. RDL o 25 kg ťažšie než v auguste a stále ďaleko od limitu: nabudúce pridaj váhu alebo opakovania. Rutinu nerobí jeden veľký tréning, ale veľa malých.",
+      },
+    ],
+  },
+  {
+    date: "2026-09-28",
     title: "Dochádzka na bicykli",
     totalDuration: "49 min",
     cardioLabel: "Jazdy",
