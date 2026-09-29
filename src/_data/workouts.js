@@ -30,7 +30,7 @@ const sessions = [
   {
     date: "2026-09-28",
     title: "Dochádzka na bicykli",
-    totalDuration: "19 min",
+    totalDuration: "49 min",
     cardioLabel: "Jazdy",
     muscles: { quads: 0.5, hamstrings: 0.3, calves: 0.3, glutes: 0.3 },
     exercises: [
@@ -38,6 +38,11 @@ const sessions = [
         name: "Ráno — do práce (7:35)",
         duration: "19:20",
         detail: "7,46 km · 23,2 km/h · +28 m · ⌀ 73 bpm",
+      },
+      {
+        name: "Podvečer — domov (17:04)",
+        duration: "29:28",
+        detail: "7,62 km · 15,5 km/h · +101 m · ⌀ 123 bpm",
       },
     ],
   },
