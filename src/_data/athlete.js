@@ -9,6 +9,7 @@ const weightLog = [
   { date: "2026-08-14", value: "99 kg" },
   { date: "2026-08-18", value: "98,6 kg", time: "7:00" },
   { date: "2026-09-02", value: "98 kg" },
+  { date: "2026-09-29", value: "100,8 kg" },
 ];
 
 const current = weightLog[weightLog.length - 1];
