@@ -68,7 +68,7 @@ const sessions = [
         by: "Claude",
         label: "Tréning",
         score: 4,
-        note: "Krátke a múdre. Zhyby, dipy a RDL pokryjú chrbát, ruky aj zadnú stranu nôh za dvadsať minút — presne taký tréning, ktorý sa dá opakovať. RDL o 25 kg ťažšie než v auguste a stále ďaleko od limitu: nabudúce pridaj váhu alebo opakovania. Rutinu nerobí jeden veľký tréning, ale veľa malých.",
+        note: "Krátke a múdre. Zhyby, dipy a RDL pokryjú chrbát, ruky aj zadnú stranu nôh za dvadsať minút — presne taký tréning, ktorý sa dá opakovať. RDL o 15 kg ťažšie než tvoje doterajšie maximum a stále ďaleko od limitu: nabudúce pridaj váhu alebo opakovania. Rutinu nerobí jeden veľký tréning, ale veľa malých.",
       },
     ],
   },
