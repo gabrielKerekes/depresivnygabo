@@ -1721,6 +1721,9 @@ a:focus-visible,
 .workout-circuit-chip:hover {
   border-color: var(--accent);
 }
+.workout-kind-chip {
+  cursor: help;
+}
 
 /* Repeatable-route progress: one card per circuit with a lap-by-lap table. */
 .workout-circuits {

@@ -26,7 +26,67 @@
 // into a progress table on /treningy/, so repeated laps can be compared over
 // time. The metrics compared come from the session's `stats` and
 // `totalDuration`.
+//
+// A session may set `kind` to a slug (see `kindMeta` below) to mark it as a
+// named workout type, e.g. "kruhac". It renders as a chip under the title,
+// with the type's description on hover.
 const sessions = [
+  {
+    date: "2026-09-30",
+    title: "Kruhový tréning",
+    kind: "kruhac",
+    totalDuration: "45 min",
+    summary:
+      "Prestal som, lebo sa mi zase začala robiť nevoľnosť. Inak som sa cítil dobre. Svalovicu som mal hlavne na bruchu. Dobrý tréning.",
+    exercises: [
+      {
+        name: "Beh na páse",
+        duration: "1:30",
+        detail: "9 km/h, sklon 6 %",
+        muscles: { quads: 0.4, hamstrings: 0.3, calves: 0.4, glutes: 0.3 },
+      },
+      {
+        name: "Veslovanie",
+        duration: "1:30",
+        muscles: { lats: 0.4, quads: 0.3, hamstrings: 0.3, biceps: 0.2 },
+      },
+      { name: "Dynamická rozcvička s gumami" },
+      {
+        name: "Jednonohý drep s oporou o kruhy",
+        weight: "vlastná váha",
+        sets: 4,
+        reps: 8,
+        note: "Superséria — päť cvikov za sebou, 4 kolá.",
+        muscles: { quads: 1, glutes: 0.8, hamstrings: 0.3, calves: 0.3 },
+      },
+      {
+        name: "Dipy",
+        weight: "vlastná váha",
+        sets: 4,
+        reps: 8,
+        muscles: { triceps: 0.8, chest: 0.4, shoulders: 0.3 },
+      },
+      {
+        name: "Ab wheel (koliesko)",
+        weight: "vlastná váha",
+        sets: 4,
+        reps: 8,
+        muscles: { abs: 1, lats: 0.4, shoulders: 0.3, lowerback: 0.3 },
+      },
+      {
+        name: "Jednonohý hip thrust (plecia na lavičke)",
+        weight: "vlastná váha",
+        sets: 4,
+        muscles: { glutes: 1, hamstrings: 0.6, abs: 0.3 },
+      },
+      {
+        name: "Squeeze press (jednoručky stlačené k sebe)",
+        weight: "jednoručky",
+        sets: 4,
+        muscles: { chest: 1, triceps: 0.5, shoulders: 0.4 },
+      },
+    ],
+  },
   {
     date: "2026-09-28",
     title: "Silový tréning",
@@ -872,6 +932,16 @@ const circuitMeta = {
   "lesna-6": { name: "Lesná šestka" },
 };
 
+// Named workout types. A session's `kind` slug points here for its chip label
+// and a short description.
+const kindMeta = {
+  kruhac: {
+    name: "Kruháč",
+    description:
+      "Kruhový tréning s vysokou intenzitou — cviky idú za sebou bez pauzy, v niekoľkých kolách.",
+  },
+};
+
 const circuitName = (slug) =>
   (circuitMeta[slug] && circuitMeta[slug].name) || slug;
 
@@ -880,6 +950,9 @@ const decorated = sessions.map((session) => {
   return {
     ...session,
     circuitName: session.circuit ? circuitName(session.circuit) : null,
+    kindInfo: session.kind
+      ? kindMeta[session.kind] || { name: session.kind }
+      : null,
     cardio: session.exercises.filter(
       (ex) => !ex.sets && !ex.setList && !ex.sauna,
     ),

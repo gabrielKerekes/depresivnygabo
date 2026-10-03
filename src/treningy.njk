@@ -96,6 +96,7 @@ description: Denník tréningov — čo som odcvičil a kedy.
       <div class="workout-headings">
         <h3 class="workout-date">{{ session.date | readableDate }}</h3>
         {%- if session.title %}<p class="workout-title">{{ session.title }}</p>{% endif %}
+        {%- if session.kindInfo %}<p class="workout-circuit"><span class="workout-circuit-chip workout-kind-chip"{% if session.kindInfo.description %} title="{{ session.kindInfo.description }}"{% endif %}>🔥 {{ session.kindInfo.name }}</span></p>{% endif %}
         {%- if session.circuit %}<p class="workout-circuit"><a class="workout-circuit-chip" href="#okruh-{{ session.circuit }}">🌲 {{ session.circuitName }}</a></p>{% endif %}
       </div>
       {%- set n = session.exercises.length %}
@@ -162,7 +163,7 @@ description: Denník tréningov — čo som odcvičil a kedy.
         <span class="workout-ex-name">{{ ex.name }}</span>
         <span class="workout-ex-metric">
           <span class="workout-weight">{{ ex.weight }}</span>
-          <span class="workout-sets">{{ ex.sets }}&nbsp;×&nbsp;{{ ex.reps }}</span>
+          <span class="workout-sets">{% if ex.reps %}{{ ex.sets }}&nbsp;×&nbsp;{{ ex.reps }}{% else %}{{ ex.sets }}&nbsp;{% if ex.sets >= 2 and ex.sets <= 4 %}série{% else %}sérií{% endif %}{% endif %}</span>
         </span>
       </li>
       {%- endif %}
