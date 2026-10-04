@@ -81,7 +81,7 @@ const sessions = [
       },
       {
         name: "Squeeze press (jednoručky stlačené k sebe)",
-        weight: "jednoručky",
+        weight: "15 kg",
         sets: 4,
         muscles: { chest: 1, triceps: 0.5, shoulders: 0.4 },
       },
