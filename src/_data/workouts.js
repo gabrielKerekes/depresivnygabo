@@ -32,6 +32,48 @@
 // with the type's description on hover.
 const sessions = [
   {
+    date: "2026-10-03",
+    title: "Pumptrack — Bratislava",
+    totalDuration: "53:47",
+    stats: [
+      { label: "Vzdialenosť", value: "4,99 km" },
+      { label: "Rýchlosť", value: "5,6 km/h" },
+      { label: "Prevýšenie", value: "+80 m" },
+      { label: "Tep", value: "131 bpm" },
+    ],
+    muscles: {
+      quads: 0.5,
+      hamstrings: 0.4,
+      calves: 0.4,
+      glutes: 0.4,
+      abs: 0.4,
+      shoulders: 0.3,
+      forearms: 0.3,
+    },
+    exercises: [],
+  },
+  {
+    date: "2026-10-03",
+    title: "Pumptrack — Svätý Jur",
+    totalDuration: "1:05:02",
+    stats: [
+      { label: "Vzdialenosť", value: "7,42 km" },
+      { label: "Rýchlosť", value: "6,8 km/h" },
+      { label: "Prevýšenie", value: "+116 m" },
+      { label: "Tep", value: "142 bpm" },
+    ],
+    muscles: {
+      quads: 0.5,
+      hamstrings: 0.4,
+      calves: 0.4,
+      glutes: 0.4,
+      abs: 0.4,
+      shoulders: 0.3,
+      forearms: 0.3,
+    },
+    exercises: [],
+  },
+  {
     date: "2026-09-30",
     title: "Kruhový tréning",
     kind: "kruhac",
