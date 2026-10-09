@@ -32,6 +32,89 @@
 // with the type's description on hover.
 const sessions = [
   {
+    date: "2026-10-07",
+    title: "Kruhový tréning",
+    kind: "kruhac",
+    totalDuration: "1:06:01",
+    stats: [
+      { label: "Tep", value: "126 bpm" },
+      { label: "Kalórie", value: "573 kcal" },
+    ],
+    summary:
+      "Cítil som sa dobre. Žiadna nevoľnosť — mám podozrenie, že ju spúšťajú pohyby hore-dole (zmena výšky).",
+    exercises: [
+      {
+        name: "Beh na páse",
+        duration: "1:30",
+        detail: "10 km/h, sklon 9 %",
+        muscles: { quads: 0.4, hamstrings: 0.3, calves: 0.4, glutes: 0.3 },
+      },
+      {
+        name: "Veslovanie",
+        duration: "1:30",
+        muscles: { lats: 0.4, quads: 0.3, hamstrings: 0.3, biceps: 0.2 },
+      },
+      { name: "Dynamická rozcvička", duration: "8 min" },
+      {
+        name: "Príťah osky v predklone",
+        weight: "25 kg",
+        sets: 3,
+        reps: 8,
+        note: "Superséria — tri cviky za sebou, 3 kolá.",
+        muscles: { lats: 1, traps: 0.6, biceps: 0.5, lowerback: 0.4 },
+      },
+      {
+        name: "Rumunský mŕtvy ťah s jednoručkami",
+        weight: "17,5 kg / ruka",
+        sets: 3,
+        reps: 8,
+        muscles: { hamstrings: 1, glutes: 0.8, lowerback: 0.5, forearms: 0.3 },
+      },
+      {
+        name: "Dosadanie na lavičku",
+        sets: 3,
+        muscles: { quads: 1, glutes: 0.8, hamstrings: 0.3 },
+      },
+      {
+        name: "Triceps palička",
+        sets: 3,
+        note: "Superséria — tri cviky za sebou, 3 kolá.",
+        muscles: { triceps: 1 },
+      },
+      {
+        name: "Rotácie ramien s gumou",
+        sets: 3,
+        note: "Namiesto rozpažovania s jednoručkami — kvôli bolesti.",
+        muscles: { shoulders: 0.8, traps: 0.3 },
+      },
+      {
+        name: "Malé T zdvihy",
+        weight: "2 kg / ruka",
+        sets: 3,
+        reps: 12,
+        muscles: { shoulders: 0.8, traps: 0.6 },
+      },
+      {
+        name: "Plank pull-through",
+        weight: "12 kg",
+        sets: 3,
+        reps: 8,
+        note: "Superséria — tri cviky za sebou, 3 kolá. 8× každou rukou.",
+        muscles: { abs: 1, shoulders: 0.5, chest: 0.3, triceps: 0.3 },
+      },
+      {
+        name: "Úklon v kľaku s gumou vo vzpažení",
+        sets: 3,
+        muscles: { abs: 1, lats: 0.3, shoulders: 0.3 },
+      },
+      {
+        name: "Bug roller",
+        sets: 3,
+        muscles: { abs: 1, lowerback: 0.3 },
+      },
+    ],
+  },
+  {
     date: "2026-10-03",
     title: "Pumptrack — Bratislava",
     totalDuration: "53:47",
