@@ -29,3 +29,9 @@ Easier said than done. Ako sa mám stretávať s ľuďmi, keď stretávanie s ľ
 ## 5. „Spomaľ. Oddychuj. Kašli na to.“
 
 Kks. Toto mi spôsobuje úzkosť už len, keď to píšem. Ako mám spomaliť? Rodina potrebuje papať – musím pracovať. Rodina potrebuje pozornosť – musím byť s nimi. Rodina potrebuje whatever – musím. Musím. Musím. Musím. A v depresívnej hlave je efekt všetkého „musím“ jednoducho znásobený. Jak mám teda spomaliť? Nič ma nebaví. Nič sa mi nechce. Musím. Easier said than done.
+
+## Na záver
+
+Keď mi napadnú ďalšie veci, tak ich sem doplním. A znova – toto neni myslené ako výčitka ľuďom, ktorí mi takto reagujú. Skôr ako objasnenie toho, čo taká reakcia so mnou urobí a prečo to nie je také jednoduché. Je prirodzené chcieť pomôcť. Je prirodzené si to nevedieť predstaviť, keď si tým človek neprešiel. Je to ok.
+
+A vlastne, aká je správna reakcia? Haha, šach mat. Neviem. Neviem, či existuje. Možno niečo na štýl „Oceňujem, že si sa podelil, a dúfam, že sa ti podarí z toho dostať. Keby si niečo potreboval, daj vedieť.“ Keď si ale predstavím, že sa bavím s depresívnym človekom a toto mu poviem, tak by som mal ešte nutkanie dodať „Dobre bude. Hlava hore!“. Čo je asi tiež v pohode 😅.
