@@ -39,3 +39,13 @@ Kde je moja vnútorná motivácia? Ako ju získam? Ako zistím, čo vlastne chce
 Ďalší dôvod prečo sa chcem zlepšovať atď je, že očakávam, že keď dosiahnem túto moju "dokonalosť", tak konečne budem slobodný. Slobodný od túžob, zlozvykov, nervov, stresu. Ale reálne pred desiatimi rokmi som si hovoril, že keď dosiahnem to, čo som dosiahol teraz (a aj výrazne menej), tak že tu bude ono. Že to bude dosť. Aaahm, zjavne to tak úplne nefunguje.
 
 Takže treba zvoliť inú stratégiu. Stratégiu uvedomenia a spokojnosti. Easy. Keď len to.
+
+## Update po nejakom čase (18.10. 2026)
+
+Nehrám WoWko, nehrám LoLko. Hrám len single player hry. A nie veľa. Nefajčím. Žujem síce nikotínové žuvačky, ale nefajčím. Čiže vlastne som dosiahol niečo, po čom som dlho túžil. Dosiahol som to bez toho, aby ma to nejak extra mučilo. Ale stále sa mám zle. Stále mám v sebe nejaký ten pocit, že by som mal byť viac. Meditovať. Športovať. Nejesť toľko cukru. Socializovať sa. Byť dobrým manželom. Fizioterapeutovať sa lebo som rozbitý. A neviem čo všetko ešte.
+
+Preto by zaujímalo, či problém nie je náhodou niekde inde. V tom, že jednoducho neviem byť spokojný, nech sa deje, čo sa deje. Nikdy. Prečo?
+
+Možno preto, že sa proste nemám dobre a menenie seba/sa je to jediné, na čo mám dosah. A tak sa stále snažím zlepšovať, aby som kua niekedy už dosiahol to, že som spokojný.
+
+Stratený človek toto. Je to funny. Na vonok môžem pôsobiť usporiadane a pri tom som vo vnútri tak dodrbkaný. Potrebujem pomoc.
