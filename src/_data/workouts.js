@@ -32,6 +32,30 @@
 // with the type's description on hover.
 const sessions = [
   {
+    date: "2026-10-25",
+    title: "Beh — Bratislava (lesný okruh)",
+    circuit: "lesna-6",
+    totalDuration: "45:21",
+    stats: [
+      { label: "Vzdialenosť", value: "6,31 km" },
+      { label: "Tempo", value: "7:11 / km" },
+      { label: "Tep", value: "150 bpm" },
+      { label: "Kalórie", value: "622 kcal" },
+    ],
+    summary:
+      "Aktivita po dlhšom čase. Dobrý beh, cítil som sa dobre, hoci som oveľa pomalší. Plecia dole a dozadu (otvorený hrudník), potom horúca sprcha na uvoľnenie svalov krku.",
+    muscles: { quads: 0.7, hamstrings: 0.6, calves: 0.8, glutes: 0.5 },
+    exercises: [],
+    ratings: [
+      {
+        by: "Claude",
+        label: "Výkon",
+        score: 3.5,
+        note: "Druhé kolo Lesnej šestky, takmer o minútu na kilometer pomalšie ako v septembri. Po dlhšej pauze je to presne to, čo treba čakať, a tep o 7 úderov nižší hovorí, že si nebežal na doraz. Dôležité je, že si vyšiel von a vrátil sa s dobrým pocitom. Rýchlosť sa vráti s pravidelnosťou.",
+      },
+    ],
+  },
+  {
     date: "2026-10-07",
     title: "Kruhový tréning",
     kind: "kruhac",
