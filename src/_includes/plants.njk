@@ -1,0 +1,56 @@
+{# Line-drawn garden plants, defined once per page and reused with
+   <use href="#st-…">. A post's growth stage picks its plant: seedling = a
+   two-leaf sprout, budding = a taller leafy stalk, evergreen = a small fir.
+   The flower marks a "trvalka" (perennial) in the footer garden. All share one
+   style: a 1.5px outline over a faint fill, in currentColor. #}
+<svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="st-seedling" viewBox="0 2 24 30">
+      <g fill="currentColor" fill-opacity=".18" stroke="none">
+        <path d="M12 22.5c-5.5 0-8.6-3.4-9-7.8 5.5 0 9 3 9 7.8Z" />
+        <path d="M12 20.5c5 0 8-3.1 8.4-7.2-5 0-8.4 2.7-8.4 7.2Z" />
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32v-11" />
+        <path vector-effect="non-scaling-stroke" d="M12 22.5c-5.5 0-8.6-3.4-9-7.8 5.5 0 9 3 9 7.8Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 20.5c5 0 8-3.1 8.4-7.2-5 0-8.4 2.7-8.4 7.2Z" />
+      </g>
+    </symbol>
+    <symbol id="st-budding" viewBox="0 2 24 30">
+      <g fill="currentColor" fill-opacity=".18" stroke="none">
+        <path d="M12 27c-4 0-6.4-2.5-6.8-5.8 4 0 6.8 2.2 6.8 5.8Z" />
+        <path d="M12 21.5c3.8 0 6.1-2.4 6.5-5.5-3.8 0-6.5 2.1-6.5 5.5Z" />
+        <path d="M12 16c-3.2 0-5.2-2-5.5-4.6 3.2 0 5.5 1.7 5.5 4.6Z" />
+        <path d="M12 9.5c-1.6-1.5-1.6-4 0-5.5 1.6 1.5 1.6 4 0 5.5Z" />
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32c-.4-7 .4-14 0-22.5" />
+        <path vector-effect="non-scaling-stroke" d="M12 27c-4 0-6.4-2.5-6.8-5.8 4 0 6.8 2.2 6.8 5.8Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 21.5c3.8 0 6.1-2.4 6.5-5.5-3.8 0-6.5 2.1-6.5 5.5Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 16c-3.2 0-5.2-2-5.5-4.6 3.2 0 5.5 1.7 5.5 4.6Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 9.5c-1.6-1.5-1.6-4 0-5.5 1.6 1.5 1.6 4 0 5.5Z" />
+      </g>
+    </symbol>
+    <symbol id="st-evergreen" viewBox="0 2 24 30">
+      <path d="M12 3.5 7.5 10.5h2.7L5.5 17h3L4 24.5h16L15.5 17h3l-4.7-6.5h2.7Z" fill="currentColor" fill-opacity=".18" stroke="none" />
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32v-7.5" />
+        <path vector-effect="non-scaling-stroke" d="M12 3.5 7.5 10.5h2.7L5.5 17h3L4 24.5h16L15.5 17h3l-4.7-6.5h2.7Z" />
+      </g>
+    </symbol>
+    <symbol id="st-flower" viewBox="0 2 24 30">
+      <path d="M12 25c-3.6 0-5.8-2.2-6.2-5.2 3.6 0 6.2 2 6.2 5.2Z" fill="currentColor" fill-opacity=".18" stroke="none" />
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32c0-6-.6-12 0-19" />
+        <path vector-effect="non-scaling-stroke" d="M12 25c-3.6 0-5.8-2.2-6.2-5.2 3.6 0 6.2 2 6.2 5.2Z" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="3.4" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="15.98" cy="5.7" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="15.98" cy="10.3" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="12.6" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="8.02" cy="10.3" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="8.02" cy="5.7" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="8" r="1.6" />
+      </g>
+    </symbol>
+  </defs>
+</svg>

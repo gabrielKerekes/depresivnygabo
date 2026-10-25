@@ -4,6 +4,13 @@
 {%- if s %} <span class="stage-badge stage-{{ stage }}" title="{{ s.description }}">{{ s.emoji }} {{ s.label }}</span>{% endif -%}
 {% endmacro %}
 
+{# Growth stage as a drawn plant + label (klíčok / rastie / dozreté). The plant
+   symbols live in plants.njk, which base.njk includes on every page. #}
+{% macro stagePlant(stage) %}
+{%- set s = stage | stageInfo -%}
+{%- if s %}<span class="stage s-{{ stage }}" title="{{ s.description }}"><svg class="ic" viewBox="0 2 24 30" aria-hidden="true"><use href="#st-{{ stage }}" /></svg>{{ s.label }}</span>{% endif -%}
+{% endmacro %}
+
 {# Shared post-list item, used by the homepage and the tag/topic pages so the
    markup stays in one place. #}
 {% macro postItem(post) %}

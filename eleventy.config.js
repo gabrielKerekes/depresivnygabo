@@ -54,6 +54,15 @@ module.exports = function (eleventyConfig) {
     }),
   );
 
+  // "3. 7. 2026" — the compact numeric date for dense lists.
+  eleventyConfig.addFilter("shortDate", (dateObj) =>
+    new Date(dateObj).toLocaleDateString("sk-SK", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    }),
+  );
+
   // "2026-07-03" for <time datetime="...">.
   eleventyConfig.addFilter(
     "htmlDateString",
@@ -114,6 +123,44 @@ module.exports = function (eleventyConfig) {
       .join("");
     return `<ul class="toc-list">${items}</ul>`;
   });
+
+  // "9 článkov", "3 trvalky", "1 trvalka" — a count with the Slovak plural:
+  // one form for 1, another for 2–4, a third for 0 and 5+.
+  eleventyConfig.addFilter("skCount", (n, one, few, many) => {
+    const word = n === 1 ? one : n >= 2 && n <= 4 ? few : many;
+    return `${n} ${word}`;
+  });
+
+  // A short teaser for the homepage cards and list: the post's first paragraph,
+  // trimmed to whole sentences (~170 chars). A single overlong sentence is cut
+  // at a word boundary instead. Text only — tags are stripped, entities kept.
+  eleventyConfig.addFilter("excerpt", (html, max = 170) => {
+    const m = /<p>([\s\S]*?)<\/p>/.exec(String(html || ""));
+    if (!m) return "";
+    const text = m[1]
+      .replace(/<[^>]+>/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (text.length <= max) return text;
+    const sentences = text.match(/[^.!?…]+[.!?…]+["“]?\s*/g) || [];
+    let out = "";
+    for (const s of sentences) {
+      if ((out + s).trim().length > max) break;
+      out += s;
+    }
+    if (out.trim()) return out.trim();
+    return text.slice(0, text.lastIndexOf(" ", max)) + "…";
+  });
+
+  // Lift a leading "1." off numbered h2 headings into its own span, so the
+  // number can sit above the heading as a small kicker:
+  //   <h2 id="x">1. „Text“</h2>  →  <h2 id="x"><span class="n">1.</span>„Text“</h2>
+  eleventyConfig.addFilter("numberedHeadings", (html) =>
+    String(html || "").replace(
+      /(<h2[^>]*>)(\d+\.)\s+/g,
+      '$1<span class="n">$2</span>',
+    ),
+  );
 
   // A dated journal entry ("zápis") rendered as a card on a timeline. Used in
   // posts that log progress over time:

@@ -1,63 +1,237 @@
 ---
 layout: base.njk
+fullBleed: true
 ---
-{% from "macros.njk" import postItem, trvalkaItem %}
-<section class="intro">
-  <p class="intro-lead">
-    Ahoj, som Gabo a mám (vraj<span class="asterisk">*</span>) depresiu.
-  </p>
-  <p class="intro-note">
-    <span class="asterisk">*</span> „vraj“ pretože s tým ešte stále nie som
-    stotožnený a diagnostika depresie žiaľ nie je úplne presná.
-  </p>
+{% from "macros.njk" import stagePlant %}
+{# The hero line is drawn twice: once muted, and once more on top, revealed
+   only inside a soft pool of light that follows the pointer (and rests on the
+   asterisk otherwise). Depression mutes things; the light is where they come
+   back into colour. #}
+<section class="hero" id="hero" aria-labelledby="hero-title">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-stage">
+    <h1 class="hero-text" id="hero-title">
+      <span class="l1">Ahoj, som Gabo</span>
+      <span class="l2">a mám <span class="vraj">(vraj<a class="ast" href="#vraj" aria-label="poznámka k slovu vraj">*</a>)</span></span>
+      <span class="l3">depresiu.</span>
+    </h1>
+    <div class="hero-lit" aria-hidden="true">
+      <span class="l1">Ahoj, som Gabo</span>
+      <span class="l2">a mám <span class="vraj">(vraj<span class="ast">*</span>)</span></span>
+      <span class="l3">depresiu.</span>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <p class="hero-note" id="vraj">
+      <span class="ast">*</span>„vraj“ pretože s tým ešte stále nie som
+      stotožnený a diagnostika depresie žiaľ nie je úplne presná.
+    </p>
+    <a class="cue" href="#zacat"><span class="line" aria-hidden="true"></span>čítaj ďalej</a>
+  </div>
 </section>
 
-<section class="start-here">
-  <h2 class="page-title">Kde začať?</h2>
-  <p class="start-here-lead">
-    Toto je moja digitálna záhradka. Keď mám čas, tak sem pridám nejaké drobné
-    vylepšenie alebo „zalejem“ (upravím) nejaký článok.
-  </p>
-
-  <ul class="post-list">
-    {%- set startHere = ["kto-som", "preco-tato-stranka-vobec-existuje"] %}
-    {%- for slug in startHere %}
-    {%- for post in collections.post %}
-    {%- if post.fileSlug == slug %}
-    {{ postItem(post) }}
-    {%- endif %}
-    {%- endfor %}
-    {%- endfor %}
-  </ul>
+<section class="sec" id="zacat" aria-labelledby="h-zacat">
+  <div class="wrap start">
+    <div class="start-head reveal">
+      <p class="label">Pre nových</p>
+      <h2 class="h2" id="h-zacat">Kde začať?</h2>
+      <p class="lead">
+        Toto je moja digitálna záhradka. Keď mám čas, tak sem pridám nejaké
+        drobné vylepšenie alebo „zalejem“ (upravím) nejaký článok.
+      </p>
+    </div>
+    <div class="cards">
+      {%- set startHere = ["kto-som", "preco-tato-stranka-vobec-existuje"] %}
+      {%- for slug in startHere %}
+      {%- for post in collections.post %}
+      {%- if post.fileSlug == slug %}
+      <a class="card reveal" href="{{ post.url }}">
+        <h3 class="card-t">{{ post.data.title }}</h3>
+        <p class="card-x">{{ post.templateContent | excerpt | safe }}</p>
+        <div class="card-m">
+          {{ stagePlant(post.data.stage) }}
+          <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+          <span>{{ post.templateContent | readingTime }} min čítania</span>
+        </div>
+        <span class="card-a" aria-hidden="true">→</span>
+      </a>
+      {%- endif %}
+      {%- endfor %}
+      {%- endfor %}
+    </div>
+  </div>
 </section>
 
-<section class="posts">
-  <h2 class="page-title">Všetky články</h2>
-
-  <ul class="post-list">
-    {%- for post in collections.post | reverse %}
-    {{ postItem(post) }}
-    {%- endfor %}
-    {% if collections.post.length == 0 %}
-    <li class="post-list-empty">
+<section class="sec sec-list" id="clanky" aria-labelledby="h-clanky">
+  <div class="wrap">
+    <div class="list-head reveal">
+      <div>
+        <p class="label">Archív</p>
+        <h2 class="h2" id="h-clanky">Všetky články<sup>{{ collections.post.length }}</sup></h2>
+      </div>
+      <p class="hint">od najnovšieho</p>
+    </div>
+    {%- if collections.post.length %}
+    <ol class="rows" reversed>
+      {%- for post in collections.post | reverse %}
+      <li class="row reveal">
+        <a href="{{ post.url }}">
+          <span class="row-t">{{ post.data.title }}</span>
+          <span class="row-side">
+            {{ stagePlant(post.data.stage) }}
+            <span class="row-d"><time datetime="{{ post.date | htmlDateString }}">{{ post.date | shortDate }}</time><span aria-hidden="true"> · </span>{{ post.templateContent | readingTime }} min čítania</span>
+          </span>
+          {%- set teaser = post.templateContent | excerpt %}
+          {%- if teaser %}
+          <span class="row-x"><span><span class="row-xp">{{ teaser | safe }}</span></span></span>
+          {%- endif %}
+        </a>
+      </li>
+      {%- endfor %}
+    </ol>
+    {%- else %}
+    <p class="post-list-empty">
       Zatiaľ tu nič nie je — prvý článok sa práve rodí. Vráť sa čoskoro.
-    </li>
-    {% endif %}
-  </ul>
+    </p>
+    {%- endif %}
+  </div>
 </section>
 
 {% if collections.trvalka.length %}
-<section class="trvalky">
-  <h2 class="page-title">Trvalky</h2>
-  <p class="start-here-lead">
-    Stránky, ktoré neuvädnú — pomôcky, zoznamy a poznámky, ku ktorým sa vraciam.
-  </p>
-
-  <ul class="post-list">
-    {%- for t in collections.trvalka %}
-    {{ trvalkaItem(t) }}
-    {%- endfor %}
-  </ul>
-  <p class="section-more"><a href="/trvalky/">všetky trvalky →</a></p>
+<section class="sec perennials" id="trvalky" aria-labelledby="h-trvalky">
+  <div class="wrap">
+    <div class="p-head reveal">
+      <div>
+        <p class="label">Neuvädnú</p>
+        <h2 class="h2" id="h-trvalky">Trvalky</h2>
+      </div>
+      <p class="lead">
+        Stránky, ktoré neuvädnú — pomôcky, zoznamy a poznámky, ku ktorým sa
+        vraciam.
+      </p>
+    </div>
+    <div class="p-grid">
+      {%- set roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"] %}
+      {%- for t in collections.trvalka %}
+      <a class="p-card reveal" href="{{ t.url }}">
+        <div class="p-top">
+          <span>Trvalka {{ roman[loop.index0] }}</span>
+          {%- if t.data.kind %}<span>{{ t.data.kind }}</span>{% endif %}
+        </div>
+        <div class="p-art" aria-hidden="true">
+          {%- set art = loop.index0 % 3 %}
+          {%- if art == 0 %}
+          <svg viewBox="0 0 120 120">
+            <path class="draw" pathLength="1" d="M60 118C60 96 58 80 60 64" />
+            <path class="draw" pathLength="1" d="M59 98c-14 0-22-8-24-18 13 0 24 7 24 18Z" />
+            <g transform="translate(60 44)">
+              <ellipse class="draw" pathLength="1" cx="0" cy="-13" rx="6" ry="11" />
+              <ellipse class="draw" pathLength="1" cx="0" cy="-13" rx="6" ry="11" transform="rotate(60)" />
+              <ellipse class="draw" pathLength="1" cx="0" cy="-13" rx="6" ry="11" transform="rotate(120)" />
+              <ellipse class="draw" pathLength="1" cx="0" cy="-13" rx="6" ry="11" transform="rotate(180)" />
+              <ellipse class="draw" pathLength="1" cx="0" cy="-13" rx="6" ry="11" transform="rotate(240)" />
+              <ellipse class="draw" pathLength="1" cx="0" cy="-13" rx="6" ry="11" transform="rotate(300)" />
+              <circle class="draw" pathLength="1" r="4.5" />
+            </g>
+          </svg>
+          {%- elif art == 1 %}
+          <svg viewBox="0 0 120 120">
+            <path class="draw" pathLength="1" d="M48 118c0-30 -6-50-14-70" />
+            <path class="draw" pathLength="1" d="M72 118c0-30 6-50 14-70" />
+            <path class="draw" pathLength="1" d="M34 48c-8-4-12-12-10-20 8 2 13 10 10 20Z" />
+            <path class="draw" pathLength="1" d="M86 48c8-4 12-12 10-20-8 2-13 10-10 20Z" />
+            <path class="draw" pathLength="1" d="M45 84c-10-2-16-9-16-17 10 1 16 8 16 17Z" />
+            <path class="draw" pathLength="1" d="M75 84c10-2 16-9 16-17-10 1-16 8-16 17Z" />
+          </svg>
+          {%- else %}
+          <svg viewBox="0 0 120 120">
+            <path class="draw" pathLength="1" d="M60 118V14" />
+            <path class="draw" pathLength="1" d="M60 100c-12-1-20-8-22-18 12 0 22 7 22 18Zm0 0c12-1 20-8 22-18-12 0-22 7-22 18Z" />
+            <path class="draw" pathLength="1" d="M60 78c-10-1-17-7-19-15 10 0 19 6 19 15Zm0 0c10-1 17-7 19-15-10 0-19 6-19 15Z" />
+            <path class="draw" pathLength="1" d="M60 56c-8-1-13-6-15-12 8 0 15 5 15 12Zm0 0c8-1 13-6 15-12-8 0-15 5-15 12Z" />
+            <path class="draw" pathLength="1" d="M60 34c-5-1-9-4-10-9 6 0 10 4 10 9Zm0 0c5-1 9-4 10-9-6 0-10 4-10 9Z" />
+          </svg>
+          {%- endif %}
+        </div>
+        <div class="p-body">
+          <h3>{{ t.data.title }}</h3>
+          {%- if t.data.description %}
+          <p>{{ t.data.description }}</p>
+          {%- endif %}
+          <div class="p-go">otvoriť <span>→</span></div>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+    <p class="p-more"><a href="/trvalky/">všetky trvalky →</a></p>
+  </div>
 </section>
 {% endif %}
+
+<script>
+  (function () {
+    // Split "depresiu." into letters so they can surface one by one.
+    var l3 = document.querySelector(".hero-text .l3");
+    var lit = document.querySelector(".hero-lit .l3");
+    if (l3 && lit) {
+      var t = l3.textContent;
+      l3.textContent = "";
+      t.split("").forEach(function (c, i) {
+        var s = document.createElement("span");
+        s.className = "ch";
+        s.style.setProperty("--n", i);
+        s.setAttribute("aria-hidden", "true");
+        s.textContent = c;
+        l3.appendChild(s);
+      });
+      lit.innerHTML = l3.innerHTML;
+      var sr = document.createElement("span");
+      sr.className = "sr-only";
+      sr.textContent = t;
+      l3.appendChild(sr);
+    }
+
+    // The light follows the pointer, slowly (eased) — or snaps under reduced
+    // motion. Touch doesn't move it; it rests on the asterisk.
+    var hero = document.getElementById("hero");
+    if (!hero) return;
+    var stage = hero.querySelector(".hero-stage");
+    var glow = hero.querySelector(".hero-glow");
+    var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var tx = null, ty = null, x = null, y = null, raf = 0;
+    function set() {
+      var sr = stage.getBoundingClientRect(), hr = hero.getBoundingClientRect();
+      stage.style.setProperty("--mx", x - sr.left + "px");
+      stage.style.setProperty("--my", y - sr.top + "px");
+      glow.style.setProperty("--mx", x - hr.left + "px");
+      glow.style.setProperty("--my", y - hr.top + "px");
+    }
+    function tick() {
+      x += (tx - x) * 0.08;
+      y += (ty - y) * 0.08;
+      set();
+      raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.5 ? requestAnimationFrame(tick) : 0;
+    }
+    hero.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "touch") return;
+      tx = e.clientX;
+      ty = e.clientY;
+      if (x === null || reduce) {
+        x = tx;
+        y = ty;
+        set();
+        return;
+      }
+      if (!raf) raf = requestAnimationFrame(tick);
+    });
+    function rest() {
+      var a = stage.querySelector(".hero-text .ast").getBoundingClientRect();
+      x = tx = a.left + a.width / 2;
+      y = ty = a.top + a.height / 2 + 40;
+      set();
+    }
+    rest();
+    addEventListener("resize", rest);
+    if (document.fonts) document.fonts.ready.then(rest);
+  })();
+</script>

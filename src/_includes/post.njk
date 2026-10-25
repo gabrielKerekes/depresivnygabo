@@ -1,7 +1,8 @@
 ---
 layout: base.njk
+fullBleed: true
 ---
-{% from "macros.njk" import topicTags, stageBadge %}
+{% from "macros.njk" import stagePlant %}
 {# Structured data so reader-mode extractors that parse JSON-LD (Firefox/Safari)
    get a clean headline, byline and date without relying on <title> heuristics. #}
 <script type="application/ld+json">
@@ -17,64 +18,150 @@ layout: base.njk
 </script>
 
 {% set toc = content | toc %}
-<div class="post-layout">
-  {# The header lives outside <article> so the layout has three siblings —
-     header, TOC, body. On the desktop grid the TOC becomes a sticky sidebar
-     (its explicit grid placement ignores source order); in mobile flow the
-     order reads title → Obsah → body, keeping the TOC just under the heading
-     instead of above the title. #}
-  <header class="post-header">
-    <h1>{{ title }}</h1>
-    <p class="post-meta">
-      {%- if updated %}
-      <time datetime="{{ date | htmlDateString }}">zasadené {{ date | readableDate }}</time>
-      <span class="dot" aria-hidden="true">·</span>
-      <time class="tended" datetime="{{ updated | htmlDateString }}">naposledy zaliate {{ updated | readableDate }}</time>
-      {%- else %}
-      <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time>
-      {%- endif %}
-      <span class="dot" aria-hidden="true">·</span>
-      <span class="post-readtime">{{ content | readingTime }} min čítania</span>
-      {{- stageBadge(stage) -}}
-    </p>
-  </header>
+{% set minutes = content | readingTime %}
+{% set stageMeta = stage | stageInfo %}
+{# The last word of the title is set apart in green italic on its own line. #}
+{% set words = title.split(" ") %}
 
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+
+<header class="title">
+  <div class="title-in">
+    <a class="back" href="/#clanky">← všetky články</a>
+    <h1 class="t{% if title.length > 28 %} t-long{% endif %}">
+      {%- if words.length > 1 -%}
+      <span>{{ words.slice(0, -1).join(" ") }}</span> <em>{{ words | last }}</em>
+      {%- else -%}
+      <span>{{ title }}</span>
+      {%- endif -%}
+    </h1>
+    <div class="title-foot">
+      <p class="kick">
+        {%- if stageMeta %}
+        {{ stagePlant(stage) }}
+        <span class="dot" aria-hidden="true"></span>
+        {%- endif %}
+        <span>zasadené <time datetime="{{ date | htmlDateString }}">{{ date | readableDate }}</time></span>
+        {%- if updated %}
+        <span class="dot" aria-hidden="true"></span>
+        <span>naposledy zaliate <time datetime="{{ updated | htmlDateString }}">{{ updated | readableDate }}</time></span>
+        {%- endif %}
+        <span class="dot" aria-hidden="true"></span>
+        <span>{{ minutes }} min čítania</span>
+      </p>
+      <a class="cue" href="#citaj"><span class="line" aria-hidden="true"></span>začni čítať</a>
+    </div>
+  </div>
+</header>
+
+<div class="read{% if not toc %} no-toc{% endif %}" id="citaj">
   {% if toc %}
-  <aside class="post-toc">
-    <details class="toc-details">
+  <nav class="toc" aria-label="Obsah článku">
+    <div class="toc-in">
+      <h2>Obsah</h2>
+      {{ toc | safe }}
+      <p class="left" id="left" data-total="{{ minutes }}">zostávajú <b>{{ minutes }} min</b></p>
+    </div>
+  </nav>
+  {% endif %}
+
+  <article class="post prose">
+    {% if stageMeta and stageMeta.banner %}
+    <div class="banner stage-{{ stage }}" role="note">
+      <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-{{ stage }}" /></svg>
+      <span><b>{{ stageMeta.label | capitalize }}.</b> {{ stageMeta.banner | replace(stageMeta.emoji + " ", "") }}</span>
+    </div>
+    {% endif %}
+
+    {% if toc %}
+    <details class="toc-m">
       <summary>Obsah</summary>
-      <nav class="toc-body" aria-label="Obsah článku">
-        {{ toc | safe }}
-      </nav>
+      {{ toc | safe }}
     </details>
-  </aside>
-  {# Progressive enhancement: the TOC stays collapsed by default (mobile), and
-     opens automatically once there's room for the sidebar. Without JS it stays
-     a tappable "Obsah" disclosure everywhere. #}
-  <script>
-    (function () {
-      var d = document.querySelector(".toc-details");
-      if (!d || !window.matchMedia) return;
-      var mq = window.matchMedia("(min-width: 64rem)");
-      function sync() {
-        d.open = mq.matches;
-      }
-      sync();
-      mq.addEventListener("change", sync);
-    })();
-  </script>
-  {% endif %}
-  <article class="post">
-  {% set stageMeta = stage | stageInfo %}
-  {% if stageMeta and stageMeta.banner %}
-  <p class="stage-banner stage-{{ stage }}">{{ stageMeta.banner }}</p>
-  {% endif %}
+    {% endif %}
 
-  {{ content | safe }}
+    {{ content | numberedHeadings | safe }}
 
-  {# Tag chips hidden while /tema/ pages are unpublished — they'd link nowhere.
-     Restore this footer (and the import above) with the topic pages. #}
+    <p class="end" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path class="leaf-blade" d="M1 1c13 0 22 9 22 22C10 23 1 14 1 1Z" /><path class="leaf-vein" d="M8.6 8.6 14.9 14.9" /></svg>
+    </p>
+    {# Tag chips hidden while /tema/ pages are unpublished — they'd link nowhere.
+       Restore them (topicTags from macros.njk) with the topic pages. #}
   </article>
 </div>
 
-<p class="back"><a href="/">← späť na všetky články</a></p>
+{% set prev = collections.post | getPreviousCollectionItem(page) %}
+{% set next = collections.post | getNextCollectionItem(page) %}
+{% set other = prev or next %}
+{% if other %}
+<nav class="next" aria-label="{{ 'Predchádzajúci článok' if prev else 'Ďalší článok' }}">
+  <a href="{{ other.url }}">
+    <span class="lab">{{ "Predchádzajúci článok" if prev else "Ďalší článok" }}</span>
+    <span class="nt">{{ other.data.title }}</span>
+    <span class="nm">
+      {{ stagePlant(other.data.stage) }}
+      <span>{{ other.date | readableDate }}</span>
+      <span>{{ other.templateContent | readingTime }} min čítania</span>
+    </span>
+  </a>
+</nav>
+{% endif %}
+
+<script>
+  (function () {
+    // Reading progress along the top, and the minutes left under the TOC.
+    var prog = document.getElementById("prog");
+    var art = document.querySelector(".prose");
+    var left = document.getElementById("left");
+    var total = left ? +left.dataset.total : 0;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = art.getBoundingClientRect(), vh = innerHeight;
+      var p = Math.min(1, Math.max(0, (vh * 0.5 - r.top) / (r.height - vh * 0.3)));
+      prog.style.setProperty("--p", p.toFixed(4));
+      if (left) {
+        left.innerHTML =
+          p > 0.97
+            ? "<b>dočítané</b> — ďakujem"
+            : "zostávajú <b>" + Math.max(1, Math.ceil(total * (1 - p))) + " min</b>";
+      }
+    }
+    addEventListener(
+      "scroll",
+      function () {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true }
+    );
+    addEventListener("resize", update);
+    update();
+
+    // Highlight the TOC entry of the section being read.
+    if (!("IntersectionObserver" in window)) return;
+    var links = {};
+    document.querySelectorAll(".toc a").forEach(function (a) {
+      links[decodeURIComponent(a.getAttribute("href").slice(1))] = a;
+    });
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting || !links[e.target.id]) return;
+          Object.keys(links).forEach(function (k) {
+            links[k].classList.remove("on");
+            links[k].removeAttribute("aria-current");
+          });
+          links[e.target.id].classList.add("on");
+          links[e.target.id].setAttribute("aria-current", "true");
+        });
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+    document.querySelectorAll(".prose h2[id], .prose h3[id]").forEach(function (h) {
+      io.observe(h);
+    });
+  })();
+</script>
