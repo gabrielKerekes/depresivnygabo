@@ -44,6 +44,7 @@ Prečo som prestal fajčiť? (toto sem pridávam ako pripomienku, aby som nezabu
 - vzor pre deti
 
 ## Prečo som sa prestal hrať?
+
 - aby ma začali baviť aj iné veci (a nezačali, akurát som depresívnejší)
 - lebo som nechcel potom robiť nič iné - ale to nechcem stále, akurát sa ani hrať nemôžem....
 
