@@ -23,6 +23,7 @@ Oh, ešte som zabudol jednu dôležitú vec. A to, že som vlastne nemal mieru. 
 Sidenote: tvl keď to teraz píšem (25. 10. 2026), tak ja fakt neviem, či není lepšie sa proste spustiť. Začať piť jak kedysi. Fajčiť. Hrať sa. Slobodne. Ako chcem. Jebať všetky zásady. Fakt ma to strašne ubíja a možno by mi proste prospelo, keby sa uvoľním. Ja neviem. Fakt neviem. Na jednej strane chcem byť najlepší, aký viem byť. Na druhej ma táto "chtíč" nesmierne ubíja. Keď sa "spustím", jak som sa napr. "spustil" toto leto, tak postupne ma začne srať, že som sa spustil. Pri tom to, že som sa "spustil" není také spustenie, že teraz som vkuse v liehu s cigou v hube a ideálne ešte za compom. Znamená to, že jednoducho tie veci neriešim. Ale nakoniec vždy príde ten bod, kedy to riešiť z nejakého dôvodu začnem. Či už to, že fajčenie ide do peňazí. Do zdravia. Do toho, že vlastne aký vzor chcem byť pre svoje deti. Fajčiaci vzor? Pijúci? Je lepšie byť vystresovaný, depresívny a vlastne úplne v piči vzor alebo ľudský vzor, ktorý je človek, robí chyby, občas sa zabaví, občas sa spustí a podobne. Hm, toto je môj obrovský problém už dlhodobo - reálne s tým bojujem od skončenia strednej školy. Odkedy všetka zodpovednosť za seba samého je vlastne na mne. Nepatrí do tohto článku, ale zatiaľ to tu nechám - možno neskôr to presuniem do samostatného článku. Plus sa ešte k tomu pridáva nejaký "strach" alebo "obava", že vlastne neviem, či toto všetko robím pre seba prípadne kvôli sebe alebo že to robím z veľkej časti kvôli manželke - lebo ona je tá, ktorá trpí pri všetkých mojich "excesoch". Mojím správaním. Aj jej peniaze míňam na cigy. Ju reprezentujem. A hlavne asi aj ona má odo mňa nejaké očakávania. A vlastne do tohto celého ešte vstupuje aj zdravie. A tam si tiež nie som istý, či pre moje zdravie nie je lepšie fajčiť, piť ako byť depresívny .... Plus ďalší pohľad je pracovný - alkohol ma rozbíja a potom nie som schopný dávať v robote 100%. A to ma zase potom ubíja. Kua. Kto vlastne som? Čo mám robiť? Ako to vyriešim?
 
 Takže. Prečo som prestal piť?
+
 - nemám mieru
 - nechcem, aby mi bývalo zle
 - nepáči sa mi, že alkohol je "sociálna norma"
@@ -34,8 +35,9 @@ Takže. Prečo som prestal piť?
 - vzor pre deti
 
 Prečo som prestal fajčiť? (toto sem pridávam ako pripomienku, aby som nezabudol. prípadne aby som vedel zvážiť pre a proti)
+
 - zdravie
-    - nielen dlhodobé zdravie, napr. mám oveľa stuhnutejší krk/ramená, keď fajčím (ťažko povedať o koľko, keďže bez fajčenia mám možno viac stresu)
+  - nielen dlhodobé zdravie, napr. mám oveľa stuhnutejší krk/ramená, keď fajčím (ťažko povedať o koľko, keďže bez fajčenia mám možno viac stresu)
 - nemám mieru
 - chcem vedieť byť spokojný aj bez cigariet
 - aby som chodil von kvôli ľudom a nie kvôli cigaretám (a tak nechodím von, lol .....)
