@@ -43,4 +43,8 @@ Prečo som prestal fajčiť? (toto sem pridávam ako pripomienku, aby som nezabu
 - aby som chodil von kvôli ľudom a nie kvôli cigaretám (a tak nechodím von, lol .....)
 - vzor pre deti
 
+## Prečo som sa prestal hrať?
+- aby ma začali baviť aj iné veci (a nezačali, akurát som depresívnejší)
+- lebo som nechcel potom robiť nič iné - ale to nechcem stále, akurát sa ani hrať nemôžem....
+
 Kua ale ten čas cez leto, keď som fajčil a zároveň pil a hral sa bol tak fajn dpc. Vlastne aké to malo downsides? Zdravie a peniaze. Ale kua 150 eur mesačne za spokojnejší život není worth it? Pomoc.
