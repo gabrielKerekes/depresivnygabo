@@ -6,7 +6,7 @@ tags:
   - depresia
 ---
 
-Každá návšteva psychiatričky začínala vetou „Ako sa máte?“. Na čo som väčšinou odpovedal „asi dobre“. Už z toho reálne bol aj náš interný meme. Hlavne to „asi“, ktoré som používal v podstate v každej odpovedi. A tak čo ja viem, jak sa cítim? Anyways. Medzičasom som už ale prišiel na to, ktorá škála funguje najlepšie na vyjadrenie toho, ako sa mám.
+Každá návšteva psychiatričky začínala vetou „Ako sa máte?“. Na čo som väčšinou odpovedal „asi dobre“. Už z toho reálne bol aj náš interný meme. Hlavne na to „asi“, ktoré som používal v podstate v každej odpovedi. A tak čo ja viem, jak sa cítim? Anyways. Medzičasom som už ale prišiel na to, ktorá škála funguje najlepšie na vyjadrenie toho, ako sa mám.
 
 ## Hľadanie ideálnej škály
 
