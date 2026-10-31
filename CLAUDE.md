@@ -30,6 +30,7 @@ src/
   css/style.css  All styling (dark/light via prefers-color-scheme)
   _data/tickers.json  Tickers shown at /trhy/ (one line per ticker — add here)
   _data/markets.js    Fetches daily prices for those tickers at build time
+  ../lib/mood.js      "Market weather" scoring for /trhy/ (used by markets.js)
   trhy.njk       Market dashboard (trvalka) → /trhy/; data at /trhy/data.json
   index.njk      Homepage — lists posts (collections.post)
   tema.njk       One page per topic tag → /tema/<slug>/ (paginated over collections)
@@ -104,7 +105,11 @@ ticker, add a line to `src/_data/tickers.json` with its Yahoo symbol (`AAPL`,
 `DOGE-USD`, `EURUSD=X`), a short `label`, a `name` and a `group` (`trh` / `akcie` /
 `krypto`; a new group gets its own "Len …" filter). Colours follow the line's
 position in that file; past eight tickers the hues repeat as dashed lines. A
-ticker that fails to load is skipped, not fatal. Responses are cached in
+ticker that fails to load is skipped, not fatal. The "Počasie na trhu" panel at the top
+(`lib/mood.js`) scores seven stress signals (VIX level, VIX vs. S&P over 5
+days, S&P drawdown and 200-day trend, HYG, flight to TLT/GLD, BTC drawdown)
+into five weather levels, plus a one-year daily strip. It needs SPY; other
+signals are skipped if their tickers are missing. Thresholds live there. Responses are cached in
 `.cache/` for 6 h during local dev.
 
 ## Local dev

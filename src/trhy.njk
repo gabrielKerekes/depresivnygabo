@@ -247,6 +247,188 @@ kind: prehľad # one-word label on the homepage card
     color: var(--muted);
   }
 
+  /* ---- Market weather ---------------------------------------------------
+     Five levels, calm green → red. Each level always ships with its icon and
+     name, so colour is never the only cue. */
+  .mk {
+    --w0: #3f9a5f; --w1: #8fae2e; --w2: #d29a00; --w3: #e0702a; --w4: #d0453f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .mk {
+      --w0: #6cc788; --w1: #b5cf5a; --w2: #e5b44a; --w3: #ef8a4a; --w4: #ef7a72;
+    }
+  }
+  :root[data-theme="dark"] .mk {
+    --w0: #6cc788; --w1: #b5cf5a; --w2: #e5b44a; --w3: #ef8a4a; --w4: #ef7a72;
+  }
+  .mk-weather {
+    --lvl: var(--w0);
+    position: relative;
+    margin: 0 0 2.25rem;
+    padding: 1.25rem 1.25rem 1rem;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--lvl);
+    border-radius: var(--radius);
+    background:
+      radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--lvl) 14%, transparent), transparent 60%),
+      var(--surface);
+    font-family: var(--sans);
+  }
+  .mk-weather.l1 { --lvl: var(--w1); }
+  .mk-weather.l2 { --lvl: var(--w2); }
+  .mk-weather.l3 { --lvl: var(--w3); }
+  .mk-weather.l4 { --lvl: var(--w4); }
+  .mk-w-head { display: flex; align-items: center; gap: 1rem; }
+  .mk-w-icon { font-size: 3.2rem; line-height: 1; flex: none; }
+  .mk-w-kicker {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .mk-w-name {
+    margin: 0.1rem 0 0.15rem;
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--fg);
+  }
+  .mk-w-text { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+  .mk-w-why { margin-top: 1rem; }
+  .mk-w-why summary {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--fg);
+    cursor: pointer;
+    list-style: none;
+  }
+  .mk-w-why summary::-webkit-details-marker { display: none; }
+  .mk-w-why summary::after {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-left: 0.1rem;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg) translateY(-0.1rem);
+    transition: transform 0.15s;
+  }
+  .mk-w-why[open] summary::after { transform: rotate(225deg) translateY(-0.1rem); }
+  .mk-w-dots { display: inline-flex; gap: 0.25rem; }
+  .mk-w-count { margin-left: auto; font-weight: 400; font-size: 0.78rem; color: var(--muted); }
+  .mk-w-dot.s1 { background: var(--w2); }
+  .mk-w-dot.s2 { background: var(--w3); }
+  .mk-w-dot.s3 { background: var(--w4); }
+  .mk-w-signals {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--border);
+  }
+  .mk-w-signal {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: baseline;
+    column-gap: 0.65rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .mk-w-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--w0);
+    transform: translateY(-0.05rem);
+  }
+  .mk-w-signal.s1 .mk-w-dot { background: var(--w2); }
+  .mk-w-signal.s2 .mk-w-dot { background: var(--w3); }
+  .mk-w-signal.s3 .mk-w-dot { background: var(--w4); }
+  .mk-w-signal b { font-weight: 600; color: var(--fg); }
+  .mk-w-note { display: block; color: var(--muted); font-size: 0.8rem; }
+  .mk-w-value {
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    font-size: 0.82rem;
+  }
+
+  .mk-w-history { margin-top: 1.1rem; }
+  .mk-w-history-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .mk-w-strip {
+    display: block;
+    width: 100%;
+    height: 34px;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: crosshair;
+    touch-action: pan-y;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  .mk-w-strip rect.l0 { fill: var(--w0); }
+  .mk-w-strip rect.l1 { fill: var(--w1); }
+  .mk-w-strip rect.l2 { fill: var(--w2); }
+  .mk-w-strip rect.l3 { fill: var(--w3); }
+  .mk-w-strip rect.l4 { fill: var(--w4); }
+  .mk-w-strip .mark { fill: var(--fg); }
+  .mk-w-axis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.3rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .mk-w-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.9rem;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.76rem;
+    color: var(--muted);
+  }
+  .mk-w-legend li { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .mk-w-legend i { width: 0.7rem; height: 0.7rem; border-radius: 3px; display: inline-block; }
+  .mk-w-show {
+    margin-top: 0.9rem;
+    padding: 0;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 0;
+    background: none;
+    color: var(--accent);
+    cursor: pointer;
+  }
+  .mk-w-show:hover { color: var(--accent-strong); text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 560px) {
+    .mk-weather { padding: 1rem 1rem 0.85rem; }
+    .mk-w-icon { font-size: 2.6rem; }
+    .mk-w-name { font-size: 1.7rem; }
+    .mk-w-signal { grid-template-columns: auto minmax(0, 1fr); }
+    .mk-w-value { grid-column: 2; text-align: left; color: var(--muted); }
+  }
+
   @media (max-width: 560px) {
     .mk-tip { min-width: 0; padding: 0.4rem 0.55rem; font-size: 0.72rem; line-height: 1.4; }
     .mk-tip-price { display: none; }
@@ -256,6 +438,61 @@ kind: prehľad # one-word label on the homepage card
 
 <section class="mk">
   <h2 class="page-title">Trhy</h2>
+  {%- set w = markets.mood %}
+  {%- if w %}
+  <section class="mk-weather l{{ w.level }}" aria-labelledby="mk-w-name">
+    <div class="mk-w-head">
+      <span class="mk-w-icon" aria-hidden="true">{{ w.icon }}</span>
+      <div>
+        <p class="mk-w-kicker">Počasie na trhu · {{ w.date }}</p>
+        <p class="mk-w-name" id="mk-w-name">{{ w.name }}</p>
+        <p class="mk-w-text">{{ w.text }}</p>
+      </div>
+    </div>
+
+    <details class="mk-w-why" id="mk-w-why">
+      <summary>
+        <span>Prečo {{ w.name | lower }}?</span>
+        <span class="mk-w-dots" aria-hidden="true">
+          {%- for sig in w.signals %}<span class="mk-w-dot s{{ sig.score }}"></span>{%- endfor %}
+        </span>
+        <span class="mk-w-count">{{ w.signals.length }} ukazovateľov</span>
+      </summary>
+    <ul class="mk-w-signals">
+      {%- for sig in w.signals %}
+      <li class="mk-w-signal s{{ sig.score }}">
+        <span class="mk-w-dot" aria-hidden="true"></span>
+        <span><b>{{ sig.name }}</b><span class="mk-w-note">{{ sig.note }}</span></span>
+        <span class="mk-w-value">{{ sig.value }}</span>
+      </li>
+      {%- endfor %}
+    </ul>
+    </details>
+
+    <div class="mk-w-history">
+      <div class="mk-w-history-head">
+        <span>Počasie za posledný rok</span>
+        <span id="mk-w-pick" aria-live="polite"></span>
+      </div>
+      {%- set n = w.history.length %}
+      <svg class="mk-w-strip" id="mk-w-strip" viewBox="0 0 {{ n }} 10" preserveAspectRatio="none" role="img"
+        aria-label="Denné počasie na trhu za posledný rok">
+        {%- for h in w.history %}
+        <rect class="l{{ h.level }}" x="{{ loop.index0 }}" y="0" width="1.05" height="10" data-d="{{ h.date }}" data-l="{{ h.level }}" />
+        {%- endfor %}
+      </svg>
+      <div class="mk-w-axis"><span>{{ w.history[0].date }}</span><span>dnes</span></div>
+      <ul class="mk-w-legend">
+        {%- for lv in w.levels %}
+        <li><i style="background: var(--w{{ loop.index0 }})"></i>{{ lv.icon }} {{ lv.name }}</li>
+        {%- endfor %}
+      </ul>
+    </div>
+
+    <button type="button" class="mk-w-show" id="mk-w-show">Ukáž ukazovatele v grafe →</button>
+  </section>
+  {%- endif %}
+
   <p class="mk-lead">
     Akcie a kryptomeny, ktoré sledujem. Graf ukazuje, o koľko percent sa každá
     cena pohla od začiatku zvoleného obdobia — tak sa dajú porovnať aj Bitcoin
@@ -604,6 +841,29 @@ kind: prehľad # one-word label on the homepage card
       });
     }
 
+    // ---- market weather: strip readout + "show in chart" ---------------
+    (function () {
+      // Reasons start open where there's room, folded on phones.
+      var why = document.getElementById("mk-w-why");
+      if (why && window.matchMedia("(min-width: 700px)").matches) why.open = true;
+      var strip = document.getElementById("mk-w-strip");
+      var pick = document.getElementById("mk-w-pick");
+      var names = {{ markets.mood.levels | dump | safe if markets.mood else "[]" }};
+      if (strip) {
+        var rects = strip.querySelectorAll("rect");
+        var show = function (clientX) {
+          var b = strip.getBoundingClientRect();
+          var i = Math.max(0, Math.min(rects.length - 1, Math.floor(((clientX - b.left) / b.width) * rects.length)));
+          var r = rects[i], lv = names[+r.dataset.l];
+          pick.textContent = r.dataset.d + " · " + lv.icon + " " + lv.name;
+        };
+        strip.addEventListener("pointermove", function (e) { show(e.clientX); });
+        strip.addEventListener("pointerdown", function (e) { show(e.clientX); });
+        strip.addEventListener("pointerleave", function (e) { if (e.pointerType !== "touch") pick.textContent = ""; });
+        strip.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+      }
+    })();
+
     // ---- glue --------------------------------------------------------------
     function update() {
       save();
@@ -656,6 +916,15 @@ kind: prehľad # one-word label on the homepage card
           update();
         });
         bindFocus(document.getElementById("mk-chips"), ".mk-chip");
+        var wShow = document.getElementById("mk-w-show");
+        if (wShow) wShow.addEventListener("click", function () {
+          var gauges = ["SPY", "^VIX", "HYG", "TLT", "GLD"];
+          state.hidden = series.filter(function (s) { return gauges.indexOf(s.symbol) === -1; })
+            .map(function (s) { return s.symbol; });
+          state.range = "30";
+          update();
+          document.getElementById("mk-span").scrollIntoView({ behavior: "smooth", block: "start" });
+        });
         bindFocus(listEl, ".mk-item");
         update();
         var t;

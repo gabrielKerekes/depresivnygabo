@@ -12,6 +12,7 @@
 // breaking the build.
 const EleventyFetch = require("@11ty/eleventy-fetch");
 const tickers = require("./tickers.json");
+const mood = require("../../lib/mood.js");
 
 const RANGE = "5y"; // longest range the page offers
 const CACHE = "6h";
@@ -72,5 +73,6 @@ module.exports = async function () {
       console.warn(`[markets] ${t.symbol}: ${e.message}`);
     }
   }
-  return { updated: new Date().toISOString(), series };
+  // `mood` is the "market weather" panel (lib/mood.js), rendered into the page.
+  return { updated: new Date().toISOString(), series, mood: mood(series) };
 };
