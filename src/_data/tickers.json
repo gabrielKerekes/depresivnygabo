@@ -65,33 +65,134 @@
     "group": "krypto"
   },
   {
+    "symbol": "BNB-USD",
+    "label": "BNB",
+    "name": "BNB (Binance)",
+    "group": "krypto"
+  },
+  {
+    "symbol": "XRP-USD",
+    "label": "XRP",
+    "name": "XRP",
+    "group": "krypto"
+  },
+  {
     "symbol": "TSM",
     "label": "TSM",
     "name": "TSMC",
-    "group": "akcie"
+    "group": "akcie",
+    "ai": true
   },
   {
     "symbol": "NVDA",
     "label": "NVDA",
     "name": "NVIDIA",
-    "group": "akcie"
+    "group": "akcie",
+    "ai": true
   },
   {
     "symbol": "GOOGL",
     "label": "GOOGL",
     "name": "Alphabet",
-    "group": "akcie"
+    "group": "akcie",
+    "ai": true
   },
   {
     "symbol": "META",
     "label": "META",
     "name": "Meta Platforms",
-    "group": "akcie"
+    "group": "akcie",
+    "ai": true
   },
   {
     "symbol": "SPCX",
     "label": "SPCX",
     "name": "SpaceX",
     "group": "akcie"
+  },
+  {
+    "symbol": "ASML",
+    "label": "ASML",
+    "name": "ASML",
+    "group": "akcie",
+    "ai": true
+  },
+  {
+    "symbol": "MSFT",
+    "label": "MSFT",
+    "name": "Microsoft",
+    "group": "akcie",
+    "ai": true
+  },
+  {
+    "symbol": "AMZN",
+    "label": "AMZN",
+    "name": "Amazon",
+    "group": "akcie",
+    "ai": true
+  },
+  {
+    "symbol": "AMD",
+    "label": "AMD",
+    "name": "AMD",
+    "group": "akcie",
+    "ai": true
+  },
+  {
+    "symbol": "AVGO",
+    "label": "AVGO",
+    "name": "Broadcom",
+    "group": "akcie",
+    "ai": true
+  },
+  {
+    "symbol": "ORCL",
+    "label": "ORCL",
+    "name": "Oracle",
+    "group": "akcie",
+    "ai": true
+  },
+  {
+    "symbol": "PLTR",
+    "label": "PLTR",
+    "name": "Palantir",
+    "group": "akcie",
+    "ai": true
+  },
+  {
+    "symbol": "BRK-B",
+    "label": "BRK-B",
+    "name": "Berkshire Hathaway",
+    "group": "akcie"
+  },
+  {
+    "symbol": "BLK",
+    "label": "BLK",
+    "name": "BlackRock",
+    "group": "akcie"
+  },
+  {
+    "symbol": "COIN",
+    "label": "COIN",
+    "name": "Coinbase",
+    "group": "kryptofirmy"
+  },
+  {
+    "symbol": "MSTR",
+    "label": "MSTR",
+    "name": "Strategy (MicroStrategy)",
+    "group": "kryptofirmy"
+  },
+  {
+    "symbol": "HOOD",
+    "label": "HOOD",
+    "name": "Robinhood",
+    "group": "kryptofirmy"
+  },
+  {
+    "symbol": "CRCL",
+    "label": "CRCL",
+    "name": "Circle (USDC)",
+    "group": "kryptofirmy"
   }
 ]

@@ -101,9 +101,19 @@ module.exports = async function () {
   } catch (e) {
     console.warn(`[markets] fear & greed: ${e.message}`);
   }
+  const updated = new Date().toISOString();
   return {
-    updated: new Date().toISOString(),
+    updated,
     series,
     mood: mood([...series, ...extras]),
+    // What /trhy/data.json ships to the browser: days delta-encoded (mostly
+    // 1s) to keep the file small. The page decodes them back.
+    client: {
+      updated,
+      series: series.map(({ days, ...s }) => ({
+        ...s,
+        dd: days.map((d, i) => (i ? d - days[i - 1] : d)),
+      })),
+    },
   };
 };
