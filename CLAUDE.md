@@ -106,10 +106,12 @@ ticker, add a line to `src/_data/tickers.json` with its Yahoo symbol (`AAPL`,
 `krypto`; a new group gets its own "Len …" filter). Colours follow the line's
 position in that file; past eight tickers the hues repeat as dashed lines. A
 ticker that fails to load is skipped, not fatal. The "Počasie na trhu" panel at the top
-(`lib/mood.js`) scores seven stress signals (VIX level, VIX vs. S&P over 5
-days, S&P drawdown and 200-day trend, HYG, flight to TLT/GLD, BTC drawdown)
-into five weather levels, plus a one-year daily strip. It needs SPY; other
-signals are skipped if their tickers are missing. Thresholds live there. Responses are cached in
+(`lib/mood.js`) has two forecasts — Akcie (VIX level, VIX vs. S&P over 5 days,
+S&P drawdown and 200-day trend, HYG, flight to TLT/GLD; needs SPY) and Krypto
+(BTC drawdown, week, trend, volatility, altcoins vs. BTC; needs BTC-USD) —
+each scored into five weather levels. The main forecast is their average,
+rounded up. Tapping a tile opens its signals and one-year strip. Thresholds
+and level cut-offs live in `lib/mood.js`. Responses are cached in
 `.cache/` for 6 h during local dev.
 
 ## Local dev

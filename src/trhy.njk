@@ -298,36 +298,69 @@ kind: prehľad # one-word label on the homepage card
   }
   .mk-w-text { margin: 0; color: var(--muted); font-size: 0.95rem; }
 
-  .mk-w-why { margin-top: 1rem; }
-  .mk-w-why summary {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.6rem 0;
-    border-top: 1px solid var(--border);
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--fg);
-    cursor: pointer;
-    list-style: none;
-  }
-  .mk-w-why summary::-webkit-details-marker { display: none; }
-  .mk-w-why summary::after {
-    content: "";
-    width: 0.45rem;
-    height: 0.45rem;
-    margin-left: 0.1rem;
-    border-right: 1.5px solid var(--muted);
-    border-bottom: 1.5px solid var(--muted);
-    transform: rotate(45deg) translateY(-0.1rem);
-    transition: transform 0.15s;
-  }
-  .mk-w-why[open] summary::after { transform: rotate(225deg) translateY(-0.1rem); }
   .mk-w-dots { display: inline-flex; gap: 0.25rem; }
-  .mk-w-count { margin-left: auto; font-weight: 400; font-size: 0.78rem; color: var(--muted); }
   .mk-w-dot.s1 { background: var(--w2); }
   .mk-w-dot.s2 { background: var(--w3); }
   .mk-w-dot.s3 { background: var(--w4); }
+  /* Sub-forecast tiles: tap one to open its breakdown below. */
+  .mk-w-tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-top: 1.1rem;
+  }
+  .mk-w-tile {
+    --lvl: var(--w0);
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--lvl);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--lvl) 8%, var(--surface));
+    color: var(--fg);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s, box-shadow 0.15s;
+  }
+  .mk-w-tile.l1 { --lvl: var(--w1); }
+  .mk-w-tile.l2 { --lvl: var(--w2); }
+  .mk-w-tile.l3 { --lvl: var(--w3); }
+  .mk-w-tile.l4 { --lvl: var(--w4); }
+  .mk-w-tile:hover { background: color-mix(in srgb, var(--lvl) 15%, var(--surface)); }
+  .mk-w-tile[aria-expanded="true"] {
+    background: color-mix(in srgb, var(--lvl) 15%, var(--surface));
+    box-shadow: 0 0 0 1px var(--lvl);
+  }
+  .mk-w-tile-icon { font-size: 1.9rem; line-height: 1; flex: none; }
+  .mk-w-tile-body { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+  .mk-w-tile-title { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .mk-w-tile-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; line-height: 1.15; }
+  .mk-w-tile .mk-w-dots { margin-top: 0.2rem; }
+  .mk-w-tile .mk-w-dot { width: 0.45rem; height: 0.45rem; }
+  .mk-w-chev {
+    flex: none;
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-left: auto;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg);
+    transition: transform 0.15s;
+  }
+  .mk-w-tile[aria-expanded="true"] .mk-w-chev { transform: rotate(225deg); }
+
+  .mk-w-detail {
+    margin-top: 0.9rem;
+    padding: 0.9rem 0 0.2rem;
+    border-top: 1px solid var(--border);
+  }
+  .mk-w-detail-head { margin: 0 0 0.6rem; font-size: 0.9rem; color: var(--muted); }
+  .mk-w-detail-head b { color: var(--fg); font-weight: 600; }
+  .mk-w-detail .mk-w-history { margin-top: 0.9rem; }
   .mk-w-signals {
     list-style: none;
     margin: 0;
@@ -426,6 +459,10 @@ kind: prehľad # one-word label on the homepage card
     .mk-w-icon { font-size: 2.6rem; }
     .mk-w-name { font-size: 1.7rem; }
     .mk-w-signal { grid-template-columns: auto minmax(0, 1fr); }
+    .mk-w-tiles { gap: 0.5rem; }
+    .mk-w-tile { padding: 0.6rem 0.6rem; gap: 0.5rem; }
+    .mk-w-tile-icon { font-size: 1.5rem; }
+    .mk-w-tile-name { font-size: 1.05rem; }
     .mk-w-value { grid-column: 2; text-align: left; color: var(--muted); }
   }
 
@@ -438,6 +475,22 @@ kind: prehľad # one-word label on the homepage card
 
 <section class="mk">
   <h2 class="page-title">Trhy</h2>
+  {#- One year of daily weather as a colour strip; tap/hover reads a day. #}
+  {%- macro weatherStrip(hist, label) %}
+  <div class="mk-w-history">
+    <div class="mk-w-history-head">
+      <span>{{ label }}</span>
+      <span class="mk-w-pick" aria-live="polite"></span>
+    </div>
+    <svg class="mk-w-strip" viewBox="0 0 {{ hist.length }} 10" preserveAspectRatio="none" role="img" aria-label="{{ label }}">
+      {%- for h in hist %}
+      <rect class="l{{ h.level }}" x="{{ loop.index0 }}" y="0" width="1.05" height="10" data-d="{{ h.date }}" data-l="{{ h.level }}" />
+      {%- endfor %}
+    </svg>
+    <div class="mk-w-axis"><span>{{ hist[0].date }}</span><span>dnes</span></div>
+  </div>
+  {%- endmacro %}
+
   {%- set w = markets.mood %}
   {%- if w %}
   <section class="mk-weather l{{ w.level }}" aria-labelledby="mk-w-name">
@@ -450,46 +503,50 @@ kind: prehľad # one-word label on the homepage card
       </div>
     </div>
 
-    <details class="mk-w-why" id="mk-w-why">
-      <summary>
-        <span>Prečo {{ w.name | lower }}?</span>
-        <span class="mk-w-dots" aria-hidden="true">
-          {%- for sig in w.signals %}<span class="mk-w-dot s{{ sig.score }}"></span>{%- endfor %}
+    {%- if w.groups.length > 1 %}
+    <div class="mk-w-tiles">
+      {%- for g in w.groups %}
+      <button type="button" class="mk-w-tile l{{ g.level }}" aria-expanded="false" aria-controls="mk-w-g-{{ g.id }}">
+        <span class="mk-w-tile-icon" aria-hidden="true">{{ g.icon }}</span>
+        <span class="mk-w-tile-body">
+          <span class="mk-w-tile-title">{{ g.title }}</span>
+          <span class="mk-w-tile-name">{{ g.name }}</span>
+          <span class="mk-w-dots" aria-hidden="true">
+            {%- for sig in g.signals %}<span class="mk-w-dot s{{ sig.score }}"></span>{%- endfor %}
+          </span>
         </span>
-        <span class="mk-w-count">{{ w.signals.length }} ukazovateľov</span>
-      </summary>
-    <ul class="mk-w-signals">
-      {%- for sig in w.signals %}
-      <li class="mk-w-signal s{{ sig.score }}">
-        <span class="mk-w-dot" aria-hidden="true"></span>
-        <span><b>{{ sig.name }}</b><span class="mk-w-note">{{ sig.note }}</span></span>
-        <span class="mk-w-value">{{ sig.value }}</span>
-      </li>
+        <span class="mk-w-chev" aria-hidden="true"></span>
+      </button>
       {%- endfor %}
-    </ul>
-    </details>
+    </div>
+    {%- endif %}
 
-    <div class="mk-w-history">
-      <div class="mk-w-history-head">
-        <span>Počasie za posledný rok</span>
-        <span id="mk-w-pick" aria-live="polite"></span>
-      </div>
-      {%- set n = w.history.length %}
-      <svg class="mk-w-strip" id="mk-w-strip" viewBox="0 0 {{ n }} 10" preserveAspectRatio="none" role="img"
-        aria-label="Denné počasie na trhu za posledný rok">
-        {%- for h in w.history %}
-        <rect class="l{{ h.level }}" x="{{ loop.index0 }}" y="0" width="1.05" height="10" data-d="{{ h.date }}" data-l="{{ h.level }}" />
-        {%- endfor %}
-      </svg>
-      <div class="mk-w-axis"><span>{{ w.history[0].date }}</span><span>dnes</span></div>
-      <ul class="mk-w-legend">
-        {%- for lv in w.levels %}
-        <li><i style="background: var(--w{{ loop.index0 }})"></i>{{ lv.icon }} {{ lv.name }}</li>
+    {%- for g in w.groups %}
+    <div class="mk-w-detail" id="mk-w-g-{{ g.id }}" {% if w.groups.length > 1 %}hidden{% endif %}>
+      <p class="mk-w-detail-head">
+        <b>{{ g.icon }} {{ g.title }}: {{ g.name | lower }}.</b> {{ g.text }}
+      </p>
+      <ul class="mk-w-signals">
+        {%- for sig in g.signals %}
+        <li class="mk-w-signal s{{ sig.score }}">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>{{ sig.name }}</b><span class="mk-w-note">{{ sig.note }}</span></span>
+          <span class="mk-w-value">{{ sig.value }}</span>
+        </li>
         {%- endfor %}
       </ul>
+      {{ weatherStrip(g.history, g.title + " za posledný rok") }}
+      <button type="button" class="mk-w-show"
+        data-syms="{{ ('SPY,^VIX,HYG,TLT,GLD' if g.id == 'fiat' else 'BTC-USD,ETH-USD,SOL-USD,ADA-USD') }}">Ukáž v grafe →</button>
     </div>
+    {%- endfor %}
 
-    <button type="button" class="mk-w-show" id="mk-w-show">Ukáž ukazovatele v grafe →</button>
+    {{ weatherStrip(w.history, "Celkové počasie za posledný rok") }}
+    <ul class="mk-w-legend">
+      {%- for lv in w.levels %}
+      <li><i style="background: var(--w{{ loop.index0 }})"></i>{{ lv.icon }} {{ lv.name }}</li>
+      {%- endfor %}
+    </ul>
   </section>
   {%- endif %}
 
@@ -841,15 +898,12 @@ kind: prehľad # one-word label on the homepage card
       });
     }
 
-    // ---- market weather: strip readout + "show in chart" ---------------
+    // ---- market weather: strip readouts + sub-forecast tiles ------------
     (function () {
-      // Reasons start open where there's room, folded on phones.
-      var why = document.getElementById("mk-w-why");
-      if (why && window.matchMedia("(min-width: 700px)").matches) why.open = true;
-      var strip = document.getElementById("mk-w-strip");
-      var pick = document.getElementById("mk-w-pick");
       var names = {{ markets.mood.levels | dump | safe if markets.mood else "[]" }};
-      if (strip) {
+      document.querySelectorAll(".mk-w-history").forEach(function (box) {
+        var strip = box.querySelector(".mk-w-strip");
+        var pick = box.querySelector(".mk-w-pick");
         var rects = strip.querySelectorAll("rect");
         var show = function (clientX) {
           var b = strip.getBoundingClientRect();
@@ -861,7 +915,20 @@ kind: prehľad # one-word label on the homepage card
         strip.addEventListener("pointerdown", function (e) { show(e.clientX); });
         strip.addEventListener("pointerleave", function (e) { if (e.pointerType !== "touch") pick.textContent = ""; });
         strip.addEventListener("contextmenu", function (e) { e.preventDefault(); });
-      }
+      });
+
+      // One breakdown open at a time; tapping the open tile closes it.
+      var tiles = document.querySelectorAll(".mk-w-tile");
+      tiles.forEach(function (t) {
+        t.addEventListener("click", function () {
+          var open = t.getAttribute("aria-expanded") !== "true";
+          tiles.forEach(function (o) {
+            var on = open && o === t;
+            o.setAttribute("aria-expanded", String(on));
+            document.getElementById(o.getAttribute("aria-controls")).hidden = !on;
+          });
+        });
+      });
     })();
 
     // ---- glue --------------------------------------------------------------
@@ -916,14 +983,15 @@ kind: prehľad # one-word label on the homepage card
           update();
         });
         bindFocus(document.getElementById("mk-chips"), ".mk-chip");
-        var wShow = document.getElementById("mk-w-show");
-        if (wShow) wShow.addEventListener("click", function () {
-          var gauges = ["SPY", "^VIX", "HYG", "TLT", "GLD"];
-          state.hidden = series.filter(function (s) { return gauges.indexOf(s.symbol) === -1; })
-            .map(function (s) { return s.symbol; });
-          state.range = "30";
-          update();
-          document.getElementById("mk-span").scrollIntoView({ behavior: "smooth", block: "start" });
+        document.querySelectorAll(".mk-w-show").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var keep = btn.dataset.syms.split(",");
+            state.hidden = series.filter(function (s) { return keep.indexOf(s.symbol) === -1; })
+              .map(function (s) { return s.symbol; });
+            state.range = "30";
+            update();
+            document.getElementById("mk-span").scrollIntoView({ behavior: "smooth", block: "start" });
+          });
         });
         bindFocus(listEl, ".mk-item");
         update();
