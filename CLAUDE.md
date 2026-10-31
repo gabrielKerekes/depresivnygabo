@@ -103,7 +103,9 @@ Browsers can't call it (no CORS), so `src/_data/markets.js` fetches it at
 build time and the deploy workflow also runs daily on a schedule. To add a
 ticker, add a line to `src/_data/tickers.json` with its Yahoo symbol (`AAPL`,
 `DOGE-USD`, `EURUSD=X`), a short `label`, a `name` and a `group` (`trh` / `akcie` /
-`krypto`; a new group gets its own "Len …" filter). Colours follow the line's
+`krypto`; a new group gets its own "Len …" filter). The chart has a % / $ switch: % overlays
+all tickers as % change; $ draws one small chart per ticker with its own
+price axis and a shared crosshair. Colours follow the line's
 position in that file; past eight tickers the hues repeat as dashed lines. A
 ticker that fails to load is skipped, not fatal. The "Počasie na trhu" panel at the top
 (`lib/mood.js`) has two forecasts — Akcie (VIX level, VIX vs. S&P over 5 days,
