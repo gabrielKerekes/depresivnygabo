@@ -1,4 +1,25 @@
 [
+  { "symbol": "SPY", "label": "SPY", "name": "S&P 500", "group": "trh" },
+  {
+    "symbol": "QQQ",
+    "label": "QQQ",
+    "name": "Nasdaq 100",
+    "group": "trh"
+  },
+  { "symbol": "^VIX", "label": "VIX", "name": "Index strachu", "group": "trh" },
+  {
+    "symbol": "HYG",
+    "label": "HYG",
+    "name": "Rizikové dlhopisy",
+    "group": "trh"
+  },
+  {
+    "symbol": "TLT",
+    "label": "TLT",
+    "name": "Dlhopisy USA",
+    "group": "trh"
+  },
+  { "symbol": "GLD", "label": "GLD", "name": "Zlato", "group": "trh" },
   { "symbol": "BTC-USD", "label": "BTC", "name": "Bitcoin", "group": "krypto" },
   {
     "symbol": "ETH-USD",

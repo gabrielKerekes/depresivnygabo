@@ -101,7 +101,7 @@ Prices come from Yahoo Finance's public chart endpoint (unofficial, no key).
 Browsers can't call it (no CORS), so `src/_data/markets.js` fetches it at
 build time and the deploy workflow also runs daily on a schedule. To add a
 ticker, add a line to `src/_data/tickers.json` with its Yahoo symbol (`AAPL`,
-`DOGE-USD`, `EURUSD=X`), a short `label`, a `name` and a `group` (`akcie` /
+`DOGE-USD`, `EURUSD=X`), a short `label`, a `name` and a `group` (`trh` / `akcie` /
 `krypto`; a new group gets its own "Len …" filter). Colours follow the line's
 position in that file; past eight tickers the hues repeat as dashed lines. A
 ticker that fails to load is skipped, not fatal. Responses are cached in

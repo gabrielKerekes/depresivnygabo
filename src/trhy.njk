@@ -196,6 +196,7 @@ kind: prehľad # one-word label on the homepage card
   .mk-item:hover { background: var(--accent-soft); }
   .mk-sym { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
   .mk-sym svg { width: 18px; height: 8px; flex: none; }
+  .mk-sym > span { min-width: 0; }
   .mk-sym b { display: block; font-size: 1.05rem; font-weight: 700; letter-spacing: 0.01em; }
   .mk-sym small {
     display: block;
@@ -285,7 +286,7 @@ kind: prehľad # one-word label on the homepage card
   <ul class="mk-list" id="mk-list" aria-label="Kurzy"></ul>
 
   <p class="mk-note" id="mk-note">
-    Denné záverečné ceny z Yahoo Finance, v USD. Aktualizuje sa raz denne.
+    Denné záverečné ceny z Yahoo Finance, v USD (VIX je index, nie cena). Aktualizuje sa raz denne.
   </p>
 </section>
 
@@ -293,7 +294,7 @@ kind: prehľad # one-word label on the homepage card
   (function () {
     var DAY = 86400000;
     var STORE = "trhy:v1";
-    var GROUP_NAMES = { krypto: "Krypto", akcie: "Akcie" };
+    var GROUP_NAMES = { trh: "celý trh", krypto: "krypto", akcie: "akcie" };
 
     var state = { range: "30", hidden: [] };
     try {
@@ -644,7 +645,7 @@ kind: prehľad # one-word label on the homepage card
           return series.some(function (s) { return s.symbol === sym; });
         });
         document.getElementById("mk-note").textContent =
-          "Denné záverečné ceny z Yahoo Finance, v USD. Naposledy aktualizované " +
+          "Denné záverečné ceny z Yahoo Finance, v USD (VIX je index, nie cena). Naposledy aktualizované " +
           new Date(data.updated).toLocaleDateString("sk-SK", { day: "numeric", month: "long", year: "numeric" }) + ".";
         buildControls();
         listEl.addEventListener("click", function (e) {
