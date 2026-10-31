@@ -62,6 +62,27 @@ async function load(t) {
   return { ...t, currency: r.meta.currency, days, prices };
 }
 
+// Crypto Fear & Greed Index (alternative.me, free, no key): one 0–100 reading
+// per day since 2018. Not a price, so it feeds the weather panel only, shaped
+// like a series so lib/mood.js can read it the same way.
+async function loadFearGreed() {
+  const json = await EleventyFetch(
+    "https://api.alternative.me/fng/?limit=0&format=json",
+    {
+      duration: CACHE,
+      type: "json",
+    },
+  );
+  const rows = json.data
+    .map((r) => [toDay(Number(r.timestamp)), Number(r.value)])
+    .sort((a, b) => a[0] - b[0]);
+  return {
+    symbol: "FNG",
+    days: rows.map((r) => r[0]),
+    prices: rows.map((r) => r[1]),
+  };
+}
+
 module.exports = async function () {
   const series = [];
   for (const [slot, t] of tickers.entries()) {
@@ -74,5 +95,15 @@ module.exports = async function () {
     }
   }
   // `mood` is the "market weather" panel (lib/mood.js), rendered into the page.
-  return { updated: new Date().toISOString(), series, mood: mood(series) };
+  const extras = [];
+  try {
+    extras.push(await loadFearGreed());
+  } catch (e) {
+    console.warn(`[markets] fear & greed: ${e.message}`);
+  }
+  return {
+    updated: new Date().toISOString(),
+    series,
+    mood: mood([...series, ...extras]),
+  };
 };
