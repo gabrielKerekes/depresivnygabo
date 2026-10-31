@@ -28,6 +28,9 @@ src/
   posts/         One Markdown file per article
   posts/posts.json  Directory data: applies post.njk layout + "/{slug}/" permalink
   css/style.css  All styling (dark/light via prefers-color-scheme)
+  _data/tickers.json  Tickers shown at /trhy/ (one line per ticker — add here)
+  _data/markets.js    Fetches daily prices for those tickers at build time
+  trhy.njk       Market dashboard (trvalka) → /trhy/; data at /trhy/data.json
   index.njk      Homepage — lists posts (collections.post)
   tema.njk       One page per topic tag → /tema/<slug>/ (paginated over collections)
   temy.njk       Topics index → /temy/
@@ -91,6 +94,18 @@ Other niceties that need no front-matter: an Atom feed at `/feed.xml`, a
 content), and a **table of contents** auto-built from a post's `h2`/`h3`
 headings (only shown when there are at least two — collapsed on mobile, a sticky
 sidebar on wide screens).
+
+## Market dashboard (/trhy/)
+
+Prices come from Yahoo Finance's public chart endpoint (unofficial, no key).
+Browsers can't call it (no CORS), so `src/_data/markets.js` fetches it at
+build time and the deploy workflow also runs daily on a schedule. To add a
+ticker, add a line to `src/_data/tickers.json` with its Yahoo symbol (`AAPL`,
+`DOGE-USD`, `EURUSD=X`), a short `label`, a `name` and a `group` (`akcie` /
+`krypto`; a new group gets its own "Len …" filter). Colours follow the line's
+position in that file; past eight tickers the hues repeat as dashed lines. A
+ticker that fails to load is skipped, not fatal. Responses are cached in
+`.cache/` for 6 h during local dev.
 
 ## Local dev
 

@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Daily rebuild so /trhy/ picks up fresh prices (fetched at build time by
+  # src/_data/markets.js). 22:17 UTC is after the US market close.
+  schedule:
+    - cron: "17 22 * * *"
 
 # Permissions needed for the GitHub Pages deployment.
 permissions:

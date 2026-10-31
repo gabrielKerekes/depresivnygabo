@@ -1,0 +1,21 @@
+[
+  { "symbol": "BTC-USD", "label": "BTC", "name": "Bitcoin", "group": "krypto" },
+  {
+    "symbol": "ETH-USD",
+    "label": "ETH",
+    "name": "Ethereum",
+    "group": "krypto"
+  },
+  { "symbol": "SOL-USD", "label": "SOL", "name": "Solana", "group": "krypto" },
+  { "symbol": "ADA-USD", "label": "ADA", "name": "Cardano", "group": "krypto" },
+  { "symbol": "TSM", "label": "TSM", "name": "TSMC", "group": "akcie" },
+  { "symbol": "NVDA", "label": "NVDA", "name": "NVIDIA", "group": "akcie" },
+  { "symbol": "GOOGL", "label": "GOOGL", "name": "Alphabet", "group": "akcie" },
+  {
+    "symbol": "META",
+    "label": "META",
+    "name": "Meta Platforms",
+    "group": "akcie"
+  },
+  { "symbol": "SPCX", "label": "SPCX", "name": "SpaceX", "group": "akcie" }
+]
