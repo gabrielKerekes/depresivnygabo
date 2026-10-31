@@ -689,19 +689,31 @@ kind: prehľad # one-word label on the homepage card
         update();
       });
 
+      // Quick filters. One "Len …" per group, then a few cross-cutting ones:
+      // "Len ETF" (tickers marked "etf": true) and "Bez krypta" (no crypto,
+      // no indices).
       var groups = [];
       series.forEach(function (s) { if (s.group && groups.indexOf(s.group) === -1) groups.push(s.group); });
-      var g = document.getElementById("mk-groups");
-      var html = '<button type="button" class="mk-group" data-only="*">Všetko</button>';
+      var filters = [{ label: "Všetko", keep: function () { return true; } }];
       groups.forEach(function (name) {
-        html += '<button type="button" class="mk-group" data-only="' + esc(name) + '">Len ' + esc((GROUP_NAMES[name] || name).toLowerCase()) + "</button>";
+        filters.push({ label: "Len " + (GROUP_NAMES[name] || name).toLowerCase(), keep: function (s) { return s.group === name; } });
+        if (name === "trh" && series.some(function (s) { return s.etf; })) {
+          filters.push({ label: "Len ETF", keep: function (s) { return !!s.etf; } });
+        }
       });
-      g.innerHTML = html;
+      if (groups.indexOf("krypto") !== -1 && groups.length > 1) {
+        // ETFs and stocks: everything except crypto and indices like VIX.
+        filters.push({ label: "Bez krypta", keep: function (s) { return s.group !== "krypto" && s.symbol.charAt(0) !== "^"; } });
+      }
+      var g = document.getElementById("mk-groups");
+      g.innerHTML = filters.map(function (f, i) {
+        return '<button type="button" class="mk-group" data-f="' + i + '">' + esc(f.label) + "</button>";
+      }).join("");
       g.addEventListener("click", function (e) {
         var b = e.target.closest(".mk-group");
         if (!b) return;
-        var only = b.dataset.only;
-        state.hidden = series.filter(function (s) { return only !== "*" && s.group !== only; })
+        var f = filters[+b.dataset.f];
+        state.hidden = series.filter(function (s) { return !f.keep(s); })
           .map(function (s) { return s.symbol; });
         update();
       });

@@ -1,42 +1,97 @@
 [
-  { "symbol": "SPY", "label": "SPY", "name": "S&P 500", "group": "trh" },
+  {
+    "symbol": "SPY",
+    "label": "SPY",
+    "name": "S&P 500",
+    "group": "trh",
+    "etf": true
+  },
   {
     "symbol": "QQQ",
     "label": "QQQ",
     "name": "Nasdaq 100",
+    "group": "trh",
+    "etf": true
+  },
+  {
+    "symbol": "^VIX",
+    "label": "VIX",
+    "name": "Index strachu",
     "group": "trh"
   },
-  { "symbol": "^VIX", "label": "VIX", "name": "Index strachu", "group": "trh" },
   {
     "symbol": "HYG",
     "label": "HYG",
     "name": "Rizikové dlhopisy",
-    "group": "trh"
+    "group": "trh",
+    "etf": true
   },
   {
     "symbol": "TLT",
     "label": "TLT",
     "name": "Dlhopisy USA",
-    "group": "trh"
+    "group": "trh",
+    "etf": true
   },
-  { "symbol": "GLD", "label": "GLD", "name": "Zlato", "group": "trh" },
-  { "symbol": "BTC-USD", "label": "BTC", "name": "Bitcoin", "group": "krypto" },
+  {
+    "symbol": "GLD",
+    "label": "GLD",
+    "name": "Zlato",
+    "group": "trh",
+    "etf": true
+  },
+  {
+    "symbol": "BTC-USD",
+    "label": "BTC",
+    "name": "Bitcoin",
+    "group": "krypto"
+  },
   {
     "symbol": "ETH-USD",
     "label": "ETH",
     "name": "Ethereum",
     "group": "krypto"
   },
-  { "symbol": "SOL-USD", "label": "SOL", "name": "Solana", "group": "krypto" },
-  { "symbol": "ADA-USD", "label": "ADA", "name": "Cardano", "group": "krypto" },
-  { "symbol": "TSM", "label": "TSM", "name": "TSMC", "group": "akcie" },
-  { "symbol": "NVDA", "label": "NVDA", "name": "NVIDIA", "group": "akcie" },
-  { "symbol": "GOOGL", "label": "GOOGL", "name": "Alphabet", "group": "akcie" },
+  {
+    "symbol": "SOL-USD",
+    "label": "SOL",
+    "name": "Solana",
+    "group": "krypto"
+  },
+  {
+    "symbol": "ADA-USD",
+    "label": "ADA",
+    "name": "Cardano",
+    "group": "krypto"
+  },
+  {
+    "symbol": "TSM",
+    "label": "TSM",
+    "name": "TSMC",
+    "group": "akcie"
+  },
+  {
+    "symbol": "NVDA",
+    "label": "NVDA",
+    "name": "NVIDIA",
+    "group": "akcie"
+  },
+  {
+    "symbol": "GOOGL",
+    "label": "GOOGL",
+    "name": "Alphabet",
+    "group": "akcie"
+  },
   {
     "symbol": "META",
     "label": "META",
     "name": "Meta Platforms",
     "group": "akcie"
   },
-  { "symbol": "SPCX", "label": "SPCX", "name": "SpaceX", "group": "akcie" }
+  {
+    "symbol": "SPCX",
+    "label": "SPCX",
+    "name": "SpaceX",
+    "group": "akcie"
+  }
 ]

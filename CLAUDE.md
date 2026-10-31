@@ -103,7 +103,7 @@ Browsers can't call it (no CORS), so `src/_data/markets.js` fetches it at
 build time and the deploy workflow also runs daily on a schedule. To add a
 ticker, add a line to `src/_data/tickers.json` with its Yahoo symbol (`AAPL`,
 `DOGE-USD`, `EURUSD=X`), a short `label`, a `name` and a `group` (`trh` / `akcie` /
-`krypto`; a new group gets its own "Len …" filter). The chart has a % / $ switch: % overlays
+`krypto`; a new group gets its own "Len …" filter). Mark ETFs with `"etf": true` to include them in the "Len ETF" filter; "Bez krypta" shows everything except `krypto` and indices (`^` symbols). The chart has a % / $ switch: % overlays
 all tickers as % change; $ plots real prices, on one axis or (with "2 osi")
 two — the selected tickers split by price at the biggest gap, cheaper on the
 left; each axis is labelled with its tickers. Colours follow the line's
