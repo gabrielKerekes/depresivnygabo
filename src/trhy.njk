@@ -120,6 +120,12 @@ kind: prehľad # one-word label on the homepage card
     border-radius: var(--radius);
     background: var(--surface);
     touch-action: pan-y;
+    /* Holding a finger on the chart should scrub, not select text or open
+       the long-press menu (which also steals the touch and hides the tip). */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
   }
   .mk-chart svg { display: block; width: 100%; }
   .mk-chart text {
@@ -526,7 +532,10 @@ kind: prehľad # one-word label on the homepage card
 
       hit.addEventListener("pointermove", function (e) { show(e.clientX); });
       hit.addEventListener("pointerdown", function (e) { show(e.clientX); });
-      hit.addEventListener("pointerleave", hide);
+      // A lifted finger keeps the tip up; a tap elsewhere clears it (below).
+      hit.addEventListener("pointerleave", function (e) {
+        if (e.pointerType !== "touch") hide();
+      });
     }
 
     // ---- quote list ------------------------------------------------------
@@ -561,6 +570,16 @@ kind: prehľad # one-word label on the homepage card
 
     // ---- focus (hover a chip or row to pick out its line) ----------------
     var focusSym = null;
+
+    // Touch: no long-press menu on the chart, and tapping outside it closes
+    // the tooltip that stays up after the finger lifts.
+    chartEl.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    document.addEventListener("pointerdown", function (e) {
+      if (chartEl.contains(e.target)) return;
+      var g = document.getElementById("mk-hover"), tip = chartEl.querySelector(".mk-tip");
+      if (g) g.style.display = "none";
+      if (tip) tip.hidden = true;
+    });
     function setFocus(sym) {
       focusSym = sym;
       var any = false;
