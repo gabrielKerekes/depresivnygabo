@@ -1,0 +1,58 @@
+[
+  {
+    "label": "Všetko",
+    "all": true
+  },
+  {
+    "label": "Celý trh",
+    "groups": ["trh"]
+  },
+  {
+    "label": "Krízové ukazovatele",
+    "symbols": ["SPY", "^VIX", "HYG", "TLT", "GLD"]
+  },
+  {
+    "label": "ETF",
+    "tags": ["etf"]
+  },
+  {
+    "label": "Akcie",
+    "groups": ["akcie"]
+  },
+  {
+    "label": "Veľká sedmička",
+    "tags": ["mag7"]
+  },
+  {
+    "label": "AI",
+    "tags": ["ai"]
+  },
+  {
+    "label": "Tech",
+    "tags": ["tech"]
+  },
+  {
+    "label": "Čipy",
+    "tags": ["chips"]
+  },
+  {
+    "label": "Čína",
+    "tags": ["china"]
+  },
+  {
+    "label": "Financie",
+    "tags": ["finance"]
+  },
+  {
+    "label": "Krypto",
+    "groups": ["krypto"]
+  },
+  {
+    "label": "Krypto firmy",
+    "groups": ["kryptofirmy"]
+  },
+  {
+    "label": "Bez krypta",
+    "exceptGroups": ["krypto", "kryptofirmy"]
+  }
+]

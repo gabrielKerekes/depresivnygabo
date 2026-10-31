@@ -4,14 +4,14 @@
     "label": "SPY",
     "name": "S&P 500",
     "group": "trh",
-    "etf": true
+    "tags": ["etf"]
   },
   {
     "symbol": "QQQ",
     "label": "QQQ",
     "name": "Nasdaq 100",
     "group": "trh",
-    "etf": true
+    "tags": ["etf", "tech"]
   },
   {
     "symbol": "^VIX",
@@ -24,21 +24,21 @@
     "label": "HYG",
     "name": "Rizikové dlhopisy",
     "group": "trh",
-    "etf": true
+    "tags": ["etf"]
   },
   {
     "symbol": "TLT",
     "label": "TLT",
     "name": "Dlhopisy USA",
     "group": "trh",
-    "etf": true
+    "tags": ["etf"]
   },
   {
     "symbol": "GLD",
     "label": "GLD",
     "name": "Zlato",
     "group": "trh",
-    "etf": true
+    "tags": ["etf"]
   },
   {
     "symbol": "BTC-USD",
@@ -81,101 +81,175 @@
     "label": "TSM",
     "name": "TSMC",
     "group": "akcie",
-    "ai": true
+    "tags": ["ai", "chips"]
   },
   {
     "symbol": "NVDA",
     "label": "NVDA",
     "name": "NVIDIA",
     "group": "akcie",
-    "ai": true
+    "tags": ["ai", "chips", "tech", "mag7"]
   },
   {
     "symbol": "GOOGL",
     "label": "GOOGL",
     "name": "Alphabet",
     "group": "akcie",
-    "ai": true
+    "tags": ["ai", "tech", "mag7"]
   },
   {
     "symbol": "META",
     "label": "META",
     "name": "Meta Platforms",
     "group": "akcie",
-    "ai": true
+    "tags": ["ai", "tech", "mag7"]
   },
   {
     "symbol": "SPCX",
     "label": "SPCX",
     "name": "SpaceX",
-    "group": "akcie"
+    "group": "akcie",
+    "tags": ["tech"]
   },
   {
     "symbol": "ASML",
     "label": "ASML",
     "name": "ASML",
     "group": "akcie",
-    "ai": true
+    "tags": ["ai", "chips"]
   },
   {
     "symbol": "MSFT",
     "label": "MSFT",
     "name": "Microsoft",
     "group": "akcie",
-    "ai": true
+    "tags": ["ai", "tech", "mag7"]
   },
   {
     "symbol": "AMZN",
     "label": "AMZN",
     "name": "Amazon",
     "group": "akcie",
-    "ai": true
+    "tags": ["ai", "tech", "mag7"]
   },
   {
     "symbol": "AMD",
     "label": "AMD",
     "name": "AMD",
     "group": "akcie",
-    "ai": true
+    "tags": ["ai", "chips"]
   },
   {
     "symbol": "AVGO",
     "label": "AVGO",
     "name": "Broadcom",
     "group": "akcie",
-    "ai": true
+    "tags": ["ai", "chips"]
   },
   {
     "symbol": "ORCL",
     "label": "ORCL",
     "name": "Oracle",
     "group": "akcie",
-    "ai": true
+    "tags": ["ai", "tech"]
   },
   {
     "symbol": "PLTR",
     "label": "PLTR",
     "name": "Palantir",
     "group": "akcie",
-    "ai": true
+    "tags": ["ai", "tech"]
   },
   {
     "symbol": "BRK-B",
     "label": "BRK-B",
     "name": "Berkshire Hathaway",
-    "group": "akcie"
+    "group": "akcie",
+    "tags": ["finance"]
   },
   {
     "symbol": "BLK",
     "label": "BLK",
     "name": "BlackRock",
-    "group": "akcie"
+    "group": "akcie",
+    "tags": ["finance"]
+  },
+  {
+    "symbol": "AAPL",
+    "label": "AAPL",
+    "name": "Apple",
+    "group": "akcie",
+    "tags": ["tech", "mag7"]
+  },
+  {
+    "symbol": "TSLA",
+    "label": "TSLA",
+    "name": "Tesla",
+    "group": "akcie",
+    "tags": ["tech", "mag7"]
+  },
+  {
+    "symbol": "JPM",
+    "label": "JPM",
+    "name": "JPMorgan Chase",
+    "group": "akcie",
+    "tags": ["finance"]
+  },
+  {
+    "symbol": "BABA",
+    "label": "BABA",
+    "name": "Alibaba",
+    "group": "akcie",
+    "tags": ["china", "tech", "ai"]
+  },
+  {
+    "symbol": "TCEHY",
+    "label": "TCEHY",
+    "name": "Tencent",
+    "group": "akcie",
+    "tags": ["china", "tech"]
+  },
+  {
+    "symbol": "PDD",
+    "label": "PDD",
+    "name": "PDD (Temu)",
+    "group": "akcie",
+    "tags": ["china"]
+  },
+  {
+    "symbol": "JD",
+    "label": "JD",
+    "name": "JD.com",
+    "group": "akcie",
+    "tags": ["china"]
+  },
+  {
+    "symbol": "BIDU",
+    "label": "BIDU",
+    "name": "Baidu",
+    "group": "akcie",
+    "tags": ["china", "ai"]
+  },
+  {
+    "symbol": "BYDDY",
+    "label": "BYD",
+    "name": "BYD",
+    "group": "akcie",
+    "tags": ["china"]
+  },
+  {
+    "symbol": "FXI",
+    "label": "FXI",
+    "name": "Čínske veľké firmy (ETF)",
+    "group": "akcie",
+    "tags": ["china", "etf"]
   },
   {
     "symbol": "COIN",
     "label": "COIN",
     "name": "Coinbase",
-    "group": "kryptofirmy"
+    "group": "kryptofirmy",
+    "tags": ["finance"]
   },
   {
     "symbol": "MSTR",
@@ -187,7 +261,8 @@
     "symbol": "HOOD",
     "label": "HOOD",
     "name": "Robinhood",
-    "group": "kryptofirmy"
+    "group": "kryptofirmy",
+    "tags": ["finance"]
   },
   {
     "symbol": "CRCL",
