@@ -239,22 +239,47 @@ kind: prehľad # one-word label on the homepage card
   }
   .mk-item {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(70px, 26%, 160px) auto;
+    grid-template-columns: auto minmax(0, 1fr) clamp(70px, 26%, 160px) auto;
     align-items: center;
     gap: 1rem;
-    width: 100%;
-    padding: 0.85rem 0.25rem;
-    border: 0;
+    padding: 0.85rem 0.25rem 0.85rem 0;
     border-bottom: 1px solid var(--border);
-    background: none;
     color: var(--fg);
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-    transition: opacity 0.15s;
   }
-  .mk-item[aria-pressed="false"] { opacity: 0.4; }
   .mk-item:hover { background: var(--accent-soft); }
+
+  /* Show/hide in chart: a checkbox in the ticker's own colour. The card
+     itself stays fully readable either way. */
+  .mk-check {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin: -0.5rem -0.6rem -0.5rem -0.35rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+  .mk-check::before {
+    content: "";
+    width: 1.3rem;
+    height: 1.3rem;
+    border: 2px solid var(--c);
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: background 0.12s;
+  }
+  .mk-check[aria-checked="true"]::before {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / 85% no-repeat,
+      var(--c);
+  }
+  .mk-check[aria-checked="false"]::before { border-color: var(--muted); opacity: 0.6; }
+  .mk-check:hover::before { opacity: 1; }
+  .mk-check:focus-visible { outline: none; }
+  .mk-check:focus-visible::before { outline: 2px solid var(--accent); outline-offset: 2px; }
   .mk-sym { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
   .mk-sym svg { width: 18px; height: 8px; flex: none; }
   .mk-sym > span { min-width: 0; }
@@ -1037,12 +1062,13 @@ kind: prehľad # one-word label on the homepage card
         var last = r.prices[r.prices.length - 1];
         var pct = r.pct[r.pct.length - 1];
         var on = state.hidden.indexOf(s.symbol) === -1;
-        return '<li><button type="button" class="mk-item" data-sym="' + esc(s.symbol) + '" aria-pressed="' + on + '"' +
-          ' title="Zobraziť alebo skryť v grafe">' +
-          '<span class="mk-sym">' + swatch(s, 18, 8) + "<span><b>" + esc(s.label) + "</b><small>" + esc(s.name) + "</small></span></span>" +
+        return '<li class="mk-item" data-sym="' + esc(s.symbol) + '">' +
+          '<button type="button" class="mk-check" role="checkbox" aria-checked="' + on + '" style="--c: ' + s.style.color + '"' +
+          ' aria-label="' + esc(s.label) + ' v grafe" title="Zobraziť v grafe"></button>' +
+          '<span class="mk-sym"><span><b>' + esc(s.label) + "</b><small>" + esc(s.name) + "</small></span></span>" +
           sparkline(r, pct >= 0) +
           '<span class="mk-quote"><span class="mk-price">' + fmtPrice(last) + '</span><span class="mk-pill ' + (pct >= 0 ? "up" : "down") + '">' + fmtPct(pct) + "</span></span>" +
-          "</button></li>";
+          "</li>";
       }).join("");
     }
 
@@ -1181,11 +1207,15 @@ kind: prehľad # one-word label on the homepage card
           new Date(data.updated).toLocaleDateString("sk-SK", { day: "numeric", month: "long", year: "numeric" }) + ".";
         buildControls();
         listEl.addEventListener("click", function (e) {
-          var b = e.target.closest(".mk-item");
-          if (!b) return;
-          var i = state.hidden.indexOf(b.dataset.sym);
-          if (i === -1) state.hidden.push(b.dataset.sym); else state.hidden.splice(i, 1);
+          var c = e.target.closest(".mk-check");
+          if (!c) return;
+          var sym = c.closest(".mk-item").dataset.sym;
+          var i = state.hidden.indexOf(sym);
+          if (i === -1) state.hidden.push(sym); else state.hidden.splice(i, 1);
           update();
+          // The list re-renders; keep keyboard focus on the same checkbox.
+          var again = listEl.querySelector('.mk-item[data-sym="' + sym.replace(/"/g, "") + '"] .mk-check');
+          if (again) again.focus({ preventScroll: true });
         });
         bindFocus(document.getElementById("mk-chips"), ".mk-chip");
         document.querySelectorAll(".mk-w-show").forEach(function (btn) {
