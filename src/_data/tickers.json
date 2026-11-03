@@ -269,5 +269,11 @@
     "label": "CRCL",
     "name": "Circle (USDC)",
     "group": "kryptofirmy"
+  },
+  {
+    "symbol": "VWAGY",
+    "label": "VW",
+    "name": "Volkswagen",
+    "group": "akcie"
   }
 ]
