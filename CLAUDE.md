@@ -102,7 +102,7 @@ Prices come from Yahoo Finance's public chart endpoint (unofficial, no key).
 Browsers can't call it (no CORS), so `src/_data/markets.js` fetches it at
 build time and the deploy workflow also runs daily on a schedule. To add a
 ticker, add a line to `src/_data/tickers.json` with its Yahoo symbol (`AAPL`,
-`DOGE-USD`, `EURUSD=X`), a short `label`, a `name` and a `group` (`trh`, `krypto`, `akcie`, `kryptofirmy`). Optional `tags` (e.g. `ai`, `tech`, `mag7`, `chips`, `china`, `finance`, `etf`) feed the presets. Presets ("Predvoľby") live in `src/_data/presets.json`: each matches tickers by `groups`, `tags` or `symbols`; `exceptGroups` means everything outside those groups minus indices (`^` symbols); `all` shows everything. The chart has a % / $ switch: % overlays
+`DOGE-USD`, `EURUSD=X`), a short `label`, a `name` and a `group` (`trh`, `krypto`, `akcie`, `kryptofirmy`). Optional `tags` (e.g. `ai`, `tech`, `mag7`, `chips`, `china`, `finance`, `etf`) feed the presets. Presets ("Predvoľby") live in `src/_data/presets.json`: each matches tickers by `groups`, `tags` or `symbols`; `exceptGroups` means everything outside those groups minus indices (`^` symbols); `all` shows everything, `none` clears the chart. The chart has a % / $ switch: % overlays
 all tickers as % change; $ plots real prices, on one axis or (with "2 osi")
 two — the selected tickers split by price at the biggest gap, cheaper on the
 left; each axis is labelled with its tickers. Colours follow the line's

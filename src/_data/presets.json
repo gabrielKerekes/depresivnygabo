@@ -4,6 +4,10 @@
     "all": true
   },
   {
+    "label": "Nič",
+    "none": true
+  },
+  {
     "label": "Celý trh",
     "groups": ["trh"]
   },

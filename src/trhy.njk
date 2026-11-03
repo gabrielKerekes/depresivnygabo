@@ -788,14 +788,15 @@ kind: prehľad # one-word label on the homepage card
       // those groups except indices like VIX. Empty presets are skipped.
       presets = PRESETS.map(function (p) {
         var keep = p.all ? function () { return true; }
+          : p.none ? function () { return false; }
           : p.exceptGroups ? function (s) { return p.exceptGroups.indexOf(s.group) === -1 && s.symbol.charAt(0) !== "^"; }
           : function (s) {
             return (p.groups || []).indexOf(s.group) !== -1 ||
               (p.symbols || []).indexOf(s.symbol) !== -1 ||
               (p.tags || []).some(function (t) { return (s.tags || []).indexOf(t) !== -1; });
           };
-        return { label: p.label, syms: series.filter(keep).map(function (s) { return s.symbol; }) };
-      }).filter(function (p) { return p.syms.length; });
+        return { label: p.label, syms: series.filter(keep).map(function (s) { return s.symbol; }), none: !!p.none };
+      }).filter(function (p) { return p.none || p.syms.length; });
       var g = document.getElementById("mk-groups");
       g.innerHTML = '<span class="mk-presets-label">Predvoľby</span>' + presets.map(function (f, i) {
         return '<button type="button" class="mk-group" data-f="' + i + '">' + esc(f.label) + "</button>";
@@ -1174,7 +1175,7 @@ kind: prehľad # one-word label on the homepage card
       var visible = series.filter(function (s) { return state.hidden.indexOf(s.symbol) === -1; })
         .map(function (s) { return { s: s, r: slice(s, start) }; });
       if (!visible.length) {
-        chartEl.innerHTML = '<p class="mk-empty">Vyber aspoň jeden titul.</p>';
+        chartEl.innerHTML = '<p class="mk-empty">Nič nie je vybrané. Zaškrtni tituly nižšie alebo zvoľ predvoľbu.</p>';
         return;
       }
       // Younger tickers may start later than the range; draw from the earliest data.
