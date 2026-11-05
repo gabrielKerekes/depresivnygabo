@@ -115,7 +115,9 @@ volatility, altcoins vs. BTC; needs BTC-USD) —
 each scored into five weather levels. The main forecast is their average,
 rounded up. Tapping a tile opens its signals and one-year strip. Thresholds
 and level cut-offs live in `lib/mood.js`. Responses are cached in
-`.cache/` for 6 h during local dev.
+`.cache/` for 6 h during local dev. On devices holding the `/edit/` GitHub token, an "Aktualizovať teraz"
+button starts the deploy workflow via the API (needs the fine-grained token to
+have Actions: Read and write) and reloads the page when the run finishes.
 
 ## Local dev
 

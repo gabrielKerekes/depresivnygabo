@@ -326,6 +326,39 @@ kind: prehľad # one-word label on the homepage card
     color: var(--muted);
   }
 
+  .mk-titlebar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+  .mk-refresh {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.25rem 0.6rem;
+    font-family: var(--sans);
+  }
+  .mk-refresh[hidden] { display: none; }
+  .mk-refresh-btn {
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--fg);
+    cursor: pointer;
+  }
+  .mk-refresh-btn:disabled { opacity: 0.6; cursor: progress; }
+  .mk-refresh-status { font-size: 0.78rem; color: var(--muted); text-align: right; }
+  .mk-refresh-status:empty { display: none; }
+  .mk-refresh:has(.mk-refresh-status:not(:empty)) { margin-bottom: 1rem; }
+  .mk-refresh-status a { color: var(--accent); }
+
   .mk-note {
     margin-top: 1rem;
     font-family: var(--sans);
@@ -562,7 +595,14 @@ kind: prehľad # one-word label on the homepage card
 </style>
 
 <section class="mk">
-  <h2 class="page-title">Trhy</h2>
+  <div class="mk-titlebar">
+    <h2 class="page-title">Trhy</h2>
+    {#- Owner-only: shown when this device holds the /edit/ GitHub token. #}
+    <div class="mk-refresh" id="mk-refresh" hidden>
+      <button type="button" class="mk-refresh-btn" id="mk-refresh-btn">↻ Aktualizovať teraz</button>
+      <span class="mk-refresh-status" id="mk-refresh-status" aria-live="polite"></span>
+    </div>
+  </div>
   {#- One year of daily weather as a colour strip; tap/hover reads a day. #}
   {%- macro weatherStrip(hist, label) %}
   <div class="mk-w-history">
@@ -1188,7 +1228,8 @@ kind: prehľad # one-word label on the homepage card
       drawChart(visible, from, end);
     }
 
-    fetch("/trhy/data.json")
+    // Versioned per build, so a fresh page never gets a cached older file.
+    fetch("/trhy/data.json?v={{ markets.updated | urlencode }}")
       .then(function (r) { return r.json(); })
       .then(function (data) {
         series = data.series.map(function (s) {
@@ -1205,7 +1246,7 @@ kind: prehľad # one-word label on the homepage card
         });
         document.getElementById("mk-note").textContent =
           "Denné záverečné ceny z Yahoo Finance, v USD (VIX je index, nie cena). Naposledy aktualizované " +
-          new Date(data.updated).toLocaleDateString("sk-SK", { day: "numeric", month: "long", year: "numeric" }) + ".";
+          new Date(data.updated).toLocaleString("sk-SK", { day: "numeric", month: "long", year: "numeric", hour: "numeric", minute: "2-digit" }) + ".";
         buildControls();
         listEl.addEventListener("click", function (e) {
           var c = e.target.closest(".mk-check");
@@ -1240,5 +1281,101 @@ kind: prehľad # one-word label on the homepage card
       .catch(function () {
         chartEl.innerHTML = '<p class="mk-empty">Ceny sa nepodarilo načítať. Skús to neskôr.</p>';
       });
+  })();
+</script>
+<script>
+  // "Aktualizovať teraz": starts the deploy workflow (which refetches all
+  // prices) through the GitHub API, using the token the /edit/ page stores on
+  // this device. Needs a fine-grained token with Actions: Read and write.
+  // Visitors without the token never see the button.
+  (function () {
+    var REPO = "gabrielKerekes/depresivnygabo";
+    var WORKFLOW = "deploy.yml";
+    var token = "";
+    try { token = localStorage.getItem("gh_editor_token") || ""; } catch (e) {}
+    if (!token) return;
+
+    var box = document.getElementById("mk-refresh");
+    var btn = document.getElementById("mk-refresh-btn");
+    var status = document.getElementById("mk-refresh-status");
+    box.hidden = false;
+
+    function gh(path, opts) {
+      opts = opts || {};
+      return fetch("https://api.github.com/repos/" + REPO + path, {
+        method: opts.method || "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+        body: opts.body ? JSON.stringify(opts.body) : undefined,
+        cache: "no-store",
+      });
+    }
+    function say(text, link) {
+      status.textContent = text;
+      if (link) {
+        var a = document.createElement("a");
+        a.href = link; a.target = "_blank"; a.rel = "noopener"; a.textContent = "detaily";
+        status.appendChild(document.createTextNode(" "));
+        status.appendChild(a);
+      }
+    }
+    function done(text, link) {
+      say(text, link);
+      btn.disabled = false;
+      btn.textContent = "↻ Aktualizovať teraz";
+    }
+    function noAccess(res) {
+      if (res.status === 401) return "Token už neplatí. Vlož nový na /edit/.";
+      return "Token nemá oprávnenie Actions (čítanie a zápis). Pridaj ho v nastaveniach tokenu na GitHube.";
+    }
+
+    btn.addEventListener("click", function () {
+      btn.disabled = true;
+      btn.textContent = "↻ Spúšťam…";
+      say("");
+      var since = Date.now() - 10000;
+      var started = Date.now();
+
+      gh("/actions/workflows/" + WORKFLOW + "/dispatches", { method: "POST", body: { ref: "main" } })
+        .then(function (res) {
+          if (res.status !== 204) { done(noAccess(res)); return; }
+          poll();
+        })
+        .catch(function () { done("GitHub je nedostupný. Skús to o chvíľu."); });
+
+      function poll() {
+        var secs = Math.round((Date.now() - started) / 1000);
+        if (secs > 300) { done("Trvá to nezvyčajne dlho. Pozri GitHub Actions.", "https://github.com/" + REPO + "/actions"); return; }
+        gh("/actions/workflows/" + WORKFLOW + "/runs?event=workflow_dispatch&branch=main&per_page=5")
+          .then(function (res) {
+            if (!res.ok) { done(noAccess(res)); return null; }
+            return res.json();
+          })
+          .then(function (data) {
+            if (!data) return;
+            var run = (data.workflow_runs || []).filter(function (r) {
+              return new Date(r.created_at).getTime() >= since;
+            })[0];
+            if (!run || run.status !== "completed") {
+              btn.textContent = "↻ " + (run ? "Sťahujem ceny" : "Čakám na štart") + "… " + secs + " s";
+              setTimeout(poll, 4000);
+              return;
+            }
+            if (run.conclusion === "success") {
+              btn.textContent = "↻ Hotovo";
+              say("Načítavam nové ceny…");
+              // Give Pages a moment to publish, then load the fresh page
+              // (the query string skips any cached copy).
+              setTimeout(function () { location.replace("/trhy/?v=" + Date.now()); }, 5000);
+            } else {
+              done("Aktualizácia zlyhala (" + run.conclusion + ").", run.html_url);
+            }
+          })
+          .catch(function () { setTimeout(poll, 4000); });
+      }
+    });
   })();
 </script>
