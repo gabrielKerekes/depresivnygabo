@@ -4,10 +4,14 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-  # Daily rebuild so /trhy/ picks up fresh prices (fetched at build time by
-  # src/_data/markets.js). 22:17 UTC is after the US market close.
+  # Rebuilds so /trhy/ picks up fresh prices (fetched at build time by
+  # src/_data/markets.js). NYSE trades 9:30–16:00 New York time, which is
+  # 14:30–21:00 UTC in winter and 13:30–20:00 UTC in summer. The UTC times
+  # below land at least an hour after the open and the close all year.
+  # GitHub may start scheduled runs late, sometimes by hours.
   schedule:
-    - cron: "17 22 * * *"
+    - cron: "7 15 * * 1-5" # after the open, weekdays
+    - cron: "7 22 * * *" # after the close; daily so crypto updates on weekends
 
 # Permissions needed for the GitHub Pages deployment.
 permissions:
