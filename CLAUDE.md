@@ -12,9 +12,11 @@ with a light build step. Content is written in Markdown.
 
 - **[Eleventy (11ty)](https://www.11ty.dev/)** — static site generator (config in
   `eleventy.config.js`, CommonJS). Templates use **Nunjucks** (`.njk`).
-- **GitHub Pages** — free hosting, custom domain, auto HTTPS.
-- **GitHub Actions** (`.github/workflows/deploy.yml`) — builds and deploys on
-  every push to `main`.
+- **GitHub Actions** (`.github/workflows/deploy.yml`) — builds on every push
+  to `main` (and on a schedule) and force-pushes the output to the `site` branch.
+- **Hosting** — the home server (repo `gabrielKerekes/gk-server`) pulls the
+  `site` branch every minute and serves it through a Cloudflare Tunnel. DNS is on
+  Cloudflare. (GitHub Pages was used until 2026-11-22.)
 - **Cloudflare Web Analytics** — cookieless, no consent banner. Currently
   dormant (see `TODO.md`).
 
@@ -179,8 +181,5 @@ npm run build   # one-off build into _site/
 ## Ops quick reference
 
 - Repo: https://github.com/gabrielKerekes/depresivnygabo (public)
-- Pages build type: `workflow` (GitHub Actions), custom domain `depresivnygabo.sk`
-- Check deploys: `gh run list --repo gabrielKerekes/depresivnygabo`
-- Pages status: `gh api repos/gabrielKerekes/depresivnygabo/pages`
-- Enforce HTTPS (only after the cert is issued):
-  `gh api -X PUT repos/gabrielKerekes/depresivnygabo/pages -F https_enforced=true`
+- Check builds: `gh run list --repo gabrielKerekes/depresivnygabo`
+- What's live = the `site` branch (`git log origin/site -1` shows which build).

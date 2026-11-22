@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build & publish
 
 on:
   push:
@@ -13,22 +13,17 @@ on:
     - cron: "7 15 * * 1-5" # after the open, weekdays
     - cron: "7 22 * * *" # after the close; daily so crypto updates on weekends
 
-# Permissions needed for the GitHub Pages deployment.
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write # push the built site to the `site` branch
 
-# Only one deployment at a time; cancel superseded runs.
+# Only one publish at a time; cancel superseded runs.
 concurrency:
-  group: pages
+  group: publish
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # push the built site to the `site` branch
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -36,8 +31,9 @@ jobs:
           node-version: 24
       - run: npm install
       - run: npm run build
-      # The home server (gk-server) serves this branch: it pulls it every
-      # minute. One force-pushed commit, so the branch never grows.
+      # The home server (github.com/gabrielKerekes/gk-server) serves this
+      # branch at depresivnygabo.sk: it pulls it every minute. One
+      # force-pushed commit, so the branch never grows.
       - name: Publish to the site branch
         run: |
           cd _site
@@ -46,16 +42,3 @@ jobs:
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -qm "Build of ${GITHUB_SHA::7}"
           git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" site
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4

@@ -1,7 +1,7 @@
 # depresivnygabo.sk
 
 Personal blog. Static site built with [Eleventy (11ty)](https://www.11ty.dev/),
-hosted free on GitHub Pages, cookieless analytics via
+served from a home server (gk-server) through Cloudflare, cookieless analytics via
 [Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/).
 
 ## Writing a new post
@@ -39,8 +39,8 @@ src/
   css/style.css  All styling
   index.njk      Homepage (list of posts)
   about.md       About page
-  CNAME          Custom domain for GitHub Pages
-.github/workflows/deploy.yml   Auto-build + deploy on push to main
+  CNAME          Leftover from GitHub Pages (harmless)
+.github/workflows/deploy.yml   Build on push / schedule, publish to the `site` branch
 ```
 
 ---
@@ -60,37 +60,20 @@ git remote add origin git@github.com:<your-username>/depresivnygabo.git
 git push -u origin main
 ```
 
-### 2. Enable GitHub Pages
+### 2. Hosting
 
-Repo → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-The included workflow does the rest. The first push triggers a deploy.
+GitHub Actions builds the site and force-pushes the output to the `site`
+branch. The home server ([gk-server](https://github.com/gabrielKerekes/gk-server),
+stack `depresivnygabo`) pulls that branch every minute and serves it through a
+Cloudflare Tunnel. DNS for `depresivnygabo.sk` is on Cloudflare (moved from
+hostcreators.sk on 2026-11-22; email records still point at hostcreators).
+A new post is live about a minute after the workflow finishes.
 
-### 3. Point the domain (at your .sk registrar's DNS)
-
-Add these records for `depresivnygabo.sk`:
-
-| Type  | Host / Name | Value                      |
-| ----- | ----------- | -------------------------- |
-| A     | @           | 185.199.108.153            |
-| A     | @           | 185.199.109.153            |
-| A     | @           | 185.199.110.153            |
-| A     | @           | 185.199.111.153            |
-| AAAA  | @           | 2606:50c0:8000::153        |
-| AAAA  | @           | 2606:50c0:8001::153        |
-| AAAA  | @           | 2606:50c0:8002::153        |
-| AAAA  | @           | 2606:50c0:8003::153        |
-| CNAME | www         | <your-username>.github.io. |
-
-Then in Repo → Settings → Pages → **Custom domain**, enter
-`depresivnygabo.sk`, save, and tick **Enforce HTTPS** once the cert is issued
-(can take a few minutes to an hour). The `src/CNAME` file already pins the
-domain on every build.
-
-### 4. Set up analytics (Cloudflare Web Analytics)
+### 3. Set up analytics (Cloudflare Web Analytics)
 
 1. Go to the [Cloudflare dashboard](https://dash.cloudflare.com/) →
-   **Web Analytics** → **Add a site**, enter `depresivnygabo.sk`. No need to
-   move your DNS to Cloudflare — choose the JS-snippet (beacon) method.
+   **Web Analytics** → **Add a site**, enter `depresivnygabo.sk` (the zone is
+   already on Cloudflare) — choose the JS-snippet (beacon) method.
 2. It shows a snippet containing `data-cf-beacon='{"token":"..."}'`. Copy that
    long hex **token** and paste it into `cloudflareToken` in
    `src/_data/site.js`, then commit + push.

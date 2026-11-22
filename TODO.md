@@ -10,7 +10,3 @@
       beacon method → copy the `token` → paste into `cloudflareToken` → commit +
       push. No cookie banner needed. Fallback if Cloudflare stays broken:
       GoatCounter (free, cookieless, plain email signup).
-
-- [ ] **Enforce HTTPS** once GitHub issues the Let's Encrypt cert for
-      depresivnygabo.sk (provisioning after DNS went live):
-      `gh api -X PUT repos/gabrielKerekes/depresivnygabo/pages -F https_enforced=true`
