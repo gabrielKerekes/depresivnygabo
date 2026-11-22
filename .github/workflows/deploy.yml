@@ -27,6 +27,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # push the built site to the `site` branch
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -34,6 +36,16 @@ jobs:
           node-version: 24
       - run: npm install
       - run: npm run build
+      # The home server (gk-server) serves this branch: it pulls it every
+      # minute. One force-pushed commit, so the branch never grows.
+      - name: Publish to the site branch
+        run: |
+          cd _site
+          git init -q -b site
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -qm "Build of ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" site
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
