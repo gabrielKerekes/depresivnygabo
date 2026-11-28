@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>Allostatic load | depresívny gabo</title>
+    <meta name="description" content="A pocket reference — what fills the stress battery, what drains it, and how to tell it is full." />
+    <meta name="author" content="Gabo" />
+    <!-- Apply the saved theme before first paint to avoid a flash of the wrong colours -->
+    <script>
+      (function () {
+        var t;
+        try {
+          t = localStorage.getItem("theme");
+        } catch (e) {}
+        document.documentElement.setAttribute(
+          "data-theme",
+          t === "light" || t === "dark" ? t : "system"
+        );
+      })();
+    </script>
+    <link
+      rel="preload"
+      href="/fonts/CheltenhamStdBook.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="depresívny gabo — Atom feed"
+      href="/feed.xml"
+    />
+    
+  </head>
+  <body id="top">
+    <a class="skip" href="#obsah">Preskočiť na obsah</a>
+    
+<svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="st-seedling" viewBox="0 2 24 30">
+      <g fill="currentColor" fill-opacity=".18" stroke="none">
+        <path d="M12 22.5c-5.5 0-8.6-3.4-9-7.8 5.5 0 9 3 9 7.8Z" />
+        <path d="M12 20.5c5 0 8-3.1 8.4-7.2-5 0-8.4 2.7-8.4 7.2Z" />
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32v-11" />
+        <path vector-effect="non-scaling-stroke" d="M12 22.5c-5.5 0-8.6-3.4-9-7.8 5.5 0 9 3 9 7.8Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 20.5c5 0 8-3.1 8.4-7.2-5 0-8.4 2.7-8.4 7.2Z" />
+      </g>
+    </symbol>
+    <symbol id="st-budding" viewBox="0 2 24 30">
+      <g fill="currentColor" fill-opacity=".18" stroke="none">
+        <path d="M12 27c-4 0-6.4-2.5-6.8-5.8 4 0 6.8 2.2 6.8 5.8Z" />
+        <path d="M12 21.5c3.8 0 6.1-2.4 6.5-5.5-3.8 0-6.5 2.1-6.5 5.5Z" />
+        <path d="M12 16c-3.2 0-5.2-2-5.5-4.6 3.2 0 5.5 1.7 5.5 4.6Z" />
+        <path d="M12 9.5c-1.6-1.5-1.6-4 0-5.5 1.6 1.5 1.6 4 0 5.5Z" />
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32c-.4-7 .4-14 0-22.5" />
+        <path vector-effect="non-scaling-stroke" d="M12 27c-4 0-6.4-2.5-6.8-5.8 4 0 6.8 2.2 6.8 5.8Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 21.5c3.8 0 6.1-2.4 6.5-5.5-3.8 0-6.5 2.1-6.5 5.5Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 16c-3.2 0-5.2-2-5.5-4.6 3.2 0 5.5 1.7 5.5 4.6Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 9.5c-1.6-1.5-1.6-4 0-5.5 1.6 1.5 1.6 4 0 5.5Z" />
+      </g>
+    </symbol>
+    <symbol id="st-evergreen" viewBox="0 2 24 30">
+      <path d="M12 3.5 7.5 10.5h2.7L5.5 17h3L4 24.5h16L15.5 17h3l-4.7-6.5h2.7Z" fill="currentColor" fill-opacity=".18" stroke="none" />
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32v-7.5" />
+        <path vector-effect="non-scaling-stroke" d="M12 3.5 7.5 10.5h2.7L5.5 17h3L4 24.5h16L15.5 17h3l-4.7-6.5h2.7Z" />
+      </g>
+    </symbol>
+    <symbol id="st-flower" viewBox="0 2 24 30">
+      <path d="M12 25c-3.6 0-5.8-2.2-6.2-5.2 3.6 0 6.2 2 6.2 5.2Z" fill="currentColor" fill-opacity=".18" stroke="none" />
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32c0-6-.6-12 0-19" />
+        <path vector-effect="non-scaling-stroke" d="M12 25c-3.6 0-5.8-2.2-6.2-5.2 3.6 0 6.2 2 6.2 5.2Z" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="3.4" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="15.98" cy="5.7" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="15.98" cy="10.3" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="12.6" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="8.02" cy="10.3" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="8.02" cy="5.7" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="8" r="1.6" />
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+    
+    <header class="bar" id="bar">
+      <div class="bar-in">
+        <a class="brand" href="/">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="leaf-blade" d="M1 1c13 0 22 9 22 22C10 23 1 14 1 1Z" />
+            <path class="leaf-vein" d="M8.6 8.6 14.9 14.9" />
+          </svg>
+          <span>depresívny gabo</span>
+        </a>
+        <nav aria-label="Hlavná navigácia">
+          <a href="/#clanky" data-spy="clanky">Články</a>
+          <a href="/#trvalky" data-spy="trvalky">Trvalky</a>
+          <a href="/kto-som/" class="hide-sm">Kto som</a>
+          
+          <a class="edit-link" href="/edit/" aria-label="Upraviť" title="Upraviť" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+            </svg>
+          </a>
+          <button type="button" class="theme" aria-label="Prepnúť tému">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="7.5" />
+              <path d="M12 4.5v15A7.5 7.5 0 0 0 12 4.5Z" fill="currentColor" stroke="none" />
+            </svg>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="obsah" class="page">
+      <style>
+  /* Scoped to this page; leans on the site's design tokens so it tracks the
+     theme and the green accent automatically. */
+  .al-ai {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: -0.25rem 0 1.5rem;
+    padding: 0.6rem 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--muted);
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+  }
+  .al-ai::before {
+    content: "✳";
+    flex: none;
+    color: var(--accent);
+  }
+
+  .al-lead {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--muted);
+  }
+  .al-lead strong {
+    color: var(--fg);
+  }
+
+  .al-grid {
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    margin: 1.75rem 0 0.5rem;
+  }
+  .al-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top-color: var(--card-topline);
+    border-radius: var(--radius);
+    padding: 1.3rem 1.35rem;
+  }
+  .al-card h2 {
+    font-family: var(--sans);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 0.85rem;
+  }
+  .al-card.fills h2 {
+    color: var(--muted);
+  }
+  .al-card.frees h2 {
+    color: var(--accent-strong);
+  }
+  .al-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--serif);
+  }
+  .al-card li {
+    padding: 0.42rem 0 0.42rem 1.4rem;
+    position: relative;
+    line-height: 1.4;
+    border-top: 1px solid var(--border);
+  }
+  .al-card li:first-child {
+    border-top: 0;
+  }
+  .al-card li::before {
+    position: absolute;
+    left: 0;
+    top: 0.42rem;
+  }
+  .al-card.fills li::before {
+    content: "▲";
+    color: var(--muted);
+    font-size: 0.7rem;
+    top: 0.5rem;
+  }
+  .al-card.frees li::before {
+    content: "▼";
+    color: var(--accent);
+    font-size: 0.7rem;
+    top: 0.5rem;
+  }
+
+  .al-signs {
+    margin: 1.75rem 0;
+    padding: 1.4rem 1.5rem;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+  }
+  .al-signs h2 {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.7rem;
+  }
+  .al-signs ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-family: var(--serif);
+  }
+  .al-signs li {
+    margin: 0.3rem 0;
+  }
+
+  .al-mech {
+    counter-reset: mech;
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+  .al-mech li {
+    counter-increment: mech;
+    position: relative;
+    padding: 0.55rem 0 0.55rem 2.2rem;
+    font-family: var(--serif);
+    line-height: 1.45;
+  }
+  .al-mech li::before {
+    content: counter(mech);
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: grid;
+    place-items: center;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    border-radius: 999px;
+  }
+  .al-mech strong {
+    color: var(--fg);
+  }
+
+  .al-note {
+    margin: 2rem 0;
+    padding: 1.4rem 1.5rem 1.5rem;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .al-note h2 {
+    margin-top: 0;
+  }
+  .al-note p {
+    font-family: var(--serif);
+  }
+  .al-note p:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
+<article class="post">
+  <header class="post-header">
+    <h1>Allostatic load</h1>
+  </header>
+
+  <p class="al-ai">
+    Written by AI (Claude) from Gabo's prompts, then reviewed by him — a
+    reference he keeps, not medical advice.
+  </p>
+
+  <p class="al-lead">
+    Allostasis is how the body stays stable by <em>changing</em> — heart rate,
+    cortisol, blood sugar all move to meet the moment. <strong>Allostatic load
+    is the bill for running that machinery too hard, too often, without letting
+    it switch off.</strong> Think of it as a battery of wear-and-tear. Stress
+    charges it; recovery drains it. Trouble starts when it never gets to empty.
+  </p>
+
+  <div class="al-grid">
+    <section class="al-card fills">
+      <h2>What fills it</h2>
+      <ul>
+        <li>Stressors stacked back to back, with no gap to recover.</li>
+        <li>Poor or too little sleep.</li>
+        <li>Money, work and relationship strain that never lets up.</li>
+        <li>Loneliness and lost social support.</li>
+        <li>Alcohol, nicotine, junk food, a sedentary body.</li>
+        <li>Rumination — replaying the threat long after it is gone.</li>
+        <li>Old wounds: childhood adversity leaves the system primed.</li>
+      </ul>
+    </section>
+
+    <section class="al-card frees">
+      <h2>What frees it</h2>
+      <ul>
+        <li>Real sleep — the deepest reset there is.</li>
+        <li>Movement you can talk through: walks, easy cycling, swimming.</li>
+        <li>Time outdoors — 20–30 minutes in green, a few times a week.</li>
+        <li>People you trust, and time with them.</li>
+        <li>Slow breathing, meditation, a genuine day off.</li>
+        <li>Fewer inputs: less booze, caffeine, doom-scrolling.</li>
+        <li>Naming the thing — writing or talking it out beats stewing.</li>
+        <li>Your treatment counts: therapy, meds as prescribed, kept appointments.</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="al-signs">
+    <h2>Signs the load is full</h2>
+    <ul>
+      <li>Sleep breaks down — wired at night, wrecked in the morning.</li>
+      <li>A short fuse, or feeling flat and switched off.</li>
+      <li>Getting sick often; small wounds that heal slowly.</li>
+      <li>Gut trouble, appetite swings, weight settling at the middle.</li>
+      <li>Blood pressure, resting heart rate or blood sugar creeping up.</li>
+      <li>Foggy thinking, poor focus, a memory that slips.</li>
+      <li>Small things land like big ones — no reserve left.</li>
+    </ul>
+  </div>
+
+  <h2>Four ways stress turns into damage</h2>
+  <p>
+    McEwen's point: it is not stress itself that harms you, but the response
+    failing to behave. Four patterns do the wearing.
+  </p>
+  <ol class="al-mech">
+    <li><strong>Too many hits.</strong> One stressor after another, faster than you recover.</li>
+    <li><strong>No habituation.</strong> The same stressor keeps hitting as hard as the first time — you never get used to it.</li>
+    <li><strong>No off switch.</strong> The alarm stays on after the threat has passed.</li>
+    <li><strong>A weak response.</strong> One system underreacts, so others overwork to cover — a flat cortisol curve, say, lets inflammation run.</li>
+  </ol>
+
+  <section class="al-note">
+    <h2>If you're being treated for depression</h2>
+    <p>
+      Depression and a full load run in a loop. Chronic stress helps tip you in;
+      depression then keeps the same stress system switched on. The wear feeds
+      both.
+    </p>
+    <p>
+      So read the checklist gently. Its signs — flat mood, broken sleep, fog, no
+      reserve — are also depression's signs, almost one for one. A rough patch
+      here does not by itself mean the load is the culprit, or that you're
+      relapsing. Take it as a nudge to rest and to tell your therapist or doctor,
+      not as a verdict.
+    </p>
+    <p>
+      And the recovery list is hardest exactly when you need it most — the
+      illness steals the drive to move, sleep and see people. Lower the bar. A
+      ten-minute walk, one message to a friend, one early night. Small doses
+      still drain the battery, and your treatment belongs on that list, not
+      beside it.
+    </p>
+  </section>
+
+  <h2>Sources</h2>
+  <ul>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/8379800/">McEwen &amp; Stellar (1993), <em>Stress and the Individual</em></a> — the paper that named the idea.</li>
+    <li><a href="https://www.nejm.org/doi/full/10.1056/NEJM199801153380307">McEwen (1998), <em>Protective and Damaging Effects of Stress Mediators</em>, NEJM</a> — the mechanisms above.</li>
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/19822172/">Juster, McEwen &amp; Lupien (2010), <em>Allostatic load biomarkers of chronic stress</em></a> — how it is measured.</li>
+    <li><a href="https://en.wikipedia.org/wiki/Allostatic_load">Allostatic load</a> on Wikipedia — a solid overview with further reading.</li>
+  </ul>
+</article>
+
+<p class="back"><a href="/">← späť na všetky články</a></p>
+
+    </main>
+
+    
+    <footer class="foot night">
+      <div class="foot-inner">
+        <p class="foot-kicker">Chceš sa ozvať?</p>
+        <a class="foot-big" href="mailto:depresivnygabo@gmail.com">napíš mi!<span class="arr" aria-hidden="true">↗</span></a>
+        <span class="foot-mail">depresivnygabo@gmail.com</span>
+
+        <div class="garden" role="list" aria-label="Záhradka — každá rastlinka je jeden text">
+          <a role="listitem" href="/kto-som/" style="--c: var(--stage-budding); --i: 0" data-t="Kto som?">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-budding" /></svg>
+            <span class="sr-only">Kto som?</span>
+          </a>
+          <a role="listitem" href="/styri-roky-bez-alkoholu/" style="--c: var(--stage-budding); --i: 1" data-t="Štyri roky bez alkoholu">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-budding" /></svg>
+            <span class="sr-only">Štyri roky bez alkoholu</span>
+          </a>
+          <a role="listitem" href="/mam-sa-trochu-lepsie/" style="--c: var(--stage-seedling); --i: 2" data-t="Mám sa trochu lepšie!">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Mám sa trochu lepšie!</span>
+          </a>
+          <a role="listitem" href="/zmenil-som-sa/" style="--c: var(--stage-seedling); --i: 3" data-t="Zmenil som sa. Som lepší. Je čas si to uvedomiť.">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Zmenil som sa. Som lepší. Je čas si to uvedomiť.</span>
+          </a>
+          <a role="listitem" href="/dementor-je-prec-na-teraz/" style="--c: var(--stage-seedling); --i: 4" data-t="Dementor je preč (na teraz)">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Dementor je preč (na teraz)</span>
+          </a>
+          <a role="listitem" href="/preco-tato-stranka-vobec-existuje/" style="--c: var(--stage-seedling); --i: 5" data-t="Prečo táto stránka vôbec existuje?">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Prečo táto stránka vôbec existuje?</span>
+          </a>
+          <a role="listitem" href="/nefajcim-nehram-nezijem/" style="--c: var(--stage-seedling); --i: 6" data-t="Nefajčím, nehrám sa...nežijem">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Nefajčím, nehrám sa...nežijem</span>
+          </a>
+          <a role="listitem" href="/nemozem-pocuvat-let-it-go/" style="--c: var(--stage-seedling); --i: 7" data-t="Nemôžem počúvať „Let it go“ z Frozen">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Nemôžem počúvať „Let it go“ z Frozen</span>
+          </a>
+          <a role="listitem" href="/depresia-je-skutocna/" style="--c: var(--stage-seedling); --i: 8" data-t="Depresia je skutočná">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Depresia je skutočná</span>
+          </a>
+          <a role="listitem" href="/najlepsia-skala-na-meranie-nalady/" style="--c: var(--stage-seedling); --i: 9" data-t="Najlepšia škála na meranie nálady">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Najlepšia škála na meranie nálady</span>
+          </a>
+          <span class="spacer" aria-hidden="true"></span>
+          <a role="listitem" href="/allostatic-load/" style="--c: var(--accent-strong); --i: 10" data-t="Allostatic load">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Allostatic load</span>
+          </a>
+          <a role="listitem" href="/hry-pre-dvojice/" style="--c: var(--accent-strong); --i: 11" data-t="Písacie hry pre dvojice">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Písacie hry pre dvojice</span>
+          </a>
+          <a role="listitem" href="/treningy/" style="--c: var(--accent-strong); --i: 12" data-t="Tréningy">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Tréningy</span>
+          </a>
+          <a role="listitem" href="/trhy/" style="--c: var(--accent-strong); --i: 13" data-t="Trhy">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Trhy</span>
+          </a>
+        </div>
+        <p class="garden-cap">
+          <span>Záhradka: 10 článkov
+            a 4 trvalky.
+            Každá rastlinka je jeden text.</span>
+          <span>od júla 2026 →</span>
+        </p>
+
+        <div class="foot-base">
+          <p>So <span class="heart">&lt;3</span> vytvoril <a href="https://github.com/gabrielKerekes">Gabo</a></p>
+          <nav aria-label="Odkazy v pätičke">
+            <a href="https://github.com/gabrielKerekes/depresivnygabo">zdrojový kód na GitHube</a>
+            <a href="/feed.xml">RSS</a>
+            <a href="#top">hore ↑</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Reveal the edit shortcut only on devices where an editor token is
+         stored (same key the /edit/ page uses). Visitors never see it. -->
+    <script>
+      (function () {
+        var link = document.querySelector(".edit-link");
+        if (!link) return;
+        try {
+          if (localStorage.getItem("gh_editor_token")) link.hidden = false;
+        } catch (e) {}
+      })();
+    </script>
+
+    <script>
+      (function () {
+        var btn = document.querySelector(".bar .theme");
+        if (!btn) return;
+        var root = document.documentElement;
+        var order = ["system", "light", "dark"];
+        var labels = {
+          system: "Téma: podľa systému",
+          light: "Téma: svetlá",
+          dark: "Téma: tmavá"
+        };
+
+        function apply(mode) {
+          root.setAttribute("data-theme", mode);
+          btn.setAttribute("aria-label", labels[mode]);
+          btn.setAttribute("title", labels[mode]);
+          try {
+            localStorage.setItem("theme", mode);
+          } catch (e) {}
+        }
+
+        // Sync the label with whatever the head script already applied
+        var current = root.getAttribute("data-theme");
+        if (order.indexOf(current) === -1) current = "system";
+        btn.setAttribute("aria-label", labels[current]);
+        btn.setAttribute("title", labels[current]);
+
+        btn.addEventListener("click", function () {
+          apply(order[(order.indexOf(current) + 1) % order.length]);
+          current = root.getAttribute("data-theme");
+        });
+      })();
+    </script>
+
+    <script>
+      (function () {
+        // The bar gets its backdrop once you leave the top.
+        var bar = document.getElementById("bar");
+        function onScroll() {
+          bar.classList.toggle("scrolled", window.scrollY > 24);
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        // Mark the nav link of the homepage section in view.
+        var spies = document.querySelectorAll(".bar [data-spy]");
+        if (!("IntersectionObserver" in window)) return;
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              spies.forEach(function (a) {
+                if (a.dataset.spy === e.target.id)
+                  a.classList.toggle("is-here", e.isIntersecting);
+              });
+            });
+          },
+          { rootMargin: "-45% 0px -50% 0px" }
+        );
+        spies.forEach(function (a) {
+          var s = document.getElementById(a.dataset.spy);
+          if (s) io.observe(s);
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,2598 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>Trhy | depresívny gabo</title>
+    <meta name="description" content="Akcie a kryptomeny, ktoré sledujem — vývoj cien vedľa seba." />
+    <meta name="author" content="Gabo" />
+    <!-- Apply the saved theme before first paint to avoid a flash of the wrong colours -->
+    <script>
+      (function () {
+        var t;
+        try {
+          t = localStorage.getItem("theme");
+        } catch (e) {}
+        document.documentElement.setAttribute(
+          "data-theme",
+          t === "light" || t === "dark" ? t : "system"
+        );
+      })();
+    </script>
+    <link
+      rel="preload"
+      href="/fonts/CheltenhamStdBook.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="depresívny gabo — Atom feed"
+      href="/feed.xml"
+    />
+    
+  </head>
+  <body id="top">
+    <a class="skip" href="#obsah">Preskočiť na obsah</a>
+    
+<svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="st-seedling" viewBox="0 2 24 30">
+      <g fill="currentColor" fill-opacity=".18" stroke="none">
+        <path d="M12 22.5c-5.5 0-8.6-3.4-9-7.8 5.5 0 9 3 9 7.8Z" />
+        <path d="M12 20.5c5 0 8-3.1 8.4-7.2-5 0-8.4 2.7-8.4 7.2Z" />
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32v-11" />
+        <path vector-effect="non-scaling-stroke" d="M12 22.5c-5.5 0-8.6-3.4-9-7.8 5.5 0 9 3 9 7.8Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 20.5c5 0 8-3.1 8.4-7.2-5 0-8.4 2.7-8.4 7.2Z" />
+      </g>
+    </symbol>
+    <symbol id="st-budding" viewBox="0 2 24 30">
+      <g fill="currentColor" fill-opacity=".18" stroke="none">
+        <path d="M12 27c-4 0-6.4-2.5-6.8-5.8 4 0 6.8 2.2 6.8 5.8Z" />
+        <path d="M12 21.5c3.8 0 6.1-2.4 6.5-5.5-3.8 0-6.5 2.1-6.5 5.5Z" />
+        <path d="M12 16c-3.2 0-5.2-2-5.5-4.6 3.2 0 5.5 1.7 5.5 4.6Z" />
+        <path d="M12 9.5c-1.6-1.5-1.6-4 0-5.5 1.6 1.5 1.6 4 0 5.5Z" />
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32c-.4-7 .4-14 0-22.5" />
+        <path vector-effect="non-scaling-stroke" d="M12 27c-4 0-6.4-2.5-6.8-5.8 4 0 6.8 2.2 6.8 5.8Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 21.5c3.8 0 6.1-2.4 6.5-5.5-3.8 0-6.5 2.1-6.5 5.5Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 16c-3.2 0-5.2-2-5.5-4.6 3.2 0 5.5 1.7 5.5 4.6Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 9.5c-1.6-1.5-1.6-4 0-5.5 1.6 1.5 1.6 4 0 5.5Z" />
+      </g>
+    </symbol>
+    <symbol id="st-evergreen" viewBox="0 2 24 30">
+      <path d="M12 3.5 7.5 10.5h2.7L5.5 17h3L4 24.5h16L15.5 17h3l-4.7-6.5h2.7Z" fill="currentColor" fill-opacity=".18" stroke="none" />
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32v-7.5" />
+        <path vector-effect="non-scaling-stroke" d="M12 3.5 7.5 10.5h2.7L5.5 17h3L4 24.5h16L15.5 17h3l-4.7-6.5h2.7Z" />
+      </g>
+    </symbol>
+    <symbol id="st-flower" viewBox="0 2 24 30">
+      <path d="M12 25c-3.6 0-5.8-2.2-6.2-5.2 3.6 0 6.2 2 6.2 5.2Z" fill="currentColor" fill-opacity=".18" stroke="none" />
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32c0-6-.6-12 0-19" />
+        <path vector-effect="non-scaling-stroke" d="M12 25c-3.6 0-5.8-2.2-6.2-5.2 3.6 0 6.2 2 6.2 5.2Z" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="3.4" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="15.98" cy="5.7" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="15.98" cy="10.3" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="12.6" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="8.02" cy="10.3" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="8.02" cy="5.7" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="8" r="1.6" />
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+    
+    <header class="bar" id="bar">
+      <div class="bar-in">
+        <a class="brand" href="/">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="leaf-blade" d="M1 1c13 0 22 9 22 22C10 23 1 14 1 1Z" />
+            <path class="leaf-vein" d="M8.6 8.6 14.9 14.9" />
+          </svg>
+          <span>depresívny gabo</span>
+        </a>
+        <nav aria-label="Hlavná navigácia">
+          <a href="/#clanky" data-spy="clanky">Články</a>
+          <a href="/#trvalky" data-spy="trvalky">Trvalky</a>
+          <a href="/kto-som/" class="hide-sm">Kto som</a>
+          
+          <a class="edit-link" href="/edit/" aria-label="Upraviť" title="Upraviť" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+            </svg>
+          </a>
+          <button type="button" class="theme" aria-label="Prepnúť tému">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="7.5" />
+              <path d="M12 4.5v15A7.5 7.5 0 0 0 12 4.5Z" fill="currentColor" stroke="none" />
+            </svg>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="obsah" class="page">
+      <style>
+  /* Scoped to this page. Series colours are a validated categorical palette,
+     stepped separately for light and dark surfaces. */
+  .mk {
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+    --s5: #e87ba4; --s6: #008300; --s7: #6250d6; --s8: #e34948;
+    --up: #2f8a4f; --down: #d0453f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .mk {
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+      --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+      --up: #6cc788; --down: #ef7a72;
+    }
+  }
+  :root[data-theme="dark"] .mk {
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+    --up: #6cc788; --down: #ef7a72;
+  }
+
+  .mk-lead {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--muted);
+    margin: 0 0 1.75rem;
+  }
+
+  .mk-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-family: var(--sans);
+  }
+  .mk-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* Range: one segmented control. */
+  .mk-ranges {
+    display: inline-flex;
+    padding: 3px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+  }
+  .mk-ranges button {
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    min-width: 2.6rem;
+    padding: 0.35rem 0.7rem;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .mk-ranges button[aria-pressed="true"] {
+    background: var(--accent-soft);
+    color: var(--fg);
+  }
+
+  /* Ticker chips double as the legend. */
+  .mk-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem 0.35rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--fg);
+    cursor: pointer;
+  }
+  .mk-chip svg { width: 18px; height: 8px; flex: none; }
+  .mk-chip[aria-pressed="false"] {
+    color: var(--muted);
+    background: none;
+  }
+  .mk-chip[aria-pressed="false"] svg { opacity: 0.3; }
+  /* Presets: one tap picks a set of tickers. Wraps on wide screens,
+     scrolls sideways on phones. */
+  .mk-presets {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .mk-presets-label {
+    margin-right: 0.25rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .mk-group {
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 0.32rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .mk-group[aria-pressed="true"] {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--fg);
+  }
+  .mk-pick summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    cursor: pointer;
+    list-style: none;
+  }
+  .mk-pick summary::-webkit-details-marker { display: none; }
+  .mk-pick summary::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.15s;
+  }
+  .mk-pick[open] summary::before { transform: rotate(45deg); }
+  .mk-pick summary:hover { color: var(--fg); }
+  .mk-pick #mk-chips { margin-top: 0.6rem; }
+  @media (max-width: 560px) {
+    .mk-presets {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      margin: 0 -1rem;
+      padding: 0 1rem 0.2rem;
+      scrollbar-width: none;
+      -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+      mask-image: linear-gradient(90deg, #000 85%, transparent);
+    }
+    .mk-presets::-webkit-scrollbar { display: none; }
+  }
+  .mk-group:hover, .mk-chip:hover, .mk-ranges button:hover { color: var(--fg); }
+
+  .mk-chart {
+    position: relative;
+    margin: 0 0 1.5rem;
+    padding: 0.75rem 0.25rem 0.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    touch-action: pan-y;
+    /* Holding a finger on the chart should scrub, not select text or open
+       the long-press menu (which also steals the touch and hides the tip). */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mk-chart svg { display: block; width: 100%; }
+  .mk-chart text {
+    font-family: var(--sans);
+    font-size: 11px;
+    fill: var(--muted);
+  }
+  .mk-chart .grid { stroke: var(--border); stroke-width: 1; }
+  .mk-chart .zero { stroke: var(--muted); stroke-width: 1; opacity: 0.6; }
+  .mk-chart .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .mk-chart .end-label { font-weight: 600; fill: var(--fg); }
+  .mk-chart .cross { stroke: var(--muted); stroke-width: 1; }
+  .mk-chart .dot { stroke: var(--surface); stroke-width: 2; }
+  /* $ mode with two axes: each axis names the tickers it carries. */
+  .mk-chart .axis-key { font-weight: 600; fill: var(--fg); }
+  .mk-mode button, .mk-axes button { min-width: 2.2rem; }
+  .mk-ranges[hidden] { display: none; }
+
+  .mk-empty {
+    padding: 4rem 1rem;
+    text-align: center;
+    color: var(--muted);
+    font-family: var(--sans);
+  }
+
+  .mk-tip {
+    position: absolute;
+    top: 0.5rem;
+    z-index: 2;
+    min-width: 11rem;
+    padding: 0.55rem 0.7rem;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 6px 18px var(--shadow);
+    pointer-events: none;
+  }
+  .mk-tip-date { color: var(--muted); margin-bottom: 0.2rem; }
+  .mk-tip-row { display: flex; align-items: center; gap: 0.5rem; }
+  .mk-tip-row svg { width: 14px; height: 6px; flex: none; }
+  .mk-tip-row b { font-weight: 600; min-width: 3.2rem; }
+  .mk-tip-row span:last-child { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+  /* Quote list, in the spirit of a stocks app: ticker, sparkline, price. */
+  .mk-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--sans);
+    border-top: 1px solid var(--border);
+  }
+  .mk-item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) clamp(70px, 26%, 160px) auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 0.25rem 0.85rem 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--fg);
+  }
+  .mk-item:hover { background: var(--accent-soft); }
+
+  /* Show/hide in chart: a checkbox in the ticker's own colour. The card
+     itself stays fully readable either way. */
+  .mk-check {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin: -0.5rem -0.6rem -0.5rem -0.35rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+  .mk-check::before {
+    content: "";
+    width: 1.3rem;
+    height: 1.3rem;
+    border: 2px solid var(--c);
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: background 0.12s;
+  }
+  .mk-check[aria-checked="true"]::before {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / 85% no-repeat,
+      var(--c);
+  }
+  .mk-check[aria-checked="false"]::before { border-color: var(--muted); opacity: 0.6; }
+  .mk-check:hover::before { opacity: 1; }
+  .mk-check:focus-visible { outline: none; }
+  .mk-check:focus-visible::before { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .mk-sym { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+  .mk-sym svg { width: 18px; height: 8px; flex: none; }
+  .mk-sym > span { min-width: 0; }
+  .mk-sym b { display: block; font-size: 1.05rem; font-weight: 700; letter-spacing: 0.01em; }
+  .mk-sym small {
+    display: block;
+    color: var(--muted);
+    font-size: 0.82rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mk-spark { width: 100%; height: 38px; display: block; overflow: visible; }
+  .mk-spark .base { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 2 3; opacity: 0.6; }
+  .mk-spark .up { stroke: var(--up); }
+  .mk-spark .down { stroke: var(--down); }
+  .mk-quote { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; }
+  .mk-price { font-size: 1.02rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .mk-pill {
+    min-width: 4.8rem;
+    padding: 0.18rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: #fff;
+  }
+  .mk-pill.up { background: var(--up); }
+  .mk-pill.down { background: var(--down); }
+  :root[data-theme="dark"] .mk-pill { color: #101216; }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .mk-pill { color: #101216; }
+  }
+
+  /* Focus one ticker (hover a chip or a row): the rest step back. */
+  .mk-chart.has-focus .line { opacity: 0.12; }
+  .mk-chart.has-focus .line.on { opacity: 1; stroke-width: 2.75; }
+
+  .mk-span {
+    margin: 0 0 0.5rem;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .mk-titlebar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+  .mk-refresh {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.25rem 0.6rem;
+    font-family: var(--sans);
+  }
+  .mk-refresh[hidden] { display: none; }
+  .mk-refresh-btn {
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--fg);
+    cursor: pointer;
+  }
+  .mk-refresh-btn:disabled { opacity: 0.6; cursor: progress; }
+  .mk-refresh-status { font-size: 0.78rem; color: var(--muted); text-align: right; }
+  .mk-refresh-status:empty { display: none; }
+  .mk-refresh:has(.mk-refresh-status:not(:empty)) { margin-bottom: 1rem; }
+  .mk-refresh-status a { color: var(--accent); }
+
+  .mk-note {
+    margin-top: 1rem;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* ---- Market weather ---------------------------------------------------
+     Five levels, calm green → red. Each level always ships with its icon and
+     name, so colour is never the only cue. */
+  .mk {
+    --w0: #3f9a5f; --w1: #8fae2e; --w2: #d29a00; --w3: #e0702a; --w4: #d0453f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .mk {
+      --w0: #6cc788; --w1: #b5cf5a; --w2: #e5b44a; --w3: #ef8a4a; --w4: #ef7a72;
+    }
+  }
+  :root[data-theme="dark"] .mk {
+    --w0: #6cc788; --w1: #b5cf5a; --w2: #e5b44a; --w3: #ef8a4a; --w4: #ef7a72;
+  }
+  .mk-weather {
+    --lvl: var(--w0);
+    position: relative;
+    margin: 0 0 2.25rem;
+    padding: 1.25rem 1.25rem 1rem;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--lvl);
+    border-radius: var(--radius);
+    background:
+      radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--lvl) 14%, transparent), transparent 60%),
+      var(--surface);
+    font-family: var(--sans);
+  }
+  .mk-weather.l1 { --lvl: var(--w1); }
+  .mk-weather.l2 { --lvl: var(--w2); }
+  .mk-weather.l3 { --lvl: var(--w3); }
+  .mk-weather.l4 { --lvl: var(--w4); }
+  .mk-w-head { display: flex; align-items: center; gap: 1rem; }
+  .mk-w-icon { font-size: 3.2rem; line-height: 1; flex: none; }
+  .mk-w-kicker {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .mk-w-name {
+    margin: 0.1rem 0 0.15rem;
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--fg);
+  }
+  .mk-w-text { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+  .mk-w-dots { display: inline-flex; gap: 0.25rem; }
+  .mk-w-dot.s1 { background: var(--w2); }
+  .mk-w-dot.s2 { background: var(--w3); }
+  .mk-w-dot.s3 { background: var(--w4); }
+  /* Sub-forecast tiles: tap one to open its breakdown below. */
+  .mk-w-tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-top: 1.1rem;
+  }
+  .mk-w-tile {
+    --lvl: var(--w0);
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--lvl);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--lvl) 8%, var(--surface));
+    color: var(--fg);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s, box-shadow 0.15s;
+  }
+  .mk-w-tile.l1 { --lvl: var(--w1); }
+  .mk-w-tile.l2 { --lvl: var(--w2); }
+  .mk-w-tile.l3 { --lvl: var(--w3); }
+  .mk-w-tile.l4 { --lvl: var(--w4); }
+  .mk-w-tile:hover { background: color-mix(in srgb, var(--lvl) 15%, var(--surface)); }
+  .mk-w-tile[aria-expanded="true"] {
+    background: color-mix(in srgb, var(--lvl) 15%, var(--surface));
+    box-shadow: 0 0 0 1px var(--lvl);
+  }
+  .mk-w-tile-icon { font-size: 1.9rem; line-height: 1; flex: none; }
+  .mk-w-tile-body { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+  .mk-w-tile-title { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .mk-w-tile-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; line-height: 1.15; }
+  .mk-w-tile .mk-w-dots { margin-top: 0.2rem; }
+  .mk-w-tile .mk-w-dot { width: 0.45rem; height: 0.45rem; }
+  .mk-w-chev {
+    flex: none;
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-left: auto;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg);
+    transition: transform 0.15s;
+  }
+  .mk-w-tile[aria-expanded="true"] .mk-w-chev { transform: rotate(225deg); }
+
+  .mk-w-detail {
+    margin-top: 0.9rem;
+    padding: 0.9rem 0 0.2rem;
+    border-top: 1px solid var(--border);
+  }
+  .mk-w-detail-head { margin: 0 0 0.6rem; font-size: 0.9rem; color: var(--muted); }
+  .mk-w-detail-head b { color: var(--fg); font-weight: 600; }
+  .mk-w-detail .mk-w-history { margin-top: 0.9rem; }
+  .mk-w-signals {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--border);
+  }
+  .mk-w-signal {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: baseline;
+    column-gap: 0.65rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .mk-w-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--w0);
+    transform: translateY(-0.05rem);
+  }
+  .mk-w-signal.s1 .mk-w-dot { background: var(--w2); }
+  .mk-w-signal.s2 .mk-w-dot { background: var(--w3); }
+  .mk-w-signal.s3 .mk-w-dot { background: var(--w4); }
+  .mk-w-signal b { font-weight: 600; color: var(--fg); }
+  .mk-w-note { display: block; color: var(--muted); font-size: 0.8rem; }
+  .mk-w-value {
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    font-size: 0.82rem;
+  }
+
+  .mk-w-history { margin-top: 1.1rem; }
+  .mk-w-history-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .mk-w-strip {
+    display: block;
+    width: 100%;
+    height: 34px;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: crosshair;
+    touch-action: pan-y;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  .mk-w-strip rect.l0 { fill: var(--w0); }
+  .mk-w-strip rect.l1 { fill: var(--w1); }
+  .mk-w-strip rect.l2 { fill: var(--w2); }
+  .mk-w-strip rect.l3 { fill: var(--w3); }
+  .mk-w-strip rect.l4 { fill: var(--w4); }
+  .mk-w-strip .mark { fill: var(--fg); }
+  .mk-w-axis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.3rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .mk-w-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.9rem;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.76rem;
+    color: var(--muted);
+  }
+  .mk-w-legend li { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .mk-w-legend i { width: 0.7rem; height: 0.7rem; border-radius: 3px; display: inline-block; }
+  .mk-w-show {
+    margin-top: 0.9rem;
+    padding: 0;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 0;
+    background: none;
+    color: var(--accent);
+    cursor: pointer;
+  }
+  .mk-w-show:hover { color: var(--accent-strong); text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 560px) {
+    .mk-weather { padding: 1rem 1rem 0.85rem; }
+    .mk-w-icon { font-size: 2.6rem; }
+    .mk-w-name { font-size: 1.7rem; }
+    .mk-w-signal { grid-template-columns: auto minmax(0, 1fr); }
+    .mk-w-tiles { gap: 0.5rem; }
+    .mk-w-tile { padding: 0.6rem 0.6rem; gap: 0.5rem; }
+    .mk-w-tile-icon { font-size: 1.5rem; }
+    .mk-w-tile-name { font-size: 1.05rem; }
+    .mk-w-value { grid-column: 2; text-align: left; color: var(--muted); }
+  }
+
+  @media (max-width: 560px) {
+    .mk-tip { min-width: 0; padding: 0.4rem 0.55rem; font-size: 0.72rem; line-height: 1.4; }
+    .mk-tip-price { display: none; }
+    .mk-chart.is-usd .mk-tip-price { display: inline; }
+    .mk-chart.is-usd .mk-tip-pct { display: none; }
+    .mk-item { gap: 0.75rem; }
+  }
+</style>
+
+<section class="mk">
+  <div class="mk-titlebar">
+    <h2 class="page-title">Trhy</h2>
+    <div class="mk-refresh" id="mk-refresh" hidden>
+      <button type="button" class="mk-refresh-btn" id="mk-refresh-btn">↻ Aktualizovať teraz</button>
+      <span class="mk-refresh-status" id="mk-refresh-status" aria-live="polite"></span>
+    </div>
+  </div>
+  <section class="mk-weather l2" aria-labelledby="mk-w-name">
+    <div class="mk-w-head">
+      <span class="mk-w-icon" aria-hidden="true">☁️</span>
+      <div>
+        <p class="mk-w-kicker">Počasie na trhu · 28. 11. 2026</p>
+        <p class="mk-w-name" id="mk-w-name">Zamračené</p>
+        <p class="mk-w-text">Trhy sú nervózne. Oplatí sa sledovať.</p>
+      </div>
+    </div>
+    <div class="mk-w-tiles">
+      <button type="button" class="mk-w-tile l2" aria-expanded="false" aria-controls="mk-w-g-fiat">
+        <span class="mk-w-tile-icon" aria-hidden="true">☁️</span>
+        <span class="mk-w-tile-body">
+          <span class="mk-w-tile-title">Akcie</span>
+          <span class="mk-w-tile-name">Zamračené</span>
+          <span class="mk-w-dots" aria-hidden="true"><span class="mk-w-dot s1"></span><span class="mk-w-dot s0"></span><span class="mk-w-dot s1"></span><span class="mk-w-dot s1"></span><span class="mk-w-dot s1"></span><span class="mk-w-dot s0"></span>
+          </span>
+        </span>
+        <span class="mk-w-chev" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="mk-w-tile l2" aria-expanded="false" aria-controls="mk-w-g-crypto">
+        <span class="mk-w-tile-icon" aria-hidden="true">☁️</span>
+        <span class="mk-w-tile-body">
+          <span class="mk-w-tile-title">Krypto</span>
+          <span class="mk-w-tile-name">Zamračené</span>
+          <span class="mk-w-dots" aria-hidden="true"><span class="mk-w-dot s2"></span><span class="mk-w-dot s1"></span><span class="mk-w-dot s0"></span><span class="mk-w-dot s1"></span><span class="mk-w-dot s0"></span><span class="mk-w-dot s0"></span>
+          </span>
+        </span>
+        <span class="mk-w-chev" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="mk-w-detail" id="mk-w-g-fiat" hidden>
+      <p class="mk-w-detail-head">
+        <b>☁️ Akcie: zamračené.</b> Trhy sú nervózne. Oplatí sa sledovať.
+      </p>
+      <ul class="mk-w-signals">
+        <li class="mk-w-signal s1">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>Index strachu (VIX)</b><span class="mk-w-note">nervozita (20–30)</span></span>
+          <span class="mk-w-value">23,8</span>
+        </li>
+        <li class="mk-w-signal s0">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>Strach vs. pokles (5 dní)</b><span class="mk-w-note">pokojný týždeň</span></span>
+          <span class="mk-w-value">VIX −33,7 %, S&amp;P +5,6 %</span>
+        </li>
+        <li class="mk-w-signal s1">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>S&amp;P 500 pod vrcholom</b><span class="mk-w-note">pokles</span></span>
+          <span class="mk-w-value">−6,5 %</span>
+        </li>
+        <li class="mk-w-signal s1">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>Trend S&amp;P 500</b><span class="mk-w-note">pod 200-dňovým priemerom</span></span>
+          <span class="mk-w-value">−0,7 % voči priemeru</span>
+        </li>
+        <li class="mk-w-signal s1">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>Rizikové dlhopisy (HYG)</b><span class="mk-w-note">veritelia znervózňujú</span></span>
+          <span class="mk-w-value">−4,0 % od vrcholu</span>
+        </li>
+        <li class="mk-w-signal s0">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>Útek do bezpečia (1 mesiac)</b><span class="mk-w-note">žiadny útek</span></span>
+          <span class="mk-w-value">dlhopisy +0,3 %, zlato −10,5 %</span>
+        </li>
+      </ul>
+      
+  <div class="mk-w-history">
+    <div class="mk-w-history-head">
+      <span>Akcie za posledný rok</span>
+      <span class="mk-w-pick" aria-live="polite"></span>
+    </div>
+    <svg class="mk-w-strip" viewBox="0 0 251 10" preserveAspectRatio="none" role="img" aria-label="Akcie za posledný rok">
+      <rect class="l0" x="0" y="0" width="1.05" height="10" data-d="28. 11. 2025" data-l="0" />
+      <rect class="l0" x="1" y="0" width="1.05" height="10" data-d="1. 12. 2025" data-l="0" />
+      <rect class="l0" x="2" y="0" width="1.05" height="10" data-d="2. 12. 2025" data-l="0" />
+      <rect class="l0" x="3" y="0" width="1.05" height="10" data-d="3. 12. 2025" data-l="0" />
+      <rect class="l0" x="4" y="0" width="1.05" height="10" data-d="4. 12. 2025" data-l="0" />
+      <rect class="l0" x="5" y="0" width="1.05" height="10" data-d="5. 12. 2025" data-l="0" />
+      <rect class="l0" x="6" y="0" width="1.05" height="10" data-d="8. 12. 2025" data-l="0" />
+      <rect class="l0" x="7" y="0" width="1.05" height="10" data-d="9. 12. 2025" data-l="0" />
+      <rect class="l0" x="8" y="0" width="1.05" height="10" data-d="10. 12. 2025" data-l="0" />
+      <rect class="l0" x="9" y="0" width="1.05" height="10" data-d="11. 12. 2025" data-l="0" />
+      <rect class="l0" x="10" y="0" width="1.05" height="10" data-d="12. 12. 2025" data-l="0" />
+      <rect class="l0" x="11" y="0" width="1.05" height="10" data-d="15. 12. 2025" data-l="0" />
+      <rect class="l0" x="12" y="0" width="1.05" height="10" data-d="16. 12. 2025" data-l="0" />
+      <rect class="l0" x="13" y="0" width="1.05" height="10" data-d="17. 12. 2025" data-l="0" />
+      <rect class="l0" x="14" y="0" width="1.05" height="10" data-d="18. 12. 2025" data-l="0" />
+      <rect class="l0" x="15" y="0" width="1.05" height="10" data-d="19. 12. 2025" data-l="0" />
+      <rect class="l0" x="16" y="0" width="1.05" height="10" data-d="22. 12. 2025" data-l="0" />
+      <rect class="l0" x="17" y="0" width="1.05" height="10" data-d="23. 12. 2025" data-l="0" />
+      <rect class="l0" x="18" y="0" width="1.05" height="10" data-d="24. 12. 2025" data-l="0" />
+      <rect class="l0" x="19" y="0" width="1.05" height="10" data-d="26. 12. 2025" data-l="0" />
+      <rect class="l0" x="20" y="0" width="1.05" height="10" data-d="29. 12. 2025" data-l="0" />
+      <rect class="l0" x="21" y="0" width="1.05" height="10" data-d="30. 12. 2025" data-l="0" />
+      <rect class="l0" x="22" y="0" width="1.05" height="10" data-d="31. 12. 2025" data-l="0" />
+      <rect class="l0" x="23" y="0" width="1.05" height="10" data-d="2. 1. 2026" data-l="0" />
+      <rect class="l0" x="24" y="0" width="1.05" height="10" data-d="5. 1. 2026" data-l="0" />
+      <rect class="l0" x="25" y="0" width="1.05" height="10" data-d="6. 1. 2026" data-l="0" />
+      <rect class="l0" x="26" y="0" width="1.05" height="10" data-d="7. 1. 2026" data-l="0" />
+      <rect class="l0" x="27" y="0" width="1.05" height="10" data-d="8. 1. 2026" data-l="0" />
+      <rect class="l0" x="28" y="0" width="1.05" height="10" data-d="9. 1. 2026" data-l="0" />
+      <rect class="l0" x="29" y="0" width="1.05" height="10" data-d="12. 1. 2026" data-l="0" />
+      <rect class="l0" x="30" y="0" width="1.05" height="10" data-d="13. 1. 2026" data-l="0" />
+      <rect class="l0" x="31" y="0" width="1.05" height="10" data-d="14. 1. 2026" data-l="0" />
+      <rect class="l0" x="32" y="0" width="1.05" height="10" data-d="15. 1. 2026" data-l="0" />
+      <rect class="l0" x="33" y="0" width="1.05" height="10" data-d="16. 1. 2026" data-l="0" />
+      <rect class="l1" x="34" y="0" width="1.05" height="10" data-d="20. 1. 2026" data-l="1" />
+      <rect class="l0" x="35" y="0" width="1.05" height="10" data-d="21. 1. 2026" data-l="0" />
+      <rect class="l0" x="36" y="0" width="1.05" height="10" data-d="22. 1. 2026" data-l="0" />
+      <rect class="l0" x="37" y="0" width="1.05" height="10" data-d="23. 1. 2026" data-l="0" />
+      <rect class="l0" x="38" y="0" width="1.05" height="10" data-d="26. 1. 2026" data-l="0" />
+      <rect class="l0" x="39" y="0" width="1.05" height="10" data-d="27. 1. 2026" data-l="0" />
+      <rect class="l0" x="40" y="0" width="1.05" height="10" data-d="28. 1. 2026" data-l="0" />
+      <rect class="l0" x="41" y="0" width="1.05" height="10" data-d="29. 1. 2026" data-l="0" />
+      <rect class="l0" x="42" y="0" width="1.05" height="10" data-d="30. 1. 2026" data-l="0" />
+      <rect class="l0" x="43" y="0" width="1.05" height="10" data-d="2. 2. 2026" data-l="0" />
+      <rect class="l0" x="44" y="0" width="1.05" height="10" data-d="3. 2. 2026" data-l="0" />
+      <rect class="l0" x="45" y="0" width="1.05" height="10" data-d="4. 2. 2026" data-l="0" />
+      <rect class="l1" x="46" y="0" width="1.05" height="10" data-d="5. 2. 2026" data-l="1" />
+      <rect class="l0" x="47" y="0" width="1.05" height="10" data-d="6. 2. 2026" data-l="0" />
+      <rect class="l0" x="48" y="0" width="1.05" height="10" data-d="9. 2. 2026" data-l="0" />
+      <rect class="l0" x="49" y="0" width="1.05" height="10" data-d="10. 2. 2026" data-l="0" />
+      <rect class="l0" x="50" y="0" width="1.05" height="10" data-d="11. 2. 2026" data-l="0" />
+      <rect class="l0" x="51" y="0" width="1.05" height="10" data-d="12. 2. 2026" data-l="0" />
+      <rect class="l0" x="52" y="0" width="1.05" height="10" data-d="13. 2. 2026" data-l="0" />
+      <rect class="l0" x="53" y="0" width="1.05" height="10" data-d="17. 2. 2026" data-l="0" />
+      <rect class="l0" x="54" y="0" width="1.05" height="10" data-d="18. 2. 2026" data-l="0" />
+      <rect class="l0" x="55" y="0" width="1.05" height="10" data-d="19. 2. 2026" data-l="0" />
+      <rect class="l0" x="56" y="0" width="1.05" height="10" data-d="20. 2. 2026" data-l="0" />
+      <rect class="l0" x="57" y="0" width="1.05" height="10" data-d="23. 2. 2026" data-l="0" />
+      <rect class="l0" x="58" y="0" width="1.05" height="10" data-d="24. 2. 2026" data-l="0" />
+      <rect class="l0" x="59" y="0" width="1.05" height="10" data-d="25. 2. 2026" data-l="0" />
+      <rect class="l0" x="60" y="0" width="1.05" height="10" data-d="26. 2. 2026" data-l="0" />
+      <rect class="l0" x="61" y="0" width="1.05" height="10" data-d="27. 2. 2026" data-l="0" />
+      <rect class="l0" x="62" y="0" width="1.05" height="10" data-d="2. 3. 2026" data-l="0" />
+      <rect class="l0" x="63" y="0" width="1.05" height="10" data-d="3. 3. 2026" data-l="0" />
+      <rect class="l0" x="64" y="0" width="1.05" height="10" data-d="4. 3. 2026" data-l="0" />
+      <rect class="l1" x="65" y="0" width="1.05" height="10" data-d="5. 3. 2026" data-l="1" />
+      <rect class="l1" x="66" y="0" width="1.05" height="10" data-d="6. 3. 2026" data-l="1" />
+      <rect class="l0" x="67" y="0" width="1.05" height="10" data-d="9. 3. 2026" data-l="0" />
+      <rect class="l0" x="68" y="0" width="1.05" height="10" data-d="10. 3. 2026" data-l="0" />
+      <rect class="l0" x="69" y="0" width="1.05" height="10" data-d="11. 3. 2026" data-l="0" />
+      <rect class="l1" x="70" y="0" width="1.05" height="10" data-d="12. 3. 2026" data-l="1" />
+      <rect class="l0" x="71" y="0" width="1.05" height="10" data-d="13. 3. 2026" data-l="0" />
+      <rect class="l0" x="72" y="0" width="1.05" height="10" data-d="16. 3. 2026" data-l="0" />
+      <rect class="l0" x="73" y="0" width="1.05" height="10" data-d="17. 3. 2026" data-l="0" />
+      <rect class="l1" x="74" y="0" width="1.05" height="10" data-d="18. 3. 2026" data-l="1" />
+      <rect class="l1" x="75" y="0" width="1.05" height="10" data-d="19. 3. 2026" data-l="1" />
+      <rect class="l2" x="76" y="0" width="1.05" height="10" data-d="20. 3. 2026" data-l="2" />
+      <rect class="l2" x="77" y="0" width="1.05" height="10" data-d="23. 3. 2026" data-l="2" />
+      <rect class="l2" x="78" y="0" width="1.05" height="10" data-d="24. 3. 2026" data-l="2" />
+      <rect class="l1" x="79" y="0" width="1.05" height="10" data-d="25. 3. 2026" data-l="1" />
+      <rect class="l2" x="80" y="0" width="1.05" height="10" data-d="26. 3. 2026" data-l="2" />
+      <rect class="l2" x="81" y="0" width="1.05" height="10" data-d="27. 3. 2026" data-l="2" />
+      <rect class="l2" x="82" y="0" width="1.05" height="10" data-d="30. 3. 2026" data-l="2" />
+      <rect class="l1" x="83" y="0" width="1.05" height="10" data-d="31. 3. 2026" data-l="1" />
+      <rect class="l1" x="84" y="0" width="1.05" height="10" data-d="1. 4. 2026" data-l="1" />
+      <rect class="l1" x="85" y="0" width="1.05" height="10" data-d="2. 4. 2026" data-l="1" />
+      <rect class="l1" x="86" y="0" width="1.05" height="10" data-d="6. 4. 2026" data-l="1" />
+      <rect class="l1" x="87" y="0" width="1.05" height="10" data-d="7. 4. 2026" data-l="1" />
+      <rect class="l0" x="88" y="0" width="1.05" height="10" data-d="8. 4. 2026" data-l="0" />
+      <rect class="l0" x="89" y="0" width="1.05" height="10" data-d="9. 4. 2026" data-l="0" />
+      <rect class="l0" x="90" y="0" width="1.05" height="10" data-d="10. 4. 2026" data-l="0" />
+      <rect class="l0" x="91" y="0" width="1.05" height="10" data-d="13. 4. 2026" data-l="0" />
+      <rect class="l0" x="92" y="0" width="1.05" height="10" data-d="14. 4. 2026" data-l="0" />
+      <rect class="l0" x="93" y="0" width="1.05" height="10" data-d="15. 4. 2026" data-l="0" />
+      <rect class="l0" x="94" y="0" width="1.05" height="10" data-d="16. 4. 2026" data-l="0" />
+      <rect class="l0" x="95" y="0" width="1.05" height="10" data-d="17. 4. 2026" data-l="0" />
+      <rect class="l0" x="96" y="0" width="1.05" height="10" data-d="20. 4. 2026" data-l="0" />
+      <rect class="l0" x="97" y="0" width="1.05" height="10" data-d="21. 4. 2026" data-l="0" />
+      <rect class="l0" x="98" y="0" width="1.05" height="10" data-d="22. 4. 2026" data-l="0" />
+      <rect class="l0" x="99" y="0" width="1.05" height="10" data-d="23. 4. 2026" data-l="0" />
+      <rect class="l0" x="100" y="0" width="1.05" height="10" data-d="24. 4. 2026" data-l="0" />
+      <rect class="l0" x="101" y="0" width="1.05" height="10" data-d="27. 4. 2026" data-l="0" />
+      <rect class="l0" x="102" y="0" width="1.05" height="10" data-d="28. 4. 2026" data-l="0" />
+      <rect class="l0" x="103" y="0" width="1.05" height="10" data-d="29. 4. 2026" data-l="0" />
+      <rect class="l0" x="104" y="0" width="1.05" height="10" data-d="30. 4. 2026" data-l="0" />
+      <rect class="l0" x="105" y="0" width="1.05" height="10" data-d="1. 5. 2026" data-l="0" />
+      <rect class="l0" x="106" y="0" width="1.05" height="10" data-d="4. 5. 2026" data-l="0" />
+      <rect class="l0" x="107" y="0" width="1.05" height="10" data-d="5. 5. 2026" data-l="0" />
+      <rect class="l0" x="108" y="0" width="1.05" height="10" data-d="6. 5. 2026" data-l="0" />
+      <rect class="l0" x="109" y="0" width="1.05" height="10" data-d="7. 5. 2026" data-l="0" />
+      <rect class="l0" x="110" y="0" width="1.05" height="10" data-d="8. 5. 2026" data-l="0" />
+      <rect class="l0" x="111" y="0" width="1.05" height="10" data-d="11. 5. 2026" data-l="0" />
+      <rect class="l0" x="112" y="0" width="1.05" height="10" data-d="12. 5. 2026" data-l="0" />
+      <rect class="l0" x="113" y="0" width="1.05" height="10" data-d="13. 5. 2026" data-l="0" />
+      <rect class="l0" x="114" y="0" width="1.05" height="10" data-d="14. 5. 2026" data-l="0" />
+      <rect class="l0" x="115" y="0" width="1.05" height="10" data-d="15. 5. 2026" data-l="0" />
+      <rect class="l0" x="116" y="0" width="1.05" height="10" data-d="18. 5. 2026" data-l="0" />
+      <rect class="l0" x="117" y="0" width="1.05" height="10" data-d="19. 5. 2026" data-l="0" />
+      <rect class="l0" x="118" y="0" width="1.05" height="10" data-d="20. 5. 2026" data-l="0" />
+      <rect class="l0" x="119" y="0" width="1.05" height="10" data-d="21. 5. 2026" data-l="0" />
+      <rect class="l0" x="120" y="0" width="1.05" height="10" data-d="22. 5. 2026" data-l="0" />
+      <rect class="l0" x="121" y="0" width="1.05" height="10" data-d="26. 5. 2026" data-l="0" />
+      <rect class="l0" x="122" y="0" width="1.05" height="10" data-d="27. 5. 2026" data-l="0" />
+      <rect class="l0" x="123" y="0" width="1.05" height="10" data-d="28. 5. 2026" data-l="0" />
+      <rect class="l0" x="124" y="0" width="1.05" height="10" data-d="29. 5. 2026" data-l="0" />
+      <rect class="l0" x="125" y="0" width="1.05" height="10" data-d="1. 6. 2026" data-l="0" />
+      <rect class="l0" x="126" y="0" width="1.05" height="10" data-d="2. 6. 2026" data-l="0" />
+      <rect class="l0" x="127" y="0" width="1.05" height="10" data-d="3. 6. 2026" data-l="0" />
+      <rect class="l0" x="128" y="0" width="1.05" height="10" data-d="4. 6. 2026" data-l="0" />
+      <rect class="l1" x="129" y="0" width="1.05" height="10" data-d="5. 6. 2026" data-l="1" />
+      <rect class="l0" x="130" y="0" width="1.05" height="10" data-d="8. 6. 2026" data-l="0" />
+      <rect class="l1" x="131" y="0" width="1.05" height="10" data-d="9. 6. 2026" data-l="1" />
+      <rect class="l1" x="132" y="0" width="1.05" height="10" data-d="10. 6. 2026" data-l="1" />
+      <rect class="l1" x="133" y="0" width="1.05" height="10" data-d="11. 6. 2026" data-l="1" />
+      <rect class="l0" x="134" y="0" width="1.05" height="10" data-d="12. 6. 2026" data-l="0" />
+      <rect class="l0" x="135" y="0" width="1.05" height="10" data-d="15. 6. 2026" data-l="0" />
+      <rect class="l0" x="136" y="0" width="1.05" height="10" data-d="16. 6. 2026" data-l="0" />
+      <rect class="l0" x="137" y="0" width="1.05" height="10" data-d="17. 6. 2026" data-l="0" />
+      <rect class="l0" x="138" y="0" width="1.05" height="10" data-d="18. 6. 2026" data-l="0" />
+      <rect class="l0" x="139" y="0" width="1.05" height="10" data-d="22. 6. 2026" data-l="0" />
+      <rect class="l0" x="140" y="0" width="1.05" height="10" data-d="23. 6. 2026" data-l="0" />
+      <rect class="l0" x="141" y="0" width="1.05" height="10" data-d="24. 6. 2026" data-l="0" />
+      <rect class="l0" x="142" y="0" width="1.05" height="10" data-d="25. 6. 2026" data-l="0" />
+      <rect class="l0" x="143" y="0" width="1.05" height="10" data-d="26. 6. 2026" data-l="0" />
+      <rect class="l0" x="144" y="0" width="1.05" height="10" data-d="29. 6. 2026" data-l="0" />
+      <rect class="l0" x="145" y="0" width="1.05" height="10" data-d="30. 6. 2026" data-l="0" />
+      <rect class="l0" x="146" y="0" width="1.05" height="10" data-d="1. 7. 2026" data-l="0" />
+      <rect class="l0" x="147" y="0" width="1.05" height="10" data-d="2. 7. 2026" data-l="0" />
+      <rect class="l0" x="148" y="0" width="1.05" height="10" data-d="6. 7. 2026" data-l="0" />
+      <rect class="l0" x="149" y="0" width="1.05" height="10" data-d="7. 7. 2026" data-l="0" />
+      <rect class="l0" x="150" y="0" width="1.05" height="10" data-d="8. 7. 2026" data-l="0" />
+      <rect class="l0" x="151" y="0" width="1.05" height="10" data-d="9. 7. 2026" data-l="0" />
+      <rect class="l0" x="152" y="0" width="1.05" height="10" data-d="10. 7. 2026" data-l="0" />
+      <rect class="l0" x="153" y="0" width="1.05" height="10" data-d="13. 7. 2026" data-l="0" />
+      <rect class="l0" x="154" y="0" width="1.05" height="10" data-d="14. 7. 2026" data-l="0" />
+      <rect class="l0" x="155" y="0" width="1.05" height="10" data-d="15. 7. 2026" data-l="0" />
+      <rect class="l0" x="156" y="0" width="1.05" height="10" data-d="16. 7. 2026" data-l="0" />
+      <rect class="l0" x="157" y="0" width="1.05" height="10" data-d="17. 7. 2026" data-l="0" />
+      <rect class="l0" x="158" y="0" width="1.05" height="10" data-d="20. 7. 2026" data-l="0" />
+      <rect class="l0" x="159" y="0" width="1.05" height="10" data-d="21. 7. 2026" data-l="0" />
+      <rect class="l0" x="160" y="0" width="1.05" height="10" data-d="22. 7. 2026" data-l="0" />
+      <rect class="l0" x="161" y="0" width="1.05" height="10" data-d="23. 7. 2026" data-l="0" />
+      <rect class="l0" x="162" y="0" width="1.05" height="10" data-d="24. 7. 2026" data-l="0" />
+      <rect class="l0" x="163" y="0" width="1.05" height="10" data-d="27. 7. 2026" data-l="0" />
+      <rect class="l0" x="164" y="0" width="1.05" height="10" data-d="28. 7. 2026" data-l="0" />
+      <rect class="l1" x="165" y="0" width="1.05" height="10" data-d="29. 7. 2026" data-l="1" />
+      <rect class="l0" x="166" y="0" width="1.05" height="10" data-d="30. 7. 2026" data-l="0" />
+      <rect class="l0" x="167" y="0" width="1.05" height="10" data-d="31. 7. 2026" data-l="0" />
+      <rect class="l0" x="168" y="0" width="1.05" height="10" data-d="3. 8. 2026" data-l="0" />
+      <rect class="l0" x="169" y="0" width="1.05" height="10" data-d="4. 8. 2026" data-l="0" />
+      <rect class="l0" x="170" y="0" width="1.05" height="10" data-d="5. 8. 2026" data-l="0" />
+      <rect class="l0" x="171" y="0" width="1.05" height="10" data-d="6. 8. 2026" data-l="0" />
+      <rect class="l0" x="172" y="0" width="1.05" height="10" data-d="7. 8. 2026" data-l="0" />
+      <rect class="l0" x="173" y="0" width="1.05" height="10" data-d="10. 8. 2026" data-l="0" />
+      <rect class="l0" x="174" y="0" width="1.05" height="10" data-d="11. 8. 2026" data-l="0" />
+      <rect class="l0" x="175" y="0" width="1.05" height="10" data-d="12. 8. 2026" data-l="0" />
+      <rect class="l0" x="176" y="0" width="1.05" height="10" data-d="13. 8. 2026" data-l="0" />
+      <rect class="l0" x="177" y="0" width="1.05" height="10" data-d="14. 8. 2026" data-l="0" />
+      <rect class="l0" x="178" y="0" width="1.05" height="10" data-d="17. 8. 2026" data-l="0" />
+      <rect class="l0" x="179" y="0" width="1.05" height="10" data-d="18. 8. 2026" data-l="0" />
+      <rect class="l0" x="180" y="0" width="1.05" height="10" data-d="19. 8. 2026" data-l="0" />
+      <rect class="l0" x="181" y="0" width="1.05" height="10" data-d="20. 8. 2026" data-l="0" />
+      <rect class="l0" x="182" y="0" width="1.05" height="10" data-d="21. 8. 2026" data-l="0" />
+      <rect class="l0" x="183" y="0" width="1.05" height="10" data-d="24. 8. 2026" data-l="0" />
+      <rect class="l0" x="184" y="0" width="1.05" height="10" data-d="25. 8. 2026" data-l="0" />
+      <rect class="l0" x="185" y="0" width="1.05" height="10" data-d="26. 8. 2026" data-l="0" />
+      <rect class="l0" x="186" y="0" width="1.05" height="10" data-d="27. 8. 2026" data-l="0" />
+      <rect class="l0" x="187" y="0" width="1.05" height="10" data-d="28. 8. 2026" data-l="0" />
+      <rect class="l0" x="188" y="0" width="1.05" height="10" data-d="31. 8. 2026" data-l="0" />
+      <rect class="l0" x="189" y="0" width="1.05" height="10" data-d="1. 9. 2026" data-l="0" />
+      <rect class="l0" x="190" y="0" width="1.05" height="10" data-d="2. 9. 2026" data-l="0" />
+      <rect class="l0" x="191" y="0" width="1.05" height="10" data-d="3. 9. 2026" data-l="0" />
+      <rect class="l0" x="192" y="0" width="1.05" height="10" data-d="4. 9. 2026" data-l="0" />
+      <rect class="l0" x="193" y="0" width="1.05" height="10" data-d="8. 9. 2026" data-l="0" />
+      <rect class="l0" x="194" y="0" width="1.05" height="10" data-d="9. 9. 2026" data-l="0" />
+      <rect class="l0" x="195" y="0" width="1.05" height="10" data-d="10. 9. 2026" data-l="0" />
+      <rect class="l0" x="196" y="0" width="1.05" height="10" data-d="11. 9. 2026" data-l="0" />
+      <rect class="l0" x="197" y="0" width="1.05" height="10" data-d="14. 9. 2026" data-l="0" />
+      <rect class="l0" x="198" y="0" width="1.05" height="10" data-d="15. 9. 2026" data-l="0" />
+      <rect class="l0" x="199" y="0" width="1.05" height="10" data-d="16. 9. 2026" data-l="0" />
+      <rect class="l0" x="200" y="0" width="1.05" height="10" data-d="17. 9. 2026" data-l="0" />
+      <rect class="l0" x="201" y="0" width="1.05" height="10" data-d="18. 9. 2026" data-l="0" />
+      <rect class="l0" x="202" y="0" width="1.05" height="10" data-d="21. 9. 2026" data-l="0" />
+      <rect class="l0" x="203" y="0" width="1.05" height="10" data-d="22. 9. 2026" data-l="0" />
+      <rect class="l0" x="204" y="0" width="1.05" height="10" data-d="23. 9. 2026" data-l="0" />
+      <rect class="l0" x="205" y="0" width="1.05" height="10" data-d="24. 9. 2026" data-l="0" />
+      <rect class="l0" x="206" y="0" width="1.05" height="10" data-d="25. 9. 2026" data-l="0" />
+      <rect class="l0" x="207" y="0" width="1.05" height="10" data-d="28. 9. 2026" data-l="0" />
+      <rect class="l0" x="208" y="0" width="1.05" height="10" data-d="29. 9. 2026" data-l="0" />
+      <rect class="l0" x="209" y="0" width="1.05" height="10" data-d="30. 9. 2026" data-l="0" />
+      <rect class="l0" x="210" y="0" width="1.05" height="10" data-d="1. 10. 2026" data-l="0" />
+      <rect class="l0" x="211" y="0" width="1.05" height="10" data-d="2. 10. 2026" data-l="0" />
+      <rect class="l0" x="212" y="0" width="1.05" height="10" data-d="5. 10. 2026" data-l="0" />
+      <rect class="l0" x="213" y="0" width="1.05" height="10" data-d="6. 10. 2026" data-l="0" />
+      <rect class="l0" x="214" y="0" width="1.05" height="10" data-d="7. 10. 2026" data-l="0" />
+      <rect class="l0" x="215" y="0" width="1.05" height="10" data-d="8. 10. 2026" data-l="0" />
+      <rect class="l0" x="216" y="0" width="1.05" height="10" data-d="9. 10. 2026" data-l="0" />
+      <rect class="l0" x="217" y="0" width="1.05" height="10" data-d="12. 10. 2026" data-l="0" />
+      <rect class="l0" x="218" y="0" width="1.05" height="10" data-d="13. 10. 2026" data-l="0" />
+      <rect class="l0" x="219" y="0" width="1.05" height="10" data-d="14. 10. 2026" data-l="0" />
+      <rect class="l0" x="220" y="0" width="1.05" height="10" data-d="15. 10. 2026" data-l="0" />
+      <rect class="l1" x="221" y="0" width="1.05" height="10" data-d="16. 10. 2026" data-l="1" />
+      <rect class="l0" x="222" y="0" width="1.05" height="10" data-d="19. 10. 2026" data-l="0" />
+      <rect class="l0" x="223" y="0" width="1.05" height="10" data-d="20. 10. 2026" data-l="0" />
+      <rect class="l0" x="224" y="0" width="1.05" height="10" data-d="21. 10. 2026" data-l="0" />
+      <rect class="l0" x="225" y="0" width="1.05" height="10" data-d="22. 10. 2026" data-l="0" />
+      <rect class="l0" x="226" y="0" width="1.05" height="10" data-d="23. 10. 2026" data-l="0" />
+      <rect class="l0" x="227" y="0" width="1.05" height="10" data-d="26. 10. 2026" data-l="0" />
+      <rect class="l0" x="228" y="0" width="1.05" height="10" data-d="27. 10. 2026" data-l="0" />
+      <rect class="l0" x="229" y="0" width="1.05" height="10" data-d="28. 10. 2026" data-l="0" />
+      <rect class="l0" x="230" y="0" width="1.05" height="10" data-d="29. 10. 2026" data-l="0" />
+      <rect class="l0" x="231" y="0" width="1.05" height="10" data-d="30. 10. 2026" data-l="0" />
+      <rect class="l1" x="232" y="0" width="1.05" height="10" data-d="2. 11. 2026" data-l="1" />
+      <rect class="l1" x="233" y="0" width="1.05" height="10" data-d="3. 11. 2026" data-l="1" />
+      <rect class="l0" x="234" y="0" width="1.05" height="10" data-d="4. 11. 2026" data-l="0" />
+      <rect class="l2" x="235" y="0" width="1.05" height="10" data-d="5. 11. 2026" data-l="2" />
+      <rect class="l2" x="236" y="0" width="1.05" height="10" data-d="6. 11. 2026" data-l="2" />
+      <rect class="l0" x="237" y="0" width="1.05" height="10" data-d="9. 11. 2026" data-l="0" />
+      <rect class="l0" x="238" y="0" width="1.05" height="10" data-d="10. 11. 2026" data-l="0" />
+      <rect class="l0" x="239" y="0" width="1.05" height="10" data-d="11. 11. 2026" data-l="0" />
+      <rect class="l0" x="240" y="0" width="1.05" height="10" data-d="12. 11. 2026" data-l="0" />
+      <rect class="l0" x="241" y="0" width="1.05" height="10" data-d="13. 11. 2026" data-l="0" />
+      <rect class="l1" x="242" y="0" width="1.05" height="10" data-d="16. 11. 2026" data-l="1" />
+      <rect class="l2" x="243" y="0" width="1.05" height="10" data-d="17. 11. 2026" data-l="2" />
+      <rect class="l3" x="244" y="0" width="1.05" height="10" data-d="18. 11. 2026" data-l="3" />
+      <rect class="l3" x="245" y="0" width="1.05" height="10" data-d="19. 11. 2026" data-l="3" />
+      <rect class="l3" x="246" y="0" width="1.05" height="10" data-d="20. 11. 2026" data-l="3" />
+      <rect class="l2" x="247" y="0" width="1.05" height="10" data-d="23. 11. 2026" data-l="2" />
+      <rect class="l2" x="248" y="0" width="1.05" height="10" data-d="24. 11. 2026" data-l="2" />
+      <rect class="l2" x="249" y="0" width="1.05" height="10" data-d="25. 11. 2026" data-l="2" />
+      <rect class="l2" x="250" y="0" width="1.05" height="10" data-d="27. 11. 2026" data-l="2" />
+    </svg>
+    <div class="mk-w-axis"><span>28. 11. 2025</span><span>dnes</span></div>
+  </div>
+      <button type="button" class="mk-w-show"
+        data-syms="SPY,^VIX,HYG,TLT,GLD">Ukáž v grafe →</button>
+    </div>
+    <div class="mk-w-detail" id="mk-w-g-crypto" hidden>
+      <p class="mk-w-detail-head">
+        <b>☁️ Krypto: zamračené.</b> Trhy sú nervózne. Oplatí sa sledovať.
+      </p>
+      <ul class="mk-w-signals">
+        <li class="mk-w-signal s2">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>Index strachu a chamtivosti</b><span class="mk-w-note">extrémny strach</span></span>
+          <span class="mk-w-value">10 zo 100</span>
+        </li>
+        <li class="mk-w-signal s1">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>Bitcoin pod vrcholom (3 mesiace)</b><span class="mk-w-note">chuť riskovať slabne</span></span>
+          <span class="mk-w-value">−30,9 %</span>
+        </li>
+        <li class="mk-w-signal s0">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>Bitcoin za týždeň</b><span class="mk-w-note">bežný týždeň</span></span>
+          <span class="mk-w-value">−0,4 %</span>
+        </li>
+        <li class="mk-w-signal s1">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>Trend Bitcoinu</b><span class="mk-w-note">pod 200-dňovým priemerom</span></span>
+          <span class="mk-w-value">−16,6 % voči priemeru</span>
+        </li>
+        <li class="mk-w-signal s0">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>Rozkolísanosť Bitcoinu (30 dní)</b><span class="mk-w-note">pokojné</span></span>
+          <span class="mk-w-value">47 % ročne</span>
+        </li>
+        <li class="mk-w-signal s0">
+          <span class="mk-w-dot" aria-hidden="true"></span>
+          <span><b>Altcoiny vs. Bitcoin (1 mesiac)</b><span class="mk-w-note">držia krok</span></span>
+          <span class="mk-w-value">−1,5 % voči BTC</span>
+        </li>
+      </ul>
+      
+  <div class="mk-w-history">
+    <div class="mk-w-history-head">
+      <span>Krypto za posledný rok</span>
+      <span class="mk-w-pick" aria-live="polite"></span>
+    </div>
+    <svg class="mk-w-strip" viewBox="0 0 364 10" preserveAspectRatio="none" role="img" aria-label="Krypto za posledný rok">
+      <rect class="l2" x="0" y="0" width="1.05" height="10" data-d="29. 11. 2025" data-l="2" />
+      <rect class="l2" x="1" y="0" width="1.05" height="10" data-d="30. 11. 2025" data-l="2" />
+      <rect class="l2" x="2" y="0" width="1.05" height="10" data-d="1. 12. 2025" data-l="2" />
+      <rect class="l2" x="3" y="0" width="1.05" height="10" data-d="2. 12. 2025" data-l="2" />
+      <rect class="l1" x="4" y="0" width="1.05" height="10" data-d="3. 12. 2025" data-l="1" />
+      <rect class="l1" x="5" y="0" width="1.05" height="10" data-d="4. 12. 2025" data-l="1" />
+      <rect class="l1" x="6" y="0" width="1.05" height="10" data-d="5. 12. 2025" data-l="1" />
+      <rect class="l2" x="7" y="0" width="1.05" height="10" data-d="6. 12. 2025" data-l="2" />
+      <rect class="l2" x="8" y="0" width="1.05" height="10" data-d="7. 12. 2025" data-l="2" />
+      <rect class="l2" x="9" y="0" width="1.05" height="10" data-d="8. 12. 2025" data-l="2" />
+      <rect class="l2" x="10" y="0" width="1.05" height="10" data-d="9. 12. 2025" data-l="2" />
+      <rect class="l1" x="11" y="0" width="1.05" height="10" data-d="10. 12. 2025" data-l="1" />
+      <rect class="l1" x="12" y="0" width="1.05" height="10" data-d="11. 12. 2025" data-l="1" />
+      <rect class="l1" x="13" y="0" width="1.05" height="10" data-d="12. 12. 2025" data-l="1" />
+      <rect class="l2" x="14" y="0" width="1.05" height="10" data-d="13. 12. 2025" data-l="2" />
+      <rect class="l2" x="15" y="0" width="1.05" height="10" data-d="14. 12. 2025" data-l="2" />
+      <rect class="l2" x="16" y="0" width="1.05" height="10" data-d="15. 12. 2025" data-l="2" />
+      <rect class="l2" x="17" y="0" width="1.05" height="10" data-d="16. 12. 2025" data-l="2" />
+      <rect class="l2" x="18" y="0" width="1.05" height="10" data-d="17. 12. 2025" data-l="2" />
+      <rect class="l2" x="19" y="0" width="1.05" height="10" data-d="18. 12. 2025" data-l="2" />
+      <rect class="l2" x="20" y="0" width="1.05" height="10" data-d="19. 12. 2025" data-l="2" />
+      <rect class="l2" x="21" y="0" width="1.05" height="10" data-d="20. 12. 2025" data-l="2" />
+      <rect class="l2" x="22" y="0" width="1.05" height="10" data-d="21. 12. 2025" data-l="2" />
+      <rect class="l1" x="23" y="0" width="1.05" height="10" data-d="22. 12. 2025" data-l="1" />
+      <rect class="l2" x="24" y="0" width="1.05" height="10" data-d="23. 12. 2025" data-l="2" />
+      <rect class="l2" x="25" y="0" width="1.05" height="10" data-d="24. 12. 2025" data-l="2" />
+      <rect class="l2" x="26" y="0" width="1.05" height="10" data-d="25. 12. 2025" data-l="2" />
+      <rect class="l2" x="27" y="0" width="1.05" height="10" data-d="26. 12. 2025" data-l="2" />
+      <rect class="l2" x="28" y="0" width="1.05" height="10" data-d="27. 12. 2025" data-l="2" />
+      <rect class="l2" x="29" y="0" width="1.05" height="10" data-d="28. 12. 2025" data-l="2" />
+      <rect class="l2" x="30" y="0" width="1.05" height="10" data-d="29. 12. 2025" data-l="2" />
+      <rect class="l2" x="31" y="0" width="1.05" height="10" data-d="30. 12. 2025" data-l="2" />
+      <rect class="l2" x="32" y="0" width="1.05" height="10" data-d="31. 12. 2025" data-l="2" />
+      <rect class="l2" x="33" y="0" width="1.05" height="10" data-d="1. 1. 2026" data-l="2" />
+      <rect class="l1" x="34" y="0" width="1.05" height="10" data-d="2. 1. 2026" data-l="1" />
+      <rect class="l1" x="35" y="0" width="1.05" height="10" data-d="3. 1. 2026" data-l="1" />
+      <rect class="l1" x="36" y="0" width="1.05" height="10" data-d="4. 1. 2026" data-l="1" />
+      <rect class="l1" x="37" y="0" width="1.05" height="10" data-d="5. 1. 2026" data-l="1" />
+      <rect class="l1" x="38" y="0" width="1.05" height="10" data-d="6. 1. 2026" data-l="1" />
+      <rect class="l1" x="39" y="0" width="1.05" height="10" data-d="7. 1. 2026" data-l="1" />
+      <rect class="l1" x="40" y="0" width="1.05" height="10" data-d="8. 1. 2026" data-l="1" />
+      <rect class="l1" x="41" y="0" width="1.05" height="10" data-d="9. 1. 2026" data-l="1" />
+      <rect class="l1" x="42" y="0" width="1.05" height="10" data-d="10. 1. 2026" data-l="1" />
+      <rect class="l1" x="43" y="0" width="1.05" height="10" data-d="11. 1. 2026" data-l="1" />
+      <rect class="l1" x="44" y="0" width="1.05" height="10" data-d="12. 1. 2026" data-l="1" />
+      <rect class="l1" x="45" y="0" width="1.05" height="10" data-d="13. 1. 2026" data-l="1" />
+      <rect class="l0" x="46" y="0" width="1.05" height="10" data-d="14. 1. 2026" data-l="0" />
+      <rect class="l0" x="47" y="0" width="1.05" height="10" data-d="15. 1. 2026" data-l="0" />
+      <rect class="l0" x="48" y="0" width="1.05" height="10" data-d="16. 1. 2026" data-l="0" />
+      <rect class="l0" x="49" y="0" width="1.05" height="10" data-d="17. 1. 2026" data-l="0" />
+      <rect class="l0" x="50" y="0" width="1.05" height="10" data-d="18. 1. 2026" data-l="0" />
+      <rect class="l1" x="51" y="0" width="1.05" height="10" data-d="19. 1. 2026" data-l="1" />
+      <rect class="l1" x="52" y="0" width="1.05" height="10" data-d="20. 1. 2026" data-l="1" />
+      <rect class="l2" x="53" y="0" width="1.05" height="10" data-d="21. 1. 2026" data-l="2" />
+      <rect class="l2" x="54" y="0" width="1.05" height="10" data-d="22. 1. 2026" data-l="2" />
+      <rect class="l2" x="55" y="0" width="1.05" height="10" data-d="23. 1. 2026" data-l="2" />
+      <rect class="l1" x="56" y="0" width="1.05" height="10" data-d="24. 1. 2026" data-l="1" />
+      <rect class="l1" x="57" y="0" width="1.05" height="10" data-d="25. 1. 2026" data-l="1" />
+      <rect class="l2" x="58" y="0" width="1.05" height="10" data-d="26. 1. 2026" data-l="2" />
+      <rect class="l1" x="59" y="0" width="1.05" height="10" data-d="27. 1. 2026" data-l="1" />
+      <rect class="l1" x="60" y="0" width="1.05" height="10" data-d="28. 1. 2026" data-l="1" />
+      <rect class="l1" x="61" y="0" width="1.05" height="10" data-d="29. 1. 2026" data-l="1" />
+      <rect class="l2" x="62" y="0" width="1.05" height="10" data-d="30. 1. 2026" data-l="2" />
+      <rect class="l2" x="63" y="0" width="1.05" height="10" data-d="31. 1. 2026" data-l="2" />
+      <rect class="l3" x="64" y="0" width="1.05" height="10" data-d="1. 2. 2026" data-l="3" />
+      <rect class="l3" x="65" y="0" width="1.05" height="10" data-d="2. 2. 2026" data-l="3" />
+      <rect class="l3" x="66" y="0" width="1.05" height="10" data-d="3. 2. 2026" data-l="3" />
+      <rect class="l3" x="67" y="0" width="1.05" height="10" data-d="4. 2. 2026" data-l="3" />
+      <rect class="l4" x="68" y="0" width="1.05" height="10" data-d="5. 2. 2026" data-l="4" />
+      <rect class="l4" x="69" y="0" width="1.05" height="10" data-d="6. 2. 2026" data-l="4" />
+      <rect class="l4" x="70" y="0" width="1.05" height="10" data-d="7. 2. 2026" data-l="4" />
+      <rect class="l3" x="71" y="0" width="1.05" height="10" data-d="8. 2. 2026" data-l="3" />
+      <rect class="l4" x="72" y="0" width="1.05" height="10" data-d="9. 2. 2026" data-l="4" />
+      <rect class="l3" x="73" y="0" width="1.05" height="10" data-d="10. 2. 2026" data-l="3" />
+      <rect class="l3" x="74" y="0" width="1.05" height="10" data-d="11. 2. 2026" data-l="3" />
+      <rect class="l3" x="75" y="0" width="1.05" height="10" data-d="12. 2. 2026" data-l="3" />
+      <rect class="l3" x="76" y="0" width="1.05" height="10" data-d="13. 2. 2026" data-l="3" />
+      <rect class="l3" x="77" y="0" width="1.05" height="10" data-d="14. 2. 2026" data-l="3" />
+      <rect class="l3" x="78" y="0" width="1.05" height="10" data-d="15. 2. 2026" data-l="3" />
+      <rect class="l3" x="79" y="0" width="1.05" height="10" data-d="16. 2. 2026" data-l="3" />
+      <rect class="l3" x="80" y="0" width="1.05" height="10" data-d="17. 2. 2026" data-l="3" />
+      <rect class="l3" x="81" y="0" width="1.05" height="10" data-d="18. 2. 2026" data-l="3" />
+      <rect class="l3" x="82" y="0" width="1.05" height="10" data-d="19. 2. 2026" data-l="3" />
+      <rect class="l3" x="83" y="0" width="1.05" height="10" data-d="20. 2. 2026" data-l="3" />
+      <rect class="l3" x="84" y="0" width="1.05" height="10" data-d="21. 2. 2026" data-l="3" />
+      <rect class="l3" x="85" y="0" width="1.05" height="10" data-d="22. 2. 2026" data-l="3" />
+      <rect class="l3" x="86" y="0" width="1.05" height="10" data-d="23. 2. 2026" data-l="3" />
+      <rect class="l3" x="87" y="0" width="1.05" height="10" data-d="24. 2. 2026" data-l="3" />
+      <rect class="l3" x="88" y="0" width="1.05" height="10" data-d="25. 2. 2026" data-l="3" />
+      <rect class="l3" x="89" y="0" width="1.05" height="10" data-d="26. 2. 2026" data-l="3" />
+      <rect class="l3" x="90" y="0" width="1.05" height="10" data-d="27. 2. 2026" data-l="3" />
+      <rect class="l3" x="91" y="0" width="1.05" height="10" data-d="28. 2. 2026" data-l="3" />
+      <rect class="l3" x="92" y="0" width="1.05" height="10" data-d="1. 3. 2026" data-l="3" />
+      <rect class="l3" x="93" y="0" width="1.05" height="10" data-d="2. 3. 2026" data-l="3" />
+      <rect class="l3" x="94" y="0" width="1.05" height="10" data-d="3. 3. 2026" data-l="3" />
+      <rect class="l3" x="95" y="0" width="1.05" height="10" data-d="4. 3. 2026" data-l="3" />
+      <rect class="l3" x="96" y="0" width="1.05" height="10" data-d="5. 3. 2026" data-l="3" />
+      <rect class="l3" x="97" y="0" width="1.05" height="10" data-d="6. 3. 2026" data-l="3" />
+      <rect class="l2" x="98" y="0" width="1.05" height="10" data-d="7. 3. 2026" data-l="2" />
+      <rect class="l2" x="99" y="0" width="1.05" height="10" data-d="8. 3. 2026" data-l="2" />
+      <rect class="l2" x="100" y="0" width="1.05" height="10" data-d="9. 3. 2026" data-l="2" />
+      <rect class="l2" x="101" y="0" width="1.05" height="10" data-d="10. 3. 2026" data-l="2" />
+      <rect class="l2" x="102" y="0" width="1.05" height="10" data-d="11. 3. 2026" data-l="2" />
+      <rect class="l2" x="103" y="0" width="1.05" height="10" data-d="12. 3. 2026" data-l="2" />
+      <rect class="l2" x="104" y="0" width="1.05" height="10" data-d="13. 3. 2026" data-l="2" />
+      <rect class="l2" x="105" y="0" width="1.05" height="10" data-d="14. 3. 2026" data-l="2" />
+      <rect class="l2" x="106" y="0" width="1.05" height="10" data-d="15. 3. 2026" data-l="2" />
+      <rect class="l2" x="107" y="0" width="1.05" height="10" data-d="16. 3. 2026" data-l="2" />
+      <rect class="l1" x="108" y="0" width="1.05" height="10" data-d="17. 3. 2026" data-l="1" />
+      <rect class="l1" x="109" y="0" width="1.05" height="10" data-d="18. 3. 2026" data-l="1" />
+      <rect class="l2" x="110" y="0" width="1.05" height="10" data-d="19. 3. 2026" data-l="2" />
+      <rect class="l2" x="111" y="0" width="1.05" height="10" data-d="20. 3. 2026" data-l="2" />
+      <rect class="l2" x="112" y="0" width="1.05" height="10" data-d="21. 3. 2026" data-l="2" />
+      <rect class="l2" x="113" y="0" width="1.05" height="10" data-d="22. 3. 2026" data-l="2" />
+      <rect class="l2" x="114" y="0" width="1.05" height="10" data-d="23. 3. 2026" data-l="2" />
+      <rect class="l2" x="115" y="0" width="1.05" height="10" data-d="24. 3. 2026" data-l="2" />
+      <rect class="l2" x="116" y="0" width="1.05" height="10" data-d="25. 3. 2026" data-l="2" />
+      <rect class="l2" x="117" y="0" width="1.05" height="10" data-d="26. 3. 2026" data-l="2" />
+      <rect class="l2" x="118" y="0" width="1.05" height="10" data-d="27. 3. 2026" data-l="2" />
+      <rect class="l2" x="119" y="0" width="1.05" height="10" data-d="28. 3. 2026" data-l="2" />
+      <rect class="l2" x="120" y="0" width="1.05" height="10" data-d="29. 3. 2026" data-l="2" />
+      <rect class="l2" x="121" y="0" width="1.05" height="10" data-d="30. 3. 2026" data-l="2" />
+      <rect class="l2" x="122" y="0" width="1.05" height="10" data-d="31. 3. 2026" data-l="2" />
+      <rect class="l2" x="123" y="0" width="1.05" height="10" data-d="1. 4. 2026" data-l="2" />
+      <rect class="l2" x="124" y="0" width="1.05" height="10" data-d="2. 4. 2026" data-l="2" />
+      <rect class="l2" x="125" y="0" width="1.05" height="10" data-d="3. 4. 2026" data-l="2" />
+      <rect class="l2" x="126" y="0" width="1.05" height="10" data-d="4. 4. 2026" data-l="2" />
+      <rect class="l2" x="127" y="0" width="1.05" height="10" data-d="5. 4. 2026" data-l="2" />
+      <rect class="l2" x="128" y="0" width="1.05" height="10" data-d="6. 4. 2026" data-l="2" />
+      <rect class="l2" x="129" y="0" width="1.05" height="10" data-d="7. 4. 2026" data-l="2" />
+      <rect class="l2" x="130" y="0" width="1.05" height="10" data-d="8. 4. 2026" data-l="2" />
+      <rect class="l2" x="131" y="0" width="1.05" height="10" data-d="9. 4. 2026" data-l="2" />
+      <rect class="l2" x="132" y="0" width="1.05" height="10" data-d="10. 4. 2026" data-l="2" />
+      <rect class="l2" x="133" y="0" width="1.05" height="10" data-d="11. 4. 2026" data-l="2" />
+      <rect class="l2" x="134" y="0" width="1.05" height="10" data-d="12. 4. 2026" data-l="2" />
+      <rect class="l2" x="135" y="0" width="1.05" height="10" data-d="13. 4. 2026" data-l="2" />
+      <rect class="l2" x="136" y="0" width="1.05" height="10" data-d="14. 4. 2026" data-l="2" />
+      <rect class="l2" x="137" y="0" width="1.05" height="10" data-d="15. 4. 2026" data-l="2" />
+      <rect class="l2" x="138" y="0" width="1.05" height="10" data-d="16. 4. 2026" data-l="2" />
+      <rect class="l2" x="139" y="0" width="1.05" height="10" data-d="17. 4. 2026" data-l="2" />
+      <rect class="l1" x="140" y="0" width="1.05" height="10" data-d="18. 4. 2026" data-l="1" />
+      <rect class="l2" x="141" y="0" width="1.05" height="10" data-d="19. 4. 2026" data-l="2" />
+      <rect class="l1" x="142" y="0" width="1.05" height="10" data-d="20. 4. 2026" data-l="1" />
+      <rect class="l1" x="143" y="0" width="1.05" height="10" data-d="21. 4. 2026" data-l="1" />
+      <rect class="l1" x="144" y="0" width="1.05" height="10" data-d="22. 4. 2026" data-l="1" />
+      <rect class="l1" x="145" y="0" width="1.05" height="10" data-d="23. 4. 2026" data-l="1" />
+      <rect class="l1" x="146" y="0" width="1.05" height="10" data-d="24. 4. 2026" data-l="1" />
+      <rect class="l1" x="147" y="0" width="1.05" height="10" data-d="25. 4. 2026" data-l="1" />
+      <rect class="l1" x="148" y="0" width="1.05" height="10" data-d="26. 4. 2026" data-l="1" />
+      <rect class="l1" x="149" y="0" width="1.05" height="10" data-d="27. 4. 2026" data-l="1" />
+      <rect class="l1" x="150" y="0" width="1.05" height="10" data-d="28. 4. 2026" data-l="1" />
+      <rect class="l1" x="151" y="0" width="1.05" height="10" data-d="29. 4. 2026" data-l="1" />
+      <rect class="l1" x="152" y="0" width="1.05" height="10" data-d="30. 4. 2026" data-l="1" />
+      <rect class="l1" x="153" y="0" width="1.05" height="10" data-d="1. 5. 2026" data-l="1" />
+      <rect class="l1" x="154" y="0" width="1.05" height="10" data-d="2. 5. 2026" data-l="1" />
+      <rect class="l1" x="155" y="0" width="1.05" height="10" data-d="3. 5. 2026" data-l="1" />
+      <rect class="l1" x="156" y="0" width="1.05" height="10" data-d="4. 5. 2026" data-l="1" />
+      <rect class="l1" x="157" y="0" width="1.05" height="10" data-d="5. 5. 2026" data-l="1" />
+      <rect class="l1" x="158" y="0" width="1.05" height="10" data-d="6. 5. 2026" data-l="1" />
+      <rect class="l1" x="159" y="0" width="1.05" height="10" data-d="7. 5. 2026" data-l="1" />
+      <rect class="l1" x="160" y="0" width="1.05" height="10" data-d="8. 5. 2026" data-l="1" />
+      <rect class="l1" x="161" y="0" width="1.05" height="10" data-d="9. 5. 2026" data-l="1" />
+      <rect class="l0" x="162" y="0" width="1.05" height="10" data-d="10. 5. 2026" data-l="0" />
+      <rect class="l0" x="163" y="0" width="1.05" height="10" data-d="11. 5. 2026" data-l="0" />
+      <rect class="l0" x="164" y="0" width="1.05" height="10" data-d="12. 5. 2026" data-l="0" />
+      <rect class="l1" x="165" y="0" width="1.05" height="10" data-d="13. 5. 2026" data-l="1" />
+      <rect class="l1" x="166" y="0" width="1.05" height="10" data-d="14. 5. 2026" data-l="1" />
+      <rect class="l1" x="167" y="0" width="1.05" height="10" data-d="15. 5. 2026" data-l="1" />
+      <rect class="l1" x="168" y="0" width="1.05" height="10" data-d="16. 5. 2026" data-l="1" />
+      <rect class="l1" x="169" y="0" width="1.05" height="10" data-d="17. 5. 2026" data-l="1" />
+      <rect class="l1" x="170" y="0" width="1.05" height="10" data-d="18. 5. 2026" data-l="1" />
+      <rect class="l1" x="171" y="0" width="1.05" height="10" data-d="19. 5. 2026" data-l="1" />
+      <rect class="l1" x="172" y="0" width="1.05" height="10" data-d="20. 5. 2026" data-l="1" />
+      <rect class="l1" x="173" y="0" width="1.05" height="10" data-d="21. 5. 2026" data-l="1" />
+      <rect class="l1" x="174" y="0" width="1.05" height="10" data-d="22. 5. 2026" data-l="1" />
+      <rect class="l1" x="175" y="0" width="1.05" height="10" data-d="23. 5. 2026" data-l="1" />
+      <rect class="l1" x="176" y="0" width="1.05" height="10" data-d="24. 5. 2026" data-l="1" />
+      <rect class="l1" x="177" y="0" width="1.05" height="10" data-d="25. 5. 2026" data-l="1" />
+      <rect class="l1" x="178" y="0" width="1.05" height="10" data-d="26. 5. 2026" data-l="1" />
+      <rect class="l1" x="179" y="0" width="1.05" height="10" data-d="27. 5. 2026" data-l="1" />
+      <rect class="l1" x="180" y="0" width="1.05" height="10" data-d="28. 5. 2026" data-l="1" />
+      <rect class="l1" x="181" y="0" width="1.05" height="10" data-d="29. 5. 2026" data-l="1" />
+      <rect class="l1" x="182" y="0" width="1.05" height="10" data-d="30. 5. 2026" data-l="1" />
+      <rect class="l1" x="183" y="0" width="1.05" height="10" data-d="31. 5. 2026" data-l="1" />
+      <rect class="l1" x="184" y="0" width="1.05" height="10" data-d="1. 6. 2026" data-l="1" />
+      <rect class="l2" x="185" y="0" width="1.05" height="10" data-d="2. 6. 2026" data-l="2" />
+      <rect class="l2" x="186" y="0" width="1.05" height="10" data-d="3. 6. 2026" data-l="2" />
+      <rect class="l2" x="187" y="0" width="1.05" height="10" data-d="4. 6. 2026" data-l="2" />
+      <rect class="l3" x="188" y="0" width="1.05" height="10" data-d="5. 6. 2026" data-l="3" />
+      <rect class="l3" x="189" y="0" width="1.05" height="10" data-d="6. 6. 2026" data-l="3" />
+      <rect class="l3" x="190" y="0" width="1.05" height="10" data-d="7. 6. 2026" data-l="3" />
+      <rect class="l3" x="191" y="0" width="1.05" height="10" data-d="8. 6. 2026" data-l="3" />
+      <rect class="l2" x="192" y="0" width="1.05" height="10" data-d="9. 6. 2026" data-l="2" />
+      <rect class="l2" x="193" y="0" width="1.05" height="10" data-d="10. 6. 2026" data-l="2" />
+      <rect class="l2" x="194" y="0" width="1.05" height="10" data-d="11. 6. 2026" data-l="2" />
+      <rect class="l2" x="195" y="0" width="1.05" height="10" data-d="12. 6. 2026" data-l="2" />
+      <rect class="l2" x="196" y="0" width="1.05" height="10" data-d="13. 6. 2026" data-l="2" />
+      <rect class="l2" x="197" y="0" width="1.05" height="10" data-d="14. 6. 2026" data-l="2" />
+      <rect class="l1" x="198" y="0" width="1.05" height="10" data-d="15. 6. 2026" data-l="1" />
+      <rect class="l2" x="199" y="0" width="1.05" height="10" data-d="16. 6. 2026" data-l="2" />
+      <rect class="l2" x="200" y="0" width="1.05" height="10" data-d="17. 6. 2026" data-l="2" />
+      <rect class="l2" x="201" y="0" width="1.05" height="10" data-d="18. 6. 2026" data-l="2" />
+      <rect class="l2" x="202" y="0" width="1.05" height="10" data-d="19. 6. 2026" data-l="2" />
+      <rect class="l2" x="203" y="0" width="1.05" height="10" data-d="20. 6. 2026" data-l="2" />
+      <rect class="l2" x="204" y="0" width="1.05" height="10" data-d="21. 6. 2026" data-l="2" />
+      <rect class="l2" x="205" y="0" width="1.05" height="10" data-d="22. 6. 2026" data-l="2" />
+      <rect class="l2" x="206" y="0" width="1.05" height="10" data-d="23. 6. 2026" data-l="2" />
+      <rect class="l2" x="207" y="0" width="1.05" height="10" data-d="24. 6. 2026" data-l="2" />
+      <rect class="l2" x="208" y="0" width="1.05" height="10" data-d="25. 6. 2026" data-l="2" />
+      <rect class="l2" x="209" y="0" width="1.05" height="10" data-d="26. 6. 2026" data-l="2" />
+      <rect class="l2" x="210" y="0" width="1.05" height="10" data-d="27. 6. 2026" data-l="2" />
+      <rect class="l2" x="211" y="0" width="1.05" height="10" data-d="28. 6. 2026" data-l="2" />
+      <rect class="l2" x="212" y="0" width="1.05" height="10" data-d="29. 6. 2026" data-l="2" />
+      <rect class="l2" x="213" y="0" width="1.05" height="10" data-d="30. 6. 2026" data-l="2" />
+      <rect class="l2" x="214" y="0" width="1.05" height="10" data-d="1. 7. 2026" data-l="2" />
+      <rect class="l2" x="215" y="0" width="1.05" height="10" data-d="2. 7. 2026" data-l="2" />
+      <rect class="l2" x="216" y="0" width="1.05" height="10" data-d="3. 7. 2026" data-l="2" />
+      <rect class="l2" x="217" y="0" width="1.05" height="10" data-d="4. 7. 2026" data-l="2" />
+      <rect class="l2" x="218" y="0" width="1.05" height="10" data-d="5. 7. 2026" data-l="2" />
+      <rect class="l2" x="219" y="0" width="1.05" height="10" data-d="6. 7. 2026" data-l="2" />
+      <rect class="l1" x="220" y="0" width="1.05" height="10" data-d="7. 7. 2026" data-l="1" />
+      <rect class="l2" x="221" y="0" width="1.05" height="10" data-d="8. 7. 2026" data-l="2" />
+      <rect class="l2" x="222" y="0" width="1.05" height="10" data-d="9. 7. 2026" data-l="2" />
+      <rect class="l2" x="223" y="0" width="1.05" height="10" data-d="10. 7. 2026" data-l="2" />
+      <rect class="l1" x="224" y="0" width="1.05" height="10" data-d="11. 7. 2026" data-l="1" />
+      <rect class="l1" x="225" y="0" width="1.05" height="10" data-d="12. 7. 2026" data-l="1" />
+      <rect class="l1" x="226" y="0" width="1.05" height="10" data-d="13. 7. 2026" data-l="1" />
+      <rect class="l2" x="227" y="0" width="1.05" height="10" data-d="14. 7. 2026" data-l="2" />
+      <rect class="l1" x="228" y="0" width="1.05" height="10" data-d="15. 7. 2026" data-l="1" />
+      <rect class="l1" x="229" y="0" width="1.05" height="10" data-d="16. 7. 2026" data-l="1" />
+      <rect class="l1" x="230" y="0" width="1.05" height="10" data-d="17. 7. 2026" data-l="1" />
+      <rect class="l1" x="231" y="0" width="1.05" height="10" data-d="18. 7. 2026" data-l="1" />
+      <rect class="l1" x="232" y="0" width="1.05" height="10" data-d="19. 7. 2026" data-l="1" />
+      <rect class="l1" x="233" y="0" width="1.05" height="10" data-d="20. 7. 2026" data-l="1" />
+      <rect class="l1" x="234" y="0" width="1.05" height="10" data-d="21. 7. 2026" data-l="1" />
+      <rect class="l1" x="235" y="0" width="1.05" height="10" data-d="22. 7. 2026" data-l="1" />
+      <rect class="l1" x="236" y="0" width="1.05" height="10" data-d="23. 7. 2026" data-l="1" />
+      <rect class="l1" x="237" y="0" width="1.05" height="10" data-d="24. 7. 2026" data-l="1" />
+      <rect class="l1" x="238" y="0" width="1.05" height="10" data-d="25. 7. 2026" data-l="1" />
+      <rect class="l1" x="239" y="0" width="1.05" height="10" data-d="26. 7. 2026" data-l="1" />
+      <rect class="l1" x="240" y="0" width="1.05" height="10" data-d="27. 7. 2026" data-l="1" />
+      <rect class="l1" x="241" y="0" width="1.05" height="10" data-d="28. 7. 2026" data-l="1" />
+      <rect class="l1" x="242" y="0" width="1.05" height="10" data-d="29. 7. 2026" data-l="1" />
+      <rect class="l1" x="243" y="0" width="1.05" height="10" data-d="30. 7. 2026" data-l="1" />
+      <rect class="l1" x="244" y="0" width="1.05" height="10" data-d="31. 7. 2026" data-l="1" />
+      <rect class="l1" x="245" y="0" width="1.05" height="10" data-d="1. 8. 2026" data-l="1" />
+      <rect class="l1" x="246" y="0" width="1.05" height="10" data-d="2. 8. 2026" data-l="1" />
+      <rect class="l1" x="247" y="0" width="1.05" height="10" data-d="3. 8. 2026" data-l="1" />
+      <rect class="l1" x="248" y="0" width="1.05" height="10" data-d="4. 8. 2026" data-l="1" />
+      <rect class="l1" x="249" y="0" width="1.05" height="10" data-d="5. 8. 2026" data-l="1" />
+      <rect class="l1" x="250" y="0" width="1.05" height="10" data-d="6. 8. 2026" data-l="1" />
+      <rect class="l1" x="251" y="0" width="1.05" height="10" data-d="7. 8. 2026" data-l="1" />
+      <rect class="l1" x="252" y="0" width="1.05" height="10" data-d="8. 8. 2026" data-l="1" />
+      <rect class="l1" x="253" y="0" width="1.05" height="10" data-d="9. 8. 2026" data-l="1" />
+      <rect class="l1" x="254" y="0" width="1.05" height="10" data-d="10. 8. 2026" data-l="1" />
+      <rect class="l1" x="255" y="0" width="1.05" height="10" data-d="11. 8. 2026" data-l="1" />
+      <rect class="l1" x="256" y="0" width="1.05" height="10" data-d="12. 8. 2026" data-l="1" />
+      <rect class="l1" x="257" y="0" width="1.05" height="10" data-d="13. 8. 2026" data-l="1" />
+      <rect class="l1" x="258" y="0" width="1.05" height="10" data-d="14. 8. 2026" data-l="1" />
+      <rect class="l1" x="259" y="0" width="1.05" height="10" data-d="15. 8. 2026" data-l="1" />
+      <rect class="l1" x="260" y="0" width="1.05" height="10" data-d="16. 8. 2026" data-l="1" />
+      <rect class="l1" x="261" y="0" width="1.05" height="10" data-d="17. 8. 2026" data-l="1" />
+      <rect class="l1" x="262" y="0" width="1.05" height="10" data-d="18. 8. 2026" data-l="1" />
+      <rect class="l0" x="263" y="0" width="1.05" height="10" data-d="19. 8. 2026" data-l="0" />
+      <rect class="l0" x="264" y="0" width="1.05" height="10" data-d="20. 8. 2026" data-l="0" />
+      <rect class="l0" x="265" y="0" width="1.05" height="10" data-d="21. 8. 2026" data-l="0" />
+      <rect class="l0" x="266" y="0" width="1.05" height="10" data-d="22. 8. 2026" data-l="0" />
+      <rect class="l0" x="267" y="0" width="1.05" height="10" data-d="23. 8. 2026" data-l="0" />
+      <rect class="l0" x="268" y="0" width="1.05" height="10" data-d="24. 8. 2026" data-l="0" />
+      <rect class="l0" x="269" y="0" width="1.05" height="10" data-d="25. 8. 2026" data-l="0" />
+      <rect class="l0" x="270" y="0" width="1.05" height="10" data-d="26. 8. 2026" data-l="0" />
+      <rect class="l0" x="271" y="0" width="1.05" height="10" data-d="27. 8. 2026" data-l="0" />
+      <rect class="l0" x="272" y="0" width="1.05" height="10" data-d="28. 8. 2026" data-l="0" />
+      <rect class="l0" x="273" y="0" width="1.05" height="10" data-d="29. 8. 2026" data-l="0" />
+      <rect class="l0" x="274" y="0" width="1.05" height="10" data-d="30. 8. 2026" data-l="0" />
+      <rect class="l0" x="275" y="0" width="1.05" height="10" data-d="31. 8. 2026" data-l="0" />
+      <rect class="l0" x="276" y="0" width="1.05" height="10" data-d="1. 9. 2026" data-l="0" />
+      <rect class="l0" x="277" y="0" width="1.05" height="10" data-d="2. 9. 2026" data-l="0" />
+      <rect class="l0" x="278" y="0" width="1.05" height="10" data-d="3. 9. 2026" data-l="0" />
+      <rect class="l0" x="279" y="0" width="1.05" height="10" data-d="4. 9. 2026" data-l="0" />
+      <rect class="l0" x="280" y="0" width="1.05" height="10" data-d="5. 9. 2026" data-l="0" />
+      <rect class="l0" x="281" y="0" width="1.05" height="10" data-d="6. 9. 2026" data-l="0" />
+      <rect class="l0" x="282" y="0" width="1.05" height="10" data-d="7. 9. 2026" data-l="0" />
+      <rect class="l0" x="283" y="0" width="1.05" height="10" data-d="8. 9. 2026" data-l="0" />
+      <rect class="l0" x="284" y="0" width="1.05" height="10" data-d="9. 9. 2026" data-l="0" />
+      <rect class="l0" x="285" y="0" width="1.05" height="10" data-d="10. 9. 2026" data-l="0" />
+      <rect class="l0" x="286" y="0" width="1.05" height="10" data-d="11. 9. 2026" data-l="0" />
+      <rect class="l0" x="287" y="0" width="1.05" height="10" data-d="12. 9. 2026" data-l="0" />
+      <rect class="l0" x="288" y="0" width="1.05" height="10" data-d="13. 9. 2026" data-l="0" />
+      <rect class="l0" x="289" y="0" width="1.05" height="10" data-d="14. 9. 2026" data-l="0" />
+      <rect class="l0" x="290" y="0" width="1.05" height="10" data-d="15. 9. 2026" data-l="0" />
+      <rect class="l0" x="291" y="0" width="1.05" height="10" data-d="16. 9. 2026" data-l="0" />
+      <rect class="l0" x="292" y="0" width="1.05" height="10" data-d="17. 9. 2026" data-l="0" />
+      <rect class="l0" x="293" y="0" width="1.05" height="10" data-d="18. 9. 2026" data-l="0" />
+      <rect class="l0" x="294" y="0" width="1.05" height="10" data-d="19. 9. 2026" data-l="0" />
+      <rect class="l0" x="295" y="0" width="1.05" height="10" data-d="20. 9. 2026" data-l="0" />
+      <rect class="l0" x="296" y="0" width="1.05" height="10" data-d="21. 9. 2026" data-l="0" />
+      <rect class="l0" x="297" y="0" width="1.05" height="10" data-d="22. 9. 2026" data-l="0" />
+      <rect class="l0" x="298" y="0" width="1.05" height="10" data-d="23. 9. 2026" data-l="0" />
+      <rect class="l0" x="299" y="0" width="1.05" height="10" data-d="24. 9. 2026" data-l="0" />
+      <rect class="l0" x="300" y="0" width="1.05" height="10" data-d="25. 9. 2026" data-l="0" />
+      <rect class="l0" x="301" y="0" width="1.05" height="10" data-d="26. 9. 2026" data-l="0" />
+      <rect class="l0" x="302" y="0" width="1.05" height="10" data-d="27. 9. 2026" data-l="0" />
+      <rect class="l0" x="303" y="0" width="1.05" height="10" data-d="28. 9. 2026" data-l="0" />
+      <rect class="l0" x="304" y="0" width="1.05" height="10" data-d="29. 9. 2026" data-l="0" />
+      <rect class="l0" x="305" y="0" width="1.05" height="10" data-d="30. 9. 2026" data-l="0" />
+      <rect class="l0" x="306" y="0" width="1.05" height="10" data-d="1. 10. 2026" data-l="0" />
+      <rect class="l0" x="307" y="0" width="1.05" height="10" data-d="2. 10. 2026" data-l="0" />
+      <rect class="l0" x="308" y="0" width="1.05" height="10" data-d="3. 10. 2026" data-l="0" />
+      <rect class="l0" x="309" y="0" width="1.05" height="10" data-d="4. 10. 2026" data-l="0" />
+      <rect class="l0" x="310" y="0" width="1.05" height="10" data-d="5. 10. 2026" data-l="0" />
+      <rect class="l0" x="311" y="0" width="1.05" height="10" data-d="6. 10. 2026" data-l="0" />
+      <rect class="l0" x="312" y="0" width="1.05" height="10" data-d="7. 10. 2026" data-l="0" />
+      <rect class="l0" x="313" y="0" width="1.05" height="10" data-d="8. 10. 2026" data-l="0" />
+      <rect class="l0" x="314" y="0" width="1.05" height="10" data-d="9. 10. 2026" data-l="0" />
+      <rect class="l0" x="315" y="0" width="1.05" height="10" data-d="10. 10. 2026" data-l="0" />
+      <rect class="l0" x="316" y="0" width="1.05" height="10" data-d="11. 10. 2026" data-l="0" />
+      <rect class="l0" x="317" y="0" width="1.05" height="10" data-d="12. 10. 2026" data-l="0" />
+      <rect class="l0" x="318" y="0" width="1.05" height="10" data-d="13. 10. 2026" data-l="0" />
+      <rect class="l0" x="319" y="0" width="1.05" height="10" data-d="14. 10. 2026" data-l="0" />
+      <rect class="l0" x="320" y="0" width="1.05" height="10" data-d="15. 10. 2026" data-l="0" />
+      <rect class="l0" x="321" y="0" width="1.05" height="10" data-d="16. 10. 2026" data-l="0" />
+      <rect class="l0" x="322" y="0" width="1.05" height="10" data-d="17. 10. 2026" data-l="0" />
+      <rect class="l0" x="323" y="0" width="1.05" height="10" data-d="18. 10. 2026" data-l="0" />
+      <rect class="l0" x="324" y="0" width="1.05" height="10" data-d="19. 10. 2026" data-l="0" />
+      <rect class="l0" x="325" y="0" width="1.05" height="10" data-d="20. 10. 2026" data-l="0" />
+      <rect class="l0" x="326" y="0" width="1.05" height="10" data-d="21. 10. 2026" data-l="0" />
+      <rect class="l0" x="327" y="0" width="1.05" height="10" data-d="22. 10. 2026" data-l="0" />
+      <rect class="l0" x="328" y="0" width="1.05" height="10" data-d="23. 10. 2026" data-l="0" />
+      <rect class="l0" x="329" y="0" width="1.05" height="10" data-d="24. 10. 2026" data-l="0" />
+      <rect class="l0" x="330" y="0" width="1.05" height="10" data-d="25. 10. 2026" data-l="0" />
+      <rect class="l0" x="331" y="0" width="1.05" height="10" data-d="26. 10. 2026" data-l="0" />
+      <rect class="l0" x="332" y="0" width="1.05" height="10" data-d="27. 10. 2026" data-l="0" />
+      <rect class="l0" x="333" y="0" width="1.05" height="10" data-d="28. 10. 2026" data-l="0" />
+      <rect class="l0" x="334" y="0" width="1.05" height="10" data-d="29. 10. 2026" data-l="0" />
+      <rect class="l1" x="335" y="0" width="1.05" height="10" data-d="30. 10. 2026" data-l="1" />
+      <rect class="l1" x="336" y="0" width="1.05" height="10" data-d="31. 10. 2026" data-l="1" />
+      <rect class="l1" x="337" y="0" width="1.05" height="10" data-d="1. 11. 2026" data-l="1" />
+      <rect class="l1" x="338" y="0" width="1.05" height="10" data-d="2. 11. 2026" data-l="1" />
+      <rect class="l1" x="339" y="0" width="1.05" height="10" data-d="3. 11. 2026" data-l="1" />
+      <rect class="l1" x="340" y="0" width="1.05" height="10" data-d="4. 11. 2026" data-l="1" />
+      <rect class="l0" x="341" y="0" width="1.05" height="10" data-d="5. 11. 2026" data-l="0" />
+      <rect class="l1" x="342" y="0" width="1.05" height="10" data-d="6. 11. 2026" data-l="1" />
+      <rect class="l1" x="343" y="0" width="1.05" height="10" data-d="7. 11. 2026" data-l="1" />
+      <rect class="l1" x="344" y="0" width="1.05" height="10" data-d="8. 11. 2026" data-l="1" />
+      <rect class="l1" x="345" y="0" width="1.05" height="10" data-d="9. 11. 2026" data-l="1" />
+      <rect class="l1" x="346" y="0" width="1.05" height="10" data-d="10. 11. 2026" data-l="1" />
+      <rect class="l1" x="347" y="0" width="1.05" height="10" data-d="11. 11. 2026" data-l="1" />
+      <rect class="l1" x="348" y="0" width="1.05" height="10" data-d="12. 11. 2026" data-l="1" />
+      <rect class="l2" x="349" y="0" width="1.05" height="10" data-d="13. 11. 2026" data-l="2" />
+      <rect class="l3" x="350" y="0" width="1.05" height="10" data-d="14. 11. 2026" data-l="3" />
+      <rect class="l3" x="351" y="0" width="1.05" height="10" data-d="15. 11. 2026" data-l="3" />
+      <rect class="l3" x="352" y="0" width="1.05" height="10" data-d="16. 11. 2026" data-l="3" />
+      <rect class="l2" x="353" y="0" width="1.05" height="10" data-d="17. 11. 2026" data-l="2" />
+      <rect class="l2" x="354" y="0" width="1.05" height="10" data-d="18. 11. 2026" data-l="2" />
+      <rect class="l2" x="355" y="0" width="1.05" height="10" data-d="19. 11. 2026" data-l="2" />
+      <rect class="l2" x="356" y="0" width="1.05" height="10" data-d="20. 11. 2026" data-l="2" />
+      <rect class="l2" x="357" y="0" width="1.05" height="10" data-d="21. 11. 2026" data-l="2" />
+      <rect class="l2" x="358" y="0" width="1.05" height="10" data-d="22. 11. 2026" data-l="2" />
+      <rect class="l2" x="359" y="0" width="1.05" height="10" data-d="23. 11. 2026" data-l="2" />
+      <rect class="l2" x="360" y="0" width="1.05" height="10" data-d="24. 11. 2026" data-l="2" />
+      <rect class="l2" x="361" y="0" width="1.05" height="10" data-d="25. 11. 2026" data-l="2" />
+      <rect class="l2" x="362" y="0" width="1.05" height="10" data-d="26. 11. 2026" data-l="2" />
+      <rect class="l2" x="363" y="0" width="1.05" height="10" data-d="28. 11. 2026" data-l="2" />
+    </svg>
+    <div class="mk-w-axis"><span>29. 11. 2025</span><span>dnes</span></div>
+  </div>
+      <button type="button" class="mk-w-show"
+        data-syms="BTC-USD,ETH-USD,SOL-USD,ADA-USD">Ukáž v grafe →</button>
+    </div>
+
+    
+  <div class="mk-w-history">
+    <div class="mk-w-history-head">
+      <span>Celkové počasie za posledný rok</span>
+      <span class="mk-w-pick" aria-live="polite"></span>
+    </div>
+    <svg class="mk-w-strip" viewBox="0 0 251 10" preserveAspectRatio="none" role="img" aria-label="Celkové počasie za posledný rok">
+      <rect class="l0" x="0" y="0" width="1.05" height="10" data-d="28. 11. 2025" data-l="0" />
+      <rect class="l1" x="1" y="0" width="1.05" height="10" data-d="1. 12. 2025" data-l="1" />
+      <rect class="l1" x="2" y="0" width="1.05" height="10" data-d="2. 12. 2025" data-l="1" />
+      <rect class="l1" x="3" y="0" width="1.05" height="10" data-d="3. 12. 2025" data-l="1" />
+      <rect class="l1" x="4" y="0" width="1.05" height="10" data-d="4. 12. 2025" data-l="1" />
+      <rect class="l1" x="5" y="0" width="1.05" height="10" data-d="5. 12. 2025" data-l="1" />
+      <rect class="l1" x="6" y="0" width="1.05" height="10" data-d="8. 12. 2025" data-l="1" />
+      <rect class="l1" x="7" y="0" width="1.05" height="10" data-d="9. 12. 2025" data-l="1" />
+      <rect class="l1" x="8" y="0" width="1.05" height="10" data-d="10. 12. 2025" data-l="1" />
+      <rect class="l1" x="9" y="0" width="1.05" height="10" data-d="11. 12. 2025" data-l="1" />
+      <rect class="l1" x="10" y="0" width="1.05" height="10" data-d="12. 12. 2025" data-l="1" />
+      <rect class="l1" x="11" y="0" width="1.05" height="10" data-d="15. 12. 2025" data-l="1" />
+      <rect class="l1" x="12" y="0" width="1.05" height="10" data-d="16. 12. 2025" data-l="1" />
+      <rect class="l1" x="13" y="0" width="1.05" height="10" data-d="17. 12. 2025" data-l="1" />
+      <rect class="l1" x="14" y="0" width="1.05" height="10" data-d="18. 12. 2025" data-l="1" />
+      <rect class="l1" x="15" y="0" width="1.05" height="10" data-d="19. 12. 2025" data-l="1" />
+      <rect class="l1" x="16" y="0" width="1.05" height="10" data-d="22. 12. 2025" data-l="1" />
+      <rect class="l1" x="17" y="0" width="1.05" height="10" data-d="23. 12. 2025" data-l="1" />
+      <rect class="l1" x="18" y="0" width="1.05" height="10" data-d="24. 12. 2025" data-l="1" />
+      <rect class="l1" x="19" y="0" width="1.05" height="10" data-d="26. 12. 2025" data-l="1" />
+      <rect class="l1" x="20" y="0" width="1.05" height="10" data-d="29. 12. 2025" data-l="1" />
+      <rect class="l1" x="21" y="0" width="1.05" height="10" data-d="30. 12. 2025" data-l="1" />
+      <rect class="l1" x="22" y="0" width="1.05" height="10" data-d="31. 12. 2025" data-l="1" />
+      <rect class="l1" x="23" y="0" width="1.05" height="10" data-d="2. 1. 2026" data-l="1" />
+      <rect class="l1" x="24" y="0" width="1.05" height="10" data-d="5. 1. 2026" data-l="1" />
+      <rect class="l1" x="25" y="0" width="1.05" height="10" data-d="6. 1. 2026" data-l="1" />
+      <rect class="l1" x="26" y="0" width="1.05" height="10" data-d="7. 1. 2026" data-l="1" />
+      <rect class="l1" x="27" y="0" width="1.05" height="10" data-d="8. 1. 2026" data-l="1" />
+      <rect class="l1" x="28" y="0" width="1.05" height="10" data-d="9. 1. 2026" data-l="1" />
+      <rect class="l1" x="29" y="0" width="1.05" height="10" data-d="12. 1. 2026" data-l="1" />
+      <rect class="l1" x="30" y="0" width="1.05" height="10" data-d="13. 1. 2026" data-l="1" />
+      <rect class="l0" x="31" y="0" width="1.05" height="10" data-d="14. 1. 2026" data-l="0" />
+      <rect class="l0" x="32" y="0" width="1.05" height="10" data-d="15. 1. 2026" data-l="0" />
+      <rect class="l0" x="33" y="0" width="1.05" height="10" data-d="16. 1. 2026" data-l="0" />
+      <rect class="l1" x="34" y="0" width="1.05" height="10" data-d="20. 1. 2026" data-l="1" />
+      <rect class="l1" x="35" y="0" width="1.05" height="10" data-d="21. 1. 2026" data-l="1" />
+      <rect class="l1" x="36" y="0" width="1.05" height="10" data-d="22. 1. 2026" data-l="1" />
+      <rect class="l1" x="37" y="0" width="1.05" height="10" data-d="23. 1. 2026" data-l="1" />
+      <rect class="l1" x="38" y="0" width="1.05" height="10" data-d="26. 1. 2026" data-l="1" />
+      <rect class="l1" x="39" y="0" width="1.05" height="10" data-d="27. 1. 2026" data-l="1" />
+      <rect class="l1" x="40" y="0" width="1.05" height="10" data-d="28. 1. 2026" data-l="1" />
+      <rect class="l1" x="41" y="0" width="1.05" height="10" data-d="29. 1. 2026" data-l="1" />
+      <rect class="l1" x="42" y="0" width="1.05" height="10" data-d="30. 1. 2026" data-l="1" />
+      <rect class="l2" x="43" y="0" width="1.05" height="10" data-d="2. 2. 2026" data-l="2" />
+      <rect class="l2" x="44" y="0" width="1.05" height="10" data-d="3. 2. 2026" data-l="2" />
+      <rect class="l2" x="45" y="0" width="1.05" height="10" data-d="4. 2. 2026" data-l="2" />
+      <rect class="l3" x="46" y="0" width="1.05" height="10" data-d="5. 2. 2026" data-l="3" />
+      <rect class="l2" x="47" y="0" width="1.05" height="10" data-d="6. 2. 2026" data-l="2" />
+      <rect class="l2" x="48" y="0" width="1.05" height="10" data-d="9. 2. 2026" data-l="2" />
+      <rect class="l2" x="49" y="0" width="1.05" height="10" data-d="10. 2. 2026" data-l="2" />
+      <rect class="l2" x="50" y="0" width="1.05" height="10" data-d="11. 2. 2026" data-l="2" />
+      <rect class="l2" x="51" y="0" width="1.05" height="10" data-d="12. 2. 2026" data-l="2" />
+      <rect class="l2" x="52" y="0" width="1.05" height="10" data-d="13. 2. 2026" data-l="2" />
+      <rect class="l2" x="53" y="0" width="1.05" height="10" data-d="17. 2. 2026" data-l="2" />
+      <rect class="l2" x="54" y="0" width="1.05" height="10" data-d="18. 2. 2026" data-l="2" />
+      <rect class="l2" x="55" y="0" width="1.05" height="10" data-d="19. 2. 2026" data-l="2" />
+      <rect class="l2" x="56" y="0" width="1.05" height="10" data-d="20. 2. 2026" data-l="2" />
+      <rect class="l2" x="57" y="0" width="1.05" height="10" data-d="23. 2. 2026" data-l="2" />
+      <rect class="l2" x="58" y="0" width="1.05" height="10" data-d="24. 2. 2026" data-l="2" />
+      <rect class="l2" x="59" y="0" width="1.05" height="10" data-d="25. 2. 2026" data-l="2" />
+      <rect class="l2" x="60" y="0" width="1.05" height="10" data-d="26. 2. 2026" data-l="2" />
+      <rect class="l2" x="61" y="0" width="1.05" height="10" data-d="27. 2. 2026" data-l="2" />
+      <rect class="l2" x="62" y="0" width="1.05" height="10" data-d="2. 3. 2026" data-l="2" />
+      <rect class="l2" x="63" y="0" width="1.05" height="10" data-d="3. 3. 2026" data-l="2" />
+      <rect class="l2" x="64" y="0" width="1.05" height="10" data-d="4. 3. 2026" data-l="2" />
+      <rect class="l2" x="65" y="0" width="1.05" height="10" data-d="5. 3. 2026" data-l="2" />
+      <rect class="l2" x="66" y="0" width="1.05" height="10" data-d="6. 3. 2026" data-l="2" />
+      <rect class="l1" x="67" y="0" width="1.05" height="10" data-d="9. 3. 2026" data-l="1" />
+      <rect class="l1" x="68" y="0" width="1.05" height="10" data-d="10. 3. 2026" data-l="1" />
+      <rect class="l1" x="69" y="0" width="1.05" height="10" data-d="11. 3. 2026" data-l="1" />
+      <rect class="l2" x="70" y="0" width="1.05" height="10" data-d="12. 3. 2026" data-l="2" />
+      <rect class="l1" x="71" y="0" width="1.05" height="10" data-d="13. 3. 2026" data-l="1" />
+      <rect class="l1" x="72" y="0" width="1.05" height="10" data-d="16. 3. 2026" data-l="1" />
+      <rect class="l1" x="73" y="0" width="1.05" height="10" data-d="17. 3. 2026" data-l="1" />
+      <rect class="l1" x="74" y="0" width="1.05" height="10" data-d="18. 3. 2026" data-l="1" />
+      <rect class="l2" x="75" y="0" width="1.05" height="10" data-d="19. 3. 2026" data-l="2" />
+      <rect class="l2" x="76" y="0" width="1.05" height="10" data-d="20. 3. 2026" data-l="2" />
+      <rect class="l2" x="77" y="0" width="1.05" height="10" data-d="23. 3. 2026" data-l="2" />
+      <rect class="l2" x="78" y="0" width="1.05" height="10" data-d="24. 3. 2026" data-l="2" />
+      <rect class="l2" x="79" y="0" width="1.05" height="10" data-d="25. 3. 2026" data-l="2" />
+      <rect class="l2" x="80" y="0" width="1.05" height="10" data-d="26. 3. 2026" data-l="2" />
+      <rect class="l2" x="81" y="0" width="1.05" height="10" data-d="27. 3. 2026" data-l="2" />
+      <rect class="l2" x="82" y="0" width="1.05" height="10" data-d="30. 3. 2026" data-l="2" />
+      <rect class="l2" x="83" y="0" width="1.05" height="10" data-d="31. 3. 2026" data-l="2" />
+      <rect class="l2" x="84" y="0" width="1.05" height="10" data-d="1. 4. 2026" data-l="2" />
+      <rect class="l2" x="85" y="0" width="1.05" height="10" data-d="2. 4. 2026" data-l="2" />
+      <rect class="l2" x="86" y="0" width="1.05" height="10" data-d="6. 4. 2026" data-l="2" />
+      <rect class="l2" x="87" y="0" width="1.05" height="10" data-d="7. 4. 2026" data-l="2" />
+      <rect class="l1" x="88" y="0" width="1.05" height="10" data-d="8. 4. 2026" data-l="1" />
+      <rect class="l1" x="89" y="0" width="1.05" height="10" data-d="9. 4. 2026" data-l="1" />
+      <rect class="l1" x="90" y="0" width="1.05" height="10" data-d="10. 4. 2026" data-l="1" />
+      <rect class="l1" x="91" y="0" width="1.05" height="10" data-d="13. 4. 2026" data-l="1" />
+      <rect class="l1" x="92" y="0" width="1.05" height="10" data-d="14. 4. 2026" data-l="1" />
+      <rect class="l1" x="93" y="0" width="1.05" height="10" data-d="15. 4. 2026" data-l="1" />
+      <rect class="l1" x="94" y="0" width="1.05" height="10" data-d="16. 4. 2026" data-l="1" />
+      <rect class="l1" x="95" y="0" width="1.05" height="10" data-d="17. 4. 2026" data-l="1" />
+      <rect class="l1" x="96" y="0" width="1.05" height="10" data-d="20. 4. 2026" data-l="1" />
+      <rect class="l1" x="97" y="0" width="1.05" height="10" data-d="21. 4. 2026" data-l="1" />
+      <rect class="l1" x="98" y="0" width="1.05" height="10" data-d="22. 4. 2026" data-l="1" />
+      <rect class="l1" x="99" y="0" width="1.05" height="10" data-d="23. 4. 2026" data-l="1" />
+      <rect class="l1" x="100" y="0" width="1.05" height="10" data-d="24. 4. 2026" data-l="1" />
+      <rect class="l1" x="101" y="0" width="1.05" height="10" data-d="27. 4. 2026" data-l="1" />
+      <rect class="l1" x="102" y="0" width="1.05" height="10" data-d="28. 4. 2026" data-l="1" />
+      <rect class="l1" x="103" y="0" width="1.05" height="10" data-d="29. 4. 2026" data-l="1" />
+      <rect class="l1" x="104" y="0" width="1.05" height="10" data-d="30. 4. 2026" data-l="1" />
+      <rect class="l1" x="105" y="0" width="1.05" height="10" data-d="1. 5. 2026" data-l="1" />
+      <rect class="l1" x="106" y="0" width="1.05" height="10" data-d="4. 5. 2026" data-l="1" />
+      <rect class="l1" x="107" y="0" width="1.05" height="10" data-d="5. 5. 2026" data-l="1" />
+      <rect class="l1" x="108" y="0" width="1.05" height="10" data-d="6. 5. 2026" data-l="1" />
+      <rect class="l1" x="109" y="0" width="1.05" height="10" data-d="7. 5. 2026" data-l="1" />
+      <rect class="l1" x="110" y="0" width="1.05" height="10" data-d="8. 5. 2026" data-l="1" />
+      <rect class="l0" x="111" y="0" width="1.05" height="10" data-d="11. 5. 2026" data-l="0" />
+      <rect class="l0" x="112" y="0" width="1.05" height="10" data-d="12. 5. 2026" data-l="0" />
+      <rect class="l1" x="113" y="0" width="1.05" height="10" data-d="13. 5. 2026" data-l="1" />
+      <rect class="l1" x="114" y="0" width="1.05" height="10" data-d="14. 5. 2026" data-l="1" />
+      <rect class="l1" x="115" y="0" width="1.05" height="10" data-d="15. 5. 2026" data-l="1" />
+      <rect class="l1" x="116" y="0" width="1.05" height="10" data-d="18. 5. 2026" data-l="1" />
+      <rect class="l1" x="117" y="0" width="1.05" height="10" data-d="19. 5. 2026" data-l="1" />
+      <rect class="l1" x="118" y="0" width="1.05" height="10" data-d="20. 5. 2026" data-l="1" />
+      <rect class="l1" x="119" y="0" width="1.05" height="10" data-d="21. 5. 2026" data-l="1" />
+      <rect class="l1" x="120" y="0" width="1.05" height="10" data-d="22. 5. 2026" data-l="1" />
+      <rect class="l1" x="121" y="0" width="1.05" height="10" data-d="26. 5. 2026" data-l="1" />
+      <rect class="l1" x="122" y="0" width="1.05" height="10" data-d="27. 5. 2026" data-l="1" />
+      <rect class="l1" x="123" y="0" width="1.05" height="10" data-d="28. 5. 2026" data-l="1" />
+      <rect class="l1" x="124" y="0" width="1.05" height="10" data-d="29. 5. 2026" data-l="1" />
+      <rect class="l1" x="125" y="0" width="1.05" height="10" data-d="1. 6. 2026" data-l="1" />
+      <rect class="l1" x="126" y="0" width="1.05" height="10" data-d="2. 6. 2026" data-l="1" />
+      <rect class="l1" x="127" y="0" width="1.05" height="10" data-d="3. 6. 2026" data-l="1" />
+      <rect class="l1" x="128" y="0" width="1.05" height="10" data-d="4. 6. 2026" data-l="1" />
+      <rect class="l2" x="129" y="0" width="1.05" height="10" data-d="5. 6. 2026" data-l="2" />
+      <rect class="l2" x="130" y="0" width="1.05" height="10" data-d="8. 6. 2026" data-l="2" />
+      <rect class="l2" x="131" y="0" width="1.05" height="10" data-d="9. 6. 2026" data-l="2" />
+      <rect class="l2" x="132" y="0" width="1.05" height="10" data-d="10. 6. 2026" data-l="2" />
+      <rect class="l2" x="133" y="0" width="1.05" height="10" data-d="11. 6. 2026" data-l="2" />
+      <rect class="l1" x="134" y="0" width="1.05" height="10" data-d="12. 6. 2026" data-l="1" />
+      <rect class="l1" x="135" y="0" width="1.05" height="10" data-d="15. 6. 2026" data-l="1" />
+      <rect class="l1" x="136" y="0" width="1.05" height="10" data-d="16. 6. 2026" data-l="1" />
+      <rect class="l1" x="137" y="0" width="1.05" height="10" data-d="17. 6. 2026" data-l="1" />
+      <rect class="l1" x="138" y="0" width="1.05" height="10" data-d="18. 6. 2026" data-l="1" />
+      <rect class="l1" x="139" y="0" width="1.05" height="10" data-d="22. 6. 2026" data-l="1" />
+      <rect class="l1" x="140" y="0" width="1.05" height="10" data-d="23. 6. 2026" data-l="1" />
+      <rect class="l1" x="141" y="0" width="1.05" height="10" data-d="24. 6. 2026" data-l="1" />
+      <rect class="l1" x="142" y="0" width="1.05" height="10" data-d="25. 6. 2026" data-l="1" />
+      <rect class="l1" x="143" y="0" width="1.05" height="10" data-d="26. 6. 2026" data-l="1" />
+      <rect class="l1" x="144" y="0" width="1.05" height="10" data-d="29. 6. 2026" data-l="1" />
+      <rect class="l1" x="145" y="0" width="1.05" height="10" data-d="30. 6. 2026" data-l="1" />
+      <rect class="l1" x="146" y="0" width="1.05" height="10" data-d="1. 7. 2026" data-l="1" />
+      <rect class="l1" x="147" y="0" width="1.05" height="10" data-d="2. 7. 2026" data-l="1" />
+      <rect class="l1" x="148" y="0" width="1.05" height="10" data-d="6. 7. 2026" data-l="1" />
+      <rect class="l1" x="149" y="0" width="1.05" height="10" data-d="7. 7. 2026" data-l="1" />
+      <rect class="l1" x="150" y="0" width="1.05" height="10" data-d="8. 7. 2026" data-l="1" />
+      <rect class="l1" x="151" y="0" width="1.05" height="10" data-d="9. 7. 2026" data-l="1" />
+      <rect class="l1" x="152" y="0" width="1.05" height="10" data-d="10. 7. 2026" data-l="1" />
+      <rect class="l1" x="153" y="0" width="1.05" height="10" data-d="13. 7. 2026" data-l="1" />
+      <rect class="l1" x="154" y="0" width="1.05" height="10" data-d="14. 7. 2026" data-l="1" />
+      <rect class="l1" x="155" y="0" width="1.05" height="10" data-d="15. 7. 2026" data-l="1" />
+      <rect class="l1" x="156" y="0" width="1.05" height="10" data-d="16. 7. 2026" data-l="1" />
+      <rect class="l1" x="157" y="0" width="1.05" height="10" data-d="17. 7. 2026" data-l="1" />
+      <rect class="l1" x="158" y="0" width="1.05" height="10" data-d="20. 7. 2026" data-l="1" />
+      <rect class="l1" x="159" y="0" width="1.05" height="10" data-d="21. 7. 2026" data-l="1" />
+      <rect class="l1" x="160" y="0" width="1.05" height="10" data-d="22. 7. 2026" data-l="1" />
+      <rect class="l1" x="161" y="0" width="1.05" height="10" data-d="23. 7. 2026" data-l="1" />
+      <rect class="l1" x="162" y="0" width="1.05" height="10" data-d="24. 7. 2026" data-l="1" />
+      <rect class="l1" x="163" y="0" width="1.05" height="10" data-d="27. 7. 2026" data-l="1" />
+      <rect class="l1" x="164" y="0" width="1.05" height="10" data-d="28. 7. 2026" data-l="1" />
+      <rect class="l1" x="165" y="0" width="1.05" height="10" data-d="29. 7. 2026" data-l="1" />
+      <rect class="l1" x="166" y="0" width="1.05" height="10" data-d="30. 7. 2026" data-l="1" />
+      <rect class="l1" x="167" y="0" width="1.05" height="10" data-d="31. 7. 2026" data-l="1" />
+      <rect class="l1" x="168" y="0" width="1.05" height="10" data-d="3. 8. 2026" data-l="1" />
+      <rect class="l1" x="169" y="0" width="1.05" height="10" data-d="4. 8. 2026" data-l="1" />
+      <rect class="l1" x="170" y="0" width="1.05" height="10" data-d="5. 8. 2026" data-l="1" />
+      <rect class="l1" x="171" y="0" width="1.05" height="10" data-d="6. 8. 2026" data-l="1" />
+      <rect class="l1" x="172" y="0" width="1.05" height="10" data-d="7. 8. 2026" data-l="1" />
+      <rect class="l1" x="173" y="0" width="1.05" height="10" data-d="10. 8. 2026" data-l="1" />
+      <rect class="l1" x="174" y="0" width="1.05" height="10" data-d="11. 8. 2026" data-l="1" />
+      <rect class="l1" x="175" y="0" width="1.05" height="10" data-d="12. 8. 2026" data-l="1" />
+      <rect class="l1" x="176" y="0" width="1.05" height="10" data-d="13. 8. 2026" data-l="1" />
+      <rect class="l1" x="177" y="0" width="1.05" height="10" data-d="14. 8. 2026" data-l="1" />
+      <rect class="l1" x="178" y="0" width="1.05" height="10" data-d="17. 8. 2026" data-l="1" />
+      <rect class="l1" x="179" y="0" width="1.05" height="10" data-d="18. 8. 2026" data-l="1" />
+      <rect class="l0" x="180" y="0" width="1.05" height="10" data-d="19. 8. 2026" data-l="0" />
+      <rect class="l0" x="181" y="0" width="1.05" height="10" data-d="20. 8. 2026" data-l="0" />
+      <rect class="l0" x="182" y="0" width="1.05" height="10" data-d="21. 8. 2026" data-l="0" />
+      <rect class="l0" x="183" y="0" width="1.05" height="10" data-d="24. 8. 2026" data-l="0" />
+      <rect class="l0" x="184" y="0" width="1.05" height="10" data-d="25. 8. 2026" data-l="0" />
+      <rect class="l0" x="185" y="0" width="1.05" height="10" data-d="26. 8. 2026" data-l="0" />
+      <rect class="l0" x="186" y="0" width="1.05" height="10" data-d="27. 8. 2026" data-l="0" />
+      <rect class="l0" x="187" y="0" width="1.05" height="10" data-d="28. 8. 2026" data-l="0" />
+      <rect class="l0" x="188" y="0" width="1.05" height="10" data-d="31. 8. 2026" data-l="0" />
+      <rect class="l0" x="189" y="0" width="1.05" height="10" data-d="1. 9. 2026" data-l="0" />
+      <rect class="l0" x="190" y="0" width="1.05" height="10" data-d="2. 9. 2026" data-l="0" />
+      <rect class="l0" x="191" y="0" width="1.05" height="10" data-d="3. 9. 2026" data-l="0" />
+      <rect class="l0" x="192" y="0" width="1.05" height="10" data-d="4. 9. 2026" data-l="0" />
+      <rect class="l0" x="193" y="0" width="1.05" height="10" data-d="8. 9. 2026" data-l="0" />
+      <rect class="l0" x="194" y="0" width="1.05" height="10" data-d="9. 9. 2026" data-l="0" />
+      <rect class="l0" x="195" y="0" width="1.05" height="10" data-d="10. 9. 2026" data-l="0" />
+      <rect class="l0" x="196" y="0" width="1.05" height="10" data-d="11. 9. 2026" data-l="0" />
+      <rect class="l0" x="197" y="0" width="1.05" height="10" data-d="14. 9. 2026" data-l="0" />
+      <rect class="l0" x="198" y="0" width="1.05" height="10" data-d="15. 9. 2026" data-l="0" />
+      <rect class="l0" x="199" y="0" width="1.05" height="10" data-d="16. 9. 2026" data-l="0" />
+      <rect class="l0" x="200" y="0" width="1.05" height="10" data-d="17. 9. 2026" data-l="0" />
+      <rect class="l0" x="201" y="0" width="1.05" height="10" data-d="18. 9. 2026" data-l="0" />
+      <rect class="l0" x="202" y="0" width="1.05" height="10" data-d="21. 9. 2026" data-l="0" />
+      <rect class="l0" x="203" y="0" width="1.05" height="10" data-d="22. 9. 2026" data-l="0" />
+      <rect class="l0" x="204" y="0" width="1.05" height="10" data-d="23. 9. 2026" data-l="0" />
+      <rect class="l0" x="205" y="0" width="1.05" height="10" data-d="24. 9. 2026" data-l="0" />
+      <rect class="l0" x="206" y="0" width="1.05" height="10" data-d="25. 9. 2026" data-l="0" />
+      <rect class="l0" x="207" y="0" width="1.05" height="10" data-d="28. 9. 2026" data-l="0" />
+      <rect class="l0" x="208" y="0" width="1.05" height="10" data-d="29. 9. 2026" data-l="0" />
+      <rect class="l0" x="209" y="0" width="1.05" height="10" data-d="30. 9. 2026" data-l="0" />
+      <rect class="l0" x="210" y="0" width="1.05" height="10" data-d="1. 10. 2026" data-l="0" />
+      <rect class="l0" x="211" y="0" width="1.05" height="10" data-d="2. 10. 2026" data-l="0" />
+      <rect class="l0" x="212" y="0" width="1.05" height="10" data-d="5. 10. 2026" data-l="0" />
+      <rect class="l0" x="213" y="0" width="1.05" height="10" data-d="6. 10. 2026" data-l="0" />
+      <rect class="l0" x="214" y="0" width="1.05" height="10" data-d="7. 10. 2026" data-l="0" />
+      <rect class="l0" x="215" y="0" width="1.05" height="10" data-d="8. 10. 2026" data-l="0" />
+      <rect class="l0" x="216" y="0" width="1.05" height="10" data-d="9. 10. 2026" data-l="0" />
+      <rect class="l0" x="217" y="0" width="1.05" height="10" data-d="12. 10. 2026" data-l="0" />
+      <rect class="l0" x="218" y="0" width="1.05" height="10" data-d="13. 10. 2026" data-l="0" />
+      <rect class="l0" x="219" y="0" width="1.05" height="10" data-d="14. 10. 2026" data-l="0" />
+      <rect class="l0" x="220" y="0" width="1.05" height="10" data-d="15. 10. 2026" data-l="0" />
+      <rect class="l1" x="221" y="0" width="1.05" height="10" data-d="16. 10. 2026" data-l="1" />
+      <rect class="l0" x="222" y="0" width="1.05" height="10" data-d="19. 10. 2026" data-l="0" />
+      <rect class="l0" x="223" y="0" width="1.05" height="10" data-d="20. 10. 2026" data-l="0" />
+      <rect class="l0" x="224" y="0" width="1.05" height="10" data-d="21. 10. 2026" data-l="0" />
+      <rect class="l0" x="225" y="0" width="1.05" height="10" data-d="22. 10. 2026" data-l="0" />
+      <rect class="l0" x="226" y="0" width="1.05" height="10" data-d="23. 10. 2026" data-l="0" />
+      <rect class="l0" x="227" y="0" width="1.05" height="10" data-d="26. 10. 2026" data-l="0" />
+      <rect class="l0" x="228" y="0" width="1.05" height="10" data-d="27. 10. 2026" data-l="0" />
+      <rect class="l0" x="229" y="0" width="1.05" height="10" data-d="28. 10. 2026" data-l="0" />
+      <rect class="l0" x="230" y="0" width="1.05" height="10" data-d="29. 10. 2026" data-l="0" />
+      <rect class="l1" x="231" y="0" width="1.05" height="10" data-d="30. 10. 2026" data-l="1" />
+      <rect class="l1" x="232" y="0" width="1.05" height="10" data-d="2. 11. 2026" data-l="1" />
+      <rect class="l1" x="233" y="0" width="1.05" height="10" data-d="3. 11. 2026" data-l="1" />
+      <rect class="l1" x="234" y="0" width="1.05" height="10" data-d="4. 11. 2026" data-l="1" />
+      <rect class="l1" x="235" y="0" width="1.05" height="10" data-d="5. 11. 2026" data-l="1" />
+      <rect class="l2" x="236" y="0" width="1.05" height="10" data-d="6. 11. 2026" data-l="2" />
+      <rect class="l1" x="237" y="0" width="1.05" height="10" data-d="9. 11. 2026" data-l="1" />
+      <rect class="l1" x="238" y="0" width="1.05" height="10" data-d="10. 11. 2026" data-l="1" />
+      <rect class="l1" x="239" y="0" width="1.05" height="10" data-d="11. 11. 2026" data-l="1" />
+      <rect class="l1" x="240" y="0" width="1.05" height="10" data-d="12. 11. 2026" data-l="1" />
+      <rect class="l1" x="241" y="0" width="1.05" height="10" data-d="13. 11. 2026" data-l="1" />
+      <rect class="l2" x="242" y="0" width="1.05" height="10" data-d="16. 11. 2026" data-l="2" />
+      <rect class="l2" x="243" y="0" width="1.05" height="10" data-d="17. 11. 2026" data-l="2" />
+      <rect class="l3" x="244" y="0" width="1.05" height="10" data-d="18. 11. 2026" data-l="3" />
+      <rect class="l3" x="245" y="0" width="1.05" height="10" data-d="19. 11. 2026" data-l="3" />
+      <rect class="l3" x="246" y="0" width="1.05" height="10" data-d="20. 11. 2026" data-l="3" />
+      <rect class="l2" x="247" y="0" width="1.05" height="10" data-d="23. 11. 2026" data-l="2" />
+      <rect class="l2" x="248" y="0" width="1.05" height="10" data-d="24. 11. 2026" data-l="2" />
+      <rect class="l2" x="249" y="0" width="1.05" height="10" data-d="25. 11. 2026" data-l="2" />
+      <rect class="l2" x="250" y="0" width="1.05" height="10" data-d="27. 11. 2026" data-l="2" />
+    </svg>
+    <div class="mk-w-axis"><span>28. 11. 2025</span><span>dnes</span></div>
+  </div>
+    <ul class="mk-w-legend">
+      <li><i style="background: var(--w0)"></i>☀️ Jasno</li>
+      <li><i style="background: var(--w1)"></i>🌤️ Polojasno</li>
+      <li><i style="background: var(--w2)"></i>☁️ Zamračené</li>
+      <li><i style="background: var(--w3)"></i>🌧️ Búrka</li>
+      <li><i style="background: var(--w4)"></i>⛈️ Víchrica</li>
+    </ul>
+  </section>
+
+  <p class="mk-lead">
+    Akcie a kryptomeny, ktoré sledujem. V režime % graf ukazuje, o koľko sa
+    každá cena pohla od začiatku obdobia — tak sa dajú porovnať aj Bitcoin za
+    77 000 a Cardano za pár centov. V režime $ ukazuje skutočné ceny.
+  </p>
+
+  <div class="mk-controls">
+    <div class="mk-row">
+      <div class="mk-ranges" role="group" aria-label="Obdobie">
+        <button type="button" data-range="7">1T</button>
+        <button type="button" data-range="30">1M</button>
+        <button type="button" data-range="91">3M</button>
+        <button type="button" data-range="182">6M</button>
+        <button type="button" data-range="ytd">Od 1.1.</button>
+        <button type="button" data-range="365">1R</button>
+        <button type="button" data-range="1826">5R</button>
+      </div>
+      <div class="mk-ranges mk-mode" role="group" aria-label="Zobrazenie">
+        <button type="button" data-mode="pct" title="Zmena v percentách">%</button>
+        <button type="button" data-mode="usd" title="Cena v dolároch">$</button>
+      </div>
+      <div class="mk-ranges mk-axes" role="group" aria-label="Osi" hidden>
+        <button type="button" data-axes="1" title="Všetky ceny na jednej osi">1 os</button>
+        <button type="button" data-axes="2" title="Lacnejšie tituly vľavo, drahšie vpravo">2 osi</button>
+      </div>
+    </div>
+    <div class="mk-presets" id="mk-groups" role="group" aria-label="Predvoľby"></div>
+    <details class="mk-pick" id="mk-pick">
+      <summary id="mk-pick-sum">Vlastný výber</summary>
+      <div class="mk-row" id="mk-chips" role="group" aria-label="Zobrazené tituly"></div>
+    </details>
+  </div>
+
+  <p class="mk-span" id="mk-span" aria-live="polite"></p>
+  <div class="mk-chart" id="mk-chart">
+    <p class="mk-empty">Načítavam ceny…</p>
+  </div>
+
+  <ul class="mk-list" id="mk-list" aria-label="Kurzy"></ul>
+
+  <p class="mk-note" id="mk-note">
+    Denné ceny z Yahoo Finance, v USD (VIX je index, nie cena). Aktualizuje sa hodinu po otvorení a po zatvorení burzy v New Yorku.
+  </p>
+</section>
+
+<script>
+  (function () {
+    var DAY = 86400000;
+    var STORE = "trhy:v1";
+    // Presets live in src/_data/presets.json.
+    var PRESETS = [{"label":"Všetko","all":true},{"label":"Nič","none":true},{"label":"Celý trh","groups":["trh"]},{"label":"Krízové ukazovatele","symbols":["SPY","^VIX","HYG","TLT","GLD"]},{"label":"ETF","tags":["etf"]},{"label":"Akcie","groups":["akcie"]},{"label":"Veľká sedmička","tags":["mag7"]},{"label":"AI","tags":["ai"]},{"label":"Tech","tags":["tech"]},{"label":"Čipy","tags":["chips"]},{"label":"Čína","tags":["china"]},{"label":"Financie","tags":["finance"]},{"label":"Krypto","groups":["krypto"]},{"label":"Krypto firmy","groups":["kryptofirmy"]},{"label":"Bez krypta","exceptGroups":["krypto","kryptofirmy"]}];
+
+    var state = { range: "30", hidden: [], mode: "pct", axes: "1" };
+    try {
+      var saved = JSON.parse(localStorage.getItem(STORE) || "null");
+      if (saved && saved.range) state = saved;
+      if (state.mode !== "usd") state.mode = "pct";
+      if (state.axes !== "2") state.axes = "1";
+    } catch (e) {}
+    function save() {
+      try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) {}
+    }
+
+    var chartEl = document.getElementById("mk-chart");
+    var listEl = document.getElementById("mk-list");
+    var series = [];
+    var lastRender = null;
+    var presets = [];
+
+    // ---- formatting --------------------------------------------------------
+    function dateOf(day) { return new Date(day * DAY); }
+    function fmtDate(day, opts) {
+      return dateOf(day).toLocaleDateString("sk-SK", Object.assign({ timeZone: "UTC" }, opts));
+    }
+    function fmtPrice(v) {
+      var digits = v >= 1000 ? 0 : v >= 1 ? 2 : 4;
+      if (v < 1) return v.toLocaleString("sk-SK", { maximumSignificantDigits: 4 });
+      return v.toLocaleString("sk-SK", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+    }
+    function fmtPct(p) {
+      var abs = Math.abs(p);
+      var s = abs.toLocaleString("sk-SK", { maximumFractionDigits: abs >= 100 ? 0 : 1, minimumFractionDigits: abs >= 100 ? 0 : 1 });
+      return (p > 0 ? "+" : p < 0 ? "−" : "") + s + " %";
+    }
+
+    // Colour follows the ticker's position in tickers.json, never what's on
+    // screen. Past eight tickers the hues repeat with a dashed line.
+    // Line patterns per block of eight: solid, dashed, dotted, dash-dot,
+    // long dash, dash-dot-dot (48 distinct styles).
+    // [chart dash, legend-swatch dash]; lines have round caps, so a 0.5
+    // dash draws as a dot.
+    var PATTERNS = [["", ""], ["6 4", "4 3"], ["0.5 4.5", "0.5 3.5"], ["9 3.5 0.5 3.5", "5 2.5 0.5 2.5"],
+      ["14 5", "7 3"], ["9 3 0.5 3 0.5 3", "4 2 0.5 2 0.5 2"]];
+    function styleOf(i) {
+      var pat = PATTERNS[Math.floor(i / 8) % PATTERNS.length];
+      return { color: "var(--s" + ((i % 8) + 1) + ")", dash: pat[0], swatchDash: pat[1] };
+    }
+    function swatch(s, w, h) {
+      return '<svg viewBox="0 0 ' + w + " " + h + '" aria-hidden="true"><line x1="1" y1="' + h / 2 + '" x2="' + (w - 1) + '" y2="' + h / 2 +
+        '" stroke="' + s.style.color + '" stroke-width="3" stroke-linecap="round"' + (s.style.swatchDash ? ' stroke-dasharray="' + s.style.swatchDash + '"' : "") + "/></svg>";
+    }
+    function esc(t) {
+      return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; });
+    }
+
+    // ---- data shaping ------------------------------------------------------
+    function rangeStart(lastDay) {
+      if (state.range === "ytd") {
+        var y = dateOf(lastDay).getUTCFullYear();
+        return Math.floor(Date.UTC(y, 0, 1) / DAY) - 1; // last close of the previous year
+      }
+      return lastDay - Number(state.range);
+    }
+
+    // Slice one ticker to the range. The baseline is the last close at or
+    // before the range start (or the first close, for younger tickers).
+    function slice(s, start) {
+      var i = 0;
+      while (i < s.days.length && s.days[i] < start) i++;
+      var from = Math.max(0, s.days[i] === start ? i : i - 1);
+      var days = s.days.slice(from), prices = s.prices.slice(from);
+      var base = prices[0];
+      return {
+        days: days,
+        prices: prices,
+        pct: prices.map(function (p) { return (p / base - 1) * 100; }),
+      };
+    }
+
+    // ---- controls ----------------------------------------------------------
+    function buildControls() {
+      var chips = document.getElementById("mk-chips");
+      chips.innerHTML = series.map(function (s) {
+        return '<button type="button" class="mk-chip" data-sym="' + esc(s.symbol) + '" title="' + esc(s.name) + '">' +
+          swatch(s, 18, 8) + esc(s.label) + "</button>";
+      }).join("");
+      chips.addEventListener("click", function (e) {
+        var b = e.target.closest(".mk-chip");
+        if (!b) return;
+        var sym = b.dataset.sym;
+        var i = state.hidden.indexOf(sym);
+        if (i === -1) state.hidden.push(sym); else state.hidden.splice(i, 1);
+        update();
+      });
+
+      // Presets (src/_data/presets.json). A preset matches tickers by any of
+      // its groups, tags or symbols; "exceptGroups" means everything outside
+      // those groups except indices like VIX. Empty presets are skipped.
+      presets = PRESETS.map(function (p) {
+        var keep = p.all ? function () { return true; }
+          : p.none ? function () { return false; }
+          : p.exceptGroups ? function (s) { return p.exceptGroups.indexOf(s.group) === -1 && s.symbol.charAt(0) !== "^"; }
+          : function (s) {
+            return (p.groups || []).indexOf(s.group) !== -1 ||
+              (p.symbols || []).indexOf(s.symbol) !== -1 ||
+              (p.tags || []).some(function (t) { return (s.tags || []).indexOf(t) !== -1; });
+          };
+        return { label: p.label, syms: series.filter(keep).map(function (s) { return s.symbol; }), none: !!p.none };
+      }).filter(function (p) { return p.none || p.syms.length; });
+      var g = document.getElementById("mk-groups");
+      g.innerHTML = '<span class="mk-presets-label">Predvoľby</span>' + presets.map(function (f, i) {
+        return '<button type="button" class="mk-group" data-f="' + i + '">' + esc(f.label) + "</button>";
+      }).join("");
+      g.addEventListener("click", function (e) {
+        var b = e.target.closest(".mk-group");
+        if (!b) return;
+        var keep = presets[+b.dataset.f].syms;
+        state.hidden = series.filter(function (s) { return keep.indexOf(s.symbol) === -1; })
+          .map(function (s) { return s.symbol; });
+        update();
+      });
+
+      // The full chip list is folded on phones; open where there's room.
+      if (window.matchMedia("(min-width: 700px)").matches) document.getElementById("mk-pick").open = true;
+
+      document.querySelector(".mk-mode").addEventListener("click", function (e) {
+        var b = e.target.closest("button");
+        if (!b) return;
+        state.mode = b.dataset.mode;
+        update();
+      });
+
+      document.querySelector(".mk-axes").addEventListener("click", function (e) {
+        var b = e.target.closest("button");
+        if (!b) return;
+        state.axes = b.dataset.axes;
+        update();
+      });
+
+      document.querySelector(".mk-ranges").addEventListener("click", function (e) {
+        var b = e.target.closest("button");
+        if (!b) return;
+        state.range = b.dataset.range;
+        update();
+      });
+    }
+
+    // ---- chart -------------------------------------------------------------
+    function niceStep(span, count) {
+      var raw = span / count, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+      var n = raw / mag;
+      return (n >= 5 ? 10 : n >= 2 ? 5 : n >= 1 ? 2 : 1) * mag;
+    }
+
+    function drawChart(visible, start, end) {
+      var W = chartEl.clientWidth - 8;
+      var H = W < 560 ? 320 : 400;
+      var usd = state.mode === "usd";
+      var dual = usd && state.axes === "2" && visible.length > 1;
+      var val = usd ? function (v, i) { return v.r.prices[i]; } : function (v, i) { return v.r.pct[i]; };
+      visible.forEach(function (v) { v.axis = 0; });
+      if (dual) splitAxes(visible);
+      var fewLabels = visible.length <= 4 && !dual;
+
+      // One scale per axis: % always includes the 0 baseline; $ fits the data.
+      var axes = [0, 1].map(function (a) {
+        var lo = usd ? Infinity : 0, hi = usd ? -Infinity : 0, any = false;
+        visible.forEach(function (v) {
+          if (v.axis !== a) return;
+          any = true;
+          v.r.days.forEach(function (_, i) { var p = val(v, i); if (p < lo) lo = p; if (p > hi) hi = p; });
+        });
+        if (!any) return null;
+        if (hi - lo < (usd ? Math.abs(hi) * 0.01 + 1e-9 : 1)) { var pad = usd ? Math.abs(hi) * 0.01 + 1e-6 : 0.5; hi += pad; lo -= pad; }
+        var step = niceStep(hi - lo, W < 560 ? 4 : 5);
+        lo = Math.floor(lo / step) * step;
+        hi = Math.ceil(hi / step) * step;
+        if (usd && lo < 0) lo = 0;
+        var label = usd
+          ? function (t) { return axisLabel(t, step); }
+          : function (t) { return Math.abs(t) < step / 1000 ? "0 %" : fmtPct(t).replace(",0 ", " "); };
+        return { lo: lo, hi: hi, step: step, label: label };
+      });
+
+      // Margins fit the widest tick label (~6.2px per character at 11px).
+      function widest(A) { return A ? Math.max(A.label(A.lo).length, A.label(A.hi).length) : 0; }
+      var m = {
+        t: dual ? 24 : 10,
+        r: axes[1] ? Math.round(widest(axes[1]) * 6.2 + 14) : fewLabels ? 52 : 14,
+        b: 26,
+        l: Math.round(widest(axes[0]) * 6.2 + 12),
+      };
+      var iw = W - m.l - m.r, ih = H - m.t - m.b;
+
+      var x = function (d) { return m.l + ((d - start) / (end - start)) * iw; };
+      var yAx = function (a, p) { var A = axes[a]; return m.t + (1 - (p - A.lo) / (A.hi - A.lo)) * ih; };
+      var yOf = function (v, i) { return yAx(v.axis, val(v, i)); };
+
+      var out = '<svg viewBox="0 0 ' + W + " " + H + '" height="' + H + '" role="img" aria-label="' +
+        (usd ? "Ceny v dolároch" : "Percentuálna zmena cien") + ' za zvolené obdobie">';
+
+      // Gridlines follow the left axis; the right axis only gets labels.
+      axes.forEach(function (A, a) {
+        if (!A) return;
+        for (var v = A.lo; v <= A.hi + A.step / 2; v += A.step) {
+          var yy = yAx(a, v).toFixed(1);
+          if (a === 0) {
+            var zero = !usd && Math.abs(v) < A.step / 1000;
+            out += '<line class="' + (zero ? "zero" : "grid") + '" x1="' + m.l + '" x2="' + (m.l + iw) + '" y1="' + yy + '" y2="' + yy + '"/>';
+            out += '<text x="' + (m.l - 8) + '" y="' + yy + '" dy="0.32em" text-anchor="end">' + esc(A.label(v)) + "</text>";
+          } else {
+            out += '<text x="' + (m.l + iw + 8) + '" y="' + yy + '" dy="0.32em" text-anchor="start">' + esc(A.label(v)) + "</text>";
+          }
+        }
+      });
+
+      // With two axes, name what each one carries, above it.
+      if (dual) {
+        [0, 1].forEach(function (a) {
+          var names = visible.filter(function (v) { return v.axis === a; }).map(function (v) { return v.s.label; });
+          var txt = (a ? "" : "← ") + names.join(", ") + (a ? " →" : "");
+          out += '<text class="axis-key" x="' + (a ? m.l + iw + m.r - 4 : 4) + '" y="12" text-anchor="' + (a ? "end" : "start") + '">' + esc(txt) + "</text>";
+        });
+      }
+
+      // X labels: a handful of evenly spaced dates
+      var span = end - start;
+      var opts = span <= 120 ? { day: "numeric", month: "numeric" } : span <= 250 ? { month: "short" } : { month: "numeric", year: "numeric" };
+      var ticks = W < 560 ? 3 : 5;
+      for (var k = 0; k <= ticks; k++) {
+        var d = Math.round(start + (span * k) / ticks);
+        var anchor = k === 0 ? "start" : k === ticks ? "end" : "middle";
+        out += '<text x="' + x(d).toFixed(1) + '" y="' + (H - 6) + '" text-anchor="' + anchor + '">' + esc(fmtDate(d, opts)) + "</text>";
+      }
+
+      // Lines
+      visible.forEach(function (v) {
+        var dpath = v.r.days.map(function (d, i) {
+          return (i ? "L" : "M") + x(Math.max(d, start)).toFixed(1) + " " + yOf(v, i).toFixed(1);
+        }).join("");
+        out += '<path class="line" data-sym="' + esc(v.s.symbol) + '" d="' + dpath + '" stroke="' + v.s.style.color + '"' +
+          (v.s.style.dash ? ' stroke-dasharray="' + v.s.style.dash + '"' : "") + "/>";
+      });
+
+      // Direct end labels when there are few enough lines to read them
+      if (fewLabels) {
+        var labels = visible.map(function (v) {
+          return { text: v.s.label, y: yOf(v, v.r.days.length - 1) };
+        }).sort(function (a, b) { return a.y - b.y; });
+        for (var j = 1; j < labels.length; j++) {
+          if (labels[j].y - labels[j - 1].y < 13) labels[j].y = labels[j - 1].y + 13;
+        }
+        // If the stack runs off the bottom, push just the crowded ones back up.
+        var n = labels.length;
+        if (n && labels[n - 1].y > m.t + ih) {
+          labels[n - 1].y = m.t + ih;
+          for (var q = n - 2; q >= 0; q--) {
+            if (labels[q + 1].y - labels[q].y < 13) labels[q].y = labels[q + 1].y - 13;
+          }
+        }
+        labels.forEach(function (l) {
+          out += '<text class="end-label" x="' + (m.l + iw + 6) + '" y="' + l.y.toFixed(1) + '" dy="0.32em">' + esc(l.text) + "</text>";
+        });
+      }
+
+      out += '<g id="mk-hover" style="display:none"><line class="cross" y1="' + m.t + '" y2="' + (m.t + ih) + '"/></g>';
+      out += '<rect x="' + m.l + '" y="0" width="' + iw + '" height="' + H + '" fill="transparent" id="mk-hit"/>';
+      out += "</svg><div class=\"mk-tip\" hidden></div>";
+      chartEl.innerHTML = out;
+      chartEl.classList.toggle("is-usd", usd);
+
+      if (focusSym) setFocus(focusSym);
+      lastRender = { visible: visible, x: x, yOf: yOf, usd: usd, dual: dual, start: start, end: end, m: m, iw: iw, ih: ih, W: W };
+      bindHover();
+    }
+
+    function bindHover() {
+      var svg = chartEl.querySelector("svg");
+      var hit = document.getElementById("mk-hit");
+      var g = document.getElementById("mk-hover");
+      var tip = chartEl.querySelector(".mk-tip");
+      var R = lastRender;
+
+      function at(r, day) {
+        // last point at or before `day`
+        var lo = 0, hi = r.days.length - 1;
+        if (day < r.days[0]) return -1;
+        while (lo < hi) {
+          var mid = (lo + hi + 1) >> 1;
+          if (r.days[mid] <= day) lo = mid; else hi = mid - 1;
+        }
+        return lo;
+      }
+
+      function show(clientX) {
+        var box = svg.getBoundingClientRect();
+        var px = ((clientX - box.left) / box.width) * R.W;
+        var day = Math.round(R.start + ((px - R.m.l) / R.iw) * (R.end - R.start));
+        day = Math.max(R.start, Math.min(R.end, day));
+        var cx = R.x(day);
+        var dots = "", rows = [];
+        R.visible.forEach(function (v) {
+          var i = at(v.r, day);
+          if (i < 0) return;
+          dots += '<circle class="dot" r="4.5" cx="' + R.x(Math.max(v.r.days[i], R.start)).toFixed(1) + '" cy="' + R.yOf(v, i).toFixed(1) + '" fill="' + v.s.style.color + '"/>';
+          rows.push({ v: v, pct: v.r.pct[i], price: v.r.prices[i] });
+        });
+        rows.sort(R.usd ? function (a, b) { return b.price - a.price; } : function (a, b) { return b.pct - a.pct; });
+        g.innerHTML = '<line class="cross" x1="' + cx + '" x2="' + cx + '" y1="' + R.m.t + '" y2="' + (R.m.t + R.ih) + '"/>' + dots;
+        g.style.display = "";
+        tip.innerHTML = '<div class="mk-tip-date">' + esc(fmtDate(day, { day: "numeric", month: "long", year: "numeric" })) + "</div>" +
+          rows.map(function (r) {
+            return '<div class="mk-tip-row">' + swatch(r.v.s, 14, 6) + "<b>" + esc(r.v.s.label) + (R.dual ? (r.v.axis ? " →" : " ←") : "") + "</b><span class='mk-tip-price'>" + (R.usd ? fmtUsd(r.v.s, r.price) : fmtPrice(r.price)) + "</span><span class='mk-tip-pct'>" + fmtPct(r.pct) + "</span></div>";
+          }).join("");
+        tip.hidden = false;
+        var frac = cx / R.W;
+        var tw = tip.offsetWidth, cw = chartEl.clientWidth;
+        var left = frac * cw + (frac > 0.5 ? -tw - 14 : 14);
+        tip.style.left = Math.max(4, Math.min(cw - tw - 4, left)) + "px";
+      }
+      function hide() { g.style.display = "none"; tip.hidden = true; }
+
+      hit.addEventListener("pointermove", function (e) { show(e.clientX); });
+      hit.addEventListener("pointerdown", function (e) { show(e.clientX); });
+      // A lifted finger keeps the tip up; a tap elsewhere clears it (below).
+      hit.addEventListener("pointerleave", function (e) {
+        if (e.pointerType !== "touch") hide();
+      });
+    }
+
+    // ---- $ formatting --------------------------------------------------
+    var compact = new Intl.NumberFormat("sk-SK", { notation: "compact", maximumSignificantDigits: 3 });
+    function isIndex(s) { return s.symbol.charAt(0) === "^"; }
+    function fmtUsd(s, v) { return fmtPrice(v) + (isIndex(s) ? "" : " $"); }
+    // Axis ticks: only as many decimals as the step needs ("200", "0,25").
+    function axisLabel(v, step) {
+      if (Math.abs(v) >= 10000) return compact.format(v);
+      var dec = step >= 1 ? 0 : Math.min(4, Math.ceil(-Math.log10(step) - 1e-9));
+      return v.toLocaleString("sk-SK", { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    }
+
+    // Two-axis split: sort by price (log scale) and cut at the biggest jump,
+    // so each axis holds tickers of a similar size.
+    function splitAxes(visible) {
+      var sorted = visible.map(function (v) {
+        return { v: v, lp: Math.log10(Math.max(1e-9, v.r.prices[v.r.prices.length - 1])) };
+      }).sort(function (a, b) { return a.lp - b.lp; });
+      var cut = 1, gap = -1;
+      for (var i = 1; i < sorted.length; i++) {
+        if (sorted[i].lp - sorted[i - 1].lp > gap) { gap = sorted[i].lp - sorted[i - 1].lp; cut = i; }
+      }
+      sorted.forEach(function (o, i) { o.v.axis = i < cut ? 0 : 1; });
+    }
+
+    // ---- quote list ------------------------------------------------------
+    function sparkline(r, up) {
+      var w = 120, h = 38, lo = Infinity, hi = -Infinity;
+      r.prices.forEach(function (p) { if (p < lo) lo = p; if (p > hi) hi = p; });
+      if (hi === lo) { hi += 1; lo -= 1; }
+      var d0 = r.days[0], d1 = r.days[r.days.length - 1];
+      var x = function (d) { return ((d - d0) / Math.max(1, d1 - d0)) * w; };
+      var y = function (p) { return 2 + (1 - (p - lo) / (hi - lo)) * (h - 4); };
+      var path = r.days.map(function (d, i) { return (i ? "L" : "M") + x(d).toFixed(1) + " " + y(r.prices[i]).toFixed(1); }).join("");
+      var by = y(r.prices[0]).toFixed(1);
+      return '<svg class="mk-spark" viewBox="0 0 ' + w + " " + h + '" preserveAspectRatio="none" aria-hidden="true">' +
+        '<line class="base" x1="0" x2="' + w + '" y1="' + by + '" y2="' + by + '" vector-effect="non-scaling-stroke"/>' +
+        '<path class="' + (up ? "up" : "down") + '" d="' + path + '" fill="none" stroke-width="1.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>';
+    }
+
+    function drawList(start) {
+      listEl.innerHTML = series.map(function (s) {
+        var r = slice(s, start);
+        var last = r.prices[r.prices.length - 1];
+        var pct = r.pct[r.pct.length - 1];
+        var on = state.hidden.indexOf(s.symbol) === -1;
+        return '<li class="mk-item" data-sym="' + esc(s.symbol) + '">' +
+          '<button type="button" class="mk-check" role="checkbox" aria-checked="' + on + '" style="--c: ' + s.style.color + '"' +
+          ' aria-label="' + esc(s.label) + ' v grafe" title="Zobraziť v grafe"></button>' +
+          '<span class="mk-sym"><span><b>' + esc(s.label) + "</b><small>" + esc(s.name) + "</small></span></span>" +
+          sparkline(r, pct >= 0) +
+          '<span class="mk-quote"><span class="mk-price">' + fmtPrice(last) + '</span><span class="mk-pill ' + (pct >= 0 ? "up" : "down") + '">' + fmtPct(pct) + "</span></span>" +
+          "</li>";
+      }).join("");
+    }
+
+    // ---- focus (hover a chip or row to pick out its line) ----------------
+    var focusSym = null;
+
+    // Touch: no long-press menu on the chart, and tapping outside it closes
+    // the tooltip that stays up after the finger lifts.
+    chartEl.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    document.addEventListener("pointerdown", function (e) {
+      if (chartEl.contains(e.target)) return;
+      var g = document.getElementById("mk-hover"), tip = chartEl.querySelector(".mk-tip");
+      if (g) g.style.display = "none";
+      if (tip) tip.hidden = true;
+    });
+    function setFocus(sym) {
+      focusSym = sym;
+      var any = false;
+      chartEl.querySelectorAll(".line").forEach(function (l) {
+        var on = l.getAttribute("data-sym") === sym;
+        l.classList.toggle("on", on);
+        if (on) { any = true; l.parentNode.insertBefore(l, document.getElementById("mk-hover")); }
+      });
+      chartEl.classList.toggle("has-focus", any);
+    }
+    function bindFocus(root, selector) {
+      ["pointerover", "focusin"].forEach(function (ev) {
+        root.addEventListener(ev, function (e) {
+          if (e.pointerType === "touch") return;
+          var b = e.target.closest(selector);
+          if (b) setFocus(b.dataset.sym);
+        });
+      });
+      ["pointerleave", "focusout"].forEach(function (ev) {
+        root.addEventListener(ev, function () { setFocus(null); });
+      });
+    }
+
+    // ---- market weather: strip readouts + sub-forecast tiles ------------
+    (function () {
+      var names = [{"min":0,"icon":"☀️","name":"Jasno","text":"Na trhoch je pokoj. Nič sa nedeje."},{"min":2,"icon":"🌤️","name":"Polojasno","text":"Bežný šum. Občas mráčik, nič vážne."},{"min":4,"icon":"☁️","name":"Zamračené","text":"Trhy sú nervózne. Oplatí sa sledovať."},{"min":6,"icon":"🌧️","name":"Búrka","text":"Je tu strach. Niečo sa deje."},{"min":9,"icon":"⛈️","name":"Víchrica","text":"Panika. Takto vyzerajú krízy."}];
+      document.querySelectorAll(".mk-w-history").forEach(function (box) {
+        var strip = box.querySelector(".mk-w-strip");
+        var pick = box.querySelector(".mk-w-pick");
+        var rects = strip.querySelectorAll("rect");
+        var show = function (clientX) {
+          var b = strip.getBoundingClientRect();
+          var i = Math.max(0, Math.min(rects.length - 1, Math.floor(((clientX - b.left) / b.width) * rects.length)));
+          var r = rects[i], lv = names[+r.dataset.l];
+          pick.textContent = r.dataset.d + " · " + lv.icon + " " + lv.name;
+        };
+        strip.addEventListener("pointermove", function (e) { show(e.clientX); });
+        strip.addEventListener("pointerdown", function (e) { show(e.clientX); });
+        strip.addEventListener("pointerleave", function (e) { if (e.pointerType !== "touch") pick.textContent = ""; });
+        strip.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+      });
+
+      // One breakdown open at a time; tapping the open tile closes it.
+      var tiles = document.querySelectorAll(".mk-w-tile");
+      tiles.forEach(function (t) {
+        t.addEventListener("click", function () {
+          var open = t.getAttribute("aria-expanded") !== "true";
+          tiles.forEach(function (o) {
+            var on = open && o === t;
+            o.setAttribute("aria-expanded", String(on));
+            document.getElementById(o.getAttribute("aria-controls")).hidden = !on;
+          });
+        });
+      });
+    })();
+
+    // ---- glue --------------------------------------------------------------
+    function update() {
+      save();
+      document.querySelectorAll(".mk-ranges [data-range]").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.range === state.range));
+      });
+      document.querySelectorAll(".mk-mode [data-mode]").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.mode === state.mode));
+      });
+      document.querySelector(".mk-axes").hidden = state.mode !== "usd";
+      document.querySelectorAll(".mk-axes [data-axes]").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.axes === state.axes));
+      });
+      document.querySelectorAll(".mk-chip").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(state.hidden.indexOf(b.dataset.sym) === -1));
+      });
+      // Light up the preset that matches the current selection exactly.
+      var shown = series.filter(function (s) { return state.hidden.indexOf(s.symbol) === -1; })
+        .map(function (s) { return s.symbol; });
+      document.querySelectorAll(".mk-group").forEach(function (b) {
+        var p = presets[+b.dataset.f];
+        var same = p.syms.length === shown.length && p.syms.every(function (x) { return shown.indexOf(x) !== -1; });
+        b.setAttribute("aria-pressed", String(same));
+      });
+      document.getElementById("mk-pick-sum").textContent =
+        "Vlastný výber · " + shown.length + " z " + series.length;
+
+      var end = Math.max.apply(null, series.map(function (s) { return s.days[s.days.length - 1]; }));
+      var start = rangeStart(end);
+      drawList(start);
+
+      var visible = series.filter(function (s) { return state.hidden.indexOf(s.symbol) === -1; })
+        .map(function (s) { return { s: s, r: slice(s, start) }; });
+      if (!visible.length) {
+        chartEl.innerHTML = '<p class="mk-empty">Nič nie je vybrané. Zaškrtni tituly nižšie alebo zvoľ predvoľbu.</p>';
+        return;
+      }
+      // Younger tickers may start later than the range; draw from the earliest data.
+      var first = Math.min.apply(null, visible.map(function (v) { return v.r.days[0]; }));
+      var from = Math.max(start, first);
+      var dfmt = { day: "numeric", month: "numeric", year: "numeric" };
+      document.getElementById("mk-span").textContent =
+        fmtDate(from, dfmt) + " – " + fmtDate(end, dfmt) +
+        (state.mode === "usd" ? " · cena v dolároch" : " · zmena v percentách");
+      drawChart(visible, from, end);
+    }
+
+    // Versioned per build, so a fresh page never gets a cached older file.
+    fetch("/trhy/data.json?v=2026-11-28T03%3A49%3A20.485Z")
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        series = data.series.map(function (s) {
+          // Days arrive delta-encoded (see src/_data/markets.js).
+          var d = 0;
+          s.days = s.dd.map(function (x) { return (d += x); });
+          delete s.dd;
+          s.style = styleOf(s.slot);
+          return s;
+        });
+        if (!series.length) throw new Error("no data");
+        state.hidden = state.hidden.filter(function (sym) {
+          return series.some(function (s) { return s.symbol === sym; });
+        });
+        document.getElementById("mk-note").textContent =
+          "Denné ceny z Yahoo Finance, v USD (VIX je index, nie cena). Počas obchodovania je posledná cena priebežná. Naposledy aktualizované " +
+          new Date(data.updated).toLocaleString("sk-SK", { day: "numeric", month: "long", year: "numeric", hour: "numeric", minute: "2-digit" }) + ".";
+        buildControls();
+        listEl.addEventListener("click", function (e) {
+          var c = e.target.closest(".mk-check");
+          if (!c) return;
+          var sym = c.closest(".mk-item").dataset.sym;
+          var i = state.hidden.indexOf(sym);
+          if (i === -1) state.hidden.push(sym); else state.hidden.splice(i, 1);
+          update();
+          // The list re-renders; keep keyboard focus on the same checkbox.
+          var again = listEl.querySelector('.mk-item[data-sym="' + sym.replace(/"/g, "") + '"] .mk-check');
+          if (again) again.focus({ preventScroll: true });
+        });
+        bindFocus(document.getElementById("mk-chips"), ".mk-chip");
+        document.querySelectorAll(".mk-w-show").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var keep = btn.dataset.syms.split(",");
+            state.hidden = series.filter(function (s) { return keep.indexOf(s.symbol) === -1; })
+              .map(function (s) { return s.symbol; });
+            state.range = "30";
+            update();
+            document.getElementById("mk-span").scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        });
+        bindFocus(listEl, ".mk-item");
+        update();
+        var t;
+        window.addEventListener("resize", function () {
+          clearTimeout(t);
+          t = setTimeout(update, 150);
+        });
+      })
+      .catch(function () {
+        chartEl.innerHTML = '<p class="mk-empty">Ceny sa nepodarilo načítať. Skús to neskôr.</p>';
+      });
+  })();
+</script>
+<script>
+  // "Aktualizovať teraz": starts the deploy workflow (which refetches all
+  // prices) through the GitHub API, using the token the /edit/ page stores on
+  // this device. Needs a fine-grained token with Actions: Read and write.
+  // Visitors without the token never see the button.
+  (function () {
+    var REPO = "gabrielKerekes/depresivnygabo";
+    var WORKFLOW = "deploy.yml";
+    var token = "";
+    try { token = localStorage.getItem("gh_editor_token") || ""; } catch (e) {}
+    if (!token) return;
+
+    var box = document.getElementById("mk-refresh");
+    var btn = document.getElementById("mk-refresh-btn");
+    var status = document.getElementById("mk-refresh-status");
+    box.hidden = false;
+
+    function gh(path, opts) {
+      opts = opts || {};
+      return fetch("https://api.github.com/repos/" + REPO + path, {
+        method: opts.method || "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+        body: opts.body ? JSON.stringify(opts.body) : undefined,
+        cache: "no-store",
+      });
+    }
+    function say(text, link) {
+      status.textContent = text;
+      if (link) {
+        var a = document.createElement("a");
+        a.href = link; a.target = "_blank"; a.rel = "noopener"; a.textContent = "detaily";
+        status.appendChild(document.createTextNode(" "));
+        status.appendChild(a);
+      }
+    }
+    function done(text, link) {
+      say(text, link);
+      btn.disabled = false;
+      btn.textContent = "↻ Aktualizovať teraz";
+    }
+    function noAccess(res) {
+      if (res.status === 401) return "Token už neplatí. Vlož nový na /edit/.";
+      return "Token nemá oprávnenie Actions (čítanie a zápis). Pridaj ho v nastaveniach tokenu na GitHube.";
+    }
+
+    btn.addEventListener("click", function () {
+      btn.disabled = true;
+      btn.textContent = "↻ Spúšťam…";
+      say("");
+      var since = Date.now() - 10000;
+      var started = Date.now();
+
+      gh("/actions/workflows/" + WORKFLOW + "/dispatches", { method: "POST", body: { ref: "main" } })
+        .then(function (res) {
+          if (res.status !== 204) { done(noAccess(res)); return; }
+          poll();
+        })
+        .catch(function () { done("GitHub je nedostupný. Skús to o chvíľu."); });
+
+      function poll() {
+        var secs = Math.round((Date.now() - started) / 1000);
+        if (secs > 300) { done("Trvá to nezvyčajne dlho. Pozri GitHub Actions.", "https://github.com/" + REPO + "/actions"); return; }
+        gh("/actions/workflows/" + WORKFLOW + "/runs?event=workflow_dispatch&branch=main&per_page=5")
+          .then(function (res) {
+            if (!res.ok) { done(noAccess(res)); return null; }
+            return res.json();
+          })
+          .then(function (data) {
+            if (!data) return;
+            var run = (data.workflow_runs || []).filter(function (r) {
+              return new Date(r.created_at).getTime() >= since;
+            })[0];
+            if (!run || run.status !== "completed") {
+              btn.textContent = "↻ " + (run ? "Sťahujem ceny" : "Čakám na štart") + "… " + secs + " s";
+              setTimeout(poll, 4000);
+              return;
+            }
+            if (run.conclusion === "success") {
+              btn.textContent = "↻ Hotovo";
+              say("Načítavam nové ceny…");
+              // Give Pages a moment to publish, then load the fresh page
+              // (the query string skips any cached copy).
+              setTimeout(function () { location.replace("/trhy/?v=" + Date.now()); }, 5000);
+            } else {
+              done("Aktualizácia zlyhala (" + run.conclusion + ").", run.html_url);
+            }
+          })
+          .catch(function () { setTimeout(poll, 4000); });
+      }
+    });
+  })();
+</script>
+
+    </main>
+
+    
+    <footer class="foot night">
+      <div class="foot-inner">
+        <p class="foot-kicker">Chceš sa ozvať?</p>
+        <a class="foot-big" href="mailto:depresivnygabo@gmail.com">napíš mi!<span class="arr" aria-hidden="true">↗</span></a>
+        <span class="foot-mail">depresivnygabo@gmail.com</span>
+
+        <div class="garden" role="list" aria-label="Záhradka — každá rastlinka je jeden text">
+          <a role="listitem" href="/kto-som/" style="--c: var(--stage-budding); --i: 0" data-t="Kto som?">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-budding" /></svg>
+            <span class="sr-only">Kto som?</span>
+          </a>
+          <a role="listitem" href="/styri-roky-bez-alkoholu/" style="--c: var(--stage-budding); --i: 1" data-t="Štyri roky bez alkoholu">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-budding" /></svg>
+            <span class="sr-only">Štyri roky bez alkoholu</span>
+          </a>
+          <a role="listitem" href="/mam-sa-trochu-lepsie/" style="--c: var(--stage-seedling); --i: 2" data-t="Mám sa trochu lepšie!">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Mám sa trochu lepšie!</span>
+          </a>
+          <a role="listitem" href="/zmenil-som-sa/" style="--c: var(--stage-seedling); --i: 3" data-t="Zmenil som sa. Som lepší. Je čas si to uvedomiť.">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Zmenil som sa. Som lepší. Je čas si to uvedomiť.</span>
+          </a>
+          <a role="listitem" href="/dementor-je-prec-na-teraz/" style="--c: var(--stage-seedling); --i: 4" data-t="Dementor je preč (na teraz)">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Dementor je preč (na teraz)</span>
+          </a>
+          <a role="listitem" href="/preco-tato-stranka-vobec-existuje/" style="--c: var(--stage-seedling); --i: 5" data-t="Prečo táto stránka vôbec existuje?">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Prečo táto stránka vôbec existuje?</span>
+          </a>
+          <a role="listitem" href="/nefajcim-nehram-nezijem/" style="--c: var(--stage-seedling); --i: 6" data-t="Nefajčím, nehrám sa...nežijem">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Nefajčím, nehrám sa...nežijem</span>
+          </a>
+          <a role="listitem" href="/nemozem-pocuvat-let-it-go/" style="--c: var(--stage-seedling); --i: 7" data-t="Nemôžem počúvať „Let it go“ z Frozen">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Nemôžem počúvať „Let it go“ z Frozen</span>
+          </a>
+          <a role="listitem" href="/depresia-je-skutocna/" style="--c: var(--stage-seedling); --i: 8" data-t="Depresia je skutočná">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Depresia je skutočná</span>
+          </a>
+          <a role="listitem" href="/najlepsia-skala-na-meranie-nalady/" style="--c: var(--stage-seedling); --i: 9" data-t="Najlepšia škála na meranie nálady">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Najlepšia škála na meranie nálady</span>
+          </a>
+          <span class="spacer" aria-hidden="true"></span>
+          <a role="listitem" href="/allostatic-load/" style="--c: var(--accent-strong); --i: 10" data-t="Allostatic load">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Allostatic load</span>
+          </a>
+          <a role="listitem" href="/hry-pre-dvojice/" style="--c: var(--accent-strong); --i: 11" data-t="Písacie hry pre dvojice">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Písacie hry pre dvojice</span>
+          </a>
+          <a role="listitem" href="/treningy/" style="--c: var(--accent-strong); --i: 12" data-t="Tréningy">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Tréningy</span>
+          </a>
+          <a role="listitem" href="/trhy/" style="--c: var(--accent-strong); --i: 13" data-t="Trhy">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Trhy</span>
+          </a>
+        </div>
+        <p class="garden-cap">
+          <span>Záhradka: 10 článkov
+            a 4 trvalky.
+            Každá rastlinka je jeden text.</span>
+          <span>od júla 2026 →</span>
+        </p>
+
+        <div class="foot-base">
+          <p>So <span class="heart">&lt;3</span> vytvoril <a href="https://github.com/gabrielKerekes">Gabo</a></p>
+          <nav aria-label="Odkazy v pätičke">
+            <a href="https://github.com/gabrielKerekes/depresivnygabo">zdrojový kód na GitHube</a>
+            <a href="/feed.xml">RSS</a>
+            <a href="#top">hore ↑</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Reveal the edit shortcut only on devices where an editor token is
+         stored (same key the /edit/ page uses). Visitors never see it. -->
+    <script>
+      (function () {
+        var link = document.querySelector(".edit-link");
+        if (!link) return;
+        try {
+          if (localStorage.getItem("gh_editor_token")) link.hidden = false;
+        } catch (e) {}
+      })();
+    </script>
+
+    <script>
+      (function () {
+        var btn = document.querySelector(".bar .theme");
+        if (!btn) return;
+        var root = document.documentElement;
+        var order = ["system", "light", "dark"];
+        var labels = {
+          system: "Téma: podľa systému",
+          light: "Téma: svetlá",
+          dark: "Téma: tmavá"
+        };
+
+        function apply(mode) {
+          root.setAttribute("data-theme", mode);
+          btn.setAttribute("aria-label", labels[mode]);
+          btn.setAttribute("title", labels[mode]);
+          try {
+            localStorage.setItem("theme", mode);
+          } catch (e) {}
+        }
+
+        // Sync the label with whatever the head script already applied
+        var current = root.getAttribute("data-theme");
+        if (order.indexOf(current) === -1) current = "system";
+        btn.setAttribute("aria-label", labels[current]);
+        btn.setAttribute("title", labels[current]);
+
+        btn.addEventListener("click", function () {
+          apply(order[(order.indexOf(current) + 1) % order.length]);
+          current = root.getAttribute("data-theme");
+        });
+      })();
+    </script>
+
+    <script>
+      (function () {
+        // The bar gets its backdrop once you leave the top.
+        var bar = document.getElementById("bar");
+        function onScroll() {
+          bar.classList.toggle("scrolled", window.scrollY > 24);
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        // Mark the nav link of the homepage section in view.
+        var spies = document.querySelectorAll(".bar [data-spy]");
+        if (!("IntersectionObserver" in window)) return;
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              spies.forEach(function (a) {
+                if (a.dataset.spy === e.target.id)
+                  a.classList.toggle("is-here", e.isIntersecting);
+              });
+            });
+          },
+          { rootMargin: "-45% 0px -50% 0px" }
+        );
+        spies.forEach(function (a) {
+          var s = document.getElementById(a.dataset.spy);
+          if (s) io.observe(s);
+        });
+      })();
+    </script>
+  </body>
+</html>

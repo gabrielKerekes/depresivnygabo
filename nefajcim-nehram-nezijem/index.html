@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>Nefajčím, nehrám sa...nežijem | depresívny gabo</title>
+    <meta name="description" content="Osobný blog." />
+    <meta name="author" content="Gabo" />
+    <!-- Apply the saved theme before first paint to avoid a flash of the wrong colours -->
+    <script>
+      (function () {
+        var t;
+        try {
+          t = localStorage.getItem("theme");
+        } catch (e) {}
+        document.documentElement.setAttribute(
+          "data-theme",
+          t === "light" || t === "dark" ? t : "system"
+        );
+      })();
+    </script>
+    <link
+      rel="preload"
+      href="/fonts/CheltenhamStdBook.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="depresívny gabo — Atom feed"
+      href="/feed.xml"
+    />
+    
+  </head>
+  <body id="top">
+    <a class="skip" href="#obsah">Preskočiť na obsah</a>
+    
+<svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="st-seedling" viewBox="0 2 24 30">
+      <g fill="currentColor" fill-opacity=".18" stroke="none">
+        <path d="M12 22.5c-5.5 0-8.6-3.4-9-7.8 5.5 0 9 3 9 7.8Z" />
+        <path d="M12 20.5c5 0 8-3.1 8.4-7.2-5 0-8.4 2.7-8.4 7.2Z" />
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32v-11" />
+        <path vector-effect="non-scaling-stroke" d="M12 22.5c-5.5 0-8.6-3.4-9-7.8 5.5 0 9 3 9 7.8Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 20.5c5 0 8-3.1 8.4-7.2-5 0-8.4 2.7-8.4 7.2Z" />
+      </g>
+    </symbol>
+    <symbol id="st-budding" viewBox="0 2 24 30">
+      <g fill="currentColor" fill-opacity=".18" stroke="none">
+        <path d="M12 27c-4 0-6.4-2.5-6.8-5.8 4 0 6.8 2.2 6.8 5.8Z" />
+        <path d="M12 21.5c3.8 0 6.1-2.4 6.5-5.5-3.8 0-6.5 2.1-6.5 5.5Z" />
+        <path d="M12 16c-3.2 0-5.2-2-5.5-4.6 3.2 0 5.5 1.7 5.5 4.6Z" />
+        <path d="M12 9.5c-1.6-1.5-1.6-4 0-5.5 1.6 1.5 1.6 4 0 5.5Z" />
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32c-.4-7 .4-14 0-22.5" />
+        <path vector-effect="non-scaling-stroke" d="M12 27c-4 0-6.4-2.5-6.8-5.8 4 0 6.8 2.2 6.8 5.8Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 21.5c3.8 0 6.1-2.4 6.5-5.5-3.8 0-6.5 2.1-6.5 5.5Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 16c-3.2 0-5.2-2-5.5-4.6 3.2 0 5.5 1.7 5.5 4.6Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 9.5c-1.6-1.5-1.6-4 0-5.5 1.6 1.5 1.6 4 0 5.5Z" />
+      </g>
+    </symbol>
+    <symbol id="st-evergreen" viewBox="0 2 24 30">
+      <path d="M12 3.5 7.5 10.5h2.7L5.5 17h3L4 24.5h16L15.5 17h3l-4.7-6.5h2.7Z" fill="currentColor" fill-opacity=".18" stroke="none" />
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32v-7.5" />
+        <path vector-effect="non-scaling-stroke" d="M12 3.5 7.5 10.5h2.7L5.5 17h3L4 24.5h16L15.5 17h3l-4.7-6.5h2.7Z" />
+      </g>
+    </symbol>
+    <symbol id="st-flower" viewBox="0 2 24 30">
+      <path d="M12 25c-3.6 0-5.8-2.2-6.2-5.2 3.6 0 6.2 2 6.2 5.2Z" fill="currentColor" fill-opacity=".18" stroke="none" />
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32c0-6-.6-12 0-19" />
+        <path vector-effect="non-scaling-stroke" d="M12 25c-3.6 0-5.8-2.2-6.2-5.2 3.6 0 6.2 2 6.2 5.2Z" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="3.4" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="15.98" cy="5.7" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="15.98" cy="10.3" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="12.6" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="8.02" cy="10.3" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="8.02" cy="5.7" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="8" r="1.6" />
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+    
+    <header class="bar" id="bar">
+      <div class="bar-in">
+        <a class="brand" href="/">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="leaf-blade" d="M1 1c13 0 22 9 22 22C10 23 1 14 1 1Z" />
+            <path class="leaf-vein" d="M8.6 8.6 14.9 14.9" />
+          </svg>
+          <span>depresívny gabo</span>
+        </a>
+        <nav aria-label="Hlavná navigácia">
+          <a href="/#clanky" data-spy="clanky">Články</a>
+          <a href="/#trvalky" data-spy="trvalky">Trvalky</a>
+          <a href="/kto-som/" class="hide-sm">Kto som</a>
+          
+          <a class="edit-link" href="/edit/?path=src%2Fposts%2F2026-09-12-nefajcim-nehram-nezijem.md" aria-label="Upraviť" title="Upraviť" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+            </svg>
+          </a>
+          <button type="button" class="theme" aria-label="Prepnúť tému">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="7.5" />
+              <path d="M12 4.5v15A7.5 7.5 0 0 0 12 4.5Z" fill="currentColor" stroke="none" />
+            </svg>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="obsah" class="full">
+      
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Nefajčím, nehrám sa...nežijem",
+  "author": { "@type": "Person", "name": "Gabo" },
+  "datePublished": "2026-09-12",
+  
+  "url": "https://depresivnygabo.sk/nefajcim-nehram-nezijem/"
+}
+</script>
+
+
+
+
+
+
+
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+
+<header class="title">
+  <div class="title-in">
+    <a class="back" href="/#clanky">← všetky články</a>
+    <h1 class="t t-long"><span>Nefajčím, nehrám</span> <em>sa...nežijem</em></h1>
+    <div class="title-foot">
+      <p class="kick">
+        <span class="stage s-seedling" title="Čerstvý nápad — ešte len klíči a bude sa vyvíjať."><svg class="ic" viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>klíčok</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>zasadené <time datetime="2026-09-12">12. septembra 2026</time></span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>3 min čítania</span>
+      </p>
+      <a class="cue" href="#citaj"><span class="line" aria-hidden="true"></span>začni čítať</a>
+    </div>
+  </div>
+</header>
+
+<div class="read" id="citaj">
+  
+  <nav class="toc" aria-label="Obsah článku">
+    <div class="toc-in">
+      <h2>Obsah</h2>
+      <ul class="toc-list"><li class="toc-l3"><a href="#zapis-1">Zápis č. 1</a></li><li class="toc-l3"><a href="#zapis-2">Zápis č. 2</a></li><li class="toc-l3"><a href="#zapis-3">Zápis č. 3</a></li><li class="toc-l3"><a href="#zapis-4">Zápis č. 4</a></li></ul>
+      <p class="left" id="left" data-total="3">zostávajú <b>3 min</b></p>
+    </div>
+  </nav>
+  
+
+  <article class="post prose">
+    
+    <div class="banner stage-seedling" role="note">
+      <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+      <span><b>Klíčok.</b> Toto je zatiaľ len klíčok — čerstvá myšlienka, ktorá sa ešte len rodí a bude rásť.</span>
+    </div>
+    
+
+    
+    <details class="toc-m">
+      <summary>Obsah</summary>
+      <ul class="toc-list"><li class="toc-l3"><a href="#zapis-1">Zápis č. 1</a></li><li class="toc-l3"><a href="#zapis-2">Zápis č. 2</a></li><li class="toc-l3"><a href="#zapis-3">Zápis č. 3</a></li><li class="toc-l3"><a href="#zapis-4">Zápis č. 4</a></li></ul>
+    </details>
+    
+
+    <p>Keďže sa mi zlepšil stav s mojou depresiou, tak som si povedal, že je čas konečne spraviť krok 2 k lepšiemu Gabovi. Prestať fajčiť. Prestať sa hrať kompetetívne videohry (LoL, WoW, CS). Prečo? Aby ma začali reálne baviť iné veci - byť s manželkou, s deťmi, cvičenie, písanie, podcast, a whatever ďalšie s pomalším vyplavovaním dopamínu.</p>
+<section class="zapis">
+<span class="zapis-node" aria-hidden="true">1</span>
+<div class="zapis-card">
+<header class="zapis-head">
+<h3 class="zapis-title" id="zapis-1">Zápis č. 1</h3>
+<span class="zapis-date">12.9.</span>
+<p class="zapis-streaks"><span class="zapis-streak zapis-streak-play"><span aria-hidden="true">🎮</span> <b>10.</b> deň bez hrania</span><span class="zapis-streak zapis-streak-smoke"><span aria-hidden="true">🚭</span> <b>6.</b> deň bez fajčenia</span></p>
+</header>
+<div class="zapis-body">
+<p>Prešlo 10 dní bez hrania, 6 bez fajčenia. Cítim sa zle. Neviem, čo robiť, aby som sa zabavil. Nič ma nebaví. Pracovať by ma bavilo, ale nechcem pracovať viac, než musím. Robiť hocičo iné - písať sem, písať inam, riešiť podcast, zabávať sa s manželkou, s deťmi - sa mi nechce. Nechce sa mi variť. Nechce sa mi upratovať. Nechce sa mi cvičiť (ale aspoň čiastočne sa k tomu viem dokopať - viď <a href="/treningy/">tréningy</a>). Depresia nie je úplne späť. Nie som na tom tak zle, ako som bol. Čiže zatiaľ okej. Ale je to na nič.</p>
+<p>Claude povedal, že sa to časom zlepší. Len treba vydržať. Hovoria to aj ľudia 😅. Hm. Tak mi neostáva nič iné, ako to skúsiť vydržať a uvidieť. Takže tento článok bude fungovať ako zápisník môjho progresu prípadne neprogresu.</p>
+<p>Nič ma nebaví. Chcem fajčiť. Chcem sa hrať. Mozog začína racionalizovať, že nemá zmysel sa 100% obmedzovať. Že načo to vlastne robím. Well. Fuck you mozog. Fuck you! 🖕Let's go! 🔥</p>
+</div>
+</div>
+</section>
+<section class="zapis">
+<span class="zapis-node" aria-hidden="true">2</span>
+<div class="zapis-card">
+<header class="zapis-head">
+<h3 class="zapis-title" id="zapis-2">Zápis č. 2</h3>
+<span class="zapis-date">13.9.</span>
+<p class="zapis-streaks"><span class="zapis-streak zapis-streak-play"><span aria-hidden="true">🎮</span> <b>11.</b> deň bez hrania</span><span class="zapis-streak zapis-streak-smoke"><span aria-hidden="true">🚭</span> <b>7.</b> deň bez fajčenia</span></p>
+</header>
+<div class="zapis-body">
+<p>Dnes je určite lepšie ako včera. No ale teraz budem mať voľný čas a ja neviem, čo skôr. Pred tým to bolo jasné. Voľný čas = hranie. Teraz? Idem sa hrať (single player hry)? Behať? Pracovať? Písať? Cvičiť? Upratovať? Príliš veľa možností. Čo som si ale všimol je, že večer ma fakt že vypína - po hraní a fajčení som bol nabudený a dlho som zaspával. Čiže aspoň spánok mi abstinencia určite zlepšuje.</p>
+</div>
+</div>
+</section>
+<section class="zapis">
+<span class="zapis-node" aria-hidden="true">3</span>
+<div class="zapis-card">
+<header class="zapis-head">
+<h3 class="zapis-title" id="zapis-3">Zápis č. 3</h3>
+<span class="zapis-date">16.9.</span>
+<p class="zapis-streaks"><span class="zapis-streak zapis-streak-play"><span aria-hidden="true">🎮</span> <b>14.</b> deň bez hrania</span><span class="zapis-streak zapis-streak-smoke"><span aria-hidden="true">🚭</span> <b>10.</b> deň bez fajčenia</span></p>
+</header>
+<div class="zapis-body">
+<p>V pondelok (dva dni dozadu) som si cez deň zabudol dávať nikotínové žuvačky. Mega. Závislosť odchádza. Nálada zlepšená. Depresia je zase preč. No ale dnes mám prvú príležitosť sa ísť večer hrať a neviem, čo s tým. Zahral by som sa. Mám chuť tomu dať ešte jednu šancu, no neviem, či to mám urobiť. Bojím sa. Trochu. Na druhej strane - mal som dva týždne pauzu, môžem si setnúť hranice - 2x týždenne a max 2.5 hodky at a time - ak by som ich dodržiaval, tak kde je problém? Hm? Kde?!</p>
+</div>
+</div>
+</section>
+<section class="zapis">
+<span class="zapis-node" aria-hidden="true">4</span>
+<div class="zapis-card">
+<header class="zapis-head">
+<h3 class="zapis-title" id="zapis-4">Zápis č. 4</h3>
+<span class="zapis-date">24.9.</span>
+<p class="zapis-streaks"><span class="zapis-streak zapis-streak-play"><span aria-hidden="true">🎮</span> <b>22.</b> deň bez hrania</span><span class="zapis-streak zapis-streak-smoke"><span aria-hidden="true">🚭</span> <b>18.</b> deň bez fajčenia</span></p>
+</header>
+<div class="zapis-body">
+<p>Už to sú tri týždne bez lolka a dva a pol bez fajčenia. Hranie mi asi až tak nechýba, fajčil by som ale furt. Nie nejak, že by som to potreboval, jednoducho by som si dal. Našťastie som si ale ešte nedal. Žujem žuvačky - štyri/päť denne - niekedy zabudnem, inokedy mi to deti &quot;pripomenú&quot;. Tá najhoršia depresia je stále preč. Stále ju však cítim. Večer dokážem dostať nejaký &quot;melancholický&quot; záchvat a je mi nejak smutno. Oh well.</p>
+<p>Po 15-tich minútach som si znova prečítal tento zápis a musím ho ešte doplniť. Chýba tam totiž, že už som bol viackrát veľmi blízko narušeniu tohto &quot;experimentu&quot;. Dvakrát som sa dohodol s Kubom, že sa večer budeme hrať a nakoniec to ani raz našťastie nevyšlo. Mozog ma silno prehováral, aby som si aj cigu kúpil, že šak čo, o čom je život, keď nie o užívaní a že nemôžem žiť v &quot;absolutes&quot;. Kktina. Stratený vo vlastnej hlave. Pomoc.</p>
+<p>A najviac funny je, že hlavný dôvod prečo toto všetko robím je, aby ma začali baviť iné veci a aby som možno bol produktívny. Produktívny určite nie som. A veci ma tiež nejak extra viac nebavia - aj keď možno troooošičku som viac vyrovnaný a aspoň nemám neovládateľné cravings (hranie a fajčenie), ktoré keď nedostanem, tak som nervózny.</p>
+<p>Oveľa viac ale jem sladkého. Mám jednoducho menej sily odolávať a musím si aspoň niečo dopriať. Hm. See you next time.</p>
+</div>
+</div>
+</section>
+
+
+    <p class="end" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path class="leaf-blade" d="M1 1c13 0 22 9 22 22C10 23 1 14 1 1Z" /><path class="leaf-vein" d="M8.6 8.6 14.9 14.9" /></svg>
+    </p>
+    
+  </article>
+</div>
+
+
+
+
+
+<nav class="next" aria-label="Predchádzajúci článok">
+  <a href="/preco-tato-stranka-vobec-existuje/">
+    <span class="lab">Predchádzajúci článok</span>
+    <span class="nt">Prečo táto stránka vôbec existuje?</span>
+    <span class="nm">
+      <span class="stage s-seedling" title="Čerstvý nápad — ešte len klíči a bude sa vyvíjať."><svg class="ic" viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>klíčok</span>
+      <span>30. júla 2026</span>
+      <span>1 min čítania</span>
+    </span>
+  </a>
+</nav>
+
+
+<script>
+  (function () {
+    // Reading progress along the top, and the minutes left under the TOC.
+    var prog = document.getElementById("prog");
+    var art = document.querySelector(".prose");
+    var left = document.getElementById("left");
+    var total = left ? +left.dataset.total : 0;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = art.getBoundingClientRect(), vh = innerHeight;
+      var p = Math.min(1, Math.max(0, (vh * 0.5 - r.top) / (r.height - vh * 0.3)));
+      prog.style.setProperty("--p", p.toFixed(4));
+      if (left) {
+        left.innerHTML =
+          p > 0.97
+            ? "<b>dočítané</b> — ďakujem"
+            : "zostávajú <b>" + Math.max(1, Math.ceil(total * (1 - p))) + " min</b>";
+      }
+    }
+    addEventListener(
+      "scroll",
+      function () {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true }
+    );
+    addEventListener("resize", update);
+    update();
+
+    // Highlight the TOC entry of the section being read.
+    if (!("IntersectionObserver" in window)) return;
+    var links = {};
+    document.querySelectorAll(".toc a").forEach(function (a) {
+      links[decodeURIComponent(a.getAttribute("href").slice(1))] = a;
+    });
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting || !links[e.target.id]) return;
+          Object.keys(links).forEach(function (k) {
+            links[k].classList.remove("on");
+            links[k].removeAttribute("aria-current");
+          });
+          links[e.target.id].classList.add("on");
+          links[e.target.id].setAttribute("aria-current", "true");
+        });
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+    document.querySelectorAll(".prose h2[id], .prose h3[id]").forEach(function (h) {
+      io.observe(h);
+    });
+  })();
+</script>
+
+    </main>
+
+    
+    <footer class="foot night">
+      <div class="foot-inner">
+        <p class="foot-kicker">Chceš sa ozvať?</p>
+        <a class="foot-big" href="mailto:depresivnygabo@gmail.com">napíš mi!<span class="arr" aria-hidden="true">↗</span></a>
+        <span class="foot-mail">depresivnygabo@gmail.com</span>
+
+        <div class="garden" role="list" aria-label="Záhradka — každá rastlinka je jeden text">
+          <a role="listitem" href="/kto-som/" style="--c: var(--stage-budding); --i: 0" data-t="Kto som?">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-budding" /></svg>
+            <span class="sr-only">Kto som?</span>
+          </a>
+          <a role="listitem" href="/styri-roky-bez-alkoholu/" style="--c: var(--stage-budding); --i: 1" data-t="Štyri roky bez alkoholu">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-budding" /></svg>
+            <span class="sr-only">Štyri roky bez alkoholu</span>
+          </a>
+          <a role="listitem" href="/mam-sa-trochu-lepsie/" style="--c: var(--stage-seedling); --i: 2" data-t="Mám sa trochu lepšie!">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Mám sa trochu lepšie!</span>
+          </a>
+          <a role="listitem" href="/zmenil-som-sa/" style="--c: var(--stage-seedling); --i: 3" data-t="Zmenil som sa. Som lepší. Je čas si to uvedomiť.">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Zmenil som sa. Som lepší. Je čas si to uvedomiť.</span>
+          </a>
+          <a role="listitem" href="/dementor-je-prec-na-teraz/" style="--c: var(--stage-seedling); --i: 4" data-t="Dementor je preč (na teraz)">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Dementor je preč (na teraz)</span>
+          </a>
+          <a role="listitem" href="/preco-tato-stranka-vobec-existuje/" style="--c: var(--stage-seedling); --i: 5" data-t="Prečo táto stránka vôbec existuje?">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Prečo táto stránka vôbec existuje?</span>
+          </a>
+          <a role="listitem" href="/nefajcim-nehram-nezijem/" style="--c: var(--stage-seedling); --i: 6" data-t="Nefajčím, nehrám sa...nežijem">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Nefajčím, nehrám sa...nežijem</span>
+          </a>
+          <a role="listitem" href="/nemozem-pocuvat-let-it-go/" style="--c: var(--stage-seedling); --i: 7" data-t="Nemôžem počúvať „Let it go“ z Frozen">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Nemôžem počúvať „Let it go“ z Frozen</span>
+          </a>
+          <a role="listitem" href="/depresia-je-skutocna/" style="--c: var(--stage-seedling); --i: 8" data-t="Depresia je skutočná">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Depresia je skutočná</span>
+          </a>
+          <a role="listitem" href="/najlepsia-skala-na-meranie-nalady/" style="--c: var(--stage-seedling); --i: 9" data-t="Najlepšia škála na meranie nálady">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Najlepšia škála na meranie nálady</span>
+          </a>
+          <span class="spacer" aria-hidden="true"></span>
+          <a role="listitem" href="/allostatic-load/" style="--c: var(--accent-strong); --i: 10" data-t="Allostatic load">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Allostatic load</span>
+          </a>
+          <a role="listitem" href="/hry-pre-dvojice/" style="--c: var(--accent-strong); --i: 11" data-t="Písacie hry pre dvojice">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Písacie hry pre dvojice</span>
+          </a>
+          <a role="listitem" href="/treningy/" style="--c: var(--accent-strong); --i: 12" data-t="Tréningy">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Tréningy</span>
+          </a>
+          <a role="listitem" href="/trhy/" style="--c: var(--accent-strong); --i: 13" data-t="Trhy">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Trhy</span>
+          </a>
+        </div>
+        <p class="garden-cap">
+          <span>Záhradka: 10 článkov
+            a 4 trvalky.
+            Každá rastlinka je jeden text.</span>
+          <span>od júla 2026 →</span>
+        </p>
+
+        <div class="foot-base">
+          <p>So <span class="heart">&lt;3</span> vytvoril <a href="https://github.com/gabrielKerekes">Gabo</a></p>
+          <nav aria-label="Odkazy v pätičke">
+            <a href="https://github.com/gabrielKerekes/depresivnygabo">zdrojový kód na GitHube</a>
+            <a href="/feed.xml">RSS</a>
+            <a href="#top">hore ↑</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Reveal the edit shortcut only on devices where an editor token is
+         stored (same key the /edit/ page uses). Visitors never see it. -->
+    <script>
+      (function () {
+        var link = document.querySelector(".edit-link");
+        if (!link) return;
+        try {
+          if (localStorage.getItem("gh_editor_token")) link.hidden = false;
+        } catch (e) {}
+      })();
+    </script>
+
+    <script>
+      (function () {
+        var btn = document.querySelector(".bar .theme");
+        if (!btn) return;
+        var root = document.documentElement;
+        var order = ["system", "light", "dark"];
+        var labels = {
+          system: "Téma: podľa systému",
+          light: "Téma: svetlá",
+          dark: "Téma: tmavá"
+        };
+
+        function apply(mode) {
+          root.setAttribute("data-theme", mode);
+          btn.setAttribute("aria-label", labels[mode]);
+          btn.setAttribute("title", labels[mode]);
+          try {
+            localStorage.setItem("theme", mode);
+          } catch (e) {}
+        }
+
+        // Sync the label with whatever the head script already applied
+        var current = root.getAttribute("data-theme");
+        if (order.indexOf(current) === -1) current = "system";
+        btn.setAttribute("aria-label", labels[current]);
+        btn.setAttribute("title", labels[current]);
+
+        btn.addEventListener("click", function () {
+          apply(order[(order.indexOf(current) + 1) % order.length]);
+          current = root.getAttribute("data-theme");
+        });
+      })();
+    </script>
+
+    <script>
+      (function () {
+        // The bar gets its backdrop once you leave the top.
+        var bar = document.getElementById("bar");
+        function onScroll() {
+          bar.classList.toggle("scrolled", window.scrollY > 24);
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        // Mark the nav link of the homepage section in view.
+        var spies = document.querySelectorAll(".bar [data-spy]");
+        if (!("IntersectionObserver" in window)) return;
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              spies.forEach(function (a) {
+                if (a.dataset.spy === e.target.id)
+                  a.classList.toggle("is-here", e.isIntersecting);
+              });
+            });
+          },
+          { rootMargin: "-45% 0px -50% 0px" }
+        );
+        spies.forEach(function (a) {
+          var s = document.getElementById(a.dataset.spy);
+          if (s) io.observe(s);
+        });
+      })();
+    </script>
+  </body>
+</html>

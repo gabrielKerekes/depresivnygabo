@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>Kto som? | depresívny gabo</title>
+    <meta name="description" content="Osobný blog." />
+    <meta name="author" content="Gabo" />
+    <!-- Apply the saved theme before first paint to avoid a flash of the wrong colours -->
+    <script>
+      (function () {
+        var t;
+        try {
+          t = localStorage.getItem("theme");
+        } catch (e) {}
+        document.documentElement.setAttribute(
+          "data-theme",
+          t === "light" || t === "dark" ? t : "system"
+        );
+      })();
+    </script>
+    <link
+      rel="preload"
+      href="/fonts/CheltenhamStdBook.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="depresívny gabo — Atom feed"
+      href="/feed.xml"
+    />
+    
+  </head>
+  <body id="top">
+    <a class="skip" href="#obsah">Preskočiť na obsah</a>
+    
+<svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="st-seedling" viewBox="0 2 24 30">
+      <g fill="currentColor" fill-opacity=".18" stroke="none">
+        <path d="M12 22.5c-5.5 0-8.6-3.4-9-7.8 5.5 0 9 3 9 7.8Z" />
+        <path d="M12 20.5c5 0 8-3.1 8.4-7.2-5 0-8.4 2.7-8.4 7.2Z" />
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32v-11" />
+        <path vector-effect="non-scaling-stroke" d="M12 22.5c-5.5 0-8.6-3.4-9-7.8 5.5 0 9 3 9 7.8Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 20.5c5 0 8-3.1 8.4-7.2-5 0-8.4 2.7-8.4 7.2Z" />
+      </g>
+    </symbol>
+    <symbol id="st-budding" viewBox="0 2 24 30">
+      <g fill="currentColor" fill-opacity=".18" stroke="none">
+        <path d="M12 27c-4 0-6.4-2.5-6.8-5.8 4 0 6.8 2.2 6.8 5.8Z" />
+        <path d="M12 21.5c3.8 0 6.1-2.4 6.5-5.5-3.8 0-6.5 2.1-6.5 5.5Z" />
+        <path d="M12 16c-3.2 0-5.2-2-5.5-4.6 3.2 0 5.5 1.7 5.5 4.6Z" />
+        <path d="M12 9.5c-1.6-1.5-1.6-4 0-5.5 1.6 1.5 1.6 4 0 5.5Z" />
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32c-.4-7 .4-14 0-22.5" />
+        <path vector-effect="non-scaling-stroke" d="M12 27c-4 0-6.4-2.5-6.8-5.8 4 0 6.8 2.2 6.8 5.8Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 21.5c3.8 0 6.1-2.4 6.5-5.5-3.8 0-6.5 2.1-6.5 5.5Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 16c-3.2 0-5.2-2-5.5-4.6 3.2 0 5.5 1.7 5.5 4.6Z" />
+        <path vector-effect="non-scaling-stroke" d="M12 9.5c-1.6-1.5-1.6-4 0-5.5 1.6 1.5 1.6 4 0 5.5Z" />
+      </g>
+    </symbol>
+    <symbol id="st-evergreen" viewBox="0 2 24 30">
+      <path d="M12 3.5 7.5 10.5h2.7L5.5 17h3L4 24.5h16L15.5 17h3l-4.7-6.5h2.7Z" fill="currentColor" fill-opacity=".18" stroke="none" />
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32v-7.5" />
+        <path vector-effect="non-scaling-stroke" d="M12 3.5 7.5 10.5h2.7L5.5 17h3L4 24.5h16L15.5 17h3l-4.7-6.5h2.7Z" />
+      </g>
+    </symbol>
+    <symbol id="st-flower" viewBox="0 2 24 30">
+      <path d="M12 25c-3.6 0-5.8-2.2-6.2-5.2 3.6 0 6.2 2 6.2 5.2Z" fill="currentColor" fill-opacity=".18" stroke="none" />
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path vector-effect="non-scaling-stroke" d="M12 32c0-6-.6-12 0-19" />
+        <path vector-effect="non-scaling-stroke" d="M12 25c-3.6 0-5.8-2.2-6.2-5.2 3.6 0 6.2 2 6.2 5.2Z" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="3.4" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="15.98" cy="5.7" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="15.98" cy="10.3" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="12.6" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="8.02" cy="10.3" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="8.02" cy="5.7" r="2.4" />
+        <circle vector-effect="non-scaling-stroke" cx="12" cy="8" r="1.6" />
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+    
+    <header class="bar" id="bar">
+      <div class="bar-in">
+        <a class="brand" href="/">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="leaf-blade" d="M1 1c13 0 22 9 22 22C10 23 1 14 1 1Z" />
+            <path class="leaf-vein" d="M8.6 8.6 14.9 14.9" />
+          </svg>
+          <span>depresívny gabo</span>
+        </a>
+        <nav aria-label="Hlavná navigácia">
+          <a href="/#clanky" data-spy="clanky">Články</a>
+          <a href="/#trvalky" data-spy="trvalky">Trvalky</a>
+          <a href="/kto-som/" class="hide-sm">Kto som</a>
+          
+          <a class="edit-link" href="/edit/?path=src%2Fposts%2F2026-07-04-kto-som.md" aria-label="Upraviť" title="Upraviť" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+            </svg>
+          </a>
+          <button type="button" class="theme" aria-label="Prepnúť tému">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="7.5" />
+              <path d="M12 4.5v15A7.5 7.5 0 0 0 12 4.5Z" fill="currentColor" stroke="none" />
+            </svg>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="obsah" class="full">
+      
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Kto som?",
+  "author": { "@type": "Person", "name": "Gabo" },
+  "datePublished": "2026-07-04",
+  
+  "url": "https://depresivnygabo.sk/kto-som/"
+}
+</script>
+
+
+
+
+
+
+
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+
+<header class="title">
+  <div class="title-in">
+    <a class="back" href="/#clanky">← všetky články</a>
+    <h1 class="t"><span>Kto</span> <em>som?</em></h1>
+    <div class="title-foot">
+      <p class="kick">
+        <span class="stage s-budding" title="Rozpracovaná myšlienka, ktorá sa ešte formuje."><svg class="ic" viewBox="0 2 24 30" aria-hidden="true"><use href="#st-budding" /></svg>rastie</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>zasadené <time datetime="2026-07-04">4. júla 2026</time></span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>7 min čítania</span>
+      </p>
+      <a class="cue" href="#citaj"><span class="line" aria-hidden="true"></span>začni čítať</a>
+    </div>
+  </div>
+</header>
+
+<div class="read" id="citaj">
+  
+  <nav class="toc" aria-label="Obsah článku">
+    <div class="toc-in">
+      <h2>Obsah</h2>
+      <ul class="toc-list"><li class="toc-l2"><a href="#co-to-znamena">Čo to znamená?</a></li><li class="toc-l2"><a href="#terapia-sedenia-s-psychologickou">Terapia (sedenia s psychologičkou)</a></li><li class="toc-l2"><a href="#psychiatricka">Psychiatrička</a></li><li class="toc-l2"><a href="#antidepresiva">Antidepresíva</a></li><li class="toc-l2"><a href="#kde-som-teraz-9-8-2026">Kde som teraz - 9. 8. 2026?</a></li><li class="toc-l2"><a href="#kde-som-teraz-25-10-2026">Kde som teraz - 25. 10. 2026?</a></li></ul>
+      <p class="left" id="left" data-total="7">zostávajú <b>7 min</b></p>
+    </div>
+  </nav>
+  
+
+  <article class="post prose">
+    
+    <div class="banner stage-budding" role="note">
+      <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-budding" /></svg>
+      <span><b>Rastie.</b> Toto ešte rastie — myšlienku priebežne dopĺňam a formujem.</span>
+    </div>
+    
+
+    
+    <details class="toc-m">
+      <summary>Obsah</summary>
+      <ul class="toc-list"><li class="toc-l2"><a href="#co-to-znamena">Čo to znamená?</a></li><li class="toc-l2"><a href="#terapia-sedenia-s-psychologickou">Terapia (sedenia s psychologičkou)</a></li><li class="toc-l2"><a href="#psychiatricka">Psychiatrička</a></li><li class="toc-l2"><a href="#antidepresiva">Antidepresíva</a></li><li class="toc-l2"><a href="#kde-som-teraz-9-8-2026">Kde som teraz - 9. 8. 2026?</a></li><li class="toc-l2"><a href="#kde-som-teraz-25-10-2026">Kde som teraz - 25. 10. 2026?</a></li></ul>
+    </details>
+    
+
+    <p>Som depresívny Gabo. 32-ročný programátor, otec dvoch detí – Kubko (5r) a Lucka (3r) – a proste pomerne obyčajný týpek. A nejak sa teda stalo, že (vraj<span class="asterisk">*</span>) mám depresiu.</p>
+<p class="intro-note">
+  <span class="asterisk">*</span> „vraj“ pretože s tým ešte stále nie som
+  stotožnený a diagnostika depresie žiaľ nie je úplne presná.
+</p>
+<h2 id="co-to-znamena">Čo to znamená?</h2>
+<p>Znamená to, že ma tak trošku prestal baviť život, alebo že som si uvedomil, že ma už dlhšie nebaví. Prejavovalo sa to tak, že som bol vkuse &quot;pred-nasratý&quot; - nenapadá mi lepší slovenský výraz; po anglicky by som povedal, že som bol irritable alebo on-edge. Akákoľvek drobnosť s deťmi ma privádzala do úplného hnevu, výbuchu.</p>
+<p>To samozrejme nie je jediné - deti vedia aj &quot;obyčajného&quot; človeka poriadne vytočiť. Dialo sa ale to, že som sa často vedel &quot;zacykliť&quot; v seba-ubíjajúcich myšlienkach typu - &quot;Načo je toto vlastne dobré?&quot;, &quot;Nebolo by rodine bez mňa lepšie?&quot;, &quot;Jak môžem byť tak slabý a nezvládať to, keď si reálne žijeme lepšie ako 90% svetovej populácie?&quot; a podobne. Tieto myšlienky sú podľa mňa celkom bežné. Občas. Problémom ale bolo, že ja som ich mal v podstate furt, pokiaľ som od nich neunikal nejakou dopamín-generujúcou aktivitou napr. kompetitívne video hry (WoW, CS, LoL), nikotín, doom scrolling, YouTube a podobne. Práca bola tiež nejakým spôsobom únik, aj keď istým spôsobom ma vedela tiež stresovať a spôsobovať negatívne, seba-hodnotiace myšlienky.</p>
+<p>V skratke - rodina, práca, domácnosť, rodina, práca, domácnosť, rodina, práca – furt dokola a teda málo času (respektíve žiadny čas) na seba, manželku, kamarátov a tak všeobecne.</p>
+<p>Veľa sme o tom samozrejme debatovali aj s manželkou. A tak nejak sme sa nakoniec rozhodli, že by som s tým asi mal niečo robiť. Tak som začal chodiť na terapiu.</p>
+<h2 id="terapia-sedenia-s-psychologickou">Terapia (sedenia s psychologičkou)</h2>
+<p><em>O terapii niekedy napíšem viac, teraz len také kratšie intro.</em></p>
+<p>Na terapie som najprv chodil tak tri mesiace pravidelne – raz týždenne, prípadne raz za dva týždne. A bolo to fajn. Bavili sme sa o mojom detstve, akí boli rodičia, akí boli súrodenci, aký som bol ja. Riešili sme, či mám nejaké traumy z detstva - čo asi nejak extra nemám. Riešili sme rok strávený v Amerike, keď som mal 9 rokov, 3 roky strávené v Nemecku od mojich štrnástich, strednú školu, vzťahy, kamarátov, záľuby. Nejak pomedzi to sme vždy riešili aj nejaký problém v mojom súčasnom živote ako deti, práca, imposter syndrome, deti, vzťah s manželkou, deti a tak.</p>
+<p>Po cca prvých troch mesiacoch som si dal na nejaký čas prestávku, že šak sa mám lepšie. Potom sa môj stav zase trochu zhoršil, tak som zase šiel na terapiu zopárkrát (cca 6 za 2 mesiace) potom som zase chvíľu nešiel a potom zas šiel.</p>
+<h2 id="psychiatricka">Psychiatrička</h2>
+<p>Takto prebehol rok a uvedomil som si, že sa stále necítim dobre,
+respektíve, že sa cítim dosť zle. Podľa mňa bola moja psychologička dobrá, celkom sme si rozumeli, ale môj stav sa nejak výrazne nezlepšoval. A tak som si povedal, že je čas skúsiť ísť k psychiatričke. Samozrejme, to nebolo len tak – robil som si okolo toho
+research, radil som sa s Claude-om (🙈), googlil som, čítal som,
+konzultoval som s manželkou. Neprišlo nám vôbec okej, ako sa mám. A tak som nakoniec išiel.</p>
+<p>Aj napriek researchu som netušil, čo presne ma u psychiatričky čaká.
+Nevedel som, či sa robia nejaké testy, alebo či sa proste iba
+porozprávame, alebo čo*. A pani doktorka sa ma teda pýtala nejaké otázky
+(konkrétne otázky spíšem inokedy). Ja som na tie otázky odpovedal a pani doktorka z mojich odpovedí usúdila, že mám reaktívnu depresiu a teda že mi nasadí antidepresíva.</p>
+<p><em>*Inak keď to teraz čítam, tak mám pocit, že môj research o psychiatrii, depresii a antidepresívach nebol moc dôkladný 😅. Je zároveň aj dosť možné, že si to úplne nepamätám.</em></p>
+<p>Podľa mňa je zaujímave, že čo sa vo mne vlastne dialo, keď mi povedala, že mi nasadí lieky. Na jednej strane ma tak trochu zamrazilo. Hovoril som si, že &quot;Hmm, really? Takto jednoducho? A naozaj to potrebujem?&quot;. Na druhej strane som zažil akési uvoľnenie alebo ako to nazvať. Tešil som sa, že môj stav akokeby nie je o mne, ale že za to môže &quot;choroba&quot;. Toto tešenie som sa snažil zakryť, aby to nevyzeralo, že som účelovo odpovedal na jej otázky alebo niečo na ten štýl. A tak som moc nevedel, ako na to reagovať a tak som to proste prijal. Popýtal som sa na ďalšie kroky. Mal som pokračovať s terapiou, prvé dva týždne sa na lieky &quot;nabieha&quot; - začína sa s nejakou menšou dávkou a postupne sa dostanem na predpísanú dávku.</p>
+<p>Úplné detaily zase popíšem neskôr, no zopár vecí k mojej liečbe spomeniem teraz.</p>
+<h2 id="antidepresiva">Antidepresíva</h2>
+<p>Začali sme s liekom <a href="https://www.adc.sk/databazy/produkty/detail/paretin-20-mg-954679.html">Paretín</a>. Je to asi celkom bežné SSRI. Pri každej zmene lieku sa predpokladá, že ich plný účinok bude tak o 4 až 6 týždňov. Celkom mi asi zafungovalo aj placebo alebo chvíľku ma hrial ten pocit, že hej, niečo je so mnou naozaj zle. Po cca šiestich týždňoch sa môj stav trošku zlepšil. No o ďalších pár týždňov sa zhoršil. A tak sme navýšili dávku a zase čakali 6 týždňov. Stav sa zase trošku zlepšil a potom zase zhoršil.</p>
+<p>A tak mi k Paretínu, ktorý sa bere ráno, pridala ďalší liek - <a href="https://www.adc.sk/databazy/produkty/detail/mirzaten-30-mg-447489.html">Mirzaten</a>. Ten sa berie večer a vraj má aj trochu utlmovacie účinky. V praxi to znamená, že cca 30 minút po tom, ako si tento liek dám, ma v podstate vypne a že ráno sa mi o dosť ťažšie vstáva. Pred tým som bol ranné vtáča, budil som sa o šiestej a ráno bolo moja najviac energická časť dňa. Po Mirzatene resp. po jeho ďalšom navýšení, som však začal mať problém sa ráno zobudiť. Zobudím sa o šiestej (alebo ma zobudia deti) a ja sa jednoducho neviem prebudiť prípadne proste ešte zaspávam takmer aj po stojačky.</p>
+<p>Pri Mirzatene treba už aj spomenúť vedľajšie účinky. Viac to popíšem zase inokedy, ale tu poviem, že Mirzaten mi spôsoboval:</p>
+<ol>
+<li>Už spomenuté horšie stávanie.</li>
+<li>Každé dve hodiny pocit v ústach akokeby som bol hladný, aj keď som nemal šancu byť už hladný - stačilo si dať niečo drobné a tento efekt basically zmizol.</li>
+<li>S bodom číslo 2 súvisí aj väčšia chuť do jedla - pribral som tak 5kg za tri týždne (po dlhšej dobe 10kg, čo je ale spôsobené aj tým, že som prestal behať).</li>
+<li>Mirzaten ovplyvnil aj môj fyzický výkon - nevládal som toľko behať, cvičiť.</li>
+</ol>
+<p>Čo sa psychického stavu týka, bol ale príbeh s Mirzatenom podobný ako s Paretínom - chvíľku zlepšenie a potom zase zhoršenie.</p>
+<h2 id="kde-som-teraz-9-8-2026">Kde som teraz - 9. 8. 2026?</h2>
+<p>Paretín sme nakoniec vymenili za <a href="https://www.adc.sk/databazy/produkty/detail/alventa-75-mg-673196.html">Alventu</a>. Alventa nie je SSRI ako Paretín, ale je to SNRI - čiže niečo s adrenalínom namiesto serotonínu. To znamená, že by mala aj trochu nabudzovať k aktivite. Viac o tom v zásade neviem. Z Alventy som mal tiež nejaké vedľajšie účinky. Nepamätám si presne, pri akej dávke začali, ale napr. sa mi začalo diať, že skôr viem mať &quot;motion sickness&quot; - napr. keď upratujem kuchyňu a teda veľa sa otáčam, nakláňam a podobne, tak sa mi potom začne točiť hlava a začne mi byť nejak zle. Plus mi asi ešte trochu viac chutí jesť.</p>
+<p>Inak je Alventa trochu magic, lebo v menších dávkach pod 150mg účinkuje ako SSRI. Vo vyššej dávke - 225mg, v ktorej som od Júna 2026, však začne fungovať trochu inak. Neviem ako, ale proste inak - niečo spoločné s adrenalínom alebo čo. A teda s Alventou bol príbeh podobný - postupné zvyšovanie, zlepšenie, zhoršenie až sme postupne prišli až na tých 225mg.</p>
+<p>A musím povedať, že konečne mám reálne pocit, že <a href="https://depresivnygabo.sk/dementor-je-prec-na-teraz/">depresia je (aspoň na teraz) preč</a>. Normálne je proste vypnutá. Žiadne ruminovanie. (Takmer) žiadne negatívne myšlienky. Proste žijem si život. A toto sa basically od narodenia Lucky v podstate nestalo. Stav sa mi trochu zlepšoval, ale nepamätám si, že by sa depresia úplne vypla.</p>
+<p>Takže tu som teraz. Depresia vypnutá. Užívam si život. Občas sa zahrám. Občas niečo napíšem. Občas sa vzdelávam. Občas kričím na deti, ale rýchlo sa viem dostať späť do &quot;neutrálu&quot;.</p>
+<h2 id="kde-som-teraz-25-10-2026">Kde som teraz - 25. 10. 2026?</h2>
+<p><a href="/nefajcim-nehram-nezijem/">Prestal som fajčiť</a> a nejak sa mi depresia čiastočne vrátila. Nič ma nebaví. Nie som až tak nervózny ako predtým, ale proste nejaké to šťastie ma opustilo. Stále neruminujem ako predtým. Avšak &quot;žijem&quot; určite menej, ako keď som fajčil. Čiastočne mi s tým pomáhajú nikotínové žuvačky, ale stále to nie je ako keď som fajčil. Možno to fajčenie nie je jediný faktor - tiež sa skončilo leto - dovolenky, rozlúčka so slobodou, svadba a tak. Proste prišiel zase normálny kolobeh. K tomu som sa prestal aj hrať. A jednoducho to nedávam. A tak som trochu zase stratený.</p>
+<p><em>Postupne do tohto článku popridávam linky, ktoré ťa nasmerujú k detailom o jednotlivých témach.</em></p>
+
+
+    <p class="end" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path class="leaf-blade" d="M1 1c13 0 22 9 22 22C10 23 1 14 1 1Z" /><path class="leaf-vein" d="M8.6 8.6 14.9 14.9" /></svg>
+    </p>
+    
+  </article>
+</div>
+
+
+
+
+
+<nav class="next" aria-label="Ďalší článok">
+  <a href="/styri-roky-bez-alkoholu/">
+    <span class="lab">Ďalší článok</span>
+    <span class="nt">Štyri roky bez alkoholu</span>
+    <span class="nm">
+      <span class="stage s-budding" title="Rozpracovaná myšlienka, ktorá sa ešte formuje."><svg class="ic" viewBox="0 2 24 30" aria-hidden="true"><use href="#st-budding" /></svg>rastie</span>
+      <span>5. júla 2026</span>
+      <span>6 min čítania</span>
+    </span>
+  </a>
+</nav>
+
+
+<script>
+  (function () {
+    // Reading progress along the top, and the minutes left under the TOC.
+    var prog = document.getElementById("prog");
+    var art = document.querySelector(".prose");
+    var left = document.getElementById("left");
+    var total = left ? +left.dataset.total : 0;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = art.getBoundingClientRect(), vh = innerHeight;
+      var p = Math.min(1, Math.max(0, (vh * 0.5 - r.top) / (r.height - vh * 0.3)));
+      prog.style.setProperty("--p", p.toFixed(4));
+      if (left) {
+        left.innerHTML =
+          p > 0.97
+            ? "<b>dočítané</b> — ďakujem"
+            : "zostávajú <b>" + Math.max(1, Math.ceil(total * (1 - p))) + " min</b>";
+      }
+    }
+    addEventListener(
+      "scroll",
+      function () {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true }
+    );
+    addEventListener("resize", update);
+    update();
+
+    // Highlight the TOC entry of the section being read.
+    if (!("IntersectionObserver" in window)) return;
+    var links = {};
+    document.querySelectorAll(".toc a").forEach(function (a) {
+      links[decodeURIComponent(a.getAttribute("href").slice(1))] = a;
+    });
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting || !links[e.target.id]) return;
+          Object.keys(links).forEach(function (k) {
+            links[k].classList.remove("on");
+            links[k].removeAttribute("aria-current");
+          });
+          links[e.target.id].classList.add("on");
+          links[e.target.id].setAttribute("aria-current", "true");
+        });
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+    document.querySelectorAll(".prose h2[id], .prose h3[id]").forEach(function (h) {
+      io.observe(h);
+    });
+  })();
+</script>
+
+    </main>
+
+    
+    <footer class="foot night">
+      <div class="foot-inner">
+        <p class="foot-kicker">Chceš sa ozvať?</p>
+        <a class="foot-big" href="mailto:depresivnygabo@gmail.com">napíš mi!<span class="arr" aria-hidden="true">↗</span></a>
+        <span class="foot-mail">depresivnygabo@gmail.com</span>
+
+        <div class="garden" role="list" aria-label="Záhradka — každá rastlinka je jeden text">
+          <a role="listitem" href="/kto-som/" style="--c: var(--stage-budding); --i: 0" data-t="Kto som?">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-budding" /></svg>
+            <span class="sr-only">Kto som?</span>
+          </a>
+          <a role="listitem" href="/styri-roky-bez-alkoholu/" style="--c: var(--stage-budding); --i: 1" data-t="Štyri roky bez alkoholu">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-budding" /></svg>
+            <span class="sr-only">Štyri roky bez alkoholu</span>
+          </a>
+          <a role="listitem" href="/mam-sa-trochu-lepsie/" style="--c: var(--stage-seedling); --i: 2" data-t="Mám sa trochu lepšie!">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Mám sa trochu lepšie!</span>
+          </a>
+          <a role="listitem" href="/zmenil-som-sa/" style="--c: var(--stage-seedling); --i: 3" data-t="Zmenil som sa. Som lepší. Je čas si to uvedomiť.">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Zmenil som sa. Som lepší. Je čas si to uvedomiť.</span>
+          </a>
+          <a role="listitem" href="/dementor-je-prec-na-teraz/" style="--c: var(--stage-seedling); --i: 4" data-t="Dementor je preč (na teraz)">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Dementor je preč (na teraz)</span>
+          </a>
+          <a role="listitem" href="/preco-tato-stranka-vobec-existuje/" style="--c: var(--stage-seedling); --i: 5" data-t="Prečo táto stránka vôbec existuje?">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Prečo táto stránka vôbec existuje?</span>
+          </a>
+          <a role="listitem" href="/nefajcim-nehram-nezijem/" style="--c: var(--stage-seedling); --i: 6" data-t="Nefajčím, nehrám sa...nežijem">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Nefajčím, nehrám sa...nežijem</span>
+          </a>
+          <a role="listitem" href="/nemozem-pocuvat-let-it-go/" style="--c: var(--stage-seedling); --i: 7" data-t="Nemôžem počúvať „Let it go“ z Frozen">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Nemôžem počúvať „Let it go“ z Frozen</span>
+          </a>
+          <a role="listitem" href="/depresia-je-skutocna/" style="--c: var(--stage-seedling); --i: 8" data-t="Depresia je skutočná">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Depresia je skutočná</span>
+          </a>
+          <a role="listitem" href="/najlepsia-skala-na-meranie-nalady/" style="--c: var(--stage-seedling); --i: 9" data-t="Najlepšia škála na meranie nálady">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-seedling" /></svg>
+            <span class="sr-only">Najlepšia škála na meranie nálady</span>
+          </a>
+          <span class="spacer" aria-hidden="true"></span>
+          <a role="listitem" href="/allostatic-load/" style="--c: var(--accent-strong); --i: 10" data-t="Allostatic load">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Allostatic load</span>
+          </a>
+          <a role="listitem" href="/hry-pre-dvojice/" style="--c: var(--accent-strong); --i: 11" data-t="Písacie hry pre dvojice">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Písacie hry pre dvojice</span>
+          </a>
+          <a role="listitem" href="/treningy/" style="--c: var(--accent-strong); --i: 12" data-t="Tréningy">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Tréningy</span>
+          </a>
+          <a role="listitem" href="/trhy/" style="--c: var(--accent-strong); --i: 13" data-t="Trhy">
+            <svg viewBox="0 2 24 30" aria-hidden="true"><use href="#st-flower" /></svg>
+            <span class="sr-only">Trvalka: Trhy</span>
+          </a>
+        </div>
+        <p class="garden-cap">
+          <span>Záhradka: 10 článkov
+            a 4 trvalky.
+            Každá rastlinka je jeden text.</span>
+          <span>od júla 2026 →</span>
+        </p>
+
+        <div class="foot-base">
+          <p>So <span class="heart">&lt;3</span> vytvoril <a href="https://github.com/gabrielKerekes">Gabo</a></p>
+          <nav aria-label="Odkazy v pätičke">
+            <a href="https://github.com/gabrielKerekes/depresivnygabo">zdrojový kód na GitHube</a>
+            <a href="/feed.xml">RSS</a>
+            <a href="#top">hore ↑</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Reveal the edit shortcut only on devices where an editor token is
+         stored (same key the /edit/ page uses). Visitors never see it. -->
+    <script>
+      (function () {
+        var link = document.querySelector(".edit-link");
+        if (!link) return;
+        try {
+          if (localStorage.getItem("gh_editor_token")) link.hidden = false;
+        } catch (e) {}
+      })();
+    </script>
+
+    <script>
+      (function () {
+        var btn = document.querySelector(".bar .theme");
+        if (!btn) return;
+        var root = document.documentElement;
+        var order = ["system", "light", "dark"];
+        var labels = {
+          system: "Téma: podľa systému",
+          light: "Téma: svetlá",
+          dark: "Téma: tmavá"
+        };
+
+        function apply(mode) {
+          root.setAttribute("data-theme", mode);
+          btn.setAttribute("aria-label", labels[mode]);
+          btn.setAttribute("title", labels[mode]);
+          try {
+            localStorage.setItem("theme", mode);
+          } catch (e) {}
+        }
+
+        // Sync the label with whatever the head script already applied
+        var current = root.getAttribute("data-theme");
+        if (order.indexOf(current) === -1) current = "system";
+        btn.setAttribute("aria-label", labels[current]);
+        btn.setAttribute("title", labels[current]);
+
+        btn.addEventListener("click", function () {
+          apply(order[(order.indexOf(current) + 1) % order.length]);
+          current = root.getAttribute("data-theme");
+        });
+      })();
+    </script>
+
+    <script>
+      (function () {
+        // The bar gets its backdrop once you leave the top.
+        var bar = document.getElementById("bar");
+        function onScroll() {
+          bar.classList.toggle("scrolled", window.scrollY > 24);
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        // Mark the nav link of the homepage section in view.
+        var spies = document.querySelectorAll(".bar [data-spy]");
+        if (!("IntersectionObserver" in window)) return;
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              spies.forEach(function (a) {
+                if (a.dataset.spy === e.target.id)
+                  a.classList.toggle("is-here", e.isIntersecting);
+              });
+            });
+          },
+          { rootMargin: "-45% 0px -50% 0px" }
+        );
+        spies.forEach(function (a) {
+          var s = document.getElementById(a.dataset.spy);
+          if (s) io.observe(s);
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,3309 @@
+/* ==========================================================================
+   Fonts
+   Cheltenham Std (self-hosted woff2, serif display face). Only the variants
+   the design uses: Book + Bold, each with its italic. Weight ranges are
+   widened so the 500/600 weights used in the design resolve without synthetic
+   bolding.
+   ========================================================================== */
+@font-face {
+  font-family: "Cheltenham";
+  src: url("/fonts/CheltenhamStdBook.woff2") format("woff2");
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cheltenham";
+  src: url("/fonts/CheltenhamStdBookItalic.woff2") format("woff2");
+  font-weight: 400 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cheltenham";
+  src: url("/fonts/CheltenhamStdBold.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cheltenham";
+  src: url("/fonts/CheltenhamStdBoldItalic.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   Design tokens
+   Calm green accent + warm neutrals. Both themes defined as custom properties.
+   ========================================================================== */
+:root {
+  /* Palette — dark (default) */
+  color-scheme: dark;
+  --bg: #15171b;
+  --surface: #1b1e24;
+  --fg: #dde0e4;
+  --muted: #8b909b;
+  --accent: #8fbf9d;
+  --accent-strong: #a9d6b6;
+  --accent-soft: rgba(143, 191, 157, 0.12);
+  --border: #282c34;
+  --shadow: rgba(0, 0, 0, 0.35);
+  /* Depth and light for the full-bleed pages: a deeper band, the brightest
+     text, a whisper of grey, the green glow, and the colour words take on
+     inside the hero's pool of light (--lit). */
+  --bg-deep: #101216;
+  --fg-bright: #f1f4f1;
+  --faint: #6c727d;
+  --line: #22262d;
+  --glow: rgba(143, 191, 157, 0.16);
+  --glow-strong: rgba(143, 191, 157, 0.32);
+  --lit: #f3f7f2;
+  /* A raised card is lit from above. On dark surfaces that reads as a bright
+     hairline on the top edge (--card-highlight). On a white card a white line
+     is invisible, so light mode does the same job in reverse: shade the bottom
+     of the card (--card-shade) and let the top edge stay the brightest thing
+     (--card-topline). Each theme leans on whichever half actually shows. */
+  --card-highlight: rgba(255, 255, 255, 0.5);
+  --card-shade: transparent;
+  --card-topline: color-mix(in srgb, var(--border) 80%, transparent);
+  --stage-seedling: #cdd884;
+  --stage-budding: #84cf9b;
+  --stage-evergreen: #57b7a3;
+  /* Journal-entry streak chips: gaming (violet) and smoking (amber). */
+  --streak-play: #b4a3ec;
+  --streak-smoke: #e5b27c;
+  /* Muscle map: neutral body (--muscle-bp) and untrained muscle (--muscle-base);
+     trained levels mix --accent over the base in the .bodymap rules. */
+  --muscle-base: #363d49;
+  --muscle-bp: #2a2f39;
+
+  /* Type */
+  /* A quiet, native workhorse for small UI text (meta, chips, TOC). No
+     webfont: the platform's own sans has no "template" signature, loads
+     instantly, and phones nowhere — Cheltenham carries all the character. */
+  --sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --serif: "Cheltenham", Georgia, "Times New Roman", serif;
+
+  /* Layout */
+  --frame: 52rem; /* page frame: same edge on every page — header, footer, main */
+  --measure: 42rem; /* article prose: kept narrow for readability */
+  --radius: 14px;
+}
+
+/* Follow the OS in the "system" state (also the no-JS default: no attribute) */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]),
+  :root[data-theme="system"] {
+    color-scheme: light;
+    --bg: #f6f9f4;
+    --surface: #ffffff;
+    --fg: #23262b;
+    --muted: #626771;
+    --accent: #3f8f66;
+    --accent-strong: #2f7a54;
+    --accent-soft: rgba(63, 143, 102, 0.09);
+    --border: #e1e8e0;
+    --shadow: rgba(31, 61, 45, 0.08);
+    --bg-deep: #eef3eb;
+    --fg-bright: #15171b;
+    --faint: #7f867f;
+    --line: #e8eee6;
+    --glow: rgba(63, 143, 102, 0.12);
+    --glow-strong: rgba(63, 143, 102, 0.22);
+    --lit: #2f7a54;
+    --card-highlight: rgba(255, 255, 255, 0.55);
+    --card-shade: rgba(31, 61, 45, 0.05);
+    --card-topline: #ffffff;
+    --stage-seedling: #7d8a1f;
+    --stage-budding: #3f8f66;
+    --stage-evergreen: #2b8478;
+    --streak-play: #6a52bf;
+    --streak-smoke: #a4601c;
+    --muscle-base: #e3e9e2;
+    --muscle-bp: #cfd8cf;
+  }
+}
+
+/* Explicit user choice always wins over the OS preference. Higher specificity
+   than the plain :root rules above, so no !important needed. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f6f9f4;
+  --surface: #ffffff;
+  --fg: #23262b;
+  --muted: #626771;
+  --accent: #3f8f66;
+  --accent-strong: #2f7a54;
+  --accent-soft: rgba(63, 143, 102, 0.09);
+  --border: #e1e8e0;
+  --shadow: rgba(31, 61, 45, 0.08);
+  --bg-deep: #eef3eb;
+  --fg-bright: #15171b;
+  --faint: #7f867f;
+  --line: #e8eee6;
+  --glow: rgba(63, 143, 102, 0.12);
+  --glow-strong: rgba(63, 143, 102, 0.22);
+  --lit: #2f7a54;
+  --card-highlight: rgba(255, 255, 255, 0.55);
+  --card-shade: rgba(31, 61, 45, 0.05);
+  --card-topline: #ffffff;
+  --stage-seedling: #7d8a1f;
+  --stage-budding: #3f8f66;
+  --stage-evergreen: #2b8478;
+  --streak-play: #6a52bf;
+  --streak-smoke: #a4601c;
+  --muscle-base: #e3e9e2;
+  --muscle-bp: #cfd8cf;
+}
+
+/* .night: a band that stays dark in either theme (the footer). */
+:root[data-theme="dark"],
+.night {
+  color-scheme: dark;
+  --bg: #15171b;
+  --surface: #1b1e24;
+  --fg: #dde0e4;
+  --muted: #8b909b;
+  --accent: #8fbf9d;
+  --accent-strong: #a9d6b6;
+  --accent-soft: rgba(143, 191, 157, 0.12);
+  --border: #282c34;
+  --shadow: rgba(0, 0, 0, 0.35);
+  /* Depth and light for the full-bleed pages: a deeper band, the brightest
+     text, a whisper of grey, the green glow, and the colour words take on
+     inside the hero's pool of light (--lit). */
+  --bg-deep: #101216;
+  --fg-bright: #f1f4f1;
+  --faint: #6c727d;
+  --line: #22262d;
+  --glow: rgba(143, 191, 157, 0.16);
+  --glow-strong: rgba(143, 191, 157, 0.32);
+  --lit: #f3f7f2;
+  /* A raised card is lit from above. On dark surfaces that reads as a bright
+     hairline on the top edge (--card-highlight). On a white card a white line
+     is invisible, so light mode does the same job in reverse: shade the bottom
+     of the card (--card-shade) and let the top edge stay the brightest thing
+     (--card-topline). Each theme leans on whichever half actually shows. */
+  --card-highlight: rgba(255, 255, 255, 0.5);
+  --card-shade: transparent;
+  --card-topline: color-mix(in srgb, var(--border) 80%, transparent);
+  --stage-seedling: #cdd884;
+  --stage-budding: #84cf9b;
+  --stage-evergreen: #57b7a3;
+  /* Journal-entry streak chips: gaming (violet) and smoking (amber). */
+  --streak-play: #b4a3ec;
+  --streak-smoke: #e5b27c;
+  /* Muscle map: neutral body (--muscle-bp) and untrained muscle (--muscle-base);
+     trained levels mix --accent over the base in the .bodymap rules. */
+  --muscle-base: #363d49;
+  --muscle-bp: #2a2f39;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* Anchored headings clear the fixed bar. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* The hero and footer glows bleed past the edges on purpose. */
+  overflow-x: clip;
+}
+
+/* Ordinary pages (trvalky, tréningy, …) keep the narrow frame, starting below
+   the fixed bar. The homepage and posts opt out with `fullBleed: true`. */
+main.page {
+  max-width: calc(var(--frame) + 2.5rem);
+  margin-inline: auto;
+  padding: 6.5rem 1.25rem 5rem;
+}
+
+/* Article prose stays at a comfortable reading measure inside the wider frame */
+.post {
+  max-width: var(--measure);
+}
+
+a {
+  color: var(--accent);
+}
+
+/* Consistent, accessible focus ring */
+a:focus-visible,
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   "Kde začať?" — curated entry point (homepage)
+   ========================================================================== */
+.start-here {
+  margin-top: 3rem;
+}
+
+.start-here-lead {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  max-width: none;
+}
+
+/* ==========================================================================
+   Post list (homepage)
+   ========================================================================== */
+.posts {
+  margin-top: 3rem;
+}
+
+/* Homepage "Trvalky" section — same top gap as the sections above it. */
+.trvalky {
+  margin-top: 3rem;
+}
+
+.page-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Post cards are raised paper: lit from the top-left (the --card-highlight
+   hairline), shadowed underneath by three stacked shadows, and washed with a
+   little accent green in the bottom-right corner. On hover they lift a little
+   and the border warms to the accent — a quiet raise, no tilt or scale. */
+.post-list-item {
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-top-color: var(--card-topline);
+  border-bottom-color: color-mix(in srgb, var(--border) 100%, #000 12%);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(
+      130% 150% at 100% 100%,
+      color-mix(in srgb, var(--accent) 6%, transparent),
+      transparent 55%
+    ),
+    linear-gradient(180deg, transparent 45%, var(--card-shade)),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 100%, #fff 4%),
+      var(--surface)
+    );
+  box-shadow:
+    inset 0 1px 0 var(--card-highlight),
+    0 1px 2px -1px var(--shadow),
+    0 4px 8px -4px var(--shadow),
+    0 12px 20px -12px var(--shadow);
+  transition:
+    border-color 0.18s ease,
+    transform 0.16s ease,
+    box-shadow 0.18s ease;
+}
+
+.post-list-item:hover {
+  border-color: var(--accent);
+  background:
+    radial-gradient(
+      130% 150% at 100% 100%,
+      color-mix(in srgb, var(--accent) 10%, transparent),
+      transparent 55%
+    ),
+    linear-gradient(180deg, transparent 45%, var(--card-shade)),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 100%, #fff 4%),
+      var(--surface)
+    );
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 var(--card-highlight),
+    0 2px 4px -2px var(--shadow),
+    0 8px 16px -6px var(--shadow),
+    0 20px 30px -18px var(--shadow);
+}
+
+.post-link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.2rem 1rem;
+  padding: 1.1rem 1.35rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-date {
+  grid-column: 1;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.dot {
+  color: var(--muted);
+  margin: 0 0.1rem;
+}
+
+.post-title {
+  grid-column: 1;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  color: var(--fg);
+}
+/* One-line description under a "trvalka" (perennial) list item's title. */
+.trvalka-desc {
+  grid-column: 1;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+/* "See all →" link at the foot of a homepage section. */
+.section-more {
+  margin: 0.9rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+}
+
+/* Growth-stage badge (🌱 / 🌿 / 🌳). Each stage sets its own --stage colour
+   (see .stage-seedling/-budding/-evergreen below); the badge falls back to the
+   accent when no stage colour is set. */
+.stage-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.55rem;
+  border: 1px solid var(--stage, var(--accent));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--stage, var(--accent)) 15%, transparent);
+  color: var(--stage, var(--accent));
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-transform: lowercase;
+}
+
+/* Per-stage colour, shared by the badge and the post banner. */
+.stage-seedling {
+  --stage: var(--stage-seedling);
+}
+.stage-budding {
+  --stage: var(--stage-budding);
+}
+.stage-evergreen {
+  --stage: var(--stage-evergreen);
+}
+
+.post-arrow {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  color: var(--accent);
+  font-size: 1.1rem;
+  transform: translateX(-0.25rem);
+  opacity: 0;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.post-list-item:hover .post-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Empty state — designed, not an afterthought */
+.post-list-empty {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Myslienky (short thoughts / microblog)
+   ========================================================================== */
+.thoughts-lead {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.thought-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.thought {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 1.25rem 1.4rem;
+}
+
+.thought-body {
+  margin: 0 0 0.7rem;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--fg);
+}
+
+.thought-date {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   Tags / topics
+   ========================================================================== */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.tag-chip:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.tag-count {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Topic index (/temy/) */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-cloud .tag-chip {
+  font-size: 0.95rem;
+  padding: 0.3rem 0.85rem;
+}
+
+/* Tags shown under an article */
+.post-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ==========================================================================
+   Article
+   ========================================================================== */
+.post {
+  margin-top: 3rem;
+}
+
+.post-header {
+  margin-bottom: 2.5rem;
+}
+
+.post-header h1 {
+  margin: 0.35rem 0 0.5rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.post-header time,
+.post-meta .post-readtime {
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* The flex gap in the meta row already spaces items; drop the dot's margin */
+.post-meta .dot {
+  margin: 0;
+}
+
+/* Inside the post meta row the flex gap already spaces the badge */
+.post-meta .stage-badge {
+  margin-left: 0;
+}
+
+/* Growth-stage banner atop unfinished posts (seedling / budding). Colour comes
+   from the post's --stage (set by the .stage-* class on the element). */
+.stage-banner {
+  margin-bottom: 1.75rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--stage, var(--accent));
+  border-left-width: 3px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--stage, var(--accent)) 10%, transparent);
+  color: var(--fg);
+  font-size: 0.92rem;
+}
+
+.post h2,
+.post h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 2.25rem;
+}
+
+.post p,
+.post ul,
+.post ol {
+  margin: 1.15rem 0;
+}
+
+/* Article prose reads in the serif — a calm, book-like reading column, set a
+   touch larger and looser than UI text. The furniture (meta row, stage banner,
+   TOC, back link) stays in the sans; <code>/<pre> keep the browser monospace,
+   so only the flowing text changes. */
+.post > p:not(.stage-banner),
+.post ul,
+.post ol,
+.post blockquote {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+/* Journal entries ("zápisy") from the `zapis` shortcode: numbered cards
+   strung on a vertical timeline. The rail runs from each node down to the
+   next entry; the last entry in a run drops it. */
+.zapis {
+  position: relative;
+  margin: 2.25rem 0;
+  padding-left: 3rem;
+}
+
+.zapis::before {
+  content: "";
+  position: absolute;
+  left: 1.05rem;
+  top: 2.4rem;
+  bottom: -2.25rem;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 55%, transparent),
+    color-mix(in srgb, var(--accent) 12%, transparent)
+  );
+}
+
+.zapis:not(:has(+ .zapis))::before {
+  display: none;
+}
+
+.zapis-node {
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.zapis-card {
+  padding: 1.1rem 1.35rem 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-top-color: var(--card-topline);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(
+      120% 90% at 0% 0%,
+      color-mix(in srgb, var(--accent) 7%, transparent),
+      transparent 60%
+    ),
+    linear-gradient(180deg, transparent 45%, var(--card-shade)), var(--surface);
+  box-shadow:
+    inset 0 1px 0 var(--card-highlight),
+    0 1px 2px -1px var(--shadow),
+    0 6px 14px -8px var(--shadow);
+}
+
+.zapis-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px dashed var(--border);
+}
+
+.post .zapis-title {
+  margin: 0;
+  font-size: 1.2rem;
+  scroll-margin-top: 1.5rem;
+}
+
+.zapis-date {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.post .zapis-streaks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  width: 100%;
+  margin: 0.2rem 0 0;
+}
+
+.zapis-streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--streak) 45%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--streak) 12%, transparent);
+  color: var(--streak);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.zapis-streak b {
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.zapis-streak-play {
+  --streak: var(--streak-play);
+}
+
+.zapis-streak-smoke {
+  --streak: var(--streak-smoke);
+}
+
+.zapis-body p {
+  margin: 0.9rem 0;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 30rem) {
+  .zapis {
+    padding-left: 2.4rem;
+  }
+  .zapis::before {
+    left: 0.85rem;
+  }
+  .zapis-node {
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 0.95rem;
+  }
+  .zapis-card {
+    padding: 0.9rem 0.9rem 0.3rem;
+  }
+  /* Keep both streak chips on one line on phones. */
+  .post .zapis-streaks {
+    gap: 0.3rem;
+  }
+  .zapis-streak {
+    gap: 0.2rem;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.72rem;
+  }
+  .zapis-streak b {
+    font-size: 0.85rem;
+  }
+}
+
+.post img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.post pre {
+  overflow-x: auto;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.post code {
+  font-size: 0.9em;
+}
+
+.post :not(pre) > code {
+  background: var(--accent-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+.post blockquote {
+  margin-inline: 0;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Motion / responsive
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+  /* No lift — the card still gets its shadow and accent border on hover,
+     just without the motion. */
+  .post-list-item,
+  .post-list-item:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Workout log (/treningy/)
+   A hidden page: one card per session, exercises grouped into a warm-up/cardio
+   list and a strength list, each row a name on the left and its metric on the
+   right in tabular figures.
+   ========================================================================== */
+.workouts {
+  margin-top: 1rem;
+}
+
+/* Athlete stats bar at the top of the log. */
+.athlete-stats {
+  list-style: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.athlete-stat {
+  flex: 1 1 auto;
+  min-width: 6rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface) 100%, transparent);
+  text-align: center;
+}
+.athlete-stat-value {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+.athlete-stat-label {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Weight history: hidden behind a small toggle so only the current weight
+   (in the stats bar) shows by default. */
+.weight-history {
+  margin-top: 0.6rem;
+  font-family: var(--sans);
+}
+.weight-history > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  list-style: none;
+}
+.weight-history > summary::-webkit-details-marker {
+  display: none;
+}
+.weight-history > summary::before {
+  content: "›";
+  display: inline-block;
+  transition: transform 0.15s ease;
+  color: var(--accent);
+}
+.weight-history[open] > summary::before {
+  transform: rotate(90deg);
+}
+.weight-history-list {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  max-width: 16rem;
+}
+.weight-history-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.25rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+.weight-history-item:first-child {
+  border-top: none;
+}
+.weight-history-date {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.weight-history-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.workout-session {
+  margin-top: 1.5rem;
+  padding: 1.35rem 1.5rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-top-color: var(--card-topline);
+  border-bottom-color: color-mix(in srgb, var(--border) 100%, #000 12%);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(
+      130% 150% at 100% 100%,
+      color-mix(in srgb, var(--accent) 6%, transparent),
+      transparent 55%
+    ),
+    linear-gradient(180deg, transparent 45%, var(--card-shade)),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 100%, #fff 4%),
+      var(--surface)
+    );
+  box-shadow:
+    inset 0 1px 0 var(--card-highlight),
+    0 1px 2px -1px var(--shadow),
+    0 4px 8px -4px var(--shadow),
+    0 12px 20px -12px var(--shadow);
+}
+
+.workout-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.9rem;
+  margin-bottom: 0.4rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+}
+
+.workout-date {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.workout-count {
+  flex: none;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.workout-group-label {
+  margin: 1.1rem 0 0.5rem;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.workout-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.workout-exercise {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+.workout-exercise:first-child {
+  border-top: none;
+}
+
+.workout-ex-name {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.35;
+  color: var(--fg);
+}
+
+.workout-ex-detail {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.1rem;
+}
+
+.workout-ex-metric {
+  flex: none;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.workout-weight {
+  color: var(--muted);
+}
+
+.workout-sets {
+  min-width: 3.4rem;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* A strength exercise with per-set detail: name on its own line, each set
+   listed below, and an optional note under the whole thing. */
+.workout-exercise--detailed {
+  display: block;
+}
+.workout-setlist {
+  list-style: none;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.workout-set {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+}
+.workout-set-metric {
+  flex: none;
+  min-width: 5rem;
+  font-weight: 600;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+.workout-set-note {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+.workout-ex-note {
+  margin: 0.5rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.workout-duration {
+  color: var(--accent);
+  font-weight: 600;
+}
+.workout-count-sep {
+  color: var(--muted);
+}
+
+/* Ratings: one row per rater, a label with star score, and an optional note. */
+.workout-ratings {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.workout-rating {
+  padding: 0.6rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+.workout-rating:first-child {
+  border-top: none;
+}
+.workout-rating-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.workout-rating-label {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+.workout-rating-by {
+  font-weight: 400;
+  color: var(--muted);
+}
+.workout-rating-score {
+  flex: none;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+}
+.star-on {
+  color: var(--accent);
+}
+.star-off {
+  color: color-mix(in srgb, var(--muted) 40%, transparent);
+}
+/* Half a star: accent on the left, the "off" colour on the right, via a
+   gradient clipped to the glyph. */
+.star-half {
+  background: linear-gradient(
+    90deg,
+    var(--accent) 50%,
+    color-mix(in srgb, var(--muted) 40%, transparent) 50%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.workout-rating-note {
+  margin: 0.3rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   Muscle map (/treningy/)
+   A stylized front + back figure per workout and one for all-time coverage.
+   Structural parts stay neutral (--muscle-bp); worked muscles shade from a
+   light base up to full accent — darker means more work.
+   ========================================================================== */
+/* Optional session subtitle (e.g. "Posilňovňa", "Túra") under the date. */
+.workout-headings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.workout-title {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.workout-summary {
+  margin: 0.6rem 0 0;
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--fg);
+}
+
+/* Per-session stat grid (hike distance/ascent/pace/calories). Reuses the
+   athlete-stat card look with a bit of top space. */
+.workout-session-stats {
+  margin: 0.9rem 0 0;
+}
+
+.workout-coverage {
+  margin-top: 2rem;
+  padding: 1.35rem 1.5rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.workout-coverage .page-title {
+  font-size: 1.15rem;
+}
+.workout-coverage .start-here-lead {
+  margin-bottom: 0.5rem;
+}
+
+/* Circuit chip under a session's title, linking to its progress table. */
+.workout-circuit {
+  margin: 0.2rem 0 0;
+}
+.workout-circuit-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.1rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  text-decoration: none;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+.workout-circuit-chip:hover {
+  border-color: var(--accent);
+}
+.workout-kind-chip {
+  cursor: help;
+}
+
+/* Repeatable-route progress: one card per circuit with a lap-by-lap table. */
+.workout-circuits {
+  margin-top: 2rem;
+  padding: 1.35rem 1.5rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.workout-circuits > .page-title {
+  font-size: 1.15rem;
+}
+.workout-circuits > .start-here-lead {
+  margin-bottom: 0.5rem;
+}
+.workout-circuit-card {
+  margin-top: 1.25rem;
+  scroll-margin-top: 1rem;
+}
+.workout-circuit-card:first-of-type {
+  margin-top: 1rem;
+}
+.workout-circuit-name {
+  margin: 0 0 0.6rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--fg);
+}
+.workout-circuit-scroll {
+  overflow-x: auto;
+}
+.workout-circuit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+.workout-circuit-table th,
+.workout-circuit-table td {
+  padding: 0.45rem 0.7rem;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+.workout-circuit-table thead th {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.workout-circuit-table thead th:first-child,
+.workout-circuit-table tbody th {
+  text-align: left;
+}
+.workout-circuit-table tbody th {
+  font-weight: 600;
+  color: var(--fg);
+}
+.workout-circuit-table tbody tr:last-child th,
+.workout-circuit-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.bodymap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+}
+.bodymap-view {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+.bodymap-view svg {
+  width: 120px;
+  height: auto;
+  max-width: 40vw;
+}
+.bodymap-view figcaption {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Structural parts and muscle-shading levels. `fill` and `stroke` are inherited
+   SVG properties, so setting them on the <g> cascades to its shapes. */
+.bodymap .bp {
+  fill: var(--muscle-bp);
+}
+.bodymap .mg {
+  stroke: var(--surface);
+  stroke-width: 0.8;
+}
+.bodymap .m0 {
+  fill: var(--muscle-base);
+}
+.bodymap .m1 {
+  fill: color-mix(in srgb, var(--accent) 28%, var(--muscle-base));
+}
+.bodymap .m2 {
+  fill: color-mix(in srgb, var(--accent) 52%, var(--muscle-base));
+}
+.bodymap .m3 {
+  fill: color-mix(in srgb, var(--accent) 78%, var(--muscle-base));
+}
+.bodymap .m4 {
+  fill: var(--accent-strong);
+}
+
+.bodymap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-top: 1rem;
+}
+.bodymap-legend-label {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 0 0.2rem;
+}
+.bodymap-legend-swatch {
+  width: 1.1rem;
+  height: 0.7rem;
+  border-radius: 3px;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+}
+.bodymap-legend-swatch.m1 {
+  background: color-mix(in srgb, var(--accent) 28%, var(--muscle-base));
+}
+.bodymap-legend-swatch.m2 {
+  background: color-mix(in srgb, var(--accent) 52%, var(--muscle-base));
+}
+.bodymap-legend-swatch.m3 {
+  background: color-mix(in srgb, var(--accent) 78%, var(--muscle-base));
+}
+.bodymap-legend-swatch.m4 {
+  background: var(--accent-strong);
+}
+
+/* ==========================================================================
+   Site chrome, homepage and article (the "úplne nové" redesign)
+   Dark-first, oversized Cheltenham, the green as light. Kept at the end of the
+   file so it wins over the older generic rules (.post p, .dot, …) that the
+   ordinary pages still use.
+   ========================================================================== */
+:root {
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+.night {
+  background: var(--bg-deep);
+  color: var(--fg);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--bg);
+  font: 600 0.85rem var(--sans);
+}
+
+.skip:focus {
+  top: 1rem;
+}
+
+main.full {
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ---------- Bar ----------
+   Speaks the page's own language: italic serif wordmark (like the section
+   titles), tracked small-caps links with the green kicker dash, and a hairline
+   inside the gutter — the same rule that sits under the hero. */
+.bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  padding: 0 var(--gutter);
+  transition: background 0.4s;
+}
+
+.bar-in {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.35rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+  transition:
+    padding 0.4s var(--ease),
+    border-color 0.4s;
+}
+
+.bar.scrolled {
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+
+.bar.scrolled .bar-in {
+  padding-block: 0.85rem 0.75rem;
+  border-color: var(--border);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  white-space: nowrap;
+  text-decoration: none;
+  font: italic 400 1.4rem/1 var(--serif);
+  letter-spacing: -0.01em;
+  color: var(--fg-bright);
+}
+
+.brand svg {
+  width: 14px;
+  height: 14px;
+  align-self: center;
+  transition: transform 0.6s var(--ease);
+}
+
+.brand:hover svg {
+  transform: rotate(-18deg);
+}
+
+.leaf-blade {
+  fill: var(--accent);
+}
+
+.leaf-vein {
+  fill: none;
+  stroke: var(--bg);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.bar nav {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1.1rem, 2.6vw, 2.25rem);
+}
+
+.bar nav a {
+  position: relative;
+  text-decoration: none;
+  color: var(--muted);
+  font: 600 0.7rem/1 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: color 0.25s;
+}
+
+/* The kicker dash, growing in from the left on hover / for the section in view. */
+.bar nav a::before {
+  content: "";
+  position: absolute;
+  right: calc(100% + 0.45rem);
+  top: 50%;
+  width: 1rem;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease);
+}
+
+.bar nav a:hover,
+.bar nav a.is-here {
+  color: var(--fg-bright);
+}
+
+.bar nav a:hover::before,
+.bar nav a.is-here::before {
+  transform: scaleX(1);
+}
+
+.bar .edit-link {
+  align-self: center;
+  line-height: 0;
+}
+
+.bar .edit-link[hidden] {
+  display: none;
+}
+
+.bar .edit-link::before {
+  content: none;
+}
+
+.bar .edit-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.bar .theme {
+  display: grid;
+  place-items: center;
+  box-sizing: content-box;
+  align-self: center;
+  width: 1.6rem;
+  height: 1rem;
+  padding: 0 0 0 clamp(1.1rem, 2.6vw, 2.25rem);
+  border: 0;
+  border-left: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.bar .theme:hover {
+  color: var(--accent);
+}
+
+.bar .theme svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.5s var(--ease);
+}
+
+.bar .theme:hover svg {
+  transform: rotate(180deg);
+}
+
+/* ---------- Growth stage: a drawn plant that grows with the stage ---------- */
+.stage {
+  --c: var(--accent);
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.4em;
+  white-space: nowrap;
+  font: 600 0.8rem/1 var(--sans);
+  letter-spacing: 0.01em;
+  color: var(--c);
+}
+
+.stage .ic {
+  flex: none;
+  width: 19px;
+  height: 24px;
+  margin-bottom: -2px;
+  overflow: visible;
+}
+
+.s-seedling {
+  --c: var(--stage-seedling);
+}
+
+.s-budding {
+  --c: var(--stage-budding);
+}
+
+.s-evergreen {
+  --c: var(--stage-evergreen);
+}
+
+/* ---------- Shared section furniture ---------- */
+.wrap {
+  max-width: 92rem;
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.sec {
+  padding-block: clamp(5rem, 11vw, 9rem);
+}
+
+.sec-list {
+  padding-top: 0;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 1.4rem;
+  font: 600 0.7rem/1 var(--sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.label::before {
+  content: "";
+  width: 1.6rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.h2 {
+  margin: 0;
+  font: italic 400 clamp(2.8rem, 6.4vw, 6rem)/0.95 var(--serif);
+  letter-spacing: -0.03em;
+  color: var(--fg-bright);
+}
+
+.h2 sup {
+  position: relative;
+  top: 0.6em;
+  margin-left: 0.4em;
+  vertical-align: top;
+  font: normal 600 0.8rem var(--sans);
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.lead {
+  margin: 1.4rem 0 0;
+  max-width: 28rem;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.cue {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.7rem;
+  font: 600 0.7rem/1 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.cue .line {
+  width: 1px;
+  height: 2.6rem;
+  background: linear-gradient(var(--accent), transparent);
+}
+
+.cue:hover {
+  color: var(--accent);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: end;
+  min-height: min(100svh, 60rem);
+  padding: 7rem var(--gutter) 2.2rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    34rem 34rem at var(--mx, 68%) var(--my, 46%),
+    var(--glow),
+    transparent 70%
+  );
+}
+
+.hero-stage {
+  position: relative;
+  width: 100%;
+  max-width: 92rem;
+  margin: 0 auto;
+}
+
+.hero-text,
+.hero-lit {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 0.92;
+}
+
+.hero-text > span,
+.hero-lit > span {
+  display: block;
+  letter-spacing: -0.03em;
+}
+
+/* In the dark the words start muted and the light brings them back; in the
+   light theme they start at full ink and the light tints them green. */
+.hero-text {
+  color: var(--fg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hero-text {
+    color: var(--muted);
+  }
+}
+
+:root[data-theme="dark"] .hero-text {
+  color: var(--muted);
+}
+
+.l1,
+.l2 {
+  font-size: clamp(2.6rem, 7.4vw, 7.4rem);
+}
+
+.l2 {
+  padding-left: 0.9em;
+  font-style: italic;
+}
+
+.hero-text > .l3,
+.hero-lit > .l3 {
+  letter-spacing: -0.055em;
+}
+
+.l3 {
+  margin-top: 0.06em;
+  margin-left: -0.05em;
+  font-weight: 700;
+  font-size: clamp(4.6rem, 18.4vw, 19rem);
+  line-height: 0.86;
+}
+
+.vraj {
+  white-space: nowrap;
+}
+
+.ast {
+  position: relative;
+  display: inline-block;
+  margin-left: 0.02em;
+  transform-origin: 50% 55%;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* A bigger tap target for the asterisk link. */
+a.ast::after {
+  content: "";
+  position: absolute;
+  inset: -0.15em -0.1em;
+}
+
+.hero-text .ast {
+  text-shadow: 0 0 0.4em var(--glow-strong);
+}
+
+/* The light: a second copy of the words, revealed only inside a soft pool
+   that follows the pointer. */
+.hero-lit {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: var(--lit);
+  -webkit-mask-image: radial-gradient(
+    18rem 18rem at var(--mx, 68%) var(--my, 46%),
+    #000 0%,
+    rgba(0, 0, 0, 0.55) 40%,
+    transparent 72%
+  );
+  mask-image: radial-gradient(
+    18rem 18rem at var(--mx, 68%) var(--my, 46%),
+    #000 0%,
+    rgba(0, 0, 0, 0.55) 40%,
+    transparent 72%
+  );
+}
+
+.hero-lit .ast {
+  color: var(--accent-strong);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hero-lit {
+    text-shadow: 0 0 0.5em rgba(169, 214, 182, 0.25);
+  }
+}
+
+:root[data-theme="dark"] .hero-lit {
+  text-shadow: 0 0 0.5em rgba(169, 214, 182, 0.25);
+}
+
+.hero-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 2rem;
+  width: 100%;
+  max-width: 92rem;
+  margin: clamp(2rem, 5vw, 3.5rem) auto 0;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+
+.hero-note {
+  max-width: 30rem;
+  margin: 0;
+  border-radius: 4px;
+  font: 400 0.92rem/1.55 var(--sans);
+  color: var(--muted);
+  scroll-margin-top: 50vh;
+  transition:
+    background 0.6s,
+    color 0.6s;
+}
+
+.hero-note .ast {
+  margin-right: 0.35em;
+  font-family: var(--serif);
+  font-size: 1.2em;
+  line-height: 0;
+}
+
+.hero-note:target {
+  color: var(--fg);
+  background: var(--glow);
+  box-shadow: 0 0 0 0.5rem var(--glow);
+}
+
+/* ---------- Kde začať? ---------- */
+.start {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.start-head {
+  position: sticky;
+  top: 7rem;
+}
+
+.cards {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.4rem 1.6rem;
+  align-items: start;
+  padding: clamp(1.5rem, 3vw, 2.4rem);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.4s,
+    transform 0.5s var(--ease);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  background: radial-gradient(
+    28rem 16rem at 100% 0%,
+    var(--glow),
+    transparent 70%
+  );
+  transition: opacity 0.5s;
+}
+
+.card > * {
+  position: relative;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+  transform: translateY(-3px);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-t,
+.card-x,
+.card-m {
+  grid-column: 1;
+}
+
+.card-t {
+  margin: 0;
+  font: 600 clamp(1.7rem, 3vw, 2.4rem)/1.05 var(--serif);
+  letter-spacing: -0.02em;
+  color: var(--fg-bright);
+}
+
+.card-x {
+  max-width: 34rem;
+  margin: 0.5rem 0 0.9rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.card-m {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  font: 0.8rem/1.2 var(--sans);
+  color: var(--muted);
+}
+
+.card-a {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--accent);
+  transition:
+    background 0.3s,
+    color 0.3s,
+    transform 0.5s var(--ease);
+}
+
+.card:hover .card-a {
+  background: var(--accent);
+  color: var(--bg);
+  transform: rotate(-45deg);
+}
+
+/* ---------- Všetky články: oversized titles; hover opens a teaser ---------- */
+.list-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.list-head .hint {
+  margin: 0;
+  font: 0.8rem var(--sans);
+  color: var(--muted);
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.row a {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 12.5rem;
+  gap: 0 3rem;
+  padding: clamp(1.4rem, 2.4vw, 1.9rem) 0 clamp(1.5rem, 2.6vw, 2.1rem);
+  border-top: 1px solid var(--border);
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.45s var(--ease);
+}
+
+.row a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s var(--ease);
+}
+
+.row-t {
+  max-width: 17em;
+  font: 400 clamp(2rem, 4.3vw, 4.1rem)/1.02 var(--serif);
+  letter-spacing: -0.03em;
+  color: var(--fg-bright);
+  text-wrap: balance;
+  transition:
+    transform 0.6s var(--ease),
+    color 0.4s;
+}
+
+.row-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.55rem;
+  text-align: right;
+  font: 0.8rem/1.3 var(--sans);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.row-side .stage {
+  margin-bottom: 0.15rem;
+}
+
+.row-d {
+  white-space: nowrap;
+}
+
+.row-x {
+  grid-column: 1;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s var(--ease);
+}
+
+.row-x > span {
+  overflow: hidden;
+}
+
+.row-xp {
+  display: block;
+  max-width: 40rem;
+  padding-top: 1rem;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.5s 0.1s;
+}
+
+.row-xp::after {
+  content: " …";
+  color: var(--accent);
+}
+
+@media (hover: hover) {
+  .rows:hover .row a:not(:hover) {
+    opacity: 0.38;
+  }
+
+  .row a:hover .row-t {
+    color: var(--accent-strong);
+    transform: translateX(0.35em);
+  }
+
+  .row a:hover::before {
+    transform: scaleX(1);
+  }
+
+  .row a:hover .row-x {
+    grid-template-rows: 1fr;
+  }
+
+  .row a:hover .row-xp {
+    opacity: 1;
+  }
+}
+
+.row a:focus-visible {
+  outline-offset: -2px;
+}
+
+.row a:focus-visible .row-x {
+  grid-template-rows: 1fr;
+}
+
+.row a:focus-visible .row-xp {
+  opacity: 1;
+}
+
+.row a:focus-visible .row-t {
+  color: var(--accent-strong);
+}
+
+/* ---------- Trvalky ---------- */
+.perennials {
+  position: relative;
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  background: var(--bg-deep);
+}
+
+.p-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.p-head .lead {
+  justify-self: end;
+  margin: 0;
+}
+
+.p-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.p-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 25rem;
+  padding: 1.8rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.4s,
+    transform 0.5s var(--ease);
+}
+
+.p-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+  transform: translateY(-4px);
+}
+
+.p-top {
+  display: flex;
+  justify-content: space-between;
+  font: 600 0.7rem/1 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.p-art {
+  flex: none;
+  display: grid;
+  place-items: center;
+  height: 13rem;
+  padding: 1.4rem 0;
+  color: var(--stage-evergreen);
+}
+
+.p-art svg {
+  width: 8.5rem;
+  height: 8.5rem;
+  overflow: visible;
+}
+
+.p-art :is(path, circle, ellipse) {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.p-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.p-card h3 {
+  margin: 0;
+  font: 600 1.9rem/1.05 var(--serif);
+  letter-spacing: -0.02em;
+  color: var(--fg-bright);
+}
+
+.p-card p {
+  margin: 0.6rem 0 0;
+  font: 0.92rem/1.5 var(--sans);
+  color: var(--muted);
+}
+
+.p-go {
+  margin-top: auto;
+  padding-top: 1.2rem;
+  font: 600 0.75rem var(--sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.p-go span {
+  display: inline-block;
+  transition: transform 0.4s var(--ease);
+}
+
+.p-card:hover .p-go span {
+  transform: translateX(0.4rem);
+}
+
+.p-more {
+  position: relative;
+  z-index: 1;
+  margin: 2rem 0 0;
+}
+
+.p-more a {
+  padding-bottom: 2px;
+  border-bottom: 1px solid currentColor;
+  font: 600 0.8rem var(--sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ---------- Article: title screen ---------- */
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 3px;
+  pointer-events: none;
+}
+
+.progress i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 0 12px var(--glow-strong);
+  transform: scaleX(var(--p, 0));
+  transform-origin: 0 50%;
+}
+
+.title {
+  position: relative;
+  display: grid;
+  align-content: end;
+  min-height: min(92svh, 54rem);
+  padding: 8rem var(--gutter) clamp(2.5rem, 5vw, 4rem);
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid var(--border);
+}
+
+.title::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(
+      60rem 30rem at 12% 110%,
+      var(--glow-strong),
+      transparent 65%
+    ),
+    radial-gradient(30rem 20rem at 92% 0%, var(--glow), transparent 70%);
+}
+
+.title-in {
+  width: 100%;
+  max-width: 92rem;
+  margin: 0 auto;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: clamp(2rem, 6vh, 4rem);
+  font: 500 0.8rem var(--sans);
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--accent);
+}
+
+h1.t {
+  margin: 0;
+  font: 700 clamp(3.6rem, 12.5vw, 13rem)/0.86 var(--serif);
+  letter-spacing: -0.05em;
+  color: var(--fg-bright);
+  text-wrap: balance;
+}
+
+h1.t.t-long {
+  font-size: clamp(3rem, 8vw, 8.5rem);
+  line-height: 0.9;
+}
+
+h1.t em {
+  display: block;
+  padding-left: 2.1em;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.04em;
+  color: var(--accent-strong);
+}
+
+h1.t.t-long em {
+  display: inline;
+  padding-left: 0;
+}
+
+.title-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 2rem;
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.kick {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.4rem;
+  margin: 0;
+  font: 0.82rem/1.3 var(--sans);
+  color: var(--muted);
+}
+
+.kick .dot {
+  width: 3px;
+  height: 3px;
+  margin: 0;
+  border-radius: 50%;
+  background: var(--faint);
+}
+
+/* ---------- Article: reading column ---------- */
+.read {
+  display: grid;
+  grid-template-columns: minmax(12rem, 17rem) minmax(0, 38rem) minmax(0, 1fr);
+  gap: 0 clamp(2rem, 6vw, 6rem);
+  max-width: 92rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 6rem) var(--gutter) clamp(4rem, 9vw, 7rem);
+}
+
+.toc {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.toc-in {
+  position: sticky;
+  top: 6.5rem;
+}
+
+.toc h2 {
+  margin: 0 0 1rem;
+  font: 600 0.7rem/1 var(--sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.toc .toc-list {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-left: 1px solid var(--border);
+}
+
+.toc .toc-list a {
+  display: block;
+  margin-left: -1px;
+  padding: 0.5rem 0 0.5rem 1rem;
+  border-left: 1px solid transparent;
+  font: 0.85rem/1.35 var(--sans);
+  color: var(--muted);
+  text-decoration: none;
+  transition:
+    color 0.3s,
+    border-color 0.3s;
+}
+
+.toc .toc-l3 a {
+  padding-left: 1.8rem;
+  font-size: 0.8rem;
+}
+
+.toc .toc-list a:hover {
+  color: var(--fg);
+}
+
+.toc .toc-list a.on {
+  border-left-color: var(--accent);
+  color: var(--fg-bright);
+}
+
+.left {
+  margin: 1.4rem 0 0;
+  padding-left: 1rem;
+  font: 0.78rem var(--sans);
+  color: var(--muted);
+}
+
+.left b {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.read .post {
+  grid-column: 2;
+  max-width: none;
+  margin: 0;
+}
+
+.prose {
+  font-size: 1.25rem;
+  line-height: 1.72;
+  color: var(--fg);
+}
+
+.read .prose > p,
+.read .prose ul,
+.read .prose ol,
+.read .prose blockquote {
+  margin: 0 0 1.35em;
+  font-size: 1.25rem;
+  line-height: 1.72;
+}
+
+.read .prose > p:first-of-type::first-letter {
+  float: left;
+  margin: 0.08em 0.06em 0 -0.04em;
+  font: 700 4.6em/0.78 var(--serif);
+  color: var(--accent);
+}
+
+.banner {
+  --c: var(--stage, var(--accent));
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin: 0 0 2.6rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--c) 9%, transparent);
+  font: 0.92rem/1.5 var(--sans);
+  color: var(--fg);
+}
+
+.banner svg {
+  flex: none;
+  width: 26px;
+  height: 38px;
+  margin-top: -0.15rem;
+  color: var(--c);
+}
+
+.banner b {
+  color: var(--c);
+}
+
+.prose h2 {
+  position: relative;
+  margin: 1.9em 0 0.8em;
+  font: italic 400 clamp(1.8rem, 3.2vw, 2.5rem)/1.12 var(--serif);
+  letter-spacing: -0.02em;
+  color: var(--fg-bright);
+  text-wrap: balance;
+}
+
+.prose h2 .n {
+  display: block;
+  margin-bottom: 0.9rem;
+  font: normal 600 0.72rem/1 var(--sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.prose h3 {
+  margin: 1.8em 0 0.6em;
+  font: 600 1.45rem/1.2 var(--serif);
+  letter-spacing: -0.01em;
+  color: var(--fg-bright);
+}
+
+.end {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 3.5rem 0 0;
+}
+
+.end::before,
+.end::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.end svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Collapsed contents box, shown instead of the sidebar on narrower screens. */
+.toc-m {
+  display: none;
+}
+
+/* ---------- Article: the next read ---------- */
+.next {
+  border-top: 1px solid var(--border);
+}
+
+.next a {
+  display: block;
+  max-width: 92rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) var(--gutter);
+  color: inherit;
+  text-decoration: none;
+}
+
+.next .lab {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font: 600 0.7rem/1 var(--sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.next .lab::before {
+  content: "";
+  width: 1.6rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.next .nt {
+  display: block;
+  margin-top: 1.2rem;
+  font: 400 clamp(2.4rem, 7vw, 6.4rem)/0.95 var(--serif);
+  letter-spacing: -0.035em;
+  color: var(--fg-bright);
+  text-wrap: balance;
+  transition:
+    color 0.4s,
+    transform 0.6s var(--ease);
+}
+
+.next a:hover .nt {
+  color: var(--accent-strong);
+  transform: translateX(0.2em);
+}
+
+.next .nm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.4rem;
+  font: 0.82rem var(--sans);
+  color: var(--muted);
+}
+
+/* ---------- Footer: always night — the garden glows ---------- */
+.foot {
+  position: relative;
+  padding: clamp(5rem, 12vw, 9rem) var(--gutter) 1.5rem;
+  overflow: hidden;
+}
+
+.foot::before {
+  content: "";
+  position: absolute;
+  inset: auto -10% -40% -10%;
+  height: 80%;
+  background: radial-gradient(
+    50% 60% at 50% 100%,
+    var(--glow-strong),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.foot-inner {
+  position: relative;
+  max-width: 88rem;
+  margin: 0 auto;
+}
+
+.foot-kicker {
+  margin: 0 0 1.2rem;
+  font: 600 0.72rem/1 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.foot-big {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15em;
+  font: italic 400 clamp(3.6rem, 13vw, 12rem)/0.9 var(--serif);
+  letter-spacing: -0.035em;
+  color: var(--fg-bright);
+  text-decoration: none;
+  transition: color 0.4s var(--ease);
+}
+
+.foot-big .arr {
+  display: inline-block;
+  font-size: 0.45em;
+  font-style: normal;
+  color: var(--accent);
+  transition: transform 0.5s var(--ease);
+}
+
+.foot-big:hover {
+  color: var(--accent-strong);
+}
+
+.foot-big:hover .arr {
+  transform: translate(0.12em, -0.12em);
+}
+
+.foot-mail {
+  display: block;
+  margin-top: 1rem;
+  font: 400 1rem var(--sans);
+  color: var(--muted);
+  user-select: all;
+}
+
+.garden {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(0.35rem, 1.4vw, 1.4rem);
+  height: 72px;
+  margin: clamp(3.5rem, 8vw, 6rem) 0 0;
+  padding: 0 0.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.garden a {
+  position: relative;
+  display: block;
+  line-height: 0;
+  color: var(--c);
+  transform-origin: 50% 100%;
+}
+
+.garden svg {
+  width: clamp(26px, 3.4vw, 42px);
+  height: auto;
+  overflow: visible;
+}
+
+.garden a:hover,
+.garden a:focus-visible {
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+/* The plant's title, as a little label above it on hover. */
+.garden a::after {
+  content: attr(data-t);
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  left: 50%;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font: 500 0.72rem/1.2 var(--sans);
+  color: var(--fg);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(4px);
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+
+.garden a:hover::after,
+.garden a:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%);
+}
+
+.garden a:first-child::after {
+  left: 0;
+  transform: none;
+}
+
+.garden .spacer {
+  flex: 1;
+}
+
+.garden-cap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.8rem 0 0;
+  font: 0.78rem/1.5 var(--sans);
+  color: var(--muted);
+}
+
+.foot-base {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.8rem 2rem;
+  margin-top: clamp(3rem, 7vw, 5rem);
+  font: 0.82rem/1.4 var(--sans);
+  color: var(--muted);
+}
+
+.foot-base p {
+  margin: 0;
+}
+
+.foot-base nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+}
+
+.foot-base a {
+  border-bottom: 1px solid var(--border);
+  color: var(--fg);
+  text-decoration: none;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.foot-base a:hover {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+
+.heart {
+  color: var(--accent);
+}
+
+/* ---------- Motion ----------
+   Content is visible by default; it only animates where the browser supports
+   it and the reader hasn't asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* "depresiu." surfaces letter by letter; the asterisk breathes. */
+  .hero-text .l3 .ch {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(0.08em);
+    animation: surface 2.6s var(--ease) forwards;
+    animation-delay: calc(0.9s + var(--n) * 0.11s);
+  }
+
+  @keyframes surface {
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: none;
+    }
+  }
+
+  .hero-text .ast,
+  .hero-lit .ast {
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.85;
+    }
+    45% {
+      transform: scale(1.28) rotate(18deg);
+      opacity: 1;
+    }
+  }
+
+  .cue .line {
+    transform-origin: top;
+    animation: drip 2.4s ease-in-out infinite;
+  }
+
+  @keyframes drip {
+    0% {
+      transform: scaleY(0);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+    100% {
+      transform: scaleY(1);
+      opacity: 0;
+    }
+  }
+
+  h1.t span,
+  h1.t em {
+    display: inline-block;
+    animation: up 1.4s var(--ease) both;
+  }
+
+  h1.t em {
+    display: block;
+    animation-delay: 0.25s;
+  }
+
+  h1.t.t-long em {
+    display: inline-block;
+  }
+
+  @keyframes up {
+    from {
+      opacity: 0;
+      transform: translateY(0.25em);
+      filter: blur(8px);
+    }
+  }
+
+  .garden a {
+    animation: sway 7s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -0.83s);
+  }
+
+  @keyframes sway {
+    0%,
+    100% {
+      transform: rotate(-2.5deg);
+    }
+    50% {
+      transform: rotate(2.5deg);
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    /* The hero and title screens sink away as you scroll past them. */
+    .hero-stage {
+      animation: sink-hero linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 90%;
+    }
+
+    @keyframes sink-hero {
+      to {
+        opacity: 0.12;
+        transform: translateY(-8vh) scale(0.97);
+        filter: blur(4px);
+      }
+    }
+
+    .title-in {
+      animation: sink-title linear both;
+      animation-timeline: view();
+      animation-range: exit 10% exit 100%;
+    }
+
+    @keyframes sink-title {
+      to {
+        opacity: 0.1;
+        transform: translateY(-6vh);
+      }
+    }
+
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(2.5rem);
+      }
+    }
+
+    /* Trvalky plants draw themselves in. */
+    .p-art .draw {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: draw linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 45%;
+    }
+
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .read {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 44rem;
+  }
+
+  .toc {
+    display: none;
+  }
+
+  .read .post {
+    grid-column: 1;
+  }
+
+  .toc-m {
+    display: block;
+    margin: 0 0 2.4rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .toc-m summary {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.9rem 1.1rem;
+    font: 600 0.72rem/1 var(--sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .toc-m summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .toc-m summary::after {
+    content: "+";
+    font-size: 1rem;
+    color: var(--accent);
+  }
+
+  .toc-m[open] summary::after {
+    content: "–";
+  }
+
+  .toc-m .toc-list {
+    margin: 0;
+    padding: 0 1.1rem 1rem;
+    font: 0.9rem/1.5 var(--sans);
+  }
+
+  .toc-m .toc-list a {
+    color: var(--fg);
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .start {
+    grid-template-columns: 1fr;
+  }
+
+  .start-head {
+    position: static;
+  }
+
+  .row a {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .row-side {
+    grid-column: 1;
+    grid-row: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.4rem 1rem;
+    padding-top: 0.9rem;
+    text-align: left;
+  }
+
+  .row-side .stage {
+    margin: 0;
+  }
+
+  .row-x {
+    grid-row: 3;
+  }
+
+  .p-head {
+    grid-template-columns: 1fr;
+  }
+
+  .p-head .lead {
+    justify-self: start;
+  }
+
+  .p-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .p-card {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    grid-template-areas:
+      "top top"
+      "art body";
+    gap: 1rem 1.2rem;
+    min-height: 0;
+  }
+
+  .p-top {
+    grid-area: top;
+  }
+
+  .p-art {
+    grid-area: art;
+    height: auto;
+    padding: 0;
+    place-items: start center;
+  }
+
+  .p-art svg {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+
+  .p-body {
+    grid-area: body;
+  }
+}
+
+/* Touch screens can't hover: show a two-line teaser under every title. */
+@media (hover: none) {
+  .row-x {
+    grid-template-rows: 1fr;
+  }
+
+  .row-xp {
+    display: -webkit-box;
+    padding-top: 0.7rem;
+    overflow: hidden;
+    font-size: 1rem;
+    opacity: 1;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .row-xp::after {
+    content: "";
+  }
+}
+
+@media (max-width: 560px) {
+  .bar nav .hide-sm {
+    display: none;
+  }
+
+  .brand {
+    gap: 0.35rem;
+    font-size: 1.15rem;
+  }
+
+  .bar nav {
+    gap: 1rem;
+  }
+
+  .bar nav a {
+    letter-spacing: 0.1em;
+  }
+
+  .bar nav a::before {
+    right: calc(100% + 0.3rem);
+    width: 0.6rem;
+  }
+
+  .bar .theme {
+    padding-left: 1rem;
+  }
+
+  .hero {
+    min-height: min(78svh, 40rem);
+    padding-top: 6rem;
+  }
+
+  .l1,
+  .l2 {
+    font-size: 11.4vw;
+  }
+
+  .l2 {
+    padding-left: 0;
+  }
+
+  .l3 {
+    margin-top: 0.1em;
+    font-size: 24vw;
+  }
+
+  .hero-lit {
+    -webkit-mask-image: radial-gradient(
+      11rem 11rem at var(--mx, 68%) var(--my, 46%),
+      #000 0%,
+      rgba(0, 0, 0, 0.55) 40%,
+      transparent 72%
+    );
+    mask-image: radial-gradient(
+      11rem 11rem at var(--mx, 68%) var(--my, 46%),
+      #000 0%,
+      rgba(0, 0, 0, 0.55) 40%,
+      transparent 72%
+    );
+  }
+
+  .hero-foot,
+  .title-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.4rem;
+  }
+
+  .cue {
+    display: none;
+  }
+
+  .card,
+  .p-card {
+    border-radius: 14px;
+  }
+
+  .card-x,
+  .card-m {
+    grid-column: 1 / -1;
+  }
+
+  .p-card {
+    padding: 1.4rem;
+  }
+
+  .title {
+    min-height: min(88svh, 40rem);
+    padding-top: 6rem;
+  }
+
+  h1.t {
+    font-size: 16.5vw;
+  }
+
+  h1.t.t-long {
+    font-size: 11vw;
+  }
+
+  h1.t em {
+    padding-left: 0.5em;
+  }
+
+  .kick {
+    gap: 0.5rem 1rem;
+  }
+
+  .kick .dot {
+    display: none;
+  }
+
+  .read .prose > p,
+  .read .prose ul,
+  .read .prose ol,
+  .read .prose blockquote {
+    font-size: 1.15rem;
+    line-height: 1.68;
+  }
+
+  .garden {
+    gap: 0.2rem;
+    padding: 0;
+  }
+
+  .garden svg {
+    width: 23px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar nav a::before,
+  .brand svg,
+  .bar .theme svg {
+    transition: none;
+  }
+}

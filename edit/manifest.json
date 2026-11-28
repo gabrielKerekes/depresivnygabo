@@ -1,0 +1,18 @@
+{
+  "name": "depresívny gabo — editor",
+  "short_name": "Editor",
+  "description": "Písanie a úprava článkov priamo z telefónu.",
+  "start_url": "/edit/",
+  "scope": "/edit/",
+  "display": "standalone",
+  "background_color": "#15171b",
+  "theme_color": "#15171b",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

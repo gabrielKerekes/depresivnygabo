@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <!-- Same leaf as the header wordmark. The midrib is masked out of the blade
+       rather than stroked, so it stays transparent on any tab background. -->
+  <style>
+    .blade { fill: #3f8f66; }
+    @media (prefers-color-scheme: dark) {
+      .blade { fill: #8fbf9d; }
+    }
+  </style>
+  <mask id="vein">
+    <rect width="24" height="24" fill="#fff" />
+    <path
+      d="M8.6 8.6 14.9 14.9"
+      stroke="#000"
+      stroke-width="1.6"
+      stroke-linecap="round"
+    />
+  </mask>
+  <g transform="translate(12 12) rotate(18) scale(0.86) translate(-12 -12)">
+    <path
+      class="blade"
+      d="M1 1c13 0 22 9 22 22C10 23 1 14 1 1Z"
+      mask="url(#vein)"
+    />
+  </g>
+</svg>
